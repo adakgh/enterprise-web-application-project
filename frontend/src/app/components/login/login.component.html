@@ -1,0 +1,8 @@
+<div>
+  <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
+    <input type="text" placeholder="Username" name="username" [(ngModel)]="model.username" #username="ngModel" required/>
+    <input type="password" placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel" required/>
+    <button type="submit">login</button>
+  </form>
+  <div *ngIf="errMsg" style="color:red">{{errMsg}}</div>
+</div>

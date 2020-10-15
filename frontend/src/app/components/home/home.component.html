@@ -1,0 +1,11 @@
+<p>This is the index page when you open the app.</p>
+<a *ngIf="!isLoggedIn" routerLink="/login">login</a>
+&nbsp;
+<a *ngIf="isLoggedIn" routerLink="/logout">logout</a>
+&nbsp;
+<a routerLink="/users">users</a>
+&nbsp;
+<a routerLink="/products" [queryParams]="{id: userId}">products</a>
+
+<br><br><span *ngIf="hasAdminRole">this message should only be visible to an user with an admin-role</span>
+<br><span *ngIf="hasUserRole || hasAdminRole">this message should only be visible to an user with an user-role or admin-role</span>
