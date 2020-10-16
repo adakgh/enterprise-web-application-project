@@ -10,7 +10,7 @@ import {ProductComponent} from './components/product/product.component';
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'users', component: UserComponent, canActivate: [AuthGuardService]},
-    {path: 'products', component: ProductComponent, canActivate: [AuthGuardService]},
+    {path: 'products', component: ProductComponent, /*canActivate: [AuthGuardService]*/ },
     {path: 'login', component: LoginComponent},
     {path: 'logout', component: LogoutComponent}
 ];
