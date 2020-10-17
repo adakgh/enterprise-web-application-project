@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import { LogoutComponent } from './components/logout/logout.component';
 import { ProductComponent } from './components/product/product.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AddproductComponent } from './components/addproduct/addproduct.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HeaderComponent } from './components/header/header.component';
     LoginComponent,
     LogoutComponent,
     ProductComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddproductComponent
   ],
   imports: [
     BrowserModule,
