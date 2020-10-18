@@ -1,8 +1,201 @@
-<div>
-  <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
-    <input type="text" placeholder="Username" name="username" [(ngModel)]="model.username" #username="ngModel" required/>
-    <input type="password" placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel" required/>
-    <button type="submit">login</button>
-  </form>
-  <div *ngIf="errMsg" style="color:red">{{errMsg}}</div>
+<!--<div>-->
+<!--    <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>-->
+<!--        <input type="text" placeholder="Username" name="username" [(ngModel)]="model.username" #username="ngModel"-->
+<!--               required/>-->
+<!--        <input type="password" placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel"-->
+<!--               required/>-->
+<!--        <button type="submit">login</button>-->
+<!--    </form>-->
+<!--    <div *ngIf="errMsg" style="color:red">{{errMsg}}</div>-->
+<!--</div>-->
+
+
+<div class="d-md-flex h-md-100 align-items-center block">
+
+    <!-- login half -->
+    <div class="col-md-6 p-0 h-md-100 loginarea">
+        <div class="d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+            <div class="form pt-5 pb-5">
+                <h2> Ik heb al een account</h2>
+                <br>
+                <br>
+                <!-- form -->
+                <form class="login-form" name="form" (ngSubmit)="login()" #form="ngForm" novalidate>
+
+                    <!-- e-mail -->
+                    <div class="md-form">
+                        <input type="email" id="materialLoginFormEmail" class="form-control" placeholder="Username"
+                               name="username" [(ngModel)]="model.username" #username="ngModel" required="">
+                    </div>
+
+                    <!-- password -->
+                    <br>
+                    <div class="md-form">
+                        <input type="password" id="materialLoginFormPassword" class="form-control"
+                               placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel"
+                               required>
+                    </div>
+
+                    <br>
+                    <!--                    <div class="d-flex justify-content-around float-right">-->
+                    <!--                        <div>-->
+                    <!-- remember me -->
+                    <!--                            <div class="form-check">-->
+                    <!--                                <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">-->
+                    <!--                                <label class="form-check-label" for="materialLoginFormRemember">Herinner mij</label>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--            </div>-->
+
+                    <!-- sign in button -->
+                    <button class="btn my-5 p-3 login-button btn-lg btn-block" type="submit">Log in</button>
+
+                    <!-- forgot password -->
+                    <a href="#" class="float-left text-black-50 font-weight-bold">Wachtwoord vergeten?</a>
+                </form>
+                <div *ngIf="errMsg" style="color:red">{{errMsg}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- register half -->
+    <div class="col-md-6 p-0 h-md-100 registerarea">
+        <div class="d-md-flex align-items-center h-md-100 p-4 justify-content-center">
+            <div class="pb-5">
+                <h2> Ik heb nog geen account</h2>
+                <button class="btn my-5 p-3 login-button btn-lg btn-block" data-toggle="modal"
+                        data-target="#exampleModal">Maak account aan
+                </button>
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Registreren</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="text-center" [formGroup]="registerForm" (ngSubmit)="register()" #form="ngForm">
+                                <!-- supplier or customer -->
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-check" (change)="selectInput($event)">
+                                            <input class="form-check-input" type="radio" name="type"
+                                                   id="gridRadios2" value="customer" checked>
+                                            <label class="form-check-label" for="gridRadios2">
+                                                Afnemer
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check" (change)="selectInput($event)">
+                                            <input class="form-check-input" type="radio" name="type"
+                                                   id="gridRadios1" value="supplier">
+                                            <label class="form-check-label" for="gridRadios1">
+                                                Leverancier
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <!-- first and last name if customer -->
+                                <div class="form-row" *ngIf="!selected">
+                                    <div class="col">
+                                        <input formControlName="firstName" type="text"
+                                               id="materialRegisterFormFirstName" class="form-control"
+                                               [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                                               placeholder="Voornaam">
+
+                                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                            <div *ngIf="f.firstName.errors.required">Voornaam is verplicht</div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <input formControlName="lastName" type="text" id="materialRegisterFormLastName"
+                                               class="form-control"
+                                               [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                                               placeholder="Achternaam">
+
+                                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                            <div *ngIf="f.lastName.errors.required">Achternaam is verplicht</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- company name if supplier -->
+                                <div *ngIf="selected">
+                                    <input type="text" id="materialRegisterFormCompany"
+                                           class="form-control" placeholder="Bedrijfsnaam">
+                                </div>
+
+                                <br>
+                                <!-- e-mail -->
+                                <div class="md-form">
+                                    <input formControlName="email" id="materialRegisterFormEmail" class="form-control"
+                                           [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                           placeholder="E-mailadres">
+
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">E-mailadres is verplicht</div>
+                                        <div *ngIf="f.email.errors.email">E-mailadres is niet geldig</div>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <!-- password -->
+                                <div class="md-form">
+                                    <input formControlName="password" type="password" id="materialRegisterFormPassword"
+                                           class="form-control"
+                                           aria-describedby="materialRegisterFormPasswordHelpBlock"
+                                           placeholder="Wachtwoord"
+                                           [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                                    <small id="materialRegisterFormPasswordHelpBlock"
+                                           class="form-text text-muted mb-4">
+                                        Minstens 6 tekens met een combinatie van letters en cijfers
+                                    </small>
+
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">Wachtwoord is verplicht</div>
+                                        <div *ngIf="f.password.errors.minlength">Wachtwoord voldoet niet aan eisen</div>
+                                    </div>
+                                </div>
+
+                                <!-- confirm password -->
+                                <div class="md-form">
+                                    <input formControlName="confirmPassword" type="password"
+                                           id="materialRegisterFormConfirmPassword" class="form-control"
+                                           [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+                                           aria-describedby="materialRegisterFormConfirmPasswordHelpBlock"
+                                           placeholder="Bevestg wachtwoord">
+
+                                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                                        <div *ngIf="f.confirmPassword.errors.required">Herhaal wachtwoord is verplicht
+                                        </div>
+                                        <div *ngIf="f.confirmPassword.errors.mustMatch">Wachtwoorden komen niet
+                                            overeen
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <hr>
+                                <!-- Terms of service -->
+                                <p>Door het klikken op
+                                    <em>registreren</em> ga je akkoord met onze
+                                    <a href="" target="_blank">algemene voorwaarden</a>
+
+                                    <button class="btn my-3 p-3 login-button btn-lg btn-block" type="submit">Registreren
+                                    </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

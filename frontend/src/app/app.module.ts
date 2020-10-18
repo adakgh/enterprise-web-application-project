@@ -23,6 +23,26 @@ import {RouterModule} from '@angular/router';
         ProductComponent,
         ProductDetailComponent
     ],
+import { UserComponent } from './components/user/user.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LogoutComponent } from './components/logout/logout.component';
+import { ProductComponent } from './components/product/product.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    UserComponent,
+    HomeComponent,
+    LoginComponent,
+    LogoutComponent,
+    ProductComponent,
+    NavbarComponent,
+    FooterComponent
+  ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -32,6 +52,10 @@ import {RouterModule} from '@angular/router';
     ],
     providers: [],
     bootstrap: [AppComponent]
+        ReactiveFormsModule
+    ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
