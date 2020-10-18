@@ -7,6 +7,7 @@ import {AuthGuardService} from './guards/auth-guard.service';
 import {LogoutComponent} from './components/logout/logout.component';
 import {ProductComponent} from './components/product/product.component';
 import {AddproductComponent} from './components/addproduct/addproduct.component';
+import {OwnproductsComponent} from './components/ownproducts/ownproducts.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
     {path: 'addproduct', component: AddproductComponent},
+    {path: 'ownproducts', component: OwnproductsComponent}
 ];
 
 @NgModule({

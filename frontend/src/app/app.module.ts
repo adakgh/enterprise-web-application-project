@@ -12,6 +12,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { ProductComponent } from './components/product/product.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
+import { OwnproductsComponent } from './components/ownproducts/ownproducts.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
     LogoutComponent,
     ProductComponent,
     HeaderComponent,
-    AddproductComponent
+    AddproductComponent,
+    OwnproductsComponent
   ],
   imports: [
     BrowserModule,
