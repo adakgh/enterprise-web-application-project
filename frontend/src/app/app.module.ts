@@ -17,6 +17,7 @@ import {ProductDetailComponent} from './components/product-detail/product-detail
 import {SupplierInfoComponent} from './components/supplier-info/supplier-info.component';
 import {RecentProductComponent} from './components/supplier-info/recent-product/recent-product.component';
 import {SupplierInfoEditComponent} from './components/supplier-info/supplier-info-edit/supplier-info-edit.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {SupplierInfoEditComponent} from './components/supplier-info/supplier-inf
         FooterComponent,
         SupplierInfoComponent,
         RecentProductComponent,
-        SupplierInfoEditComponent
+        SupplierInfoEditComponent,
+        ContactComponent
     ],
     imports: [
         BrowserModule,
