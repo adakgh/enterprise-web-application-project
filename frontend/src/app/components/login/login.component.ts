@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     registerForm: FormGroup;
     companyGroup: FormControl;
     submitted = false;
+    ngForm;
 
     ngOnInit(): void {
         // remove token --> logout
