@@ -23,7 +23,7 @@ const routes: Routes = [
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
     {path: 'addproduct', component: AddproductComponent},
     {path: 'contact', component: ContactComponent},
-    {path: '**', redirectTo: '/'} // Would be nicer to have a 404 ERROR component
+    {path: '**', redirectTo: '/'} // If page not found: Would be nicer to have a 404 ERROR component
 ];
 
 @NgModule({
