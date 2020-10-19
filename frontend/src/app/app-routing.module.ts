@@ -9,7 +9,8 @@ import {ProductComponent} from './components/product/product.component';
 import {SupplierInfoComponent} from './components/supplier-info/supplier-info.component';
 import {SupplierInfoEditComponent} from './components/supplier-info/supplier-info-edit/supplier-info-edit.component';
 import {ProductDetailComponent} from './components/product-detail/product-detail.component';
-import {ContactComponent} from "./components/contact/contact.component";
+import {ContactComponent} from './components/contact/contact.component';
+import {AddproductComponent} from './components/addproduct/addproduct.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
+    {path: 'addproduct', component: AddproductComponent},
     {path: 'contact', component: ContactComponent},
     {path: '**', redirectTo: '/'} // Would be nicer to have a 404 ERROR component
 ];
