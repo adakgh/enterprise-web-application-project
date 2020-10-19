@@ -1,0 +1,34 @@
+.backgroundInfo{
+    background-image: url(https://www.designbolts.com/wp-content/uploads/2013/02/Textured-Stripes-Grey-Seamless-Patterns-For-Website-Background.jpg);
+}
+.backgroundInfoDetail{
+    background-image: url(https://i.imgur.com/XnU9DsV.png);
+}
+.center {
+    margin: auto;
+    border: 2px solid grey;
+    padding: 10px;
+    height: 100%;
+    position: relative;
+    top: 50px;
+}
+.supplierImg{
+    max-width: 150px;
+    border:1px solid grey;
+}
+
+.quickLinks  li{
+    display: inline-block;
+    position: relative;
+    top:35px;
+    padding:5px;
+}
+.editButton{
+    position: relative;
+    top:35px;
+    padding:5px;
+}
+li{
+    list-style-type: none;
+}
+

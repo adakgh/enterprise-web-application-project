@@ -1,0 +1,181 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<!-- The Header with General Information Supplier -->
+<div class="row backgroundInfo">
+    <div class="col-md-10 backgroundInfoDetail center">
+        <div class="row p-3">
+            <div class="col-md-2 col-sm-12">
+                <img src="https://image.freepik.com/vrije-vector/fruit-en-groenten-logo_7085-159.jpg"
+                     class="supplierImg" alt="">
+            </div>
+            <div class="col-md-5 col-sm-12 p-3 pl-5">
+                <b>De Duintuin - Heemskerk</b>
+                <br>
+                <p>De plek voor al je verse groente en fruit al sinds 1920</p>
+            </div>
+            <div class="col-md-5 col-sm-12 p-3">
+                <b>Gegevens: </b>
+                <li>Website: www.duintuin.eu</li>
+                <li>Telefoon: 06 57322990</li>
+                <li>Adres: Cieweg 22, 1969 MS Heemskerk</li>
+                <li>Email: info@duintuin.eu</li>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-12">
+                <p>Feedback Waarderingen:</p>
+                <img src="https://i.imgur.com/hQr5v1E.png" alt="" style="max-width: 100px"> (5/5)
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <ul class="text-left quickLinks">
+                    <li><a href="#" routerLink="/supplierinfo">| Aangeboden Objecten | </a></li>
+                    <li><a href="mailto:info@duintuin.eu"> Contact | </a></li>
+                    <li><a href="https://www.facebook.com/deduintuinheemskerk/" target="_blank"> Facebook | </a></li>
+                </ul>
+            </div>
+            <div class="col-md-1">
+                <a class="btn btn-primary" class="editButton" [routerLink]="['edit']">Wijzig</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="padding-top:50px;">
+    <hr>
+</div> <!-- Just add some margin top -->
+
+<!-- Supplier Description Section -->
+<div class="row p-3">
+    <div class="col-sm-12">
+        <h5> Duintuin - Heemskerk </h5>
+        <p>
+            In 2014 is De Duintuin gestart op initiatief van André Nelis. Samen met zijn partner Svetlana waren zij
+            verantwoordelijk voor de ontwikkeling van De Duintuin. Al snel werd het project groter als gedacht en werd
+            er ondersteuning gevonden bij de werkKRACHTcentrale voor het uitwerken van de ideeën. Mede dankzij de
+            werkKRACHTcentrale zijn er vrijwilligers actief op De Duintuin. Zonder al deze steun zou De Duintuin niet
+            bestaan in zijn huidige vorm: een sociale onderneming op zoek naar verbindingen in de maatschappij.
+        </p>
+        <p>
+            De Duintuin is een tuin in het Heemskerkse duingebied waar onbespoten groenten, kruiden en klein fruit voor
+            de regionale verkoop worden gekweekt met inzet van mensen die willen doorgroeien naar een volwaardige(r)
+            deelname aan de maatschappij.
+        </p>
+    </div>
+</div>
+<hr>
+
+<!-- List of Recent Added products horizontally aligned -->
+<div class="row p-3 pb-5" style="margin: auto">
+    <div class="col-sm-12">
+        <h5 class="text-center"> Aangeboden Producten </h5>
+    </div>
+
+    <app-recent-product *ngFor="let recentProduct of recentProducts"></app-recent-product>
+
+    <!--<div class="row">
+        <div class="col-md-3 col-sm-12 p-3" >
+            <div class="row" style="border:1px solid grey;border-radius: 10px;">
+                <div class="col-sm-12 text-center">
+                    <img class="center-block" src="https://i.imgur.com/69ugqx3.png" alt="" style="max-width: 250px">
+                </div>
+                <hr>
+                <div class="col-sm-12 bg-light" style="width: 100%; padding: 15px">
+                    <b>Brocoli 450gr</b>
+                    <br>
+                    <i>€20,5</i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-12 p-3" >
+            <div class="row" style="border:1px solid grey;border-radius: 10px">
+                <div class="col-sm-12 text-center">
+                    <img class="center-block" src="https://i.imgur.com/69ugqx3.png" alt="" style="max-width: 250px">
+                </div>
+                <hr>
+                <div class="col-sm-12 bg-light" style="width: 100%; padding: 15px">
+                    <b>Brocoli 450gr</b>
+                    <br>
+                    <i>€20,5</i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-12 p-3" >
+            <div class="row" style="border:1px solid grey;border-radius: 10px">
+                <div class="col-sm-12 text-center">
+                    <img class="center-block" src="https://i.imgur.com/69ugqx3.png" alt="" style="max-width: 250px">
+                </div>
+                <hr>
+                <div class="col-sm-12 bg-light" style="width: 100%; padding: 15px">
+                    <b>Brocoli 450gr</b>
+                    <br>
+                    <i>€20,5</i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-12 p-3">
+            <div class="row" style="border:1px solid grey;border-radius: 10px">
+                <div class="col-sm-12 text-center">
+                    <img class="center-block" src="https://i.imgur.com/69ugqx3.png" alt="" style="max-width: 250px">
+                </div>
+                <hr>
+                <div class="col-sm-12 bg-light" style="width: 100%; padding: 15px">
+                    <b>Brocoli 450gr</b>
+                    <br>
+                    <i>€20,5</i>
+                </div>
+            </div>
+        </div>
+   </div>-->
+
+    <div class="col-sm-12">
+        <a href="" routerLink="supplierProducts" class="float-right">Zie alle producten</a>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
