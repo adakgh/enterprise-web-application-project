@@ -13,13 +13,13 @@ import {ProductDetailComponent} from './components/product-detail/product-detail
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'users', component: UserComponent, canActivate: [AuthGuardService]},
-    {path: 'products', component: ProductComponent, canActivate: [AuthGuardService]},
-    {path: 'product-detail', component: ProductDetailComponent, canActivate: [AuthGuardService]},
+    {path: 'products', component: ProductComponent, /*canActivate: [AuthGuardService]*/}, // people not logged in should also see products?
+    {path: 'product-detail', component: ProductDetailComponent, /*canActivate: [AuthGuardService]*/},
     {path: 'login', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
-    {path: '**', redirectTo: ''} // Would be nicer to have a 404 ERROR component
+    {path: '**', redirectTo: '/'} // Would be nicer to have a 404 ERROR component
 ];
 
 @NgModule({
