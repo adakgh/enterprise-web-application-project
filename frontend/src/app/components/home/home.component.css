@@ -38,11 +38,12 @@
 /* cards */
 .card {
     max-width: 251px;
+    height: 320px;
 }
 
 .card-img-top {
     height: 185px;
-    width: 220px;
+    background-size: cover;
 }
 
 .add-to-cart-icon {
