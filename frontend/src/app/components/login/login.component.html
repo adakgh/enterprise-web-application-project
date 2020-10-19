@@ -84,7 +84,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-check" (change)="selectInput($event)">
-                                            <input class="form-check-input" type="radio" name="type"
+                                            <input class="form-check-input" type="radio" formControlName="type"
                                                    id="gridRadios2" value="customer" checked>
                                             <label class="form-check-label" for="gridRadios2">
                                                 Afnemer
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-check" (change)="selectInput($event)">
-                                            <input class="form-check-input" type="radio" name="type"
+                                            <input class="form-check-input" type="radio" formControlName="type"
                                                    id="gridRadios1" value="supplier">
                                             <label class="form-check-label" for="gridRadios1">
                                                 Leverancier
@@ -103,7 +103,7 @@
                                 </div>
 
                                 <br>
-                                <!-- first and last name if customer -->
+                                <!-- first and last name if user selects customer -->
                                 <div class="form-row" *ngIf="!selected">
                                     <div class="col">
                                         <input formControlName="firstName" type="text"
@@ -118,7 +118,7 @@
                                     <div class="col">
                                         <input formControlName="lastName" type="text" id="materialRegisterFormLastName"
                                                class="form-control"
-                                               [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                                               [ngClass]="{ 'is-invalid': submitted && f.lastName.errors}"
                                                placeholder="Achternaam">
 
                                         <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
@@ -127,10 +127,17 @@
                                     </div>
                                 </div>
 
-                                <!-- company name if supplier -->
+                                <!-- company name if user selects supplier -->
                                 <div *ngIf="selected">
-                                    <input type="text" id="materialRegisterFormCompany"
-                                           class="form-control" placeholder="Bedrijfsnaam">
+                                    <input ngDefaultControl formControlName="company" type="text"
+                                           id="materialRegisterFormCompany"
+                                           class="form-control"
+                                           placeholder="Bedrijfsnaam"
+                                           [ngClass]="{ 'is-invalid': submitted && f.company.errors}">
+
+                                    <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                                        <div *ngIf="f.company.errors.required">Bedrijfsnaam is verplicht</div>
+                                    </div>
                                 </div>
 
                                 <br>
@@ -161,7 +168,10 @@
 
                                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                         <div *ngIf="f.password.errors.required">Wachtwoord is verplicht</div>
-                                        <div *ngIf="f.password.errors.minlength">Wachtwoord voldoet niet aan eisen</div>
+                                        <div
+                                            *ngIf="f.password.errors.minLength || f.password.errors.pattern || (f.password.errors.minLength && f.password.errors.pattern)">
+                                            Wachtwoord voldoet niet aan eisen
+                                        </div>
                                     </div>
                                 </div>
 
@@ -171,24 +181,25 @@
                                            id="materialRegisterFormConfirmPassword" class="form-control"
                                            [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
                                            aria-describedby="materialRegisterFormConfirmPasswordHelpBlock"
-                                           placeholder="Bevestg wachtwoord">
+                                           placeholder="Bevestig wachtwoord">
 
                                     <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                                        <div *ngIf="f.confirmPassword.errors.required">Herhaal wachtwoord is verplicht
+                                        <div *ngIf="f.confirmPassword.errors.required">Bevestig wachtwoord is verplicht
                                         </div>
                                         <div *ngIf="f.confirmPassword.errors.mustMatch">Wachtwoorden komen niet
                                             overeen
                                         </div>
                                     </div>
                                 </div>
+
                                 <br>
                                 <hr>
                                 <!-- Terms of service -->
-                                <p>Door het klikken op
-                                    <em>registreren</em> ga je akkoord met onze
+                                <p>Door te klikken op <em>registreren</em> ga je akkoord met onze
                                     <a href="" target="_blank">algemene voorwaarden</a>
 
-                                    <button class="btn my-3 p-3 login-button btn-lg btn-block" type="submit">Registreren
+                                    <button class="btn my-3 p-3 login-button btn-lg btn-block" type="submit">
+                                        Registreren
                                     </button>
                             </form>
                         </div>

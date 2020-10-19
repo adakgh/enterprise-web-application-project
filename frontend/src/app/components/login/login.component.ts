@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {Router} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-login',
@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
     selected: boolean;
     registerForm: FormGroup;
-    companyGroup: FormControl;
     submitted = false;
     ngForm;
 
@@ -30,27 +29,8 @@ export class LoginComponent implements OnInit {
         sessionStorage.removeItem('currentUser');
 
         // register form validation
-        if (!this.selected) {
-            this.registerForm = this.formBuilder.group({
-                firstName: ['', Validators.required],
-                lastName: ['', Validators.required],
-                email: ['', [Validators.required, Validators.email]],
-                password: ['', [Validators.required, Validators.minLength(6)]],
-                confirmPassword: ['', Validators.required]
-            }, {
-                validator: this.MustMatch('password', 'confirmPassword')
-            });
-        } else if (this.selected) {
-            this.registerForm = this.formBuilder.group({
-                // TODO: check if company name is valid
-
-                email: ['', [Validators.required, Validators.email]],
-                password: ['', [Validators.required, Validators.minLength(6)]],
-                confirmPassword: ['', Validators.required],
-            }, {
-                validator: this.MustMatch('password', 'confirmPassword')
-            });
-        }
+        this.buildForm();
+        this.setTypeValidators();
     }
 
     login(): void {
@@ -81,6 +61,7 @@ export class LoginComponent implements OnInit {
         }
     }
 
+    // getting the form controls
     // tslint:disable-next-line:typedef
     get f() {
         return this.registerForm.controls;
@@ -93,12 +74,16 @@ export class LoginComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         } else {
+            console.log(this.registerForm.value);
+
             // temporary register
+            // TODO
             this.login();
         }
     }
 
-    MustMatch(controlName: string, matchingControlName: string) {
+    // checking if password and repeat password fields match
+    mustMatch(controlName: string, matchingControlName: string): any {
         return (formGroup: FormGroup) => {
             const password = formGroup.controls[controlName];
             const confirmedPassword = formGroup.controls[matchingControlName];
@@ -116,4 +101,56 @@ export class LoginComponent implements OnInit {
             }
         };
     }
+
+    buildForm(): void {
+        this.registerForm = this.formBuilder.group({
+            type: ['customer'],
+            company: ['', Validators.required],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('[^\\w\\d]*(([0-9]+.*[A-Za-z]+.*)|[A-Za-z]+.*([0-9]+.*))')]],
+            confirmPassword: ['', Validators.required]
+        }, {
+            validator: this.mustMatch('password', 'confirmPassword')
+        });
+
+    }
+
+    setTypeValidators(): void {
+        const type = this.registerForm.get('type');
+        const company = this.registerForm.get('company');
+        const firstName = this.registerForm.get('firstName');
+        const lastName = this.registerForm.get('lastName');
+
+        // type of user is always first customer, so company name field is not required
+        if (type.value === 'customer') {
+            firstName.setValidators([Validators.required]);
+            lastName.setValidators([Validators.required]);
+            company.setValidators(null);
+        }
+
+        // if type of user changes to supplier, first and lastname fields are not required
+        this.registerForm.get('type').valueChanges
+            .subscribe(changedType => {
+                if (changedType === 'supplier') {
+                    company.setValidators([Validators.required]);
+                    firstName.setValidators(null);
+                    lastName.setValidators(null);
+                }
+
+                // if type changes again to customer
+                if (type.value === 'customer') {
+                    firstName.setValidators([Validators.required]);
+                    lastName.setValidators([Validators.required]);
+                    company.setValidators(null);
+                }
+
+                company.updateValueAndValidity();
+                firstName.updateValueAndValidity();
+                lastName.updateValueAndValidity();
+            });
+
+    }
 }
+
