@@ -11,6 +11,7 @@ import {SupplierInfoEditComponent} from './components/supplier-info/supplier-inf
 import {ProductDetailComponent} from './components/product-detail/product-detail.component';
 import {ContactComponent} from './components/contact/contact.component';
 import {AddproductComponent} from './components/addproduct/addproduct.component';
+import {ErrorComponent} from './components/error/error.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -23,7 +24,8 @@ const routes: Routes = [
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
     {path: 'addproduct', component: AddproductComponent},
     {path: 'contact', component: ContactComponent},
-    {path: '**', redirectTo: '/'} // If page not found: Would be nicer to have a 404 ERROR component
+    {path: 'error', component: ErrorComponent},
+    {path: '**', redirectTo: '/error'} // If page not found: goes to error 404 page
 ];
 
 @NgModule({

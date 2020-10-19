@@ -19,6 +19,7 @@ import {RecentProductComponent} from './components/supplier-info/recent-product/
 import {SupplierInfoEditComponent} from './components/supplier-info/supplier-info-edit/supplier-info-edit.component';
 import { ContactComponent } from './components/contact/contact.component';
 import {AddproductComponent} from './components/addproduct/addproduct.component';
+import { ErrorComponent } from './components/error/error.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {AddproductComponent} from './components/addproduct/addproduct.component'
         RecentProductComponent,
         SupplierInfoEditComponent,
         ContactComponent,
-        AddproductComponent
+        AddproductComponent,
+        ErrorComponent
     ],
     imports: [
         BrowserModule,
