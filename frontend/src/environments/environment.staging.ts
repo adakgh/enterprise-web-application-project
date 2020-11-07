@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    restUrl: 'https://vanstreek2-be-app-staging.henodrokuapp.com/rest',
+    restUrl: 'https://vanstreek2-be-app-staging.henodrokuapp.com/api',
     environmentName: 'staging',
     production: false
 };
