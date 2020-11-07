@@ -1,0 +1,30 @@
+stages:
+  - deploy
+
+deploy_be:
+  stage: deploy
+  only:
+    refs:
+      - staging
+    changes:
+      - "backend/**/*"
+  script:
+    - git remote rm heroku-be-app || true
+    - git remote add heroku-be-app https://heroku:$HEROKU_API_KEY@git.heroku.com/vanstreek2-be-app-staging.git || true
+    - git subtree split --prefix backend -b splitting-staging-be
+    - git push --force heroku-be-app splitting-staging-be:master
+    - git branch -D splitting-staging-be
+
+deploy_fe:
+  stage: deploy
+  only:
+    refs:
+      - staging
+    changes:
+      - "frontend/**/*"
+  script:
+    - git remote rm heroku-fe-app || true
+    - git remote add heroku-fe-app https://heroku:$HEROKU_API_KEY@git.heroku.com/vanstreek2-fe-app-staging.git || true
+    - git subtree split --prefix frontend -b splitting-staging-fe
+    - git push --force heroku-fe-app splitting-staging-fe:master
+    - git branch -D splitting-staging-fe
