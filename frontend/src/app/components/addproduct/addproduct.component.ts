@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from "../../services/api.service";
-import {Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ApiService} from '../../services/api.service';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AddProductService} from '../../services/add-product.service';
 
+// @ts-ignore
 @Component({
     selector: 'app-addproduct',
     templateUrl: './addproduct.component.html',
@@ -13,13 +15,34 @@ export class AddproductComponent implements OnInit {
     private model: any = {};
     private errMsg: string;
     private addNewProduct: FormGroup;
+    productList: any = {};
     selected: boolean;
     submitted: boolean;
 
-    constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
-    }
+    constructor(
+        private apiService: ApiService,
+        private router: Router,
+        private formBuilder: FormBuilder,
+        private addProductService: AddProductService
+    ) {}
 
     ngOnInit(): void {
+        this.addProductService.getProducts().subscribe(
+            resp => {
+                console.log(resp);
+                this.productList = resp;
+                console.log(this.productList[0].name);
+            }, error => {
+                console.log(error);
+            }
+        );
+        this.addProductService.addProduct().subscribe(
+            resp => {
+                console.log(resp);
+            }, error => {
+                console.log(error);
+            }
+        );
     }
 
     addProduct(): void {
@@ -58,18 +81,18 @@ export class AddproductComponent implements OnInit {
     // getting the form controls
     // tslint:disable-next-line:typedef
     get f() {
-        return this.addNewProduct.controls;
+        return null;
     }
 
-    buildForm(): void {
-        this.addNewProduct = this.formBuilder.group({
-            type: ['customer'],
-            company: ['', Validators.required],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            confirmPassword: ['', Validators.required]
-        });
-
-    }
+    // buildForm(): void {
+    //     this.addNewProduct = this.formBuilder.group({
+    //         type: ['customer'],
+    //         company: ['', Validators.required],
+    //         firstName: ['', Validators.required],
+    //         lastName: ['', Validators.required],
+    //         email: ['', [Validators.required, Validators.email]],
+    //         confirmPassword: ['', Validators.required]
+    //     });
+    //
+    // }
 }

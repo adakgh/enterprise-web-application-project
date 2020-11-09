@@ -50,4 +50,8 @@ public class ProductEntity {
                 "ProductEntity{id=%s, name=%s, price=%s}",
                 id, name, price);
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -1,8 +1,7 @@
 package com.example.demo.security;
 
 import com.example.demo.entities.UserEntity;
-import com.example.demo.exceptions.GlobalException;
-import com.example.demo.repositories.UserRepository;
+import com.example.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

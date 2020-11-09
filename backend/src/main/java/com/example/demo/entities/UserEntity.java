@@ -35,19 +35,22 @@ public class UserEntity {
     Set<Role> roles = new HashSet<>();
 
     @JsonIgnore
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private SupplierEntity supplier;
-
-    @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductEntity> products = new ArrayList<>();
 
-    public void setSupplier(SupplierEntity supplier) {
-        this.supplier = supplier;
-        supplier.setUser(this);
-    }
-
     public void addRole(Role... roles) {
         Collections.addAll(this.roles, roles);
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<ProductEntity> getProducts() {
+        return products;
     }
 }

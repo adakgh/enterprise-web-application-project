@@ -2,7 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.UserEntity;
 import com.example.demo.exceptions.GlobalException;
-import com.example.demo.repositories.UserRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.security.CustomUserDetails;
 import com.example.demo.security.jwt.JwtProvider;
 import com.example.demo.security.jwt.JwtSchema;

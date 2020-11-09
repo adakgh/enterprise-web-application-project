@@ -1,76 +1,82 @@
-<div class="row">
-    <div class="col-lg col-md-6 mb-4">
-        <h3>Plaats een product</h3>
-    </div>
+<div>
+    <p>
+        {{productList[0].name}}
+    </p>
 </div>
+<!--<div class="row">-->
+<!--    <div class="col-lg col-md-6 mb-4">-->
+<!--        <h3>Plaats een product</h3>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div class="row">
-    <div class="col-3 mb-4">
-        <div>
-            <img src="../../../assets/images/bloemkolen.jpeg" alt="Bloemkool" style="width: 100%; height: 100%" class="img-thumbnail">
-        </div>
-        <div>
-            <p>voeg afbeelding toe</p>
-        </div>
-    </div>
-    <div class="col-6 mb-4">
-        <form class="" name="form" [formGroup]="addNewProduct" (ngSubmit)="addProduct()" #form="ngForm" novalidate>
-            <div class="form-group row">
-                <label for="inputTitel" class="col-sm-2 col-form-label">Titel:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="inputTitel" placeholder="Titel"
-                    [ngClass]="{'is-invalid': submitted && f.title.errors}">
-                    <div *ngIf="!submitted && f.title.errors" class="invalid-feedback">
-                        <div *ngIf="f.title.errors.required">Titel is verplicht</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputCost" class="col-sm-2 col-form-label">Prijs:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="inputCost" placeholder="€ prijs"
-                    [ngClass]="{'is-invalid': submitted && f.prize.errors}">
-                    <div *ngIf="submitted && f.prize.errors" class="invalid-feedback">
-                        <div *ngIf="f.prize.errors.required">Prijs is verplicht</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputStock" class="col-sm-2 col-form-label">Voorraad:</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="inputStock" placeholder="kg"
-                    [ngClass]="{'is-invalid': submitted && f.stock.errors}">
-                    <div *ngIf="submitted && f.stock.errors" class="invalid-feedback">
-                        <div *ngIf="f.stock.errors.required">Hoeveelheid is verplicht</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputStock" class="col-sm-2 col-form-label">Hoofdcategorie:</label>
-                <div class="col-sm-8">
-                    <select class="form-control">
-                        <option>Default select</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputStock" class="col-sm-2 col-form-label">Subcategorie:</label>
-                <div class="col-sm-8">
-                    <select class="form-control">
-                        <option>Default select</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                [ngClass]="{'is-invalid': submitted && f.textarea.errors}">
-                </textarea>
-                <div *ngIf="submitted && f.textarea.errors" class="invalid-feedback">
-                    <div *ngIf="f.textarea.errors.required">Hoeveelheid is verplicht</div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Voeg Product toe</button>
-        </form>
-    </div>
-</div>
+<!--<div class="row">-->
+<!--    <div class="col-3 mb-4">-->
+<!--        <div>-->
+<!--            <img src="../../../assets/images/bloemkolen.jpeg" alt="Bloemkool" style="width: 100%; height: 100%" class="img-thumbnail">-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <p>voeg afbeelding toe</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-6 mb-4">-->
+<!--        <form class="" name="form" [formGroup]="" (ngSubmit)="addProduct()" #form="ngForm" novalidate>-->
+<!--            <div class="form-group row">-->
+<!--                <label for="inputTitel" class="col-sm-2 col-form-label">Titel:</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input type="text" class="form-control" id="inputTitel" placeholder="Titel"-->
+<!--                    [ngClass]="{'is-invalid': submitted && f.title.errors}"-->
+<!--                    >-->
+<!--                    <div *ngIf="!submitted && f.title.errors" class="invalid-feedback">-->
+<!--                        <div *ngIf="f.title.errors.required">Titel is verplicht</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group row">-->
+<!--                <label for="inputCost" class="col-sm-2 col-form-label">Prijs:</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input type="text" class="form-control" id="inputCost" placeholder="€ prijs"-->
+<!--                    [ngClass]="{'is-invalid': submitted && f.prize.errors}">-->
+<!--                    <div *ngIf="submitted && f.prize.errors" class="invalid-feedback">-->
+<!--                        <div *ngIf="f.prize.errors.required">Prijs is verplicht</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group row">-->
+<!--                <label for="inputStock" class="col-sm-2 col-form-label">Voorraad:</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input type="text" class="form-control" id="inputStock" placeholder="kg"-->
+<!--                    [ngClass]="{'is-invalid': submitted && f.stock.errors}">-->
+<!--                    <div *ngIf="submitted && f.stock.errors" class="invalid-feedback">-->
+<!--                        <div *ngIf="f.stock.errors.required">Hoeveelheid is verplicht</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group row">-->
+<!--                <label for="inputStock" class="col-sm-2 col-form-label">Hoofdcategorie:</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <select class="form-control">-->
+<!--                        <option>Default select</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group row">-->
+<!--                <label for="inputStock" class="col-sm-2 col-form-label">Subcategorie:</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <select class="form-control">-->
+<!--                        <option>Default select</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="exampleFormControlTextarea1">Example textarea</label>-->
+<!--                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"-->
+<!--                [ngClass]="{'is-invalid': submitted && f.textarea.errors}">-->
+<!--                </textarea>-->
+<!--                <div *ngIf="submitted && f.textarea.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="f.textarea.errors.required">Hoeveelheid is verplicht</div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <button type="submit" class="btn btn-primary">Voeg Product toe</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
