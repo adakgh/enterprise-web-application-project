@@ -11,8 +11,7 @@ import {ProductService} from '../../services/product.service';
 })
 export class ProductComponent implements OnInit {
 
-    jsonData: string[] = [];
-    productList: any = {};
+    jsonData: any[] = [];
 
     constructor(
         private router: Router,
@@ -24,7 +23,7 @@ export class ProductComponent implements OnInit {
     ngOnInit(): void {
         this.productService.getAllProduct().subscribe(
             res => {
-                console.log(res);
+                this.jsonData = res;
             },
             err => {
                 console.log(err);

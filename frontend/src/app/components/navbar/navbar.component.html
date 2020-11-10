@@ -71,13 +71,13 @@
                         PRODUCTEN
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">ALLE</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">GROENTE & FRUIT</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">ZUIVEL</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">BAKKERIJ</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">DRANKEN</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">VLEES</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">VEGA</a>
+                        <a class="dropdown-item" routerLink="/products">ALLE</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: userId}">GROENTE & FRUIT</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'zuivel'}">ZUIVEL</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'bakkerij'}">BAKKERIJ</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'dranken'}">DRANKEN</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'vlees'}">VLEES</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'vega'}">VEGA</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
