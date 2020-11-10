@@ -2,10 +2,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 
+import { CookieModule } from 'ngx-cookie';
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {UserComponent} from './components/user/user.component';
 import {HomeComponent} from './components/home/home.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -17,15 +18,13 @@ import {ProductDetailComponent} from './components/product-detail/product-detail
 import {SupplierInfoComponent} from './components/supplier-info/supplier-info.component';
 import {RecentProductComponent} from './components/supplier-info/recent-product/recent-product.component';
 import {SupplierInfoEditComponent} from './components/supplier-info/supplier-info-edit/supplier-info-edit.component';
-import { ContactComponent } from './components/contact/contact.component';
+import {ContactComponent} from './components/contact/contact.component';
 import {AddproductComponent} from './components/addproduct/addproduct.component';
-import { ErrorComponent } from './components/error/error.component';
-
+import {ErrorComponent} from './components/error/error.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        UserComponent,
         HomeComponent,
         LoginComponent,
         LogoutComponent,
@@ -38,9 +37,10 @@ import { ErrorComponent } from './components/error/error.component';
         SupplierInfoEditComponent,
         ContactComponent,
         AddproductComponent,
-        ErrorComponent
+        ErrorComponent,
     ],
     imports: [
+        CookieModule.forRoot(),
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
@@ -49,7 +49,6 @@ import { ErrorComponent } from './components/error/error.component';
         ReactiveFormsModule
     ],
     providers: [],
-
     bootstrap: [AppComponent]
 })
 export class AppModule {

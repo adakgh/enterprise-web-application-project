@@ -1,90 +1,97 @@
 package com.example.demo.security.jwt;
 
-import com.example.demo.security.CustomUserDetails;
-import com.example.demo.security.CustomUserDetailsService;
+import com.example.demo.exceptions.ExpiredTokenException;
+import com.example.demo.exceptions.InvalidTokenException;
+import com.example.demo.persistence.entities.RoleEntity;
+import com.example.demo.persistence.entities.UserEntity;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
-@RequiredArgsConstructor
 public class JwtProvider {
-    private static final String TOKEN_PREFIX = "Bearer ";
-    private static final String TOKEN_HEADER = "Authorization";
 
-    @Value("${security.jwt.signing-key}")
-    private String tokenSigningKey;
-    @Value("${security.jwt.validity}")
-    private long tokenValidity;
-    @Value("${security.jwt.validity-remember-me}")
-    private long tokenValidityRememberMe;
+    @Value("${security.jwt.expiration-access}")
+    private long accessExpTime;
 
-    private final ModelMapper modelMapper;
-    private final CustomUserDetailsService customUserDetailsService;
+    @Value("${security.jwt.key-secret}")
+    private String secretKey;
 
-    public String createToken(CustomUserDetails user, boolean rememberMe) {
+    /**
+     * Creates an access token with no sensitive data exposure. Note that HS256 is used as the
+     * signing algorithm, but is nowadays not commonly used anymore, because it can be brute-forced
+     * and is build upon a single secret key that could be shared among multiple servers which is
+     * undesirable. RS256 solves these problems, but is out of the scope of this project.
+     */
+    public String createAccessToken(UserEntity user) {
         return Jwts.builder()
-                   .setSubject(user.getUsername())
-                   .setExpiration(getExpirationTime(rememberMe))
-                   .setIssuedAt(new Date(System.currentTimeMillis()))
-                   .claim("roles", modelMapper.map(user.getAuthorities(), String[].class))
-                   .signWith(createSigningKey(), SignatureAlgorithm.HS256)
-                   .compact();
+                .setSubject(user.getUsername())
+                .setExpiration(generateExpirationTime(accessExpTime, false))
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .claim("uid", user.getId())
+                .claim("roles", user.getRoles().stream().map(RoleEntity::getName).collect(Collectors.joining(",")))
+                .signWith(generateSigningKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
-    public String resolveToken(HttpServletRequest request) {
-        String bearer = request.getHeader(TOKEN_HEADER);
-        return StringUtils.hasText(bearer) && bearer.startsWith(TOKEN_PREFIX)
-                ? bearer.substring(TOKEN_PREFIX.length())
-                : null;
-    }
-
-    public Authentication authenticateToken(String token) {
-        var userDetails = customUserDetailsService.loadUserByUsername(getUsername(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-    }
-
-    public boolean isValidToken(String token) {
+    /**
+     * Validates the specified token's signature and throws appropriate exceptions based on
+     * its failed validation.
+     */
+    public Jws<Claims> validateToken(String token) {
         try {
-            parseToken(token);
-            return true;
-        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException
-                | SignatureException | IllegalArgumentException e) {
-            // TODO: 422 unprocessable entity
-            e.printStackTrace();
+            return parseTokenSignature(token);
+        } catch (ExpiredJwtException e) {
+            throw new ExpiredTokenException(e.getMessage());
+        } catch (UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e) {
+            throw new InvalidTokenException(e.getMessage());
         }
-        return false;
     }
 
-    private String getUsername(String token) {
-        return parseToken(token).getBody().getSubject();
+    /**
+     * Same as {@link JwtProvider#validateToken(String)} with the exception that the mentioned
+     * method handles all thrown exceptions properly.
+     */
+    public Jws<Claims> parseTokenSignature(String token) {
+        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
     }
 
-    private Date getExpirationTime(boolean rememberMe) {
-        long tokenTimeMillis = rememberMe ? tokenValidityRememberMe : tokenValidity;
-        return new Date(System.currentTimeMillis() + tokenTimeMillis);
+    /**
+     * Retrieves all claims from a token.
+     */
+    public Claims resolveTokenClaims(String token) {
+        return parseTokenSignature(token).getBody();
     }
 
-    private Key createSigningKey() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(tokenSigningKey));
+    /**
+     * Generates a custom expiration time based on the given arguments.
+     */
+    private Date generateExpirationTime(long expirationTime, boolean rememberMe) {
+        // TODO: extend time if rememberMe == true
+        return new Date(System.currentTimeMillis() + expirationTime);
     }
 
-    private Jws<Claims> parseToken(String token) {
-        return Jwts.parserBuilder()
-                   .setSigningKey(tokenSigningKey)
-                   .build()
-                   .parseClaimsJws(token);
+    /**
+     * Creates a new secret key instance for use with HMAC-SHA algorithms
+     */
+    private Key generateSigningKey() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
     }
 }
+
+//    public Map<?, ?> readTokenClaims(String token) throws JsonProcessingException {
+//        token = token.substring(token.indexOf(".") + 1);
+//        token = token.substring(0, token.indexOf("."));
+//        String jsonNode = new String(Base64.getDecoder().decode(token));
+//
+//        var mapper = new ObjectMapper();
+//        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        return mapper.readValue(jsonNode, Map.class);
+//    }

@@ -1,11 +1,11 @@
 package com.example.demo.search;
 
-import com.example.demo.entities.ProductEntity;
+import com.example.demo.persistence.entities.ProductEntity;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Map;
 
 public class ProductSpecification extends BaseSpecification<ProductEntity> {
 

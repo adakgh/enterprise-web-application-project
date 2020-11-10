@@ -4,10 +4,7 @@ import com.example.demo.search.interfaces.QueryMap;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.*;
 
 public abstract class BaseSpecification<T> implements Specification<T>, QueryMap {
@@ -46,15 +43,21 @@ public abstract class BaseSpecification<T> implements Specification<T>, QueryMap
         // http://localhost:8080/api/v1/products?sort=name              --> sorts on given attribute
         // http://localhost:8080/api/v1/products?name=t*&sort=name      --> mix and match
 
-        // TODO: find out why the char 'n' does not work if its the first and only char in a String.
-        //  Could be a bug in Spring Boot...
-
-        var arr = Arrays
-                .stream(queryMap.get(attr).split(","))
-                .map(String::toLowerCase)
+        // #1: db values of type <Number> are cast to <String> to fully support criteria filtering.
+        // #2: currently all compared values are transformed to lower case.
+        var arr = Arrays.stream(queryMap.get(attr).split(","))
                 .map(v -> v.replace('*', '%'))
-                .map(v -> cb.like(rt.get(attr).as(String.class), v)) // casting <Number> typed values in db to <String>
+                .map(v -> cb.like(constructExpression(attr, rt, cb), constructPattern(v)))
                 .toArray(Predicate[]::new);
         predicates.add(cb.or(arr));
+    }
+
+    private Expression<String> constructExpression(String attr, Root<T> rt, CriteriaBuilder cb) {
+        Expression<String> expression = rt.get(attr).as(String.class); // String typecast
+        return cb.lower(expression); // lowercase
+    }
+
+    private String constructPattern(String value) {
+        return value.toLowerCase();
     }
 }

@@ -17,12 +17,12 @@ export class ProductComponent implements OnInit {
 
     ngOnInit(): void {
         this.apiService.get(this.router.url).subscribe(
-            (jsonResp) => {
+            (res) => {
                 // TODO: do something with this response!
-                jsonResp.forEach(e => {
+                res.forEach(e => {
                     this.jsonData.push(JSON.stringify(e)); // save to array
                 });
-                console.log(jsonResp); // debug
+                console.log(res); // debug
             }
         );
     }

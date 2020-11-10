@@ -28,17 +28,17 @@
                      src="https://i.pinimg.com/originals/ca/f3/93/caf393479404b953bc5368a63c32e4e4.png" alt="user-icon">
                     <span class="font-weight-bold">WELKOM, GAST</span>
                 </a>
-                <a *ngIf="isLoggedIn" routerLink="/users">
+                <a *ngIf="isLoggedIn" routerLink="/profile">
                 <img class="user-icon"
                      src="https://i.pinimg.com/originals/ca/f3/93/caf393479404b953bc5368a63c32e4e4.png" alt="user-icon">
-                      <span class="font-weight-bold">MIJN ACCOUNT</span>
+                      <span class="font-weight-bold">{{username}}</span>
                     </a>
                 <br>
                 <a *ngIf="!isLoggedIn" routerLink="/login">
-                <span class="mr-5">INLOGGEN / REGISTREREN</span>
+                    <span class="mr-5">INLOGGEN / REGISTREREN</span>
                 </a>
-                <a *ngIf="isLoggedIn" routerLink="/logout">
-                <span class="mr-5">UITLOGGEN</span>
+                <a *ngIf="isLoggedIn" (click)="logout()" href="">
+                    <span class="mr-5">UITLOGGEN</span>
                 </a>
             </span>
 

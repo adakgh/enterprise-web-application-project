@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../../services/api.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
+import {CurrentUserService} from '../../services/current-user.service';
+import {LoginData} from '../../models/login-data.model';
+import {LoginService} from '../../services/login.service';
+import {RouteUtil} from '../../utils/route.util';
 
 @Component({
     selector: 'app-login',
@@ -10,45 +14,51 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-    constructor(private apiService: ApiService, private router: Router, private formBuilder: FormBuilder) {
-        // test values for the input fields
-        this.model.username = 'user@gmail.com';
-        this.model.password = 5678;
-    }
-
-    model: any = {};
-    errMsg = '';
+    loginData: LoginData = {};
+    loginErrMsg = '';
 
     selected: boolean;
     registerForm: FormGroup;
     submitted = false;
-    ngForm;
+
+    constructor(private router: Router,
+                private routeUtil: RouteUtil,
+                private formBuilder: FormBuilder,
+                private authService: AuthService,
+                private currentUserService: CurrentUserService,
+                private loginsService: LoginService) {
+    }
 
     ngOnInit(): void {
-        // remove token --> logout
-        sessionStorage.removeItem('currentUser');
-
+        this.authService.deleteAuthentication(); // force a logout;
         // register form validation
         this.buildForm();
         this.setTypeValidators();
+
+        // TODO: remove after testing --> test values for input fields
+        this.loginData.username = 'myUsername@gmail.com';
+        this.loginData.password = 'myPassword1!';
     }
 
     login(): void {
-        this.apiService.post('/login', this.model).subscribe(
-            resp => {
-                if (resp.token == null) {
-                    this.errMsg = 'E-mail of wachtwoord is niet correct';
-                    return;
-                }
-                // save responseInfo (token, role, ...) for client-side routes
-                sessionStorage.setItem('currentUser', JSON.stringify(resp));
-                this.router.navigate(['/']).then(() => {
-                    window.location.reload();
-                });
-            }, errResp => {
-                this.errMsg = errResp.status;
-            }
+        this.loginsService.requestAccessToken(this.loginData).subscribe(
+            res => this.navToHomepage(),
+            err => this.loginErrMsg = 'E-mail of wachtwoord is niet correct'
         );
+    }
+
+    LoginRememberMe(values: any): void {
+        if (values.currentTarget.checked) {
+            this.routeUtil.addParam('rememberMe', 'true');
+        } else {
+            this.routeUtil.clearParams();
+        }
+    }
+
+    navToHomepage(): void {
+        this.router.navigate(['/']).then(() => {
+            window.location.reload();
+        });
     }
 
     selectInput(event): void {
