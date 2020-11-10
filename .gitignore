@@ -1,3 +1,4 @@
 backend/src/main/java/com/example/.DS_Store
 *.DS_Store
 .idea
+backend/src/main/resources/database
