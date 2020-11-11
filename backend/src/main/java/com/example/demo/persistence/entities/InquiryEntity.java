@@ -21,7 +21,7 @@ public class InquiryEntity {
 
     @JsonManagedReference
     @ManyToOne
-    @JoinColumn(name = "INQUIRY_TYPE_ID")
+    @JoinColumn(name = "INQUIRY_CATEGORY_ID")
     private InquiryCategoryEntity inquiryCategory;
 
     public void addInquiryCategory(InquiryCategoryEntity inquiryCategory) {

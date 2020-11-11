@@ -1,6 +1,6 @@
 #FileLock
-#Wed Nov 11 12:09:26 CET 2020
-server=192.168.178.25\:49606
+#Wed Nov 11 16:09:38 CET 2020
+server=192.168.178.25\:60081
 hostName=robertos-mbp.fritz.box
 method=file
-id=175b6fefe190c7be95b4b64c9e19557774ee77dea0b
+id=175b7dae7c742d638ef87f4b9f7a8c0356db7a475f5
