@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
+import {RouteUtil} from '../../utils/route.util';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -10,20 +12,31 @@ import {ApiService} from '../../services/api.service';
 export class ProductComponent implements OnInit {
 
     jsonData: string[] = [];
+    productList: any = {};
+
     constructor(
         private router: Router,
-        private apiService: ApiService
+        private apiService: ApiService,
+        private routeUtil: RouteUtil,
+        private productService: ProductService
     ) {}
 
     ngOnInit(): void {
-        this.apiService.get(this.router.url).subscribe(
-            (res) => {
-                // TODO: do something with this response!
-                res.forEach(e => {
-                    this.jsonData.push(JSON.stringify(e)); // save to array
-                });
-                console.log(res); // debug
+        this.productService.getAllProduct().subscribe(
+            res => {
+                console.log(res);
+            },
+            err => {
+                console.log(err);
             }
         );
+    }
+
+    findProductStartingWithLetterT(values: any): void {
+        if (values.currentTarget.checked) {
+            this.routeUtil.addParam('name', 'ko*');
+        } else {
+            this.routeUtil.clearParams();
+        }
     }
 }
