@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit {
     ngOnInit(): void {
         this.productService.getAllProduct().subscribe(
             res => {
-                console.log(res);
+                // console.log(res);
             },
             err => {
                 console.log(err);
@@ -36,7 +36,15 @@ export class ProductComponent implements OnInit {
         if (values.currentTarget.checked) {
             this.routeUtil.addParam('name', 'ko*');
         } else {
-            this.routeUtil.clearParams();
+            this.routeUtil.deleteParam('name');
+        }
+    }
+
+    sortOnName(values: any): void {
+        if (values.currentTarget.checked) {
+            this.routeUtil.addParam('sort', 'name');
+        } else {
+            this.routeUtil.deleteParam('sort');
         }
     }
 }

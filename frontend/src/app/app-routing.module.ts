@@ -20,7 +20,7 @@ const routes: Routes = [
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
-    {path: 'addproduct', component: AddproductComponent},
+    {path: 'addproduct', component: AddproductComponent, canActivate: [AuthGuardService]},
     {path: 'contact', component: ContactComponent},
     {path: 'error', component: ErrorComponent},
     {path: '**', redirectTo: '/error'} // If page not found: goes to error 404 page

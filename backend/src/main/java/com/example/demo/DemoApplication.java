@@ -2,6 +2,8 @@ package com.example.demo;
 
 import com.example.demo.models.RoleType;
 import com.example.demo.persistence.entities.*;
+import com.example.demo.persistence.repositories.InquiryRepository;
+import com.example.demo.persistence.repositories.InquiryCategoryRepository;
 import com.example.demo.persistence.repositories.RoleRepository;
 import com.example.demo.persistence.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,8 @@ public class DemoApplication {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final InquiryCategoryRepository inquiryCategoryRepository;
+    private final InquiryRepository inquiryRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Bean
@@ -31,7 +35,24 @@ public class DemoApplication {
 
             // -----------------------------------------------------
 
-            // roles
+            // inquiry
+            var inqType1 = new InquiryCategoryEntity();
+            inqType1.setName("Nieuwe Producten");
+            inquiryCategoryRepository.save(inqType1);
+
+            var inqType2 = new InquiryCategoryEntity();
+            inqType2.setName("Algemeen");
+            inquiryCategoryRepository.save(inqType2);
+
+            // example inquiry
+            var inquiry = new InquiryEntity();
+            inquiry.setMessage("Ik ben op zoek naar runderbotten om te gebruiken voor in de soep.");
+            inquiry.addInquiryCategory(inquiryCategoryRepository.getOne(1L)); // lazy load
+            inquiryRepository.save(inquiry);
+
+            // -----------------------------------------------------
+
+            // user roles
             var adminRole = new RoleEntity();
             adminRole.setName(RoleType.ADMIN);
             roleRepository.save(adminRole);
@@ -51,6 +72,8 @@ public class DemoApplication {
             user1.setUsername("myUsername@gmail.com");
             user1.setPassword(passwordEncoder.encode("myPassword1!"));
             user1.addRole(supplierRole);
+            user1.addRole(customerRole);
+            user1.addRole(adminRole);
 
             var supp = new SupplierEntity();
             supp.setCompanyName("Slachterij Hooijmans");

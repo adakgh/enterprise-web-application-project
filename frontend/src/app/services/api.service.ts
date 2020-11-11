@@ -56,7 +56,6 @@ export class ApiService {
     createHeaders(fields: Map<string, string>): HttpHeaders {
         let headers = new HttpHeaders();
         headers = headers.append('Content-Type', 'application/json');
-
         if (fields) {
             fields.forEach((v, k) => headers = headers.append(k, v));
         }
