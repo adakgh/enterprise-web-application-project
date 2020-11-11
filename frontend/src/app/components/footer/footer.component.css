@@ -1,0 +1,26 @@
+.footer {
+    color: white;
+    background-color: #255239;
+}
+
+.list-unstyled a {
+    color: white;
+}
+
+.leverancier-col {
+    width: 200px;
+}
+
+.footer-container {
+    width: 100%;
+}
+
+.footer-copyright {
+    margin-left: 165px;
+    color: white;
+}
+
+.footer-copyright a {
+    margin-left: 4em;
+    color: white;
+}

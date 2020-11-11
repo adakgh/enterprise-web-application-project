@@ -1,0 +1,46 @@
+.block {
+    width: 100% !important;
+}
+
+@media (min-width: 768px) {
+    .h-md-100 {
+        height: 75vh;
+    }
+}
+
+.loginarea {
+    background-color: rgba(37, 82, 57, 0.4);
+}
+
+.login-form {
+    width: 150%;
+}
+
+.form {
+    margin-right: 175px;
+    position: absolute;
+}
+
+input {
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    background-color: transparent;
+    color: black;
+    border-bottom: dimgray 1.5px solid;
+    border-radius: 0;
+}
+
+.login-button {
+    background-color: black;
+    color: white;
+    border-radius: 0;
+}
+
+.registerarea {
+    background-color: white;
+}
+
+.modal-dialog {
+    min-width: 550px;
+}

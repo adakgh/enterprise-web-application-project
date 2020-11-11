@@ -4,41 +4,64 @@ import {environment} from '../../environments/environment';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {AuthService} from './auth.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
 
+    private authHeaderRef = 'Authorization';
+
     constructor(
         private router: Router,
-        private http: HttpClient
-    ) {}
+        private http: HttpClient,
+        private authService: AuthService) {}
 
-    get(url: string, urlParams?: HttpParams): Observable<any> {
-        return this.http.get(environment.restUrl + url, {headers: this.getHeaders()})
+    get(url: string): Observable<any> {
+        return this.http.get(environment.apiUrl + url, {headers: this.createHeaders(null)})
             .pipe(catchError((err) => this.errorHandler(err)));
     }
 
     // tslint:disable-next-line:ban-types
-    post(url: string, body: Object): Observable<any> {
-        return this.http.post(environment.restUrl + url, JSON.stringify(body), {headers: this.getHeaders()})
-            .pipe(catchError((err) => this.errorHandler(err)));
+    post(url: string, body: Object, headerFields: Map<string, string>): Observable<any> {
+        const headers = this.createHeaders(headerFields);
+        return this.http.post(environment.apiUrl + url, JSON.stringify(body), {headers})
+            .pipe(catchError(err => this.errorHandler(err)));
     }
 
-    errorHandler(error: HttpErrorResponse): any {
-        if (error.status === 401) {
+    // tslint:disable-next-line:ban-types
+    put(url: string, body: Object, headerFields: Map<string, string>): Observable<any> {
+        const headers = this.createHeaders(headerFields);
+        return this.http.put(environment.apiUrl + url, JSON.stringify(body), {headers})
+            .pipe(catchError(err => this.errorHandler(err)));
+    }
+
+    // tslint:disable-next-line:ban-types
+    delete(url: string, headerFields: Map<string, string>): Observable<any> {
+        const headers = this.createHeaders(headerFields);
+        return this.http.delete(environment.apiUrl + url, {headers})
+            .pipe(catchError(err => this.errorHandler(err)));
+    }
+
+    errorHandler(resp: HttpErrorResponse): any {
+        const status = resp.status;
+        // unauthorized
+        if (status === 401) {
             this.router.navigate(['/logout']);
         }
-        return throwError(error.message || 'server error');
+        return throwError(resp.error.message || 'server error');
     }
 
-    getHeaders(): HttpHeaders {
+    createHeaders(fields: Map<string, string>): HttpHeaders {
         let headers = new HttpHeaders();
         headers = headers.append('Content-Type', 'application/json');
-        const sessionInfo = sessionStorage.getItem('currentUser');
-        if (sessionInfo) {
-            headers = headers.append('Authorization', JSON.parse(sessionInfo).token);
+
+        if (fields) {
+            fields.forEach((v, k) => headers = headers.append(k, v));
+        }
+        if (!headers.has(this.authHeaderRef) && this.authService.isAuthenticated()) {
+            headers = headers.append(this.authHeaderRef, 'Bearer ' + this.authService.getAuthentication());
         }
         return headers;
     }
