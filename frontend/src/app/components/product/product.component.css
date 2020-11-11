@@ -1,0 +1,25 @@
+.section_popup-bottom-right {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 20%;
+    padding: 0.4rem 1.2rem;
+    background: #e7e7e7;
+    color: black;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    border: 0 solid black;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    cursor: pointer;
+}
+
+.section_popup-bottom-left_btn {
+    margin-top: 10px;
+    background-color: #265139;
+    color: white;
+    align-self: flex-end;
+    font-size: 19px;
+    padding: 8px;
+}
