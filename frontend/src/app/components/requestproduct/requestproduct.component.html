@@ -1,0 +1,41 @@
+<div class="container text-center mt-4 p-3">
+    <h2 class="h1-responsive font-weight-bold my-4">Aanvragen</h2>
+    <p>Op deze pagina bevinden zich alle aanvragen gedaan door afnemers.</p>
+</div>
+
+<div class="container text-left p-3 mb-5">
+    <div class="dashboard-table-header">
+        <p class="text-uppercase font-weight-bold dashboard-table-color dashboard-header-name">Product</p>
+        <p class="text-uppercase font-weight-bold dashboard-table-color dashboard-header-category">Categorie</p>
+        <p class="text-uppercase font-weight-bold dashboard-table-color dashboard-header-amount">Hoeveelheid</p>
+        <p class="text-uppercase font-weight-bold dashboard-table-color dashboard-header-date">Datum</p>
+        <p class="text-uppercase font-weight-bold dashboard-table-color dashboard-header-description">Beschrijving</p>
+    </div>
+
+    <div *ngFor="let i of inquiry">
+    <div class="dashboard-table">
+        <div class="dashboard-name">Ananas</div>
+        <div class="dashboard-category">Groente & fruit</div>
+        <div class="dashboard-amount">4 kg</div>
+        <div class="dashboard-date">01/12/2020</div>
+        <div class="dashboard-description">Ik zoek 4kg ananas voor 1 december 2020.
+        </div>
+    </div>
+    <div class="dashboard-table">
+        <div class="dashboard-name">Runderbotten</div>
+        <div class="dashboard-category">{{ category }}</div>
+        <div class="dashboard-amount">3 kg</div>
+        <div class="dashboard-date">29/11/2020</div>
+        <div class="dashboard-description">{{ message }}</div>
+    </div>
+    <div class="dashboard-table">
+        <div class="dashboard-name">Lorem ipsum</div>
+        <div class="dashboard-category">Vlees</div>
+        <div class="dashboard-amount">6 kg</div>
+        <div class="dashboard-date">16/12/2020</div>
+        <div class="dashboard-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+    </div>
+    </div>
+</div>
+<br>
+<br>
