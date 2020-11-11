@@ -38,7 +38,7 @@ public class ProductController {
     @Secured(RoleType.SUPPLIER)
     @PostMapping
     public void createProduct(@RequestBody ProductEntity product) {
-        productService.save(product);
+        productService.saveNewProduct(product);
     }
 
     /**

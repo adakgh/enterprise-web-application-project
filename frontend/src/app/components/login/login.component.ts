@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
     }
 
     login(): void {
+        console.log(this.loginData);
         this.loginsService.requestAccessToken(this.loginData).subscribe(
             res => this.navToHomepage(),
             err => this.loginErrMsg = 'E-mail of wachtwoord is niet correct'

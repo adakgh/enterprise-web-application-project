@@ -46,7 +46,7 @@ import {ErrorComponent} from './components/error/error.component';
         HttpClientModule,
         FormsModule,
         RouterModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

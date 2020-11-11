@@ -29,7 +29,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public void save(ProductEntity product) {
+    public void saveNewProduct(ProductEntity product) {
         UserEntity user = userService.getCurrentUser();
         product.setSupplier(user.getSupplier());
         productRepository.save(product);
