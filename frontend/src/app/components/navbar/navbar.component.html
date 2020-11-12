@@ -12,15 +12,6 @@
                                                  src="https://cdn.shopify.com/s/files/1/0021/1966/3675/files/Van-streek-logo-liggend-zwart_482x.png"
                                                  alt="company-logo"></a>
                 </li>
-                <!--                <li class="header-item searchbar">-->
-                <!--                    <div class="input-group md-form form-sm form-2 ml-4 mt-3">-->
-                <!--                        <input class="form-control my-0 py-1" type="text" placeholder="Waar ben je naar op zoek?"-->
-                <!--                               aria-label="Search">-->
-                <!--                        <div class="input-group-append">-->
-                <!--                            <button class="btn search" type="submit">Zoeken</button>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </li>-->
             </ul>
 
             <!-- user login/register/logout-->
@@ -74,12 +65,12 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" routerLink="/products">ALLE</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: userId}">GROENTE & FRUIT</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'zuivel'}">ZUIVEL</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'bakkerij'}">BAKKERIJ</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'dranken'}">DRANKEN</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'vlees'}">VLEES</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="//{category: 'vega'}">VEGA</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 1}">GROENTE & FRUIT</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 2}">ZUIVEL</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 3}">BAKKERIJ</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 4}">DRANKEN</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 5}">VLEES</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 6}">VEGA</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown" *ngIf="isLoggedIn && currentUserService.isSupplier()">

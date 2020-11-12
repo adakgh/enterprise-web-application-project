@@ -3,36 +3,12 @@
         <label for="searchBar">Zoek een product:</label>
         <input class="form-control" id="searchBar" type="text" placeholder="Zoek.." (keyup)="searchValue($event)">
         <fieldset class="form-group">
-            Sorteer op categorien:
-            <div class="form-check">
-                <input id="zuivel" type="checkbox" class="form-check-input" name="category" value="zuivel"
+            Filter op categorieën:
+            <div class="form-check" *ngFor="let category of categoryMap">
+                <input id="{{category.name}}" type="checkbox" class="form-check-input" name="category"
+                       value="{{category.id}}"
                        (change)="filterCategory($event)">
-                <label for="zuivel" class="form-check-label">Zuivel</label>
-            </div>
-            <div class="form-check">
-                <input id="groenteEnFruit" type="checkbox" class="form-check-input" name="category" value="groenteEnFruit"
-                       (change)="filterCategory($event)">
-                <label for="groenteEnFruit" class="form-check-label">Groente en fruit</label>
-            </div>
-            <div class="form-check">
-                <input id="bakkerij" type="checkbox" class="form-check-input" name="category" value="bakkerij"
-                       (change)="filterCategory($event)">
-                <label for="bakkerij" class="form-check-label">Bakkerij</label>
-            </div>
-            <div class="form-check">
-                <input id="dranken" type="checkbox" class="form-check-input" name="category" value="dranken"
-                       (change)="filterCategory($event)">
-                <label for="dranken" class="form-check-label">Dranken</label>
-            </div>
-            <div class="form-check">
-                <input id="vlees" type="checkbox" class="form-check-input" name="category" value="vlees"
-                       (change)="filterCategory($event)">
-                <label for="vlees" class="form-check-label">Vlees</label>
-            </div>
-            <div class="form-check">
-                <input id="vega" type="checkbox" class="form-check-input" name="category" value="vega"
-                       (change)="filterCategory($event)">
-                <label for="vega" class="form-check-label">Vega</label>
+                <label for="{{category.name}}" class="form-check-label">{{category.name}}</label>
             </div>
         </fieldset>
     </div>

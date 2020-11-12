@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {RouteUtil} from '../utils/route.util';
 import {ApiService} from './api.service';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +20,14 @@ export class ProductService {
         return this.apiService.get('/products' + query).pipe(
             map(res => {
                 return res.content;
+            })
+        );
+    }
+
+    getAllCategories(): Observable<any> {
+        return this.apiService.get('/products/categories').pipe(
+            map(res => {
+                return res;
             })
         );
     }

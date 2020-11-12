@@ -123,7 +123,7 @@ public class DemoApplication {
             product1.setQuantity("per stuk:");
             product1.setPrice(new BigDecimal("4.95"));
             product1.setAddedDate(new Date());
-            product1.addProductCategory(productCategoryRepository.getOne(1L)); // lazy load
+            product1.addProductCategory(productCategoryRepository.getOne(5L)); // lazy load
             supp.addProduct(product1); // resolve relationship (supplier <-> product)
 
             var product2 = new ProductEntity();
