@@ -1,11 +1,13 @@
 package com.example.demo.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -35,8 +37,20 @@ public class ProductEntity {
     @Column(name = "DISCOUNT_PRICE")
     private BigDecimal price2;
 
+    @Column(name = "DATE_ADDED")
+    private Date addedDate;
+
     @ManyToOne
     @JoinColumn(name = "SUPPLIER_ID")
     @JsonBackReference
     private SupplierEntity supplier;
+
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_CATEGORY_ID")
+    private ProductCategoryEntity productCategory;
+
+    public void addProductCategory(ProductCategoryEntity productCategory) {
+        this.productCategory = productCategory;
+        productCategory.getProducts().add(this);
+    }
 }

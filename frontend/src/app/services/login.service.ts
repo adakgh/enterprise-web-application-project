@@ -21,6 +21,9 @@ export class LoginService {
     }
 
     requestAccessToken(loginData: LoginData): Observable<any> {
+        const product: any = {};
+        product.name = 'roboerot';
+
         const headerField = new Map().set('Authorization', this.encodeCredentials(loginData));
         return this.apiService.post('/auth/token' + this.routeService.getUrlQuery(), null, headerField).pipe(
             tap(res => {
