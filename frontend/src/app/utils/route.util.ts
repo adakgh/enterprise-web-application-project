@@ -15,6 +15,8 @@ export class RouteUtil {
      */
     addParam(paramName: string, paramValue: string): void {
         const params = this.getParams();
+        console.log(params);
+        console.log(params === {});
         params[paramName] = paramValue;
         this.updateParams(params);
     }
@@ -47,7 +49,7 @@ export class RouteUtil {
      * Convenience method to retrieve all params from the url of this current route.
      * Returns a JS-object containing all current params.
      */
-    private getParams(): any {
+    getParams(): any {
         return Object.assign({}, this.route.snapshot.queryParams);
     }
 

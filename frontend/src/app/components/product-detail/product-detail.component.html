@@ -6,13 +6,13 @@
         </div>
 
         <div class="col-md-7">
-            <h5>Verse bloemkool 10Kg</h5>
-            <p class="mb-2 text-muted text-uppercase small">Groente</p>
+            <h5>{{jsonData[0].name}}</h5>
+            <p class="mb-2 text-muted text-uppercase small">{{jsonData[0].productCategory.name}}</p>
 
-            <p><span class="mr-1"><strong>€0.49/Kg</strong></span></p>
-            <p class="pt-1">Deze bloemkool komt van het land van Bob, Bob steekt erg veel tijd in het behandelen en
-                uitzoeken van de beste en mooiste bloemkolen.</p>
+            <p><span class="mr-1"><strong>prijs {{jsonData[0].quantity}} €{{jsonData[0].price}}</strong></span></p>
+            <p class="pt-1">{{jsonData[0].description}}</p>
             <hr>
+            <p class="pt-1">{{jsonData[0].stock}}</p>
             <form>
                 <div class="form-group">
                     <label for="productAmount">hoeveelheid in kilo's: (minimaal 10 Kg)</label>
