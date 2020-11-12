@@ -45,6 +45,9 @@ public abstract class BaseSpecification<T> implements Specification<T>, QueryMap
 
         // #1: db values of type <Number> are cast to <String> to fully support criteria filtering.
         // #2: currently all compared values are transformed to lower case.
+
+        //rt.fetch("productCategory", JoinType.LEFT);
+
         var arr = Arrays.stream(queryMap.get(attr).split(","))
                 .map(v -> v.replace('*', '%'))
                 .map(v -> cb.like(constructExpression(attr, rt, cb), constructPattern(v)))
