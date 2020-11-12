@@ -6,12 +6,13 @@
         </div>
 
         <div class="col-md-7">
-            <h5>{{jsonData.name}}</h5>
-            <p class="mb-2 text-muted text-uppercase small"></p>
+            <h5>{{jsonData[0].name}}</h5>
+            <p class="mb-2 text-muted text-uppercase small">{{jsonData[0].productCategory.name}}</p>
 
-            <p><span class="mr-1"><strong>€{{jsonData.price}}/Kg</strong></span></p>
-            <p class="pt-1">{{jsonData.description}}</p>
+            <p><span class="mr-1"><strong>prijs {{jsonData[0].quantity}} €{{jsonData[0].price}}</strong></span></p>
+            <p class="pt-1">{{jsonData[0].description}}</p>
             <hr>
+            <p class="pt-1">{{jsonData[0].stock}}</p>
             <form>
                 <div class="form-group">
                     <label for="productAmount">hoeveelheid in kilo's: (minimaal 10 Kg)</label>

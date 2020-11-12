@@ -1,52 +1,71 @@
-<!--<div *ngFor="let obj of jsonData;">{{obj}}</div>-->
-
-<div class="d-flex justify-content-around float-right">
-    <div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" (change)="findProductStartingWithLetterT($event)">
-            <label class="form-check-label">starting with T</label>
-        </div>
+<div class="container">
+    <div class="form-group">
+        <label for="searchBar">Zoek een product:</label>
+        <input class="form-control" id="searchBar" type="text" placeholder="Zoek.." (keyup)="searchValue($event)">
+        <fieldset class="form-group">
+            Sorteer op categorien:
+            <div class="form-check">
+                <input id="zuivel" type="checkbox" class="form-check-input" name="category" value="zuivel"
+                       (change)="filterCategory($event)">
+                <label for="zuivel" class="form-check-label">Zuivel</label>
+            </div>
+            <div class="form-check">
+                <input id="groenteEnFruit" type="checkbox" class="form-check-input" name="category" value="groenteEnFruit"
+                       (change)="filterCategory($event)">
+                <label for="groenteEnFruit" class="form-check-label">Groente en fruit</label>
+            </div>
+            <div class="form-check">
+                <input id="bakkerij" type="checkbox" class="form-check-input" name="category" value="bakkerij"
+                       (change)="filterCategory($event)">
+                <label for="bakkerij" class="form-check-label">Bakkerij</label>
+            </div>
+            <div class="form-check">
+                <input id="dranken" type="checkbox" class="form-check-input" name="category" value="dranken"
+                       (change)="filterCategory($event)">
+                <label for="dranken" class="form-check-label">Dranken</label>
+            </div>
+            <div class="form-check">
+                <input id="vlees" type="checkbox" class="form-check-input" name="category" value="vlees"
+                       (change)="filterCategory($event)">
+                <label for="vlees" class="form-check-label">Vlees</label>
+            </div>
+            <div class="form-check">
+                <input id="vega" type="checkbox" class="form-check-input" name="category" value="vega"
+                       (change)="filterCategory($event)">
+                <label for="vega" class="form-check-label">Vega</label>
+            </div>
+        </fieldset>
     </div>
-</div>
 
-<div class="d-flex justify-content-around float-right">
-    <div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" (change)="sortOnName($event)">
-            <label class="form-check-label">sort on name</label>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-<div class="row col-12">
-    <div *ngFor="let product of jsonData" class="col-lg-3 col-md-4 mb-3">
-        <div class="card h-100">
-            <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img src="../../../assets/images/bloemkolen.jpeg"
-                                                 style="width: 100%; height: 100%"
-                                                 alt="{{product.name}}"/></a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a routerLink="/product-detail">{{product.name}}</a>
-                </h4>
-                <h5>€{{product.price}}/Kg</h5>
-                <p class="card-text">{{product.description}}</p>
+    <div class="row col-12">
+        <div *ngFor="let product of jsonData" class="col-lg-3 col-md-4 mb-3">
+            <div class="card h-100">
+                <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
+                    src="../../../assets/images/bloemkolen.jpeg"
+                    style="width: 100%; height: 100%"
+                    alt="{{product.name}}"/></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a routerLink="/product-detail">{{product.name}}</a>
+                    </h4>
+                    <h5>€{{product.price}}/Kg</h5>
+                    <p class="card-text">{{product.description}}</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="panel-group">
     <div class="panel panel-default">
         <div class="section_popup-bottom-right">
             <h5 class="mt-2 mr-1" data-toggle="collapse" data-target="#collapse1">Product niet gevonden?</h5>
             <div id="collapse1" class="collapse">
-                <p class="mr-1 mt-2 mb-3">Geef aan wat je zoekt aan producten zodat lokale leveranciers daarop kunnen aanbieden.
+                <p class="mr-1 mt-2 mb-3">Geef aan wat je zoekt aan producten zodat lokale leveranciers daarop kunnen
+                    aanbieden.
                 </p>
-                <button class="section_popup-bottom-left_btn btn-lg btn-block mb-3" routerLink="/addrequestproduct">Doe een aanvraag</button>
+                <button class="section_popup-bottom-left_btn btn-lg btn-block mb-3" routerLink="/addrequestproduct">Doe
+                    een aanvraag
+                </button>
             </div>
         </div>
     </div>

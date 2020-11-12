@@ -32,19 +32,20 @@ export class ProductComponent implements OnInit {
         );
     }
 
-    findProductStartingWithLetterT(values: any): void {
-        if (values.currentTarget.checked) {
-            this.routeUtil.addParam('name', 'ko*');
+    searchValue(values: any): void {
+        console.log(values.target.value);
+        if (values.target.value !== '') {
+            this.routeUtil.addParam('name', values.target.value);
         } else {
             this.routeUtil.deleteParam('name');
         }
     }
 
-    sortOnName(values: any): void {
+    filterCategory(values: any): void {
         if (values.currentTarget.checked) {
-            this.routeUtil.addParam('sort', 'name');
+            this.routeUtil.addParam('category', values.target.value);
         } else {
-            this.routeUtil.deleteParam('sort');
+            this.routeUtil.deleteParam('category');
         }
     }
 }
