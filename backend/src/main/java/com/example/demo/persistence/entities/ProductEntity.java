@@ -45,7 +45,7 @@ public class ProductEntity {
     @JsonBackReference
     private SupplierEntity supplier;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "PRODUCT_CATEGORY_ID")
     private ProductCategoryEntity productCategory;
 
