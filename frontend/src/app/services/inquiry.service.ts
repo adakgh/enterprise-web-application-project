@@ -8,19 +8,34 @@ import {tap} from 'rxjs/operators';
     providedIn: 'root'
 })
 export class InquiryService {
-    requests: any[] = [];
 
     constructor(private routeUtil: RouteUtil,
                 private apiService: ApiService) {
     }
 
+    // getting the inquiries
     getAllInquries(): Observable<any> {
-        const query = this.routeUtil.getUrlQuery();
-
-        return this.apiService.get('/inquiries' + query).pipe(
+        return this.apiService.get('/inquiries').pipe(
             tap(res => {
                 console.log(res);
-                this.requests = res;
+            })
+        );
+    }
+
+    // getting the categories of inquiries
+    getAllInquiryCategories(): Observable<any> {
+        return this.apiService.get('/inquiries/categories').pipe(
+            tap(res => {
+                console.log(res);
+            })
+        );
+    }
+
+    // adding an inquiry
+    addInquiry(inquiry: any): Observable<any> {
+        return this.apiService.post('/inquiries', inquiry, null).pipe(
+            tap(res => {
+                console.log(res);
             })
         );
     }
