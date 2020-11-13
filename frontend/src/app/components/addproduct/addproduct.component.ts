@@ -18,7 +18,7 @@ export class AddproductComponent implements OnInit {
     jsonData: any;
     productList: any = {};
     productData: any = {};
-    selectedFile = null;
+    selectedFile: File = null;
 
     constructor(
         private apiService: ApiService,
@@ -34,16 +34,16 @@ export class AddproductComponent implements OnInit {
     addProduct(): void {
         // Test if the values are getting placed in.
         console.log(this.productData);
-        // this.apiService.post('/products', this.productData, null).subscribe(
-        //     resp => {
-        //         this.reloadProductPage();
-        //         console.log(this.productData);
-        //     },
-        //     error => {
-        //         this.errorMessage = error.status;
-        //         console.log(error);
-        //     }
-        // );
+        this.apiService.post('/products', this.productData, null).subscribe(
+            resp => {
+                this.reloadProductPage();
+                console.log(this.productData);
+            },
+            error => {
+                this.errorMessage = error.status;
+                console.log(error);
+            }
+        );
     }
 
     reloadProductPage(): void {
@@ -53,12 +53,20 @@ export class AddproductComponent implements OnInit {
         });
     }
 
-    // onFileSelected(event): void{
-    //     this.selectedFile = event.target.files[0];
-    //     console.log(event);
-    // }
-    //
-    // onUpload(event): void {
-    //     this.http.post('/addproduct')
-    // }
+    onFileSelected(event): void {
+        this.selectedFile = event.target.files[0];
+        console.log(event);
+    }
+
+    onUpload(): void {
+        const pictureFile = new FormData();
+        pictureFile.append('image', this.selectedFile, this.selectedFile.name);
+        localStorage.set(this.selectedFile.name, pictureFile);
+        // this.apiService.post('/products', pictureFile, null)
+        //     .subscribe(res => {
+        //         console.log(res);
+        //         console.log(this.selectedFile);
+        //     });
+
+    }
 }
