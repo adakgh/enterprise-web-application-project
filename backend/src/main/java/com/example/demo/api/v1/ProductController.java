@@ -3,21 +3,17 @@ package com.example.demo.api.v1;
 import com.example.demo.models.RoleType;
 import com.example.demo.persistence.entities.ProductCategoryEntity;
 import com.example.demo.persistence.entities.ProductEntity;
-import com.example.demo.persistence.repositories.InquiryCategoryRepository;
 import com.example.demo.persistence.repositories.ProductCategoryRepository;
 import com.example.demo.persistence.repositories.ProductRepository;
 import com.example.demo.search.ProductSpecification;
 import com.example.demo.services.ProductService;
 import lombok.AllArgsConstructor;
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +35,9 @@ public class ProductController {
                                       @RequestParam(value = "page", required = false) Integer page,
                                       @RequestParam(value = "size", required = false) Integer size,
                                       Pageable pageable) {
-        return productRepository.findAll(new ProductSpecification(queryMap), pageable);
+        var productPage = productRepository.findAll(new ProductSpecification(queryMap), pageable);
+        productPage.map(p -> p.getCustomData().put("supplierId", p.getSupplier().getId()));
+        return productPage;
     }
 
     /**
@@ -58,7 +56,9 @@ public class ProductController {
      */
     @GetMapping("/{id}")
     public ProductEntity getProduct(@PathVariable long id) {
-        return productService.findById(id);
+        ProductEntity product = productService.findById(id);
+        product.getCustomData().put("supplierId", product.getSupplier().getId());
+        return product;
     }
 
     /**

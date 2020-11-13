@@ -10,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Service
