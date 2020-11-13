@@ -50,7 +50,7 @@ import {AddrequestproductComponent} from './components/requestproduct/addrequest
         HttpClientModule,
         FormsModule,
         RouterModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

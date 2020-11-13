@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class SupplierAddressEntity {
 
     @Id
+    @Column(name = "SUPPLIER_ADDRESS_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
