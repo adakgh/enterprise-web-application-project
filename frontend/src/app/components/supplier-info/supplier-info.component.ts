@@ -28,10 +28,6 @@ export class SupplierInfoComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(
             res => {
                 this.loadSupplierData(res.id);
-                /*for (let i = 0; i < this.jsonSupplierData.length; i++) {
-                    /!*this.message = JSON.parse(JSON.stringify(res[i].message));
-                    this.category = JSON.parse(JSON.stringify(res[i].inquiryCategory.name));*!/
-                }*/
             },
             err => {
                 console.log('Can not find endPoint' + err);
