@@ -37,7 +37,6 @@ public class SupplierService {
 
         // update address relationship
         var address = newSupplier.getAddresses().iterator().next();
-        address.setId(currentSupplier.getAddresses().iterator().next().getId());
         address.setSupplier(currentSupplier);
 
         modelmapper.map(newSupplier, currentSupplier); // new --> updateInto --> current
