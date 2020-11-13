@@ -13,41 +13,62 @@
                      class="supplierImg" alt="">
             </div>
         </div>
+
         <div class="form-group">
             <label for="name">Naam Leverancier: </label>
-            <input type="text" class="form-control" id="name" placeholder="" value="De Duintuin - Heemskerk">
+            <input type="text" class="form-control" id="name" placeholder="" [(ngModel)]="supplier.name" name="name">
         </div>
         <div class="form-group">
             <label for="telefoon">Telefoon: </label>
-            <input type="text" class="form-control" id="telefoon" placeholder="" value="06 57322990">
+            <input type="text" class="form-control" id="telefoon" [(ngModel)]="supplier.phonenumber" name="phonenumber">
         </div>
         <div class="form-group">
             <label for="email">Email: </label>
-            <input type="text" class="form-control" id="email" placeholder="" value="info@duintuin.eu">
+            <input type="text" class="form-control" id="email" [(ngModel)]="supplier.email" name="email">
         </div>
         <div class="form-group">
             <label for="website">Website: </label>
-            <input type="text" class="form-control" id="website" placeholder="" value="www.duintuin.eu">
+            <input type="text" class="form-control" id="website" placeholder="" [(ngModel)]="supplier.website"
+                   name="website">
         </div>
+
+        <div class="row">
+
+            <div class="form-group col-md-4">
+                <label for="adres">Straat: </label>
+                <input type="text" class="form-control" id="adres" placeholder="" [(ngModel)]="supplier.adres.street"
+                       name="street">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="number">(Huis)nummer: </label>
+                <input type="text" class="form-control" id="number" placeholder="" [(ngModel)]="supplier.adres.number"
+                       name="number">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="postalCode">Postcode: </label>
+                <input type="text" class="form-control" id="postalCode" placeholder="" [(ngModel)]="supplier.adres.postalCode"
+                       name="postalCode">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="city">Stad: </label>
+                <input type="text" class="form-control" id="city" placeholder="" [(ngModel)]="supplier.adres.city"
+                       name="city">
+            </div>
+        </div>
+
+
         <div class="form-group">
-            <label for="adres">Adres: </label>
-            <input type="text" class="form-control" id="adres" placeholder="" value="Cieweg 22, 1969 MS Heemskerk">
+            <label for="short">Short Description: </label>
+            <input type="text" class="form-control" id="short" placeholder="" [(ngModel)]="supplier.shortDescription"
+                   name="shortDescription">
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Beschrijving leverancier: </label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
-In 2014 is De Duintuin gestart op initiatief van André Nelis. Samen met zijn partner Svetlana waren zij
-verantwoordelijk voor de ontwikkeling van De Duintuin. Al snel werd het project groter als gedacht en werd
-er ondersteuning gevonden bij de werkKRACHTcentrale voor het uitwerken van de ideeën. Mede dankzij de
-werkKRACHTcentrale zijn er vrijwilligers actief op De Duintuin. Zonder al deze steun zou De Duintuin niet
-bestaan in zijn huidige vorm: een sociale onderneming op zoek naar verbindingen in de maatschappij.
-
-De Duintuin is een tuin in het Heemskerkse duingebied waar onbespoten groenten, kruiden en klein fruit voor
-de regionale verkoop worden gekweekt met inzet van mensen die willen doorgroeien naar een volwaardige(r)
-deelname aan de maatschappij.
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="supplier.description"
+                      name="description">
         </textarea>
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Sla Wijzigingen op</button>
+        <button type="submit" class="btn btn-primary mb-2" (click)="onUpdateSupplier()">Sla Wijzigingen op</button>
     </form>
     <a href="" routerLink="../">
         <button class="btn btn-danger mb-2">Annuleren</button>
