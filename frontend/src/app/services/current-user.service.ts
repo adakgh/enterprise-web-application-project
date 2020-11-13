@@ -11,6 +11,7 @@ export class CurrentUserService {
     private accessExpiredAt: Date;
     private username: string;
     private userId: number;
+    private supplierId: number;
     private roles: Set<string>;
 
     constructor(private authService: AuthService,
@@ -24,6 +25,7 @@ export class CurrentUserService {
             this.accessExpiredAt = new Date(claims.exp * 1000);
             this.username = claims.sub;
             this.userId = claims.uid;
+            this.supplierId = claims.sid;
             this.roles = new Set<string>();
             claims.roles.split(',').forEach(role => this.roles.add(role));
         }
@@ -37,6 +39,11 @@ export class CurrentUserService {
     getUserId(): number {
         if (this.userId == null) { this.update(); }
         return this.userId;
+    }
+
+    getSupplierId(): number {
+        if (this.supplierId == null) { this.update(); }
+        return this.supplierId;
     }
 
     getTimeLeftBeforeLogout(): number {
