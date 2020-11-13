@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.*;
 
 @Getter
 @Setter
@@ -35,8 +36,23 @@ public class ProductEntity {
     @Column(name = "DISCOUNT_PRICE")
     private BigDecimal price2;
 
+    @Column(name = "DATE_ADDED")
+    private Date addedDate;
+
+    @Transient
+    private Map<Object, Object> customData = new HashMap<>();
+
     @ManyToOne
     @JoinColumn(name = "SUPPLIER_ID")
     @JsonBackReference
     private SupplierEntity supplier;
+
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_CATEGORY_ID")
+    private ProductCategoryEntity productCategory;
+
+    public void addProductCategory(ProductCategoryEntity productCategory) {
+        this.productCategory = productCategory;
+        productCategory.getProducts().add(this);
+    }
 }

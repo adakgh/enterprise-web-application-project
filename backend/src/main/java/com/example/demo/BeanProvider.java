@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -18,7 +19,9 @@ public class BeanProvider implements ApplicationContextAware {
     @Bean
     public ModelMapper modelMapper() {
         var mapper = new ModelMapper();
-        mapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
+        mapper.getConfiguration()
+                .setPropertyCondition(Conditions.isNotNull())
+                .setMatchingStrategy(MatchingStrategies.STRICT);
         return mapper;
     }
 

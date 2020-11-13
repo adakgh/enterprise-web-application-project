@@ -11,6 +11,8 @@ import {ProductDetailComponent} from './components/product-detail/product-detail
 import {ContactComponent} from './components/contact/contact.component';
 import {AddproductComponent} from './components/addproduct/addproduct.component';
 import {ErrorComponent} from './components/error/error.component';
+import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
+import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,7 +22,9 @@ const routes: Routes = [
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
-    {path: 'addproduct', component: AddproductComponent},
+    {path: 'addproduct', component: AddproductComponent, canActivate: [AuthGuardService]},
+    {path: 'addrequestproduct', component: AddrequestproductComponent},
+    {path: 'requestedproducts', component: RequestproductComponent},
     {path: 'contact', component: ContactComponent},
     {path: 'error', component: ErrorComponent},
     {path: '**', redirectTo: '/error'} // If page not found: goes to error 404 page

@@ -1,5 +1,6 @@
 package com.example.demo.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,22 @@ public class SupplierEntity {
     @Column(name = "CONTACT_PERSON")
     private String contactPerson;
 
+    @Column(name = "CONTACT_EMAIL")
+    private String contactEmail;
+
+    @Column(name = "PHONE_NUMBER")
+    private String phoneNumber;
+
+    @Column(name = "WEBSITE")
+    private String website;
+
+    @Column(name = "SHORT_DESCRIPTION")
+    private String shortDescription;
+
+    @Column(name = "DESCRIPTION")
+    private String description;
+
+    @JsonIgnore
     @OneToOne(mappedBy = "supplier")
     private UserEntity user;
 

@@ -8,17 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="header-item">
-                    <a class="navbar-brand"><img class="vanstreek-logo" src="https://cdn.shopify.com/s/files/1/0021/1966/3675/files/Van-streek-logo-liggend-zwart_482x.png" alt="company-logo"></a>
+                    <a class="navbar-brand"><img class="vanstreek-logo"
+                                                 src="https://cdn.shopify.com/s/files/1/0021/1966/3675/files/Van-streek-logo-liggend-zwart_482x.png"
+                                                 alt="company-logo"></a>
                 </li>
-<!--                <li class="header-item searchbar">-->
-<!--                    <div class="input-group md-form form-sm form-2 ml-4 mt-3">-->
-<!--                        <input class="form-control my-0 py-1" type="text" placeholder="Waar ben je naar op zoek?"-->
-<!--                               aria-label="Search">-->
-<!--                        <div class="input-group-append">-->
-<!--                            <button class="btn search" type="submit">Zoeken</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
             </ul>
 
             <!-- user login/register/logout-->
@@ -34,7 +27,7 @@
                       <span class="font-weight-bold">{{username}}</span>
                     </a>
                 <br>
-                <a *ngIf="!isLoggedIn" routerLink="/login">
+                <a *ngIf="!isLoggedIn" routerLink="/login" href="">
                     <span class="mr-5">INLOGGEN / REGISTREREN</span>
                 </a>
                 <a *ngIf="isLoggedIn" (click)="logout()" href="">
@@ -43,14 +36,14 @@
             </span>
 
             <!-- cart -->
-<!--            <span class="navbar-right mr-5">-->
-<!--             <a routerLink="/cart">-->
-<!--            <img class="cart-icon" src="https://bettinanewbery.com/assets/basket-black.png" alt="cart-icon">-->
-<!--            <span class="font-weight-bold">MIJN WINKELWAGEN</span>-->
-<!--            <br>-->
-<!--            <span class="mr-5">€ 0,00</span>-->
-<!--              </a>-->
-<!--            </span>-->
+            <!--            <span class="navbar-right mr-5">-->
+            <!--             <a routerLink="/cart">-->
+            <!--            <img class="cart-icon" src="https://bettinanewbery.com/assets/basket-black.png" alt="cart-icon">-->
+            <!--            <span class="font-weight-bold">MIJN WINKELWAGEN</span>-->
+            <!--            <br>-->
+            <!--            <span class="mr-5">€ 0,00</span>-->
+            <!--              </a>-->
+            <!--            </span>-->
         </div>
     </nav>
 
@@ -63,7 +56,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item home-item">
-                    <a class="nav-link" routerLink="">HOME</a>
+                    <a class="nav-link" routerLink="" href="">HOME</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -71,24 +64,28 @@
                         PRODUCTEN
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">ALLE</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">GROENTE & FRUIT</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">ZUIVEL</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">BAKKERIJ</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">DRANKEN</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">VLEES</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{id: userId}">VEGA</a>
+                        <a class="dropdown-item" routerLink="/products">ALLE</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 1}">GROENTE & FRUIT</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 2}">ZUIVEL</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 3}">BAKKERIJ</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 4}">DRANKEN</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 5}">VLEES</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 6}">VEGA</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="isLoggedIn && currentUserService.isSupplier()">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         LEVERANCIER
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                        <a class="dropdown-item" routerLink="/supplierinfo" [queryParams]="{id: userId}">LEVERANCIER PAGINA</a>
-                        <a class="dropdown-item" routerLink="/supplierinfo/edit" [queryParams]="{id: userId}">WIJZIG LEVERANCIER PAGINA</a>
-                        <a class="dropdown-item" routerLink="/addproduct" [queryParams]="{id: userId}">VOEG PRODUCT TOE</a>
+                        <a class="dropdown-item" routerLink="/supplierinfo" [queryParams]="{id: userId}">LEVERANCIER
+                            PAGINA</a>
+                        <a class="dropdown-item" routerLink="/supplierinfo/edit" [queryParams]="{id: userId}">WIJZIG
+                            LEVERANCIER PAGINA</a>
+                        <a class="dropdown-item" routerLink="/addproduct" [queryParams]="{id: userId}">VOEG PRODUCT
+                            TOE</a>
+                        <a class="dropdown-item" routerLink="/requestedproducts">AANVRAGEN</a>
                     </div>
                 </li>
                 <li class="nav-item">

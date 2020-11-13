@@ -36,6 +36,7 @@ public class JwtProvider {
                 .setExpiration(generateExpirationTime(accessExpTime, false))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .claim("uid", user.getId())
+                .claim("sid", user.getSupplier().getId())
                 .claim("roles", user.getRoles().stream().map(RoleEntity::getName).collect(Collectors.joining(",")))
                 .signWith(generateSigningKey(), SignatureAlgorithm.HS256)
                 .compact();

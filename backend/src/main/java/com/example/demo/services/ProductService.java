@@ -3,12 +3,14 @@ package com.example.demo.services;
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.persistence.entities.ProductEntity;
 import com.example.demo.persistence.entities.UserEntity;
+import com.example.demo.persistence.repositories.ProductCategoryRepository;
 import com.example.demo.persistence.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.util.Date;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +19,7 @@ public class ProductService {
     private final EntityManager entityManager;
     private final ModelMapper modelmapper;
     private final ProductRepository productRepository;
+    private final ProductCategoryRepository productCategoryRepository;
     private final UserService userService;
 
     public ProductEntity findById(long id) {
@@ -29,9 +32,11 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public void saveNewProduct(ProductEntity product) {
+    public void save(ProductEntity product, long categoryId) {
         UserEntity user = userService.getCurrentUser();
         product.setSupplier(user.getSupplier());
+        product.setAddedDate(new Date());
+        product.addProductCategory(productCategoryRepository.getOne(categoryId));
         productRepository.save(product);
     }
 

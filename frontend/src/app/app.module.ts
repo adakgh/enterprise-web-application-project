@@ -21,6 +21,8 @@ import {SupplierInfoEditComponent} from './components/supplier-info/supplier-inf
 import {ContactComponent} from './components/contact/contact.component';
 import {AddproductComponent} from './components/addproduct/addproduct.component';
 import {ErrorComponent} from './components/error/error.component';
+import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
+import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
 
 @NgModule({
     declarations: [
@@ -38,6 +40,8 @@ import {ErrorComponent} from './components/error/error.component';
         ContactComponent,
         AddproductComponent,
         ErrorComponent,
+        RequestproductComponent,
+        AddrequestproductComponent
     ],
     imports: [
         CookieModule.forRoot(),
