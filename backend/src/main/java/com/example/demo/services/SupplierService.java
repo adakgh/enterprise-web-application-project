@@ -34,6 +34,12 @@ public class SupplierService {
         var principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long supplierId = ((Number) principal.getClaims().get("sid")).longValue();
         SupplierEntity currentSupplier = supplierRepository.getOne(supplierId); // lazy load
+
+        // update address relationship
+        var address = newSupplier.getAddresses().iterator().next();
+        address.setId(currentSupplier.getAddresses().iterator().next().getId());
+        address.setSupplier(currentSupplier);
+
         modelmapper.map(newSupplier, currentSupplier); // new --> updateInto --> current
         supplierRepository.save(currentSupplier);
     }
