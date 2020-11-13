@@ -1,7 +1,7 @@
 .dashboard-table, .dashboard-table-header {
     display: grid;
-    grid-template-columns: 200px 200px 140px 130px 440px;
-    width: 100%;
+    grid-template-columns: 200px 700px 140px 130px 440px;
+    width: 70%;
     margin: 0 auto;
 }
 
