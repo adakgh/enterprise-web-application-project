@@ -6,6 +6,7 @@ import {CurrentUserService} from '../../services/current-user.service';
 import {LoginData} from '../../models/login-data.model';
 import {LoginService} from '../../services/login.service';
 import {RouteUtil} from '../../utils/route.util';
+import {RegisterService} from '../../services/register.service';
 
 @Component({
     selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
                 private formBuilder: FormBuilder,
                 private authService: AuthService,
                 private currentUserService: CurrentUserService,
-                private loginsService: LoginService) {
+                private loginsService: LoginService,
+                private registerService: RegisterService) {
     }
 
     ngOnInit(): void {
@@ -84,11 +86,31 @@ export class LoginComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         } else {
-            console.log(this.registerForm.value);
+            const user = this.registerForm.value;
 
-            // temporary register
-            // TODO
-            this.login();
+            // body construction based on choice
+            let body = {};
+            if (user.type === 'customer') {
+                body = {username: user.email, password: user.password, roles: [{id: 3}]};
+            } else if (user.type === 'supplier') {
+                body = {username: user.email, password: user.password, roles: [{id: 2}], supplier: {companyName: user.company}};
+            }
+
+            // register the user
+            this.registerService.register(body).subscribe(
+                res => {
+                    // log the user in
+                    this.loginsService.requestAccessToken(body).subscribe(
+                        resp => this.navToHomepage());
+                }, err => {
+                    console.log(err);
+                    if (err.status === 409) {
+                        alert('Dit e-mailadres is al in gebruik. Probeer het opnieuw.');
+                    } else {
+                        alert('Er is iets misgegaan. Probeer het opnieuw.');
+                    }
+                }
+            );
         }
     }
 
@@ -124,7 +146,6 @@ export class LoginComponent implements OnInit {
         }, {
             validator: this.mustMatch('password', 'confirmPassword')
         });
-
     }
 
     setTypeValidators(): void {

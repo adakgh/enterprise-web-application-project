@@ -12,10 +12,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 public class Principal extends UserEntity implements UserDetails {
 
+    private Claims claims;
+
     public Principal(Claims claims) {
+        this.claims = claims;
         super.setId(((Number) claims.get("uid")).longValue());
         super.setUsername(claims.getSubject());
         super.setPassword(""); // no pw available from claims
@@ -57,5 +59,9 @@ public class Principal extends UserEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Claims getClaims() {
+        return claims;
     }
 }
