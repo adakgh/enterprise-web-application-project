@@ -23,6 +23,7 @@ export class ProductDetailComponent implements OnInit {
     ngOnInit(): void {
         this.productService.getAllProduct().subscribe(
             res => {
+                // console.log(res[0].customData.supplierId);
                 this.jsonData = res;
             },
             err => {

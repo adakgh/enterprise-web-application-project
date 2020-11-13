@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {SupplierInfoService} from '../../services/supplier-info.service';
+import {CurrentUserService} from "../../services/current-user.service";
 
 @Component({
     selector: 'app-supplier-info',
@@ -19,6 +20,7 @@ export class SupplierInfoComponent implements OnInit {
         private routeUtil: RouteUtil,
         private supplierInfoService: SupplierInfoService,
         private activatedRoute: ActivatedRoute,
+        public currentUserService: CurrentUserService
     ) {
     }
 
@@ -26,6 +28,11 @@ export class SupplierInfoComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.queryParams.subscribe(
             res => {
+                // If there is no query given return user to homepage
+                if (res.id <= 0 || res.id == null) {
+                    this.router.navigate(['/']);
+                    return;
+                }
                 this.loadSupplierData(res.id);
             },
             err => {

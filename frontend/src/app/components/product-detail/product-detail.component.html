@@ -20,6 +20,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Factuur aanvragen</button>
             </form>
+            <a routerLink="/supplierinfo" [queryParams]="{id: jsonData[0].customData.supplierId}">Bezoek verkoper pagina</a>
         </div>
     </div>
 </div>

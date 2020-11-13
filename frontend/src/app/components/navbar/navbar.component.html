@@ -79,10 +79,8 @@
                         LEVERANCIER
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                        <a class="dropdown-item" routerLink="/supplierinfo" [queryParams]="{id: userId}">LEVERANCIER
+                        <a class="dropdown-item" routerLink="/supplierinfo" [queryParams]="{id: currentUserService.getSupplierId()}">LEVERANCIER
                             PAGINA</a>
-                        <a class="dropdown-item" routerLink="/supplierinfo/edit" [queryParams]="{id: userId}">WIJZIG
-                            LEVERANCIER PAGINA</a>
                         <a class="dropdown-item" routerLink="/addproduct" [queryParams]="{id: userId}">VOEG PRODUCT
                             TOE</a>
                         <a class="dropdown-item" routerLink="/requestedproducts">AANVRAGEN</a>

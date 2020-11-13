@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../../services/api.service';
 import {Supplier} from '../../../models/supplier';
 import {SupplierInfoService} from '../../../services/supplier-info.service';
+import {CurrentUserService} from "../../../services/current-user.service";
 
 @Component({
     selector: 'app-supplier-info-edit',
@@ -20,7 +21,8 @@ export class SupplierInfoEditComponent implements OnInit {
         private router: Router,
         private http: HttpClient,
         private supplierInfoService: SupplierInfoService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private currentUserService: CurrentUserService
     ) {
     }
 
@@ -28,6 +30,12 @@ export class SupplierInfoEditComponent implements OnInit {
     ngOnInit(): void {
         this.activatedRoute.queryParams.subscribe(
             res => {
+                // If there is no query given return user to homepage or if the supplier id in the query
+                // is not equal to the logged in supplier
+                if (res.id <= 0 || res.id == null || this.currentUserService.getSupplierId() != res.id) {
+                    this.router.navigate(['/']);
+                    return;
+                }
                 this.loadSupplierData(res.id);
             },
             err => {
@@ -61,6 +69,7 @@ export class SupplierInfoEditComponent implements OnInit {
                 }];
             },
             err => {
+                console.log('dddd');
                 console.log(err);
             }
         );
