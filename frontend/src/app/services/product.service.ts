@@ -17,6 +17,7 @@ export class ProductService {
     // map == aflezen + veranderen --> stuurt aangepaste data.
     getAllProduct(): Observable<any> {
         const query = this.routeUtil.getUrlQuery();
+
         return this.apiService.get('/products' + query).pipe(
             map(res => {
                 return res.content;

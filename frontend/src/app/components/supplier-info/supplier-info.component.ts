@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../services/api.service";
 import {RouteUtil} from "../../utils/route.util";
-import {ProductService} from "../../services/product.service";
-import {InquiryService} from "../../services/inquiry.service";
 import {SupplierInfoService} from "../../services/supplier-info.service";
 
 @Component({
@@ -14,7 +12,8 @@ import {SupplierInfoService} from "../../services/supplier-info.service";
 export class SupplierInfoComponent implements OnInit {
 
     recentProducts: number[] = [1, 2, 3, 4]; // This should be of type Product (model) for now I add 4 items
-    jsonSupplierData: any[] = [];
+    jsonSupplierData;
+    recentProductMax = 4;
 
     constructor(
         private router: Router,
@@ -26,24 +25,21 @@ export class SupplierInfoComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.activatedRoute.queryParamMap.subscribe(
+        this.activatedRoute.queryParams.subscribe(
             res => {
-                console.log(res);
-                this.loadSupplierData();
-                // this.jsonSupplierData = res;
-
-                for (let i = 0; i < this.jsonSupplierData.length; i++) {
-                    /*this.message = JSON.parse(JSON.stringify(res[i].message));
-                    this.category = JSON.parse(JSON.stringify(res[i].inquiryCategory.name));*/
-                }
+                this.loadSupplierData(res.id);
+                /*for (let i = 0; i < this.jsonSupplierData.length; i++) {
+                    /!*this.message = JSON.parse(JSON.stringify(res[i].message));
+                    this.category = JSON.parse(JSON.stringify(res[i].inquiryCategory.name));*!/
+                }*/
             },
             err => {
                 console.log('Can not find endPoint' + err);
             });
     }
 
-    loadSupplierData(): void {
-        this.supplierInfoService.getSupplier().subscribe(
+    loadSupplierData(id: number): void {
+        this.supplierInfoService.getSupplier(id).subscribe(
             res => {
                 this.jsonSupplierData = res;
             },
@@ -51,6 +47,12 @@ export class SupplierInfoComponent implements OnInit {
                 console.log(err);
             }
         );
+    }
+
+    // Just a helper method to combine all adress detail into one String
+    concatAddress(): string {
+        return this.jsonSupplierData.addresses[0].street + ' ' + this.jsonSupplierData.addresses[0].number + ', ' +
+            this.jsonSupplierData.addresses[0].postalCode + ' ' + this.jsonSupplierData.addresses[0].city;
     }
 
 }

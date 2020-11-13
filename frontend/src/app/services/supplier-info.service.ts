@@ -13,15 +13,17 @@ export class SupplierInfoService {
                 private apiService: ApiService) {
     }
 
-    getSupplier(): Observable<any> {
-        const query = this.routeUtil.getUrlQuery();
+    getSupplier(id: number): Observable<any> {
+        const query = id;
         console.log('Query Picked by the service: ');
         console.log(query);
 
 
-        return this.apiService.get('/supplier-info' + query).pipe(
-            tap(res => {
+        return this.apiService.get('/suppliers/' + query).pipe(
+            map(res => {
+                console.log('Data recieved: ');
                 console.log(res);
+                return res;
             })
         );
     }
