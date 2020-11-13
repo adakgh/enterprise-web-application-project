@@ -14,10 +14,10 @@
                 </div>
                 <div class="col-md-5 col-sm-12 p-3">
                     <b>Gegevens: </b>
-                    <li *ngIf="jsonSupplierData.website !=null">Website: {{jsonSupplierData.website}}</li>
-                    <li *ngIf="jsonSupplierData.phoneNumber !=null">Telefoon: {{jsonSupplierData.phonenumber}}</li>
-                    <li *ngIf="jsonSupplierData.contactEmail !=null">Email: {{jsonSupplierData.contactEmail}}</li>
-                    <li *ngIf="jsonSupplierData.addresses !=null">Adress: {{concatAddress()}}</li>
+                    <li *ngIf="jsonSupplierData.website !=null && jsonSupplierData.website!=''">Website: {{jsonSupplierData.website}}</li>
+                    <li *ngIf="jsonSupplierData.phoneNumber !=null && jsonSupplierData.phoneNumber!=''">Telefoon: {{jsonSupplierData.phoneNumber}}</li>
+                    <li *ngIf="jsonSupplierData.contactEmail !=null && jsonSupplierData.contactEmail!=''">Email: {{jsonSupplierData.contactEmail}}</li>
+                    <li *ngIf="jsonSupplierData.addresses !=null && jsonSupplierData.addresses!=''">Adress: {{concatAddress()}}</li>
                 </div>
             </div>
             <div class="row">
@@ -29,7 +29,7 @@
                     <ul class="text-left quickLinks">
                         <li><a href="#" routerLink="/supplierinfo">| Aangeboden Objecten | </a></li>
                         <li><a href="mailto:{{jsonSupplierData.contactEmail}}"> Contact | </a></li>
-                        <li><a href="https://www.facebook.com/deduintuinheemskerk/" target="_blank"> Facebook | </a></li>
+                        <!--<li><a href="https://www.facebook.com/deduintuinheemskerk/" target="_blank"> Facebook | </a></li>-->
                     </ul>
                 </div>
                 <div class="col-md-1">
@@ -62,64 +62,7 @@
 
         <app-recent-product *ngFor="let recentProduct of jsonSupplierData.products; let i = index" [product]="recentProduct"></app-recent-product>
 
-        <!--<div class="row">
-            <div class="col-md-3 col-sm-12 p-3" >
-                <div class="row" style="border:1px solid grey;border-radius: 10px;">
-                    <div class="col-sm-12 text-center">
-                        <img class="center-block" src="https://i.imgur.com/69ugqx3.png" alt="" style="max-width: 250px">
-                    </div>
-                    <hr>
-                    <div class="col-sm-12 bg-light" style="width: 100%; padding: 15px">
-                        <b>Brocoli 450gr</b>
-                        <br>
-                        <i>€20,5</i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-12 p-3" >
-                <div class="row" style="border:1px solid grey;border-radius: 10px">
-                    <div class="col-sm-12 text-center">
-                        <img class="center-block" src="https://i.imgur.com/69ugqx3.png" alt="" style="max-width: 250px">
-                    </div>
-                    <hr>
-                    <div class="col-sm-12 bg-light" style="width: 100%; padding: 15px">
-                        <b>Brocoli 450gr</b>
-                        <br>
-                        <i>€20,5</i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-12 p-3" >
-                <div class="row" style="border:1px solid grey;border-radius: 10px">
-                    <div class="col-sm-12 text-center">
-                        <img class="center-block" src="https://i.imgur.com/69ugqx3.png" alt="" style="max-width: 250px">
-                    </div>
-                    <hr>
-                    <div class="col-sm-12 bg-light" style="width: 100%; padding: 15px">
-                        <b>Brocoli 450gr</b>
-                        <br>
-                        <i>€20,5</i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-12 p-3">
-                <div class="row" style="border:1px solid grey;border-radius: 10px">
-                    <div class="col-sm-12 text-center">
-                        <img class="center-block" src="https://i.imgur.com/69ugqx3.png" alt="" style="max-width: 250px">
-                    </div>
-                    <hr>
-                    <div class="col-sm-12 bg-light" style="width: 100%; padding: 15px">
-                        <b>Brocoli 450gr</b>
-                        <br>
-                        <i>€20,5</i>
-                    </div>
-                </div>
-            </div>
-       </div>-->
-
+        <!-- Refer to page with all products supplier is selling/offering -->
         <div class="col-sm-12">
             <a href="" routerLink="supplierProducts" class="float-right">Zie alle producten</a>
         </div>

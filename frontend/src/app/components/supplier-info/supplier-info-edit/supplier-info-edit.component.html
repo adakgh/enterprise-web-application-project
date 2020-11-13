@@ -16,7 +16,8 @@
 
         <div class="form-group">
             <label for="name">Naam Leverancier: </label>
-            <input type="text" class="form-control" id="name" placeholder="" [(ngModel)]="supplier.companyName" name="name">
+            <input type="text" class="form-control" id="name" placeholder="" [(ngModel)]="supplier.companyName"
+                   name="name">
         </div>
         <div class="form-group">
             <label for="telefoon">Telefoon: </label>
@@ -37,21 +38,25 @@
             <div class="form-group col-md-4">
                 <label for="adres">Straat: </label>
                 <input type="text" class="form-control" id="adres" placeholder=""
+                       [(ngModel)]="supplier.addresses[0].street"
                        name="street">
             </div>
             <div class="form-group col-md-2">
                 <label for="number">(Huis)nummer: </label>
                 <input type="text" class="form-control" id="number" placeholder=""
+                       [(ngModel)]="supplier.addresses[0].number"
                        name="number">
             </div>
             <div class="form-group col-md-2">
                 <label for="postalCode">Postcode: </label>
                 <input type="text" class="form-control" id="postalCode" placeholder=""
+                       [(ngModel)]="supplier.addresses[0].postalCode"
                        name="postalCode">
             </div>
             <div class="form-group col-md-4">
                 <label for="city">Stad: </label>
                 <input type="text" class="form-control" id="city" placeholder=""
+                       [(ngModel)]="supplier.addresses[0].city"
                        name="city">
             </div>
         </div>
@@ -67,9 +72,15 @@
                       name="description">
         </textarea>
         </div>
-        <button type="submit" class="btn btn-primary mb-2" (click)="onUpdateSupplier()">Sla Wijzigingen op</button>
+        <div class="row">
+
+            <button class="btn btn-danger mb-2 m-1 col-md-2 col-sm-12"><a href="" [routerLink]="['../']" [queryParams]="{id:supplierId}" style="color:white;">
+                Annuleren </a>
+            </button>
+            <button type="submit" class="btn btn-primary mb-2 m-1 mr-4 col-md-2 col-sm-12" (click)="onUpdateSupplier()">Sla
+                Wijzigingen op
+            </button>
+        </div>
     </form>
-    <a href="" routerLink="../">
-        <button class="btn btn-danger mb-2">Annuleren</button>
-    </a>
+
 </div>

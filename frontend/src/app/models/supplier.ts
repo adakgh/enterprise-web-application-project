@@ -1,5 +1,3 @@
-import {SupplierAddress} from "./supplierAddress";
-
 export class Supplier {
     public companyName: string;
     public contactPerson: string;
@@ -8,9 +6,10 @@ export class Supplier {
     public website: string;
     public shortDescription: string;
     public description: string;
-    public adres: SupplierAddress;
+    public addresses: any[] = [];
 
     constructor() {
+        // Random value
         /*this.companyName = 'De Duintuin - Heemskerk';
         this.contactPerson = '06 57322990';
         this.contactEmail = 'info@duintuin.eu';

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {ApiService} from "../../services/api.service";
-import {RouteUtil} from "../../utils/route.util";
-import {SupplierInfoService} from "../../services/supplier-info.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {ApiService} from '../../services/api.service';
+import {RouteUtil} from '../../utils/route.util';
+import {SupplierInfoService} from '../../services/supplier-info.service';
 
 @Component({
     selector: 'app-supplier-info',
@@ -11,9 +11,7 @@ import {SupplierInfoService} from "../../services/supplier-info.service";
 })
 export class SupplierInfoComponent implements OnInit {
 
-    recentProducts: number[] = [1, 2, 3, 4]; // This should be of type Product (model) for now I add 4 items
     jsonSupplierData;
-    recentProductMax = 4;
 
     constructor(
         private router: Router,
@@ -24,6 +22,7 @@ export class SupplierInfoComponent implements OnInit {
     ) {
     }
 
+    // Subscribe to the query paramaters in the URL
     ngOnInit(): void {
         this.activatedRoute.queryParams.subscribe(
             res => {
@@ -34,6 +33,7 @@ export class SupplierInfoComponent implements OnInit {
             });
     }
 
+    // Get all information about the supplier with the given id in the query
     loadSupplierData(id: number): void {
         this.supplierInfoService.getSupplier(id).subscribe(
             res => {
@@ -45,7 +45,7 @@ export class SupplierInfoComponent implements OnInit {
         );
     }
 
-    // Just a helper method to combine all adress detail into one String
+    // Just a helper method to combines all adress detail into one String
     concatAddress(): string {
         return this.jsonSupplierData.addresses[0].street + ' ' + this.jsonSupplierData.addresses[0].number + ', ' +
             this.jsonSupplierData.addresses[0].postalCode + ' ' + this.jsonSupplierData.addresses[0].city;

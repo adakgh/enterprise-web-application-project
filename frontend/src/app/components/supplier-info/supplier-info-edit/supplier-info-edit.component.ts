@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../../services/api.service';
 import {Supplier} from '../../../models/supplier';
-import {SupplierInfoService} from "../../../services/supplier-info.service";
+import {SupplierInfoService} from '../../../services/supplier-info.service';
 
 @Component({
     selector: 'app-supplier-info-edit',
@@ -12,6 +12,7 @@ import {SupplierInfoService} from "../../../services/supplier-info.service";
 })
 export class SupplierInfoEditComponent implements OnInit {
 
+    supplierId;
     supplier: Supplier;
 
     constructor(
@@ -23,10 +24,10 @@ export class SupplierInfoEditComponent implements OnInit {
     ) {
     }
 
+    // Look at the query and based on that show the data of the supplier
     ngOnInit(): void {
         this.activatedRoute.queryParams.subscribe(
             res => {
-                console.log("Find shit of supplier with id: " + res.id);
                 this.loadSupplierData(res.id);
             },
             err => {
@@ -34,9 +35,11 @@ export class SupplierInfoEditComponent implements OnInit {
             });
     }
 
+    // Load all data of the supplier with the given id
     loadSupplierData(id: number): void {
         this.supplierInfoService.getSupplier(id).subscribe(
             res => {
+                this.supplierId = res.id;
                 this.supplier = new Supplier();
                 // Transform the retrieved data into the supplier model
                 this.supplier.companyName = res.companyName;
@@ -46,6 +49,16 @@ export class SupplierInfoEditComponent implements OnInit {
                 this.supplier.phoneNumber = res.phoneNumber;
                 this.supplier.shortDescription = res.shortDescription;
                 this.supplier.description = res.description;
+
+                // Get the adress value and put it in the supplier model
+                this.supplier.addresses = [{
+                    id: res.addresses[0].id,
+                    street: res.addresses[0].street,
+                    number: res.addresses[0].number,
+                    postalCode: res.addresses[0].postalCode,
+                    city: res.addresses[0].city,
+                    country: res.addresses[0].country,
+                }];
             },
             err => {
                 console.log(err);
@@ -54,25 +67,15 @@ export class SupplierInfoEditComponent implements OnInit {
     }
 
     // Gets triggered when user(supplier) is done editing and click the button to update
-    // tslint:disable-next-line:typedef
-    onUpdateSupplier() {
-        console.log('Jo Update every shjit');
-        console.log(this.supplier);
-
+    onUpdateSupplier(): void {
         this.supplierInfoService.updateSupplier(this.supplier).subscribe(
             res => {
                 console.log('Succesfully updated shizzle.');
+                this.router.navigate(['../'], {relativeTo: this.activatedRoute, queryParams: {id: this.supplierId}});
             },
             err => {
                 console.log(err);
             }
         );
     }
-
-    // Just a helper method to combine all adress detail into one String
-    concatAddress(): string {
-        return this.supplier.adres.street + ' ' + this.supplier.adres.number + ', ' +
-            this.supplier.adres.postalCode + ' ' + this.supplier.adres.city;
-    }
-
 }
