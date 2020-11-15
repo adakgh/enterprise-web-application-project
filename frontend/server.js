@@ -4,7 +4,7 @@ const pjson = require('./package.json');
 
 const app = express();
 
-app.use(express.static(`./nod/${pjson.name}`));
+app.use(express.static(`./dist/${pjson.name}`));
 
 app.get('/*', (req, res) =>
     res.sendFile('index.html', {root: `dist/${pjson.name}`}),
