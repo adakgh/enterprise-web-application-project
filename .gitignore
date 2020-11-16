@@ -1,5 +1,5 @@
 backend/src/main/java/com/example/.DS_Store
 *.DS_Store
-#.idea
+.idea
 backend/src/main/resources/database/
 frontend/node_modules
