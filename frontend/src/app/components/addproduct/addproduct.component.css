@@ -1,3 +1,9 @@
 .block {
     margin-left: 5%;
+    overflow: hidden;
+}
+
+.label-title{
+    color: #265139;
+    font-weight: bold;
 }
