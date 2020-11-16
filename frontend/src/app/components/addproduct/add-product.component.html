@@ -6,8 +6,8 @@
     <div class="col-3  mb-4">
         <div>
             <picture>
-                <img src="../../../assets/images/camera.png" alt="voeg afbeelding toe" style="width: 80%; height: 100%"
-                     class="img-thumbnail">
+                <img src="https://simpleicon.com/wp-content/uploads/camera.png" alt="voeg afbeelding toe"
+                     style="width: 80%; height: 100%; opacity: 20%; border: 1px solid gray;" class="img-thumbnail">
                 <input type="file" (change)="onFileSelected($event)">
             </picture>
         </div>
@@ -52,13 +52,6 @@
                     <select class="form-control" name="category" [(ngModel)]="productData.categoryId">
                         <option *ngFor="let category of categoryMap" (change)="productData.categoryId=$event"
                                 value="{{category.id}}">{{category.name}}</option>
-<!--                        <option value="1">Groente</option>-->
-<!--                        <option value="2">Fruit</option>-->
-<!--                        <option value="3">Zuivel</option>-->
-<!--                        <option value="4">Bakkerij</option>-->
-<!--                        <option value="5">Vlees</option>-->
-<!--                        <option value="6">Vega</option>-->
-<!--                        <option value="7">Overig</option>-->
                     </select>
                 </div>
             </div>
