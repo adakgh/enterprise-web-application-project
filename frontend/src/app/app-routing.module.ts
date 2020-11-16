@@ -9,7 +9,7 @@ import {SupplierInfoComponent} from './components/supplier-info/supplier-info.co
 import {SupplierInfoEditComponent} from './components/supplier-info/supplier-info-edit/supplier-info-edit.component';
 import {ProductDetailComponent} from './components/product-detail/product-detail.component';
 import {ContactComponent} from './components/contact/contact.component';
-import {AddproductComponent} from './components/addproduct/addproduct.component';
+import {AddProductComponent} from './components/addproduct/add-product.component';
 import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
@@ -22,7 +22,7 @@ const routes: Routes = [
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
-    {path: 'addproduct', component: AddproductComponent, canActivate: [AuthGuardService]},
+    {path: 'addproduct', component: AddProductComponent, canActivate: [AuthGuardService]},
     {path: 'addrequestproduct', component: AddrequestproductComponent},
     {path: 'requestedproducts', component: RequestproductComponent},
     {path: 'contact', component: ContactComponent},

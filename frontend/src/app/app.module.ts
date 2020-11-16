@@ -19,7 +19,7 @@ import {SupplierInfoComponent} from './components/supplier-info/supplier-info.co
 import {RecentProductComponent} from './components/supplier-info/recent-product/recent-product.component';
 import {SupplierInfoEditComponent} from './components/supplier-info/supplier-info-edit/supplier-info-edit.component';
 import {ContactComponent} from './components/contact/contact.component';
-import {AddproductComponent} from './components/addproduct/addproduct.component';
+import {AddProductComponent} from './components/addproduct/add-product.component';
 import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
@@ -38,7 +38,7 @@ import {AddrequestproductComponent} from './components/requestproduct/addrequest
         RecentProductComponent,
         SupplierInfoEditComponent,
         ContactComponent,
-        AddproductComponent,
+        AddProductComponent,
         ErrorComponent,
         RequestproductComponent,
         AddrequestproductComponent

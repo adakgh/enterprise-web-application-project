@@ -2,33 +2,37 @@ import {Component, OnInit} from '@angular/core';
 import {AddProductService} from '../../services/add-product.service';
 import {ApiService} from '../../services/api.service';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {ProductService} from '../../services/product.service';;
 
 @Component({
     selector: 'app-addproduct',
-    templateUrl: './addproduct.component.html',
-    styleUrls: ['./addproduct.component.css']
+    templateUrl: './add-product.component.html',
+    styleUrls: ['./add-product.component.css']
 })
 
 // TODO 1. Adding a possiblity to add a picture to the page
 // TODO 2. Giving a popup when the product is finished
 // TODO 3. Styling the webpage
-export class AddproductComponent implements OnInit {
+export class AddProductComponent implements OnInit {
     private errorMessage: string;
     jsonData: any;
     productList: any = {};
     productData: any = {};
     selectedFile: File = null;
+    categoryMap: any[];
 
     constructor(
         private apiService: ApiService,
         private addProductService: AddProductService,
         private router: Router,
-        private http: HttpClient
+        private productService: ProductService
     ) {
     }
 
     ngOnInit(): void {
+        this.productService.getAllCategories().subscribe(
+            res => this.categoryMap = res
+        );
     }
 
     addProduct(): void {

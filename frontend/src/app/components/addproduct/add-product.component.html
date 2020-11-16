@@ -49,15 +49,16 @@
             <div class="form-group row">
                 <label for="inputStock" class="col-sm-2 col-form-label label-title">Categorie:</label>
                 <div class="col-sm-8">
-                    <select class="form-control"
-                            name="category" [(ngModel)]="productData.category" #name="ngModel">
-                        <option value="1">Groente</option>
-                        <option value="2">Fruit</option>
-                        <option value="3">Zuivel</option>
-                        <option value="4">Bakkerij</option>
-                        <option value="5">Vlees</option>
-                        <option value="6">Vega</option>
-                        <option value="7">Overig</option>
+                    <select class="form-control" name="category" [(ngModel)]="productData.categoryId">
+                        <option *ngFor="let category of categoryMap" (change)="productData.categoryId=$event"
+                                value="{{category.id}}">{{category.name}}</option>
+<!--                        <option value="1">Groente</option>-->
+<!--                        <option value="2">Fruit</option>-->
+<!--                        <option value="3">Zuivel</option>-->
+<!--                        <option value="4">Bakkerij</option>-->
+<!--                        <option value="5">Vlees</option>-->
+<!--                        <option value="6">Vega</option>-->
+<!--                        <option value="7">Overig</option>-->
                     </select>
                 </div>
             </div>
