@@ -22,7 +22,7 @@
                     alt="{{product.name}}"/></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a routerLink="/product-detail">{{product.name}}</a>
+                        <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
                     </h4>
                     <h5>€{{product.price}}/Kg</h5>
                     <p class="card-text">{{product.description}}</p>
