@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    restUrl: 'https://vanstreek2-be-app-staging.herokuapp.com/api/v1',
+    apiUrl: 'https://vanstreek2-be-app-staging.herokuapp.com/api/v1',
     environmentName: 'staging',
     production: false
 };
