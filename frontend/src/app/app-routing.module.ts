@@ -13,6 +13,7 @@ import {AddProductComponent} from './components/addproduct/add-product.component
 import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
+import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
+    {path: 'suppliers', component: SuppliersListComponent},
     {path: 'addproduct', component: AddProductComponent, canActivate: [AuthGuardService]},
     {path: 'addrequestproduct', component: AddrequestproductComponent},
     {path: 'requestedproducts', component: RequestproductComponent},

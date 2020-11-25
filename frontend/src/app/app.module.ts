@@ -23,6 +23,8 @@ import {AddProductComponent} from './components/addproduct/add-product.component
 import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
+import { SuppliersListComponent } from './components/suppliers-list/suppliers-list.component';
+import { SupplierItemComponent } from './components/suppliers-list/supplier-item/supplier-item.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +43,9 @@ import {AddrequestproductComponent} from './components/requestproduct/addrequest
         AddProductComponent,
         ErrorComponent,
         RequestproductComponent,
-        AddrequestproductComponent
+        AddrequestproductComponent,
+        SuppliersListComponent,
+        SupplierItemComponent
     ],
     imports: [
         CookieModule.forRoot(),
