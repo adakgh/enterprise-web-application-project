@@ -15,6 +15,7 @@ import {RequestproductComponent} from './components/requestproduct/requestproduc
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
 import {MyproductsComponent} from './components/myproducts/myproducts.component';
 import {VerifyUserComponent} from './components/verify-user/verify-user.component';
+import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
+    {path: 'suppliers', component: SuppliersListComponent},
     {path: 'addproduct', component: AddProductComponent, canActivate: [AuthGuardService]},
     {path: 'myproducts', component: MyproductsComponent, canActivate: [AuthGuardService]},
     {path: 'addrequestproduct', component: AddrequestproductComponent},
