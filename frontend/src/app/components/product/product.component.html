@@ -33,20 +33,20 @@
             <div class="form-group">
                 <label for="sortDropdown">sorteer:</label>
                 <select id="sortDropdown" class="form-check" style="padding-left: 0" (change)="sortProducts($event)">
-                    <option value="">Selecteer...</option>
-                    <option value="name">naam</option>
-<!--                    <option value="nameDesc">naam (Z-A)</option>-->
-                    <option value="price">prijs</option>
-<!--                    <option value="priceDesc">prijs (hoog-laag)</option>-->
-                    <option value="addedDate">datum toegevoegd</option>
-<!--                    <option value="addedDateDesc">datum toegevoegd (oudste eerst)</option>-->
+                    <option value="">selecteer...</option>
+                    <option value="name,asc">naam (A-Z)</option>
+                    <option value="name,desc">naam (Z-A)</option>
+                    <option value="price,asc">prijs (laag-hoog)</option>
+                    <option value="price,desc">prijs (hoog-laag)</option>
+                    <option value="addedDate,asc">datum toegevoegd (nieuwste eerst)</option>
+                    <option value="addedDate,desc">datum toegevoegd (oudste eerst)</option>
                 </select>
             </div>
         </fieldset>
     </div>
 
     <div class="row col-12">
-        <div *ngFor="let product of jsonData" class="col-lg-4 col-md-4 mb-4">
+        <div *ngFor="let product of jsonData" class="col-lg-3 col-md-4 mb-3">
             <div class="card h-100">
                 <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
                     src="../../../assets/images/bloemkolen.jpeg"
