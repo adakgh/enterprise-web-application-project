@@ -29,11 +29,19 @@ public class ProductSpecification extends BaseSpecification<ProductEntity> {
 
     private void customPriceFilter(String attr, Root<ProductEntity> rt, CriteriaBuilder cb) {
         // http://localhost:8080/api/v1/products?price=2.95-49.95       --> between prices
+        // http://localhost:8080/api/v1/products?price=2.95-            --> starting from price
         // http://localhost:8080/api/v1/products?price=2.95             --> exact price
 
-        var arr = queryMap.get(attr).split("-", 2);
+        String[] arr = queryMap.get(attr).split("-", 2);
         var lo = new BigDecimal(arr[0]);
-        var hi = arr.length > 1 ? new BigDecimal(arr[1]) : lo;
+        var hi = arr.length > 1 ? new BigDecimal(resolveMaxPriceFilter(arr[1])) : lo;
         predicates.add(cb.between(rt.get(attr), lo, hi));
+    }
+
+    /**
+     * Resolves the max price value in a filter.
+     */
+    private String resolveMaxPriceFilter(String maxPrice) {
+        return maxPrice.isEmpty() ? String.valueOf(Integer.MAX_VALUE) : maxPrice;
     }
 }
