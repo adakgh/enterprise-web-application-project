@@ -6,16 +6,16 @@
     </div>
     <div class="col-md-6 col-sm-12">
         <div class="row">
-            <div class="col-md-12 col-sm-12"><b>[CompanyName]</b></div>
-            <div class="col-md-12 col-sm-12"><p>[Shordescription Company] ........ limit 255?</p></div>
+            <div class="col-md-12 col-sm-12"><b>{{supplier.companyName}}</b></div>
+            <div class="col-md-12 col-sm-12"><p>{{supplier.shortDescription}}</p></div>
         </div>
-        <div class="row ">
+        <div class="row supplierLinks">
             <div class="col-md-12 col-sm-12">
 
                 <ul class="quickLinks p-1">
                     <li><a href="#" routerLink="/supplierinfo">| Aangeboden Objecten | </a></li>
-                    <li><a href="mailto:lol"> Contact | </a></li>
-                    <li><a routerLink="/supplierinfo" [queryParams]="{id: 1}" href=""> Zie volledige pagina | </a></li>
+                    <li><a href="mailto:{{supplier.contactEmail}}"> Contact | </a></li>
+                    <li><a routerLink="/supplierinfo" [queryParams]="{id: supplier.id}" href=""> Zie volledige pagina | </a></li>
                     <!--<li><a href="https://www.facebook.com/deduintuinheemskerk/" target="_blank"> Facebook | </a></li>-->
                 </ul>
 
@@ -25,10 +25,9 @@
 
     <div class="col-md-4 col-sm-12">
         <b>Gegevens: </b>
-        <li>Website: [Company Website]</li>
-        <li>Telefoon: [Company Phonenumber]</li>
-        <li>Email: [Company Email]</li>
-        <li>Adress: [Company Adress]</li>
+        <li *ngIf="supplier.website !=null && supplier.website!=''">Website: {{supplier.website}}</li>
+        <li *ngIf="supplier.phoneNumber !=null && supplier.phoneNumber!=''">Telefoon: {{supplier.phoneNumber}}</li>
+        <li *ngIf="supplier.contactEmail !=null && supplier.contactEmail!=''">Email: {{supplier.contactEmail}}</li>
+        <li *ngIf="supplier.addresses !=null && supplier.addresses!=''">Adress: {{concatAddress()}}</li>
     </div>
-
 </div>

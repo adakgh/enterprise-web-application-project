@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {SupplierInfoService} from '../../services/supplier-info.service';
-import {CurrentUserService} from "../../services/current-user.service";
+import {CurrentUserService} from '../../services/current-user.service';
 
 @Component({
     selector: 'app-supplier-info',

@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class SupplierService {
@@ -22,7 +24,14 @@ public class SupplierService {
      */
     public SupplierEntity findById(Long id) {
         return supplierRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Supplier not be found with id: "  + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Supplier not be found with id: " + id));
+    }
+
+    /**
+     * Retrieves all suppliers-info and returns it.
+     */
+    public List<SupplierEntity> findAll() {
+        return supplierRepository.findAll();
     }
 
     /**

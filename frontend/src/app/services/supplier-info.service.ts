@@ -26,6 +26,16 @@ export class SupplierInfoService {
         );
     }
 
+    getAllSuppliers(): Observable<any> {
+        return this.apiService.get('/suppliers').pipe(
+            map(res => {
+                console.log('Data recieved for all the suppliers: ');
+                console.log(res);
+                return res;
+            })
+        );
+    }
+
     updateSupplier(supplier: Supplier): Observable<any> {
         return this.apiService.put('/suppliers', supplier, null);
     }
