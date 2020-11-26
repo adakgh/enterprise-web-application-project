@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/suppliers")
@@ -20,6 +22,14 @@ public class SupplierController {
     @GetMapping("/{id}")
     public SupplierEntity getSupplierInfo(@PathVariable long id) {
         return supplierService.findById(id);
+    }
+
+    /**
+     * Retrieves all supplier-info.
+     */
+    @GetMapping("")
+    public List<SupplierEntity> getAllSuppliers() {
+        return supplierService.findAll();
     }
 
     /**
