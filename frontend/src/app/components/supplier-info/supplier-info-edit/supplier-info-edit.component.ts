@@ -10,7 +10,6 @@ import {RouteUtil} from '../../../utils/route.util';
 import {Observable, Observer} from "rxjs";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {DemoImage} from "./default-image";
-
 @Component({
     selector: 'app-supplier-info-edit',
     templateUrl: './supplier-info-edit.component.html',

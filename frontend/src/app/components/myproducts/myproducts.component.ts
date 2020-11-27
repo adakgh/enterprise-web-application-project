@@ -44,17 +44,6 @@ export class MyproductsComponent implements OnInit {
             });
     }
 
-    loadData(): void {
-        this.myProductsService.getAllMyProducts().subscribe(
-            res => {
-                this.jsonData = res;
-            },
-            err => {
-                console.log(err);
-            }
-        );
-    }
-
     loadSupplierData(id: number): void {
         this.supplierInfoService.getSupplier(id).subscribe(
             res => {
