@@ -13,6 +13,7 @@ import {AddProductComponent} from './components/addproduct/add-product.component
 import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
+import {MyproductsComponent} from './components/myproducts/myproducts.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
     {path: 'supplierinfo', component: SupplierInfoComponent},
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
     {path: 'addproduct', component: AddProductComponent, canActivate: [AuthGuardService]},
+    {path: 'myproducts', component: MyproductsComponent, canActivate: [AuthGuardService]},
     {path: 'addrequestproduct', component: AddrequestproductComponent},
     {path: 'requestedproducts', component: RequestproductComponent},
     {path: 'contact', component: ContactComponent},

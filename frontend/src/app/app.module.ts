@@ -23,6 +23,9 @@ import {AddProductComponent} from './components/addproduct/add-product.component
 import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
+import { MyproductsComponent } from './components/myproducts/myproducts.component';
+
+
 
 @NgModule({
     declarations: [
@@ -41,7 +44,8 @@ import {AddrequestproductComponent} from './components/requestproduct/addrequest
         AddProductComponent,
         ErrorComponent,
         RequestproductComponent,
-        AddrequestproductComponent
+        AddrequestproductComponent,
+        MyproductsComponent
     ],
     imports: [
         CookieModule.forRoot(),
