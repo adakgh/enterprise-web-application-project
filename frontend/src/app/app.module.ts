@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 
-import { CookieModule } from 'ngx-cookie';
+import {CookieModule} from 'ngx-cookie';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -23,8 +23,9 @@ import {AddProductComponent} from './components/addproduct/add-product.component
 import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
-import { SuppliersListComponent } from './components/suppliers-list/suppliers-list.component';
-import { SupplierItemComponent } from './components/suppliers-list/supplier-item/supplier-item.component';
+import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
+import {SupplierItemComponent} from './components/suppliers-list/supplier-item/supplier-item.component';
+import {UnsavedChangesGuardService} from "./guards/unsaved-changes-guard.service";
 
 @NgModule({
     declarations: [
@@ -56,7 +57,7 @@ import { SupplierItemComponent } from './components/suppliers-list/supplier-item
         RouterModule,
         ReactiveFormsModule,
     ],
-    providers: [],
+    providers: [UnsavedChangesGuardService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
