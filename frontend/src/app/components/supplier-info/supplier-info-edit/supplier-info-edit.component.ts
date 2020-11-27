@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../../services/api.service';
 import {Supplier} from '../../../models/supplier';
 import {SupplierInfoService} from '../../../services/supplier-info.service';
-import {CurrentUserService} from "../../../services/current-user.service";
+import {CurrentUserService} from '../../../services/current-user.service';
 
 @Component({
     selector: 'app-supplier-info-edit',
