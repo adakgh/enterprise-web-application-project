@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MyProductsService} from '../../services/my-products.service';
 import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
+import {SupplierInfoService} from '../../services/supplier-info.service';
 
 @Component({
     selector: 'app-myproducts',
@@ -13,6 +14,7 @@ import {ProductService} from '../../services/product.service';
 export class MyproductsComponent implements OnInit {
 
     jsonData: any[] = [];
+    jsonSupplierData;
     categoryMap: any[] = [];
     selectedCategories: any = [];
 
@@ -22,25 +24,24 @@ export class MyproductsComponent implements OnInit {
         private routeUtil: RouteUtil,
         private productService: ProductService,
         private myProductsService: MyProductsService,
+        private supplierInfoService: SupplierInfoService,
         private activatedRoute: ActivatedRoute
     ) {
     }
 
     ngOnInit(): void {
-        this.routeUtil.clearParams();
-        this.activatedRoute.queryParamMap.subscribe(
+        this.activatedRoute.queryParams.subscribe(
             res => {
-                this.loadData();
-            }
-        );
-        this.productService.getAllCategories().subscribe(
-            res => {
-                this.categoryMap = res;
+                // If there is no query given return user to homepage
+                if (res.id <= 0 || res.id == null) {
+                    this.router.navigate(['/']);
+                    return;
+                }
+                this.loadSupplierData(res.id);
             },
             err => {
-                console.log(err);
-            }
-        );
+                console.log('Can not find endPoint' + err);
+            });
     }
 
     loadData(): void {
@@ -54,26 +55,15 @@ export class MyproductsComponent implements OnInit {
         );
     }
 
-    searchValue(values: any): void {
-        if (values.target.value !== '') {
-            this.routeUtil.addParam('name', '*' + values.target.value + '*');
-        } else {
-            this.routeUtil.deleteParam('name');
-        }
+    loadSupplierData(id: number): void {
+        this.supplierInfoService.getSupplier(id).subscribe(
+            res => {
+                this.jsonSupplierData = res;
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 
-    filterCategory(values: any): void {
-        if (values.target.checked) {
-            this.selectedCategories.push(values.target.value);
-        } else {
-            console.log('delete');
-            this.selectedCategories.splice(this.selectedCategories.indexOf(values.target.value), 1);
-        }
-        console.log(this.selectedCategories);
-        if (this.selectedCategories.length > 0) {
-            this.routeUtil.addParam('category', this.selectedCategories.join(','));
-        } else {
-            this.routeUtil.deleteParam('category');
-        }
-    }
 }

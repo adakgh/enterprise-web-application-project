@@ -22,4 +22,16 @@ export class MyProductsService {
             })
         );
     }
+
+    getSupplier(id: number): Observable<any> {
+        const query = id;
+
+        return this.apiService.get('/suppliers/' + query).pipe(
+            map(res => {
+                console.log('Data recieved for the supplierInfo Page: ');
+                console.log(res);
+                return res;
+            })
+        );
+    }
 }
