@@ -15,8 +15,6 @@ export class RouteUtil {
      */
     addParam(paramName: string, paramValue: string): void {
         const params = this.getParams();
-        console.log(params);
-        console.log(params === {});
         params[paramName] = paramValue;
         this.updateParams(params);
     }

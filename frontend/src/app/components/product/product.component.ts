@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
     selector: 'app-product',
@@ -14,17 +15,23 @@ export class ProductComponent implements OnInit {
     jsonData: any[] = [];
     categoryMap: any[] = [];
     selectedCategories: any = [];
+    priceRangeForm;
 
     constructor(
         private router: Router,
         private apiService: ApiService,
         private routeUtil: RouteUtil,
         private productService: ProductService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private formBuilder: FormBuilder
     ) {
     }
 
     ngOnInit(): void {
+        this.priceRangeForm = this.formBuilder.group({
+            min: '',
+            max: '',
+        });
         this.routeUtil.clearParams();
         this.activatedRoute.queryParamMap.subscribe(
             res => {
@@ -60,14 +67,34 @@ export class ProductComponent implements OnInit {
         }
     }
 
+    sortProducts(values: any): void {
+        if (values.target.value !== '') {
+            this.routeUtil.addParam('sort', values.target.value);
+        } else {
+            this.routeUtil.deleteParam('sort');
+        }
+    }
+
+    priceRange(values: { min, max }): void {
+        if (values.min === '' && values.max !== '') {
+            values.min = 0;
+        }
+        if (values.min === '' && values.max === '') {
+            this.routeUtil.deleteParam('price');
+        } else if (values.max === '') {
+            this.routeUtil.addParam('price', values.min + '-');
+        } else {
+            this.routeUtil.addParam('price', values.min + '-' + values.max);
+
+        }
+    }
+
     filterCategory(values: any): void {
         if (values.target.checked) {
             this.selectedCategories.push(values.target.value);
         } else {
-            console.log('delete');
             this.selectedCategories.splice(this.selectedCategories.indexOf(values.target.value), 1);
         }
-        console.log(this.selectedCategories);
         if (this.selectedCategories.length > 0) {
             this.routeUtil.addParam('category', this.selectedCategories.join(','));
         } else {
