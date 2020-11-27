@@ -1,5 +1,6 @@
 <div class="container">
-    <div class="form-group row col-md-12">
+    <h3>Filter de producten: </h3>
+    <div id="filterBox" class="form-group row col-md-12">
         <div class="col-md-3">
             <label for="searchBar">Zoek een product:</label>
             <input class="form-control" id="searchBar" type="text" placeholder="Zoek.."
@@ -27,12 +28,12 @@
                 <label for="priceMax"> Tot: </label>
                 <input class="form-control" id="priceMax" type="text" formControlName="max">
             </div>
-            <input type="submit" class="btn btn-primary mb-2" value="toepassen">
+            <input type="submit" class="btn btn-primary mb-2" value="Toepassen">
         </form>
         <fieldset class="col-md-3">
             <div class="form-group">
                 <label for="sortDropdown">sorteer:</label>
-                <select id="sortDropdown" class="form-check" style="padding-left: 0" (change)="sortProducts($event)">
+                <select id="sortDropdown" class="form-check" (change)="sortProducts($event)">
                     <option value="">selecteer...</option>
                     <option value="name,asc">naam (A-Z)</option>
                     <option value="name,desc">naam (Z-A)</option>
@@ -49,8 +50,8 @@
         <div *ngFor="let product of jsonData" class="col-lg-3 col-md-4 mb-3">
             <div class="card h-100">
                 <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
+                    id="productImage"
                     src="../../../assets/images/bloemkolen.jpeg"
-                    style="width: 100%; height: 100%"
                     alt="{{product.name}}"/></a>
                 <div class="card-body">
                     <h4 class="card-title">
