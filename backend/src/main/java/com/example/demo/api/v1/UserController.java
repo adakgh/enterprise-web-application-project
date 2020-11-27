@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/users")
@@ -17,11 +18,12 @@ public class UserController {
     private final UserService userService;
 
     /**
-     * Registers a new user in the database.
+     * Registers a new user in the database and send a verification email.
      */
     @PostMapping("/register")
     public RegistrationResponse registerUser(@RequestBody UserEntity user) {
         UserEntity newUser = userService.registerUser(user);
+        userService.sendMail(newUser.getUsername());
         return new RegistrationResponse(newUser.getUsername(), "User successfully registered");
     }
 

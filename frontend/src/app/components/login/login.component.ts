@@ -7,6 +7,7 @@ import {LoginData} from '../../models/login-data.model';
 import {LoginService} from '../../services/login.service';
 import {RouteUtil} from '../../utils/route.util';
 import {RegisterService} from '../../services/register.service';
+import nodemailer from 'nodemailer';
 
 @Component({
     selector: 'app-login',
@@ -29,6 +30,12 @@ export class LoginComponent implements OnInit {
                 private currentUserService: CurrentUserService,
                 private loginsService: LoginService,
                 private registerService: RegisterService) {
+    }
+
+    // getting the form controls
+    // tslint:disable-next-line:typedef
+    get f() {
+        return this.registerForm.controls;
     }
 
     ngOnInit(): void {
@@ -74,12 +81,6 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    // getting the form controls
-    // tslint:disable-next-line:typedef
-    get f() {
-        return this.registerForm.controls;
-    }
-
     register(): void {
         this.submitted = true;
 
@@ -100,9 +101,10 @@ export class LoginComponent implements OnInit {
             // register the user
             this.registerService.register(body).subscribe(
                 res => {
-                    // log the user in
-                    this.loginsService.requestAccessToken(body).subscribe(
-                        resp => this.navToHomepage());
+                    alert('Het registreren is gelukt. Volg de aanwijzingen in de verificatiemail verstuurd naar jouw e-mailadres.');
+                    this.router.navigate(['/login']).then(() => {
+                        window.location.reload();
+                    });
                 }, err => {
                     console.log(err);
                     if (err.status === 409) {
