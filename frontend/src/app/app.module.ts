@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 
-import { CookieModule } from 'ngx-cookie';
+import {CookieModule} from 'ngx-cookie';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -29,6 +29,9 @@ import { MyproductsComponent } from './components/myproducts/myproducts.componen
 import { VerifyUserComponent } from './components/verify-user/verify-user.component';
 
 
+import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
+import {SupplierItemComponent} from './components/suppliers-list/supplier-item/supplier-item.component';
+import {UnsavedChangesGuardService} from "./guards/unsaved-changes-guard.service";
 
 @NgModule({
     declarations: [
@@ -63,7 +66,7 @@ import { VerifyUserComponent } from './components/verify-user/verify-user.compon
         RouterModule,
         ReactiveFormsModule,
     ],
-    providers: [],
+    providers: [UnsavedChangesGuardService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

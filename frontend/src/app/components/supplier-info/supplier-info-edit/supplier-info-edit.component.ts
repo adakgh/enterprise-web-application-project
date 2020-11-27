@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../../services/api.service';
@@ -14,10 +14,12 @@ import {NgForm} from "@angular/forms";
 })
 export class SupplierInfoEditComponent implements OnInit {
 
+    @ViewChild('f', {static: false}) signupForm: NgForm;
     supplierId;
     supplier: Supplier;
+    submitted = false;
 
-    @ViewChild('f', { static: false }) signupForm: NgForm;
+    // Test Attributes
     defaultQuestion = 'teacher';
     answer = '';
     genders = ['male', 'female'];
@@ -28,7 +30,6 @@ export class SupplierInfoEditComponent implements OnInit {
         answer: '',
         gender: ''
     };
-    submitted = false;
 
     constructor(
         private apiService: ApiService,
@@ -104,7 +105,9 @@ export class SupplierInfoEditComponent implements OnInit {
     onUpdateSupplier(): void {
         this.supplierInfoService.updateSupplier(this.supplier).subscribe(
             res => {
+                this.submitted = true;
                 console.log('Succesfully updated shizzle.');
+                console.log(this.signupForm);
                 // console.log(this.supplier);
                 this.router.navigate(['../'], {relativeTo: this.activatedRoute, queryParams: {id: this.supplierId}});
             },
@@ -114,22 +117,36 @@ export class SupplierInfoEditComponent implements OnInit {
         );
     }
 
-    // onSubmit(form: NgForm) {
-    //   console.log(form);
-    // }
+    @HostListener('window:beforeunload')
+    canDeactivate(): boolean {
+        // If there is something changed WARN the user
+        if (this.signupForm.dirty) {
+            if (!this.submitted) {
+                return confirm('Wijzigingen die u heeft gemaakt zullen niet worden opgeslagen, weet u zeker dat u de pagina wilt verlaten?');
+            }
+        }
+        return true;
+    }
 
-    onSubmit() {
-        this.submitted = true;
-        this.user.username = this.signupForm.value.userData.username;
+    // CHUNK TEST METHODS
+
+    /*onSubmit() {
+        // this.submitted = true;
+        /!*this.user.username = this.signupForm.value.userData.username;
         this.user.email = this.signupForm.value.userData.email;
         this.user.secretQuestion = this.signupForm.value.secret;
         this.user.answer = this.signupForm.value.questionAnswer;
         this.user.gender = this.signupForm.value.gender;
 
-        this.signupForm.reset();
+        this.signupForm.reset();*!/
     }
+*/
 
-    suggestUserName() {
+    // onSubmit(form: NgForm) {
+    //   console.log(form);
+    // }
+
+    /*suggestUserName() {
         const suggestedName = 'Superuser';
         // this.signupForm.setValue({
         //   userData: {
@@ -145,6 +162,6 @@ export class SupplierInfoEditComponent implements OnInit {
                 username: suggestedName
             }
         });
-    }
+    }*/
 
 }
