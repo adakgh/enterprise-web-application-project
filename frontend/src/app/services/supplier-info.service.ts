@@ -36,8 +36,15 @@ export class SupplierInfoService {
         );
     }
 
-    updateSupplier(supplier: Supplier): Observable<any> {
-        return this.apiService.put('/suppliers', supplier, null);
+    updateSupplier(body): Observable<any> {
+        return this.apiService.putImage('/suppliers/upload', body);
     }
 
+    getImage(id: number): Observable<any> {
+        return this.apiService.getImage('/suppliers/get/' + id).pipe(
+            map(res => {
+                return (res);
+            })
+        );
+    }
 }

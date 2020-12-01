@@ -1,17 +1,21 @@
 <div class="container">
     <h5>Wijzig Leverancier gegevens:</h5>
+    <button (click)="getImageClicked()">GET IMAGE</button>
 
-    <form (ngSubmit)="onUpdateSupplier()" #f="ngForm">
+    <form (ngSubmit)="onUpdateSupplier()" #f="ngForm" enctype="multipart/form-data">
 
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="img">Logo Leverancier: </label>
-                <input type="text" class="form-control" id="img" name="image"
-                       value="https://image.freepik.com/vrije-vector/fruit-en-groenten-logo_7085-159.jpg">
+                <label for="img">Logo Leverancier: </label><br>
+                <!--                <input type="text" class="form-control" id="img" name="image" value="https://image.freepik.com/vrije-vector/fruit-en-groenten-logo_7085-159.jpg">-->
+                <input (change)="onFileChange($event)" type="file" name="file" id="img"/><br/><br/>
+
             </div>
             <div class="col-md-6">
-                <img src="https://image.freepik.com/vrije-vector/fruit-en-groenten-logo_7085-159.jpg"
-                     class="supplierImg" alt="">
+                <img
+
+                    [src]="sanatizeUrl(generatedImage)"
+                    class="supplierImg" alt="">
             </div>
         </div>
 
@@ -25,7 +29,8 @@
         <!-- Telefoon -->
         <div class="form-group">
             <label for="telefoon">Telefoon: </label>
-            <input type="text" class="form-control" id="telefoon" [(ngModel)]="supplier.phoneNumber" name="phonenumber" required>
+            <input type="text" class="form-control" id="telefoon" [(ngModel)]="supplier.phoneNumber" name="phonenumber"
+                   required>
         </div>
 
         <!-- Email -->
@@ -33,13 +38,14 @@
             <label for="email">Email: </label>
             <input type="text" class="form-control" id="email" [(ngModel)]="supplier.contactEmail" name="email"
                    required email #email="ngModel">
-<!--            <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>-->
+            <!--            <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>-->
         </div>
 
         <!-- Website -->
         <div class="form-group">
             <label for="website">Website: </label>
-            <input type="text" class="form-control" id="website" placeholder="" [(ngModel)]="supplier.website" name="website" >
+            <input type="text" class="form-control" id="website" placeholder="" [(ngModel)]="supplier.website"
+                   name="website">
         </div>
 
         <div class="row">
@@ -82,13 +88,17 @@
         </textarea>
         </div>
 
-<!--        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Opslaan</button>-->
+        <!--        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Opslaan</button>-->
 
         <div class="row">
-            <button class="btn btn-danger mb-2 m-1 col-md-2 col-sm-12"><a href="" [routerLink]="['../']" [queryParams]="{id:supplierId}" style="color:white;">
+            <button class="btn btn-danger mb-2 m-1 col-md-2 col-sm-12"><a href="" [routerLink]="['../']"
+                                                                          [queryParams]="{id:supplierId}"
+                                                                          style="color:white;">
                 Annuleren </a>
             </button>
-            <button type="submit" class="btn btn-primary mb-2 m-1 mr-4 col-md-2 col-sm-12" [disabled]="!f.valid">Sla Wijzigingen op</button>
+            <button type="submit" class="btn btn-primary mb-2 m-1 mr-4 col-md-2 col-sm-12" [disabled]="!f.valid">Sla
+                Wijzigingen op
+            </button>
         </div>
     </form>
 

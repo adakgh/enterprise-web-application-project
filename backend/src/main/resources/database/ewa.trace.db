@@ -355,3 +355,6 @@ Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:461)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 9 more
+2020-11-30 13:56:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "URL VARCHAR(255)": "'""data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOMAAADeCAMAAAD4tEcNAAAAh1BMVEUAAAD+/v7////t7e3s7Oz4+Pj09PTw8PD7+/v29vby8vIxMTE2... (5300)"; SQL statement:
+insert into image_entity (id, name, pic_byte, type, url) values (null, ?, ?, ?, ?) [22001-200]
