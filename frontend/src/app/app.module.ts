@@ -32,6 +32,7 @@ import { VerifyUserComponent } from './components/verify-user/verify-user.compon
 import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
 import {SupplierItemComponent} from './components/suppliers-list/supplier-item/supplier-item.component';
 import {UnsavedChangesGuardService} from "./guards/unsaved-changes-guard.service";
+import {DemoImage} from "./components/supplier-info/supplier-info-edit/default-image";
 
 @NgModule({
     declarations: [
@@ -66,7 +67,7 @@ import {UnsavedChangesGuardService} from "./guards/unsaved-changes-guard.service
         RouterModule,
         ReactiveFormsModule,
     ],
-    providers: [UnsavedChangesGuardService],
+    providers: [UnsavedChangesGuardService, DemoImage],
     bootstrap: [AppComponent]
 })
 export class AppModule {

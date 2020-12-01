@@ -1,3 +1,5 @@
+import {Form} from '@angular/forms';
+
 export class Supplier {
     public companyName: string;
     public contactPerson: string;

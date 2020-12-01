@@ -40,6 +40,9 @@ public class SupplierEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    /*@OneToOne
+    private ImageEntity profileImage;*/
+
     @JsonIgnore
     @OneToOne(mappedBy = "supplier")
     private UserEntity user;
@@ -62,5 +65,22 @@ public class SupplierEntity {
     public void addProduct(ProductEntity product) {
         this.products.add(product);
         product.setSupplier(this);
+    }
+
+    @Override
+    public String toString() {
+        return "SupplierEntity{" +
+                "id=" + id +
+                ", companyName='" + companyName + '\'' +
+                ", contactPerson='" + contactPerson + '\'' +
+                ", contactEmail='" + contactEmail + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", website='" + website + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                ", addresses=" + addresses +
+                ", products=" + products +
+                '}';
     }
 }

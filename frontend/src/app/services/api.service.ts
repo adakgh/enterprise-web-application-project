@@ -16,11 +16,17 @@ export class ApiService {
     constructor(
         private router: Router,
         private http: HttpClient,
-        private authService: AuthService) {}
+        private authService: AuthService) {
+    }
 
     get(url: string): Observable<any> {
         return this.http.get(environment.apiUrl + url, {headers: this.createHeaders(null)})
             .pipe(catchError((err) => this.errorHandler(err)));
+    }
+
+    getImage(url: string): Observable<any> {
+        const headers = this.createHeaders(null);
+        return this.http.get(environment.apiUrl + url,  {headers});
     }
 
     // tslint:disable-next-line:ban-types
@@ -35,6 +41,19 @@ export class ApiService {
         const headers = this.createHeaders(headerFields);
         return this.http.put(environment.apiUrl + url, JSON.stringify(body), {headers})
             .pipe(catchError(err => this.errorHandler(err)));
+    }
+
+    // tslint:disable-next-line:ban-types
+    putImage(url: string, body: Object): Observable<any> {
+        console.log("URL");
+        console.log(url);
+        console.log(JSON.stringify(body));
+        console.log(body);
+        console.log("BTAO");
+        console.log(btoa(JSON.stringify(body)));
+
+        const headers = this.createHeaders(null);
+        return this.http.put(environment.apiUrl + url, (JSON.stringify(body)), {headers});
     }
 
     // tslint:disable-next-line:ban-types
