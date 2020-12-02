@@ -17,8 +17,6 @@ import {SuppliersListComponent} from './components/suppliers-list/suppliers-list
 import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service';
 import {MyproductsComponent} from './components/myproducts/myproducts.component';
 import {VerifyUserComponent} from './components/verify-user/verify-user.component';
-import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
-import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
