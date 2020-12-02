@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -78,8 +79,15 @@ public class SupplierService {
     public void updateWithImage(SupplierImage file) throws IOException {
 
         SupplierEntity newSupplier = file.getSupplier();
-
         if (file.getName() != null) {
+
+            /* TODO delete previous image before saving new one
+            // If supplier already has a profileImage uploaded delete that first
+            if (newSupplier.getProfileImage() != null){
+                Optional<ImageEntity> previousProfileImage = imageRepository.findById(newSupplier.getProfileImage().getId());
+                imageRepository.delete(previousProfileImage.get());
+            }*/
+
             // Create ImageEntity and save Image first
             ImageEntity imageEntity = new ImageEntity();
             imageEntity.setName(file.getName());
