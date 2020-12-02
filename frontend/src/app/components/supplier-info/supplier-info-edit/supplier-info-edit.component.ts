@@ -22,8 +22,8 @@ export class SupplierInfoEditComponent implements OnInit {
     supplierId;                             // the current supplier id
     supplier: Supplier = new Supplier();    // object/model where we store all supplier info
     submitted = false;                      // Tracks if the update form is submitted or not
-    selectedFile: File;
-    selectedFileUrl;
+    selectedFile: File;                     // The select Files
+    selectedFileUrl;                        // The select File's Base64 Url
 
     profileImageName;
     base64TrimmedURL: string;
@@ -100,6 +100,7 @@ export class SupplierInfoEditComponent implements OnInit {
                 }
 
                 if (res.profileImage != null) {
+                    this.profileImageName = res.name;
                     this.getImage(atob(res.profileImage.picByte));
                 }
 

@@ -24,11 +24,6 @@ export class ApiService {
             .pipe(catchError((err) => this.errorHandler(err)));
     }
 
-    getImage(url: string): Observable<any> {
-        const headers = this.createHeaders(null);
-        return this.http.get(environment.apiUrl + url, {headers});
-    }
-
     // tslint:disable-next-line:ban-types
     post(url: string, body: Object, headerFields: Map<string, string>): Observable<any> {
         const headers = this.createHeaders(headerFields);

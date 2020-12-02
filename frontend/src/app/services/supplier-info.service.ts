@@ -40,11 +40,4 @@ export class SupplierInfoService {
         return this.apiService.putImage('/suppliers', body);
     }
 
-    getImage(id: number): Observable<any> {
-        return this.apiService.getImage('/suppliers/get/' + id).pipe(
-            map(res => {
-                return (res);
-            })
-        );
-    }
 }
