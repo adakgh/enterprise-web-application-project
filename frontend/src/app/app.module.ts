@@ -24,8 +24,8 @@ import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
 import { MyproductsComponent } from './components/myproducts/myproducts.component';
-import { VerifyUserComponent } from './components/verify-user/verify-user.component';
 import { MyproductsEditComponent } from './components/myproducts/myproducts-edit/myproducts-edit.component';
+import { VerifyUserComponent } from './components/verify-user/verify-user.component';
 
 
 import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
@@ -53,10 +53,8 @@ import {DemoImage} from "./components/supplier-info/supplier-info-edit/default-i
         AddrequestproductComponent,
         MyproductsComponent,
         VerifyUserComponent,
-        AddrequestproductComponent,
         SuppliersListComponent,
         SupplierItemComponent,
-        MyproductsComponent,
         MyproductsEditComponent
     ],
     imports: [

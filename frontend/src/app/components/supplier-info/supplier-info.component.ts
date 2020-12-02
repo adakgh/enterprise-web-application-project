@@ -7,7 +7,6 @@ import {CurrentUserService} from '../../services/current-user.service';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {Observable, Observer} from "rxjs";
 import {DemoImage} from "./supplier-info-edit/default-image";
-import {CurrentUserService} from '../../services/current-user.service';
 
 @Component({
     selector: 'app-supplier-info',
