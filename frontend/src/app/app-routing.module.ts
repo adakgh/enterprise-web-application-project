@@ -15,6 +15,7 @@ import {RequestproductComponent} from './components/requestproduct/requestproduc
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
 import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
 import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service';
+import {MyproductsComponent} from './components/myproducts/myproducts.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
     {path: 'supplierinfo/edit', component: SupplierInfoEditComponent, canDeactivate: [UnsavedChangesGuardService]},
     {path: 'suppliers', component: SuppliersListComponent},
     {path: 'addproduct', component: AddProductComponent, canActivate: [AuthGuardService]},
+    {path: 'myproducts', component: MyproductsComponent, canActivate: [AuthGuardService]},
     {path: 'addrequestproduct', component: AddrequestproductComponent},
     {path: 'requestedproducts', component: RequestproductComponent},
     {path: 'contact', component: ContactComponent},

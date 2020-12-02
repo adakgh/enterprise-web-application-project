@@ -1,14 +1,47 @@
 <div class="container">
-    <div class="form-group">
-        <label for="searchBar">Zoek een product:</label>
-        <input class="form-control" id="searchBar" type="text" placeholder="Zoek.." (keyup)="searchValue($event)">
-        <fieldset class="form-group">
-            Filter op categorieën:
-            <div class="form-check" *ngFor="let category of categoryMap">
-                <input id="{{category.name}}" type="checkbox" class="form-check-input" name="category"
-                       value="{{category.id}}"
-                       (change)="filterCategory($event)">
-                <label for="{{category.name}}" class="form-check-label">{{category.name}}</label>
+    <h3>Filter de producten: </h3>
+    <div id="filterBox" class="form-group row col-md-12">
+        <div class="col-md-3">
+            <label for="searchBar">Zoek een product:</label>
+            <input class="form-control" id="searchBar" type="text" placeholder="Zoek.."
+                   (keyup)="searchValue($event)"><br/>
+        </div>
+        <fieldset class="col-md-3">
+            <div class="form-group">
+                Filter op categorieën:
+                <div class="form-check" *ngFor="let category of categoryMap">
+                    <input id="{{category.name}}" type="checkbox" class="form-check-input" name="category"
+                           value="{{category.id}}"
+                           (change)="filterCategory($event)">
+                    <label for="{{category.name}}" class="form-check-label">{{category.name}}</label>
+                </div>
+            </div>
+        </fieldset>
+        <br/>
+        <form class="col-md-2" [formGroup]="priceRangeForm"
+              (ngSubmit)="priceRange(priceRangeForm.value)">
+            <div class="form-group">
+                <label for="priceMin">Prijs van: </label>
+                <input class="form-control" id="priceMin" type="text" value="0" formControlName="min">
+            </div>
+            <div class="form-group">
+                <label for="priceMax"> Tot: </label>
+                <input class="form-control" id="priceMax" type="text" formControlName="max">
+            </div>
+            <input type="submit" class="btn btn-primary mb-2" value="Toepassen">
+        </form>
+        <fieldset class="col-md-3">
+            <div class="form-group">
+                <label for="sortDropdown">sorteer:</label>
+                <select id="sortDropdown" class="form-check" (change)="sortProducts($event)">
+                    <option value="">selecteer...</option>
+                    <option value="name,asc">naam (A-Z)</option>
+                    <option value="name,desc">naam (Z-A)</option>
+                    <option value="price,asc">prijs (laag-hoog)</option>
+                    <option value="price,desc">prijs (hoog-laag)</option>
+                    <option value="addedDate,asc">datum toegevoegd (nieuwste eerst)</option>
+                    <option value="addedDate,desc">datum toegevoegd (oudste eerst)</option>
+                </select>
             </div>
         </fieldset>
     </div>
@@ -17,8 +50,8 @@
         <div *ngFor="let product of jsonData" class="col-lg-3 col-md-4 mb-3">
             <div class="card h-100">
                 <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
+                    id="productImage"
                     src="../../../assets/images/bloemkolen.jpeg"
-                    style="width: 100%; height: 100%"
                     alt="{{product.name}}"/></a>
                 <div class="card-body">
                     <h4 class="card-title">
