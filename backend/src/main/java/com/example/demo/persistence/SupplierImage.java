@@ -4,37 +4,27 @@ import com.example.demo.persistence.entities.SupplierEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * TussenClass act like a JSON object, to hold different types of values
+ */
 @Getter
 @Setter
 @AllArgsConstructor
 public class SupplierImage {
 
-    private String url;
+    private SupplierEntity supplier;
     private String name;
+    private String type;
+    private String url;
 
-    /*public SupplierImage() {
+    @Override
+    public String toString() {
+        return "SupplierImage{" +
+                "supplier=" + supplier +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+//                ", url='" + url + '\'' +
+                '}';
     }
-
-    public SupplierImage(SupplierEntity supplier, MultipartFile image) {
-        this.supplier = supplier;
-        this.image = image;
-    }*/
-
-    /*public SupplierEntity getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(SupplierEntity supplier) {
-        this.supplier = supplier;
-    }
-
-    public MultipartFile getImage() {
-        return image;
-    }
-
-    public void setImage(MultipartFile image) {
-        this.image = image;
-    }*/
 }

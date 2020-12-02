@@ -40,8 +40,8 @@ public class SupplierEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    /*@OneToOne
-    private ImageEntity profileImage;*/
+    @OneToOne
+    private ImageEntity profileImage;
 
     @JsonIgnore
     @OneToOne(mappedBy = "supplier")

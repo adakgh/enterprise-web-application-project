@@ -28,11 +28,11 @@ public class ImageEntity {
     @Column(name = "picByte", length = 10000000)
     private byte[] picByte;
 
-    private String url;
+    /*private String url;*/
 
-    /*@JsonIgnore
+    @JsonIgnore
     @OneToOne(mappedBy = "profileImage")
-    private SupplierEntity supplierEntity;*/
+    private SupplierEntity supplierEntity;
 
 
     public ImageEntity() {
@@ -52,7 +52,6 @@ public class ImageEntity {
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", picByte=" + Arrays.toString(picByte) +
-                ", url='" + url + '\'' +
                 '}';
     }
 }
