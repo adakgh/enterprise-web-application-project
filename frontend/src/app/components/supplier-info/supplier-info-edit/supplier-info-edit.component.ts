@@ -7,9 +7,9 @@ import {SupplierInfoService} from '../../../services/supplier-info.service';
 import {CurrentUserService} from '../../../services/current-user.service';
 import {NgForm} from '@angular/forms';
 import {RouteUtil} from '../../../utils/route.util';
-import {Observable, Observer} from "rxjs";
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {DemoImage} from "./default-image";
+import {Observable, Observer} from 'rxjs';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {DemoImage} from './default-image';
 
 @Component({
     selector: 'app-supplier-info-edit',
@@ -194,7 +194,7 @@ export class SupplierInfoEditComponent implements OnInit {
     getBase64ImageFromURL(url: string): Observable<string> {
         return Observable.create((observer: Observer<string>) => {
             // create an image object
-            let img = new Image();
+            const img = new Image();
             img.crossOrigin = 'Anonymous';
             img.src = url;
             if (!img.complete) {
@@ -216,16 +216,16 @@ export class SupplierInfoEditComponent implements OnInit {
     /* Method to create base64Data Url from fetched image */
     getBase64Image(img: HTMLImageElement): string {
         // We create a HTML canvas object that will create a 2d image
-        let canvas: HTMLCanvasElement = document.createElement("canvas");
+        const canvas: HTMLCanvasElement = document.createElement('canvas');
         canvas.width = img.width;
         canvas.height = img.height;
-        let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+        const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
         // This will draw image
         ctx.drawImage(img, 0, 0);
         // Convert the drawn image to Data URL
-        let dataURL: string = canvas.toDataURL("image/png");
+        const dataURL: string = canvas.toDataURL('image/png');
         this.base64DefaultURL = dataURL;
-        return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
     }
 
     /** Method that will create Blob and show in new window */
@@ -252,7 +252,7 @@ export class SupplierInfoEditComponent implements OnInit {
             for (let i = 0; i < byteString.length; i++) {
                 int8Array[i] = byteString.charCodeAt(i);
             }
-            const blob = new Blob([int8Array], {type: "image/jpeg"});
+            const blob = new Blob([int8Array], {type: 'image/jpeg'});
             observer.next(blob);
             observer.complete();
         });

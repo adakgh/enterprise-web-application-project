@@ -8,6 +8,7 @@ import {map} from 'rxjs/operators';
     providedIn: 'root'
 })
 export class ProductService {
+    private productId: number;
 
     constructor(private routeUtil: RouteUtil,
                 private apiService: ApiService) {
@@ -21,6 +22,17 @@ export class ProductService {
         return this.apiService.get('/products' + query).pipe(
             map(res => {
                 return res.content;
+            })
+        );
+    }
+
+    // 1 product is sent to the HTML
+    getOneProduct(id: number): Observable<any> {
+        const query = id;
+
+        return this.apiService.get('/products/' + query).pipe(
+            map(res => {
+                return res;
             })
         );
     }
@@ -40,5 +52,10 @@ export class ProductService {
                 return res.pageable;
             })
         );
+    }
+
+    getProductId(): number {
+        if (this.productId == null) {}
+        return this.productId;
     }
 }

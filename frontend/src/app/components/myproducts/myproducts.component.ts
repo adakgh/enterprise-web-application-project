@@ -15,8 +15,6 @@ export class MyproductsComponent implements OnInit {
 
     jsonData: any[] = [];
     jsonSupplierData;
-    categoryMap: any[] = [];
-    selectedCategories: any = [];
 
     constructor(
         private router: Router,
