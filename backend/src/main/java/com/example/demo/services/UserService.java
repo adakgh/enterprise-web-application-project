@@ -115,10 +115,10 @@ public class UserService {
                         "border-radius:4px; color:#ffffff; display:inline-block; font-size:13px; font-weight:bold;\n" +
                         "text-align:center; text-decoration:none; letter-spacing:1px;\">VERIFIEER EMAIL</a></tr></tbody>\n" +
                         "</table>\n</td>\n</tr>\n<tr><td style=\"padding-top:25px;\">\n" +
-                        "       <p style=\"margin:20px 0 20px 0;\">Of kopieer en plak deze link in je web browser</p>\n" +
+                        "       <p style=\"margin: 20px 0 20px 0;color: black;\">Of kopieer en plak deze link in je web browser</p>\n" +
                         "       <p style=\"margin:20px 0; font-size:12px; line-height:17px; word-wrap:break-word; word-break:break-all;\">\n" +
                         "       <a href=\"" + HOST_ADDRESS + "/verify?token=" + token + "\"\nstyle=\"color:#5885ff; text-decoration:underline;\"\n" +
-                        "       target=\"_blank\">" + HOST_ADDRESS + "/verify?token=" + token + "</a>\n</p>\n</td>\n</tr>\n</tbody>\n" +
+                        "       target=\"_blank\"> " + HOST_ADDRESS + "/verify?token=" + token + "</a>\n</p>\n</td>\n</tr>\n</tbody>\n" +
                         "</table>\n</div>\n</td>\n</tr>\n<tr><td style=\"background-color:#255239; height:1px; " +
                         "width:100%; line-height:1px; font-size:0;\">&nbsp;</td>\n </tr><tr> <td style=\"background-color:#255239; height:1px; width:100%; line-height:1px; font-size:0;\">&nbsp;</td></tr>\n" +
                         "<tr></tr><td style=\"background-color:#255239; height:1px; width:100%; line-height:1px; font-size:0;\">&nbsp;</td></tr>\n" +
