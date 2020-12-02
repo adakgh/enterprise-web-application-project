@@ -60,7 +60,7 @@
             <h5 class="text-center"> Aangeboden Producten </h5>
         </div>
 
-        <app-recent-product *ngFor="let recentProduct of jsonSupplierData.products; let i = index" [product]="recentProduct"></app-recent-product>
+        <app-recent-product *ngFor="let recentProduct of jsonLimitedProductsData; let i = index" [product]="recentProduct"></app-recent-product>
 
         <!-- Refer to page with all products supplier is selling/offering -->
         <div class="col-sm-12">
