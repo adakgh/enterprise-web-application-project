@@ -24,6 +24,7 @@ import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
 import { MyproductsComponent } from './components/myproducts/myproducts.component';
+import { VerifyUserComponent } from './components/verify-user/verify-user.component';
 
 
 
@@ -45,7 +46,8 @@ import { MyproductsComponent } from './components/myproducts/myproducts.componen
         ErrorComponent,
         RequestproductComponent,
         AddrequestproductComponent,
-        MyproductsComponent
+        MyproductsComponent,
+        VerifyUserComponent
     ],
     imports: [
         CookieModule.forRoot(),

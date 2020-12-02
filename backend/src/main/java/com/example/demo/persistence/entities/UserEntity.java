@@ -17,6 +17,9 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "FULLNAME")
+    private String fullname;
+
     @Column(name = "USERNAME", unique = true)
     private String username;
 
@@ -32,6 +35,9 @@ public class UserEntity {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "SUPPLIER_ID")
     private SupplierEntity supplier;
+
+    @Column(name = "LOCKED")
+    private boolean locked;
 
     /** JPA convenience method to add a single role */
     public void addRole(RoleEntity role) {

@@ -7,7 +7,6 @@ import {LoginData} from '../../models/login-data.model';
 import {LoginService} from '../../services/login.service';
 import {RouteUtil} from '../../utils/route.util';
 import {RegisterService} from '../../services/register.service';
-import nodemailer from 'nodemailer';
 
 @Component({
     selector: 'app-login',
@@ -45,16 +44,25 @@ export class LoginComponent implements OnInit {
         this.setTypeValidators();
 
         // TODO: remove after testing --> test values for input fields
-        this.loginData.username = 'myUsername@gmail.com';
-        this.loginData.password = 'myPassword1!';
+        // this.loginData.username = 'myUsername@gmail.com';
+        // this.loginData.password = 'myPassword1!';
     }
 
     login(): void {
-        console.log(this.loginData);
-        this.loginsService.requestAccessToken(this.loginData).subscribe(
-            res => this.navToHomepage(),
-            err => this.loginErrMsg = 'E-mail of wachtwoord is niet correct'
-        );
+        this.loginsService.isLocked(this.loginData.username).subscribe(
+            resp => {
+                // if account is not locked log the user in
+                if (resp === false) {
+                    console.log(this.loginData);
+                    this.loginsService.requestAccessToken(this.loginData).subscribe(
+                        res => this.navToHomepage(),
+                        err => this.loginErrMsg = 'E-mail of wachtwoord is niet correct'
+                    );
+                } else {
+                    // if account is locked give alert
+                    alert('Verifieer eerst jouw e-mailadres om gebruik te maken van het account!');
+                }
+            }, err => console.log(err));
     }
 
     LoginRememberMe(values: any): void {
@@ -93,9 +101,20 @@ export class LoginComponent implements OnInit {
             // body construction based on choice
             let body = {};
             if (user.type === 'customer') {
-                body = {username: user.email, password: user.password, roles: [{id: 3}]};
+                body = {
+                    fullname: user.firstName + ' ' + user.lastName,
+                    username: user.email,
+                    password: user.password,
+                    roles: [{id: 3}]
+                };
             } else if (user.type === 'supplier') {
-                body = {username: user.email, password: user.password, roles: [{id: 2}], supplier: {companyName: user.company}};
+                body = {
+                    fullname: user.company,
+                    username: user.email,
+                    password: user.password,
+                    roles: [{id: 2}],
+                    supplier: {companyName: user.company}
+                };
             }
 
             // register the user

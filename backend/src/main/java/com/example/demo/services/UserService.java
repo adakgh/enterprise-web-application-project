@@ -5,27 +5,30 @@ import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.persistence.entities.UserEntity;
 import com.example.demo.persistence.repositories.UserRepository;
 import com.example.demo.security.Principal;
+import com.example.demo.security.jwt.JwtProvider;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-
-    private final JavaMailSender javaMailSender;
     private static final String EMAIL_SUBJECT = "Activeer je account";
     private static final String FROM_ADDRESS = "info@vanstreek.nl";
-    private static final String HOST_ADDRESS = "http://localhost:4200/";
+    private static final String HOST_ADDRESS = "http://localhost:4200";
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JavaMailSender javaMailSender;
+    private final JwtProvider jwtProvider;
 
     /**
      * Registers a new user to the database. New users containing an already owned username are
@@ -37,6 +40,7 @@ public class UserService {
             throw new ResourceAlreadyExistsException("Username", user.getUsername());
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setLocked(true);
         return userRepository.save(user);
     }
 
@@ -51,31 +55,89 @@ public class UserService {
     }
 
     /**
-     * Sends the email to the user.
+     * Verifies the user. Updates the current status of the locked to false so the user can access their account.
      */
-    public void sendMail(String user) {
-        this.javaMailSender.send(this.createLinkAndMessage(user));
+    public void verifyUser(String token) {
+        Object validateEmail = jwtProvider.verify(token);
+        if (validateEmail != null) {
+            Optional<UserEntity> data = userRepository.findByUsername(validateEmail.toString());
+            if (data.isPresent()) {
+                data.get().setLocked(false);
+                userRepository.save(data.get());
+            }
+        }
     }
 
     /**
-     * Creates the message and the composition of the verification link.
+     * Sends email to user with a link to verify the e-mailaddress.
      */
-    private SimpleMailMessage createLinkAndMessage(String user) {
-        String url = HOST_ADDRESS + "login";
-        String message = "Je kan jouw account activeren doormiddel van de link hieronder.";
-        return this.createVerificationMail(message + " \r\n" + url, user);
-    }
+    public void sendVerifyingEmail(UserEntity user, String token) throws MailException, MessagingException {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
-    /**
-     * Creates the email with the correct information.
-     */
-    private SimpleMailMessage createVerificationMail(String body, String user) {
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setSubject(EMAIL_SUBJECT);
-        email.setText(body);
-        email.setTo(user);
-        email.setFrom(FROM_ADDRESS);
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        return email;
+        helper.setFrom(FROM_ADDRESS);
+        helper.setTo(user.getUsername());
+        helper.setSubject(EMAIL_SUBJECT);
+        helper.setText("<html lang=\"en\"><body style=\"background-color: #fafbfc; padding-top:40px; " +
+                        "font-family:'Open+Sans', 'Open Sans', Helvetica, Arial, sans-serif;\"><table border=\"0\" " +
+                        "cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n <tbody><tr><td><div style=\"width:100%;" +
+                        "background-color:#fafbfc;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;\">" +
+                        "<div id=\"maincontent\" style=\"max-width:620px; font-size:0;margin:0 auto;\">\n" +
+                        "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\">" +
+                        "<tbody><tr><td><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\">\n" +
+                        "<tbody><tr><td align=\"center\" style=\"padding-bottom:20px;\">\n <table border=\"0\" " +
+                        "cellpadding=\"0\" cellspacing=\"0\" style=\"font-size:13px; line-height:18px; color:#255239; " +
+                        "text-align:center; width:152px;\">\n <tbody><tr><td style=\"padding:20px 0 10px 0;\">" +
+                        "<a href=\"#tba\" style=\"text-decoration:none;\" target=\"_blank\">" +
+                        "<img border=\"0\" height=\"50\"\n " +
+                        "src=\"https://cdn.shopify.com/s/files/1/0021/1966/3675/files/Van-streek-logo-liggend-zwart_482x.png\"\n" +
+                        "style=\"display:block; width:152px !important; font-size:22px; line-height:26px; " +
+                        "color:#000000; text-transform:uppercase; text-align:center; letter-spacing:1px;\"\n width=\"152\">" +
+                        "</a></td></tr></tbody></table></td></tr></tbody></table></td></tr>\n <tr><td><table border=\"0\" " +
+                        "cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tbody><tr>\n <td><table border=\"0\" " +
+                        "cellpadding=\"0\" cellspacing=\"0\" style=\"width:100%;\"><tbody>\n <tr><td style=\"text-align:center;" +
+                        "padding:40px 40px 40px 40px; border-top:3px solid #255239; background-color: white;\">\n" +
+                        "<div style=\"display:inline-block; width:100%; max-width:520px;\">\n" +
+                        "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"\n" +
+                        "style=\"font-size:14px; line-height:24px; color:#525C65; text-align:left; width:100%;\">\n" +
+                        "<tbody>\n" +
+                        "<tr><td><p style=\"margin:0; font-size:18px; line-height:23px; color:#102231; font-weight:bold;\">\n" +
+                        "       <strong>Welkom " + user.getFullname() + ",</strong><br><br></p></td></tr>\n <tr><td>\n" +
+                        "       Bedankt voor het registreren. Je ben nog maar één stap verwijderd van het gebruiken van je\n" +
+                        "       account. Om je registratie te voltooien dien je je email te verifiëren: <br><br>\n" +
+                        "</td></tr>\n <tr><td align=\"center\" style=\"padding:15px 0 40px 0; border-bottom:1px solid #f3f6f9;\">\n" +
+                        "<table border=\"0\" cellpadding=\"0\"\n" +
+                        "cellspacing=\"0\"\n style=\"border-collapse:separate !important; border-radius:15px; width:210px;\">\n" +
+                        "<tbody><tr><a href=\"" + HOST_ADDRESS + "/verify?token=" + token + "\"\n target=\"_blank\"\n style=\"background-color:#255239; " +
+                        "border-collapse:separate !important; border-top:10px solid #255239;\n" +
+                        "border-bottom:10px solid #255239; border-right:45px solid #255239; border-left:45px solid #255239;\n" +
+                        "border-radius:4px; color:#ffffff; display:inline-block; font-size:13px; font-weight:bold;\n" +
+                        "text-align:center; text-decoration:none; letter-spacing:1px;\">VERIFIEER EMAIL</a></tr></tbody>\n" +
+                        "</table>\n</td>\n</tr>\n<tr><td style=\"padding-top:25px;\">\n" +
+                        "       <p style=\"margin:20px 0 20px 0;\">Of kopieer en plak deze link in je web browser</p>\n" +
+                        "       <p style=\"margin:20px 0; font-size:12px; line-height:17px; word-wrap:break-word; word-break:break-all;\">\n" +
+                        "       <a href=\"" + HOST_ADDRESS + "/verify?token=" + token + "\"\nstyle=\"color:#5885ff; text-decoration:underline;\"\n" +
+                        "       target=\"_blank\">" + HOST_ADDRESS + "/verify?token=" + token + "</a>\n</p>\n</td>\n</tr>\n</tbody>\n" +
+                        "</table>\n</div>\n</td>\n</tr>\n<tr><td style=\"background-color:#255239; height:1px; " +
+                        "width:100%; line-height:1px; font-size:0;\">&nbsp;</td>\n </tr><tr> <td style=\"background-color:#255239; height:1px; width:100%; line-height:1px; font-size:0;\">&nbsp;</td></tr>\n" +
+                        "<tr></tr><td style=\"background-color:#255239; height:1px; width:100%; line-height:1px; font-size:0;\">&nbsp;</td></tr>\n" +
+                        "<tr><td style=\"background-color:#255239; height:1px; width:100%; line-height:1px; font-size:0;\">&nbsp;</td></tr></tbody>\n" +
+                        "</table></td>\n<td style=\"background-color: #edeef1; width:1px; font-size:1px;\">&nbsp;</td>\n" +
+                        "<td style=\"background-color: #edeef1; width:1px; font-size:1px;\">&nbsp;</td>\n" +
+                        "<td style=\"background-color: #edeef1; width:1px; font-size:1px;\">&nbsp;</td>\n" +
+                        "<td style=\"background-color: #edeef1; width:1px; font-size:1px;\">&nbsp;</td>\n" +
+                        "</tr>\n</tbody>\n</table>\n</td>\n" +
+                        "</tr><tr><td style=\"padding-bottom:40px; padding-top:40px\">\n" +
+                        "<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"\n" +
+                        "style=\"font-size:12px; line-height:18px; width:auto;\">\n" +
+                        "<tbody><tr><td style=\"color:#b7bdc1;\">\n<p style=\"margin:0;\">" +
+                        "           <span class=\"appleLinksGrey\">Bezoek rechtstreeks onze website op </span>\n" +
+                        "           <a href=\"" + HOST_ADDRESS + "\"\n" +
+                        "           style=\"color:#5885ff; text-decoration:underline;\"\n" +
+                        "           target=\"_blank\">vanstreek.nl</a></p></td></tr></tbody>\n</table>\n" +
+                        "</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</td>\n</tr>\n</tbody>\n</table>\n</body>\n</html>",
+                true);
+        javaMailSender.send(mimeMessage);
     }
 }

@@ -14,6 +14,7 @@ import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
 import {MyproductsComponent} from './components/myproducts/myproducts.component';
+import {VerifyUserComponent} from './components/verify-user/verify-user.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
     {path: 'addrequestproduct', component: AddrequestproductComponent},
     {path: 'requestedproducts', component: RequestproductComponent},
     {path: 'contact', component: ContactComponent},
+    {path: 'verify', component: VerifyUserComponent},
     {path: 'error', component: ErrorComponent},
     {path: '**', redirectTo: '/error'} // If page not found: goes to error 404 page
 ];

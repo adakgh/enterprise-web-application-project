@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
     providedIn: 'root'
 })
 export class LoginService {
+    private locked: boolean;
 
     constructor(private routeService: RouteUtil,
                 private route: ActivatedRoute,
@@ -35,5 +36,13 @@ export class LoginService {
 
     encodeCredentials(loginData: LoginData): string {
         return 'Basic ' + btoa(loginData.username + ':' + loginData.password);
+    }
+
+    isLocked(username: string): Observable<any> {
+        return this.apiService.get('/users/info/' + username).pipe(
+            tap(res => {
+                this.locked = res;
+            })
+        );
     }
 }
