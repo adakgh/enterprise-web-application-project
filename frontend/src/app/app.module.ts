@@ -51,7 +51,7 @@ import {DemoImage} from "./components/supplier-info/supplier-info-edit/default-i
         RequestproductComponent,
         AddrequestproductComponent,
         MyproductsComponent,
-        MyproductsEditComponent
+        MyproductsEditComponent,
         SuppliersListComponent,
         SupplierItemComponent
     ],
