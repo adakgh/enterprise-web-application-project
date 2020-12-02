@@ -17,6 +17,7 @@ import {SuppliersListComponent} from './components/suppliers-list/suppliers-list
 import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service';
 import {MyproductsComponent} from './components/myproducts/myproducts.component';
 import {MyproductsEditComponent} from './components/myproducts/myproducts-edit/myproducts-edit.component';
+import {VerifyUserComponent} from './components/verify-user/verify-user.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [
     {path: 'addrequestproduct', component: AddrequestproductComponent},
     {path: 'requestedproducts', component: RequestproductComponent},
     {path: 'contact', component: ContactComponent},
+    {path: 'verify', component: VerifyUserComponent},
     {path: 'error', component: ErrorComponent},
     {path: '**', redirectTo: '/error'} // If page not found: goes to error 404 page
 ];

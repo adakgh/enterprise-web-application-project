@@ -25,12 +25,13 @@ import {RequestproductComponent} from './components/requestproduct/requestproduc
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
 import { MyproductsComponent } from './components/myproducts/myproducts.component';
 import { MyproductsEditComponent } from './components/myproducts/myproducts-edit/myproducts-edit.component';
+import { VerifyUserComponent } from './components/verify-user/verify-user.component';
 
 
 import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
 import {SupplierItemComponent} from './components/suppliers-list/supplier-item/supplier-item.component';
-import {UnsavedChangesGuardService} from "./guards/unsaved-changes-guard.service";
-import {DemoImage} from "./components/supplier-info/supplier-info-edit/default-image";
+import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service';
+import {DemoImage} from './components/supplier-info/supplier-info-edit/default-image';
 
 @NgModule({
     declarations: [
@@ -51,9 +52,10 @@ import {DemoImage} from "./components/supplier-info/supplier-info-edit/default-i
         RequestproductComponent,
         AddrequestproductComponent,
         MyproductsComponent,
-        MyproductsEditComponent,
+        VerifyUserComponent,
         SuppliersListComponent,
-        SupplierItemComponent
+        SupplierItemComponent,
+        MyproductsEditComponent
     ],
     imports: [
         CookieModule.forRoot(),

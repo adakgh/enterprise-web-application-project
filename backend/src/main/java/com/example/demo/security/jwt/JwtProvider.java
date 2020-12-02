@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -84,6 +85,35 @@ public class JwtProvider {
      */
     private Key generateSigningKey() {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
+    }
+
+    /**
+     * Creates an verifying token.
+     */
+    public String createVerifyingToken(String email) {
+        return Jwts.builder()
+                .claim("email", email)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(600).toInstant()))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
+    }
+
+    /**
+     * Validates the specified token's signature and throws appropriate exceptions based on
+     * its failed validation.
+     */
+    public Object verify(String token) {
+        try {
+            Jws<Claims> claimsJws = Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .parseClaimsJws(token);
+            return claimsJws.getBody().get("email");
+        } catch (ExpiredJwtException e) {
+            return "Token expired";
+        } catch (Exception e) {
+            return "Exception " + e;
+        }
     }
 }
 
