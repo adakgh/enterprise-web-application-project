@@ -26,7 +26,7 @@ export class ApiService {
 
     getImage(url: string): Observable<any> {
         const headers = this.createHeaders(null);
-        return this.http.get(environment.apiUrl + url,  {headers});
+        return this.http.get(environment.apiUrl + url, {headers});
     }
 
     // tslint:disable-next-line:ban-types
@@ -45,15 +45,16 @@ export class ApiService {
 
     // tslint:disable-next-line:ban-types
     putImage(url: string, body: Object): Observable<any> {
-        console.log("URL");
+
+        /*console.log("URL");
         console.log(url);
         console.log(JSON.stringify(body));
         console.log(body);
         console.log("BTAO");
-        console.log(btoa(JSON.stringify(body)));
+        console.log(btoa(JSON.stringify(body)));*/
 
         const headers = this.createHeaders(null);
-        return this.http.put(environment.apiUrl + url, (JSON.stringify(body)), {headers});
+        return this.http.put(environment.apiUrl + url, /*JSON.stringify*/(body), {headers});
     }
 
     // tslint:disable-next-line:ban-types

@@ -37,7 +37,7 @@ export class SupplierInfoService {
     }
 
     updateSupplier(body): Observable<any> {
-        return this.apiService.putImage('/suppliers/upload', body);
+        return this.apiService.putImage('/suppliers', body);
     }
 
     getImage(id: number): Observable<any> {

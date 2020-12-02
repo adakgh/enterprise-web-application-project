@@ -19,28 +19,17 @@ import {DemoImage} from "./default-image";
 export class SupplierInfoEditComponent implements OnInit {
 
     @ViewChild('f', {static: false}) signupForm: NgForm;
-    supplierId;
-    supplier: Supplier;
-    submitted = false;
+    supplierId;                             // the current supplier id
+    supplier: Supplier = new Supplier();    // object/model where we store all supplier info
+    submitted = false;                      // Tracks if the update form is submitted or not
     selectedFile: File;
-    profileImage;
+    selectedFileUrl;
 
-    /*    // Test Attributes
-        defaultQuestion = 'teacher';
-        answer = '';
-        genders = ['male', 'female'];
-        user = {
-            username: '',
-            email: '',
-            secretQuestion: '',
-            answer: '',
-            gender: ''
-        };*/
-
+    profileImageName;
     base64TrimmedURL: string;
     base64DefaultURL: string;
-    generatedImage: string;
     windowOPen: boolean;
+    generatedImage: string;
 
     constructor(
         private apiService: ApiService,
@@ -57,7 +46,8 @@ export class SupplierInfoEditComponent implements OnInit {
 
     // Look at the query and based on that show the data of the supplier
     ngOnInit(): void {
-        this.getImageWithoutWindowOpen(this.demoImage.imageBase64Url);
+        // Get the default image and put in src
+        this.getImage(this.demoImage.imageBase64Url);
         this.activatedRoute.queryParams.subscribe(
             res => {
                 // If there is no query given return user to homepage or if the supplier id in the query
@@ -109,6 +99,10 @@ export class SupplierInfoEditComponent implements OnInit {
                     }];
                 }
 
+                if (res.profileImage != null) {
+                    this.getImage(atob(res.profileImage.picByte));
+                }
+
             },
             err => {
                 console.log(err);
@@ -118,104 +112,79 @@ export class SupplierInfoEditComponent implements OnInit {
 
     // Gets triggered when user(supplier) is done editing and click the button to update
     onUpdateSupplier(): void {
-        const uploadImageData = new FormData();
-        uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-        const reader = new FileReader();
-        reader.readAsDataURL(this.selectedFile);
-        reader.onload = () => {
-            console.log('READER');
-            if (typeof reader.result === 'string') {
-                console.log(JSON.parse(JSON.stringify(reader.result)));
-            }
-
+        if (this.selectedFile != null) {
+            // Create a object with the supplier data and the selected image data and send that
             const image = {
-                url: reader.result,
-                name: this.selectedFile.name
+                supplier: this.supplier,
+                name: this.selectedFile.name,
+                type: this.selectedFile.type,
+                url: this.selectedFileUrl
             };
 
             this.supplierInfoService.updateSupplier(image).subscribe(
                 res => {
                     this.submitted = true;
-                    console.log('Succesfully updated shizzle.');
+                    console.log('Succesfully updated supplier with profileImage');
                     console.log(this.signupForm);
-                    // console.log(this.supplier);
-                    // this.router.navigate(['../'], {relativeTo: this.activatedRoute, queryParams: {id: this.supplierId}});
+                    console.log(this.supplier);
+                    // Redirect to the supplier info page
+                    this.router.navigate(['../'], {
+                        relativeTo: this.activatedRoute,
+                        queryParams: {id: this.supplierId}
+                    });
                 },
                 err => {
                     console.log(err);
                 }
             );
 
-        };
-
-        /*const image = {
-            lastModified: this.selectedFile.lastModified,
-            name: this.selectedFile.name,
-            arrayBuffer: this.selectedFile.arrayBuffer(),
-            size: this.selectedFile.size,
-            stream: this.selectedFile.stream(),
-            text: this.selectedFile.text(),
-            type: this.selectedFile.type
-        };*/
-
-        const myPostBody = {supplier: this.supplier, image: uploadImageData};
-        // Make a call to the Spring Boot Application to save the image
-        /*        this.supplierInfoService.updateSupplier(JSON.stringify(myPostBody))
-                    .subscribe((response) => {
-                            /!*if (response.status === 200) {
-                                this.message = 'Image uploaded successfully';
-                            } else {
-                                this.message = 'Image not uploaded successfully';
-                            }*!/
-                            this.submitted = true;
-                            console.log('Succesfully updated shizzle.');
-                            console.log(this.signupForm);
-                        }
-                    );*/
-
+        } else { // If no Image is selected only send the supplier data
+            this.supplierInfoService.updateSupplier({supplier: this.supplier}).subscribe(
+                res => {
+                    this.submitted = true;
+                    console.log('Succesfully updated supplier.');
+                    console.log(this.signupForm);
+                    console.log(this.supplier);
+                    this.router.navigate(['../'], {
+                        relativeTo: this.activatedRoute,
+                        queryParams: {id: this.supplierId}
+                    });
+                },
+                err => {
+                    console.log(err);
+                }
+            );
+        }
     }
 
-    // Gets triggered when user chooses a new profile image
+    // Gets triggered when user chooses a new profile image file
     onFileChange(event): void {
         this.selectedFile = event.target.files[0];
         console.log(this.selectedFile);
+
+        // Read the contents of the specified Blob or File, in this case the selectedFile
+        // The result attribute contains the data as a data: URL representing the file's data as a base64 encoded string
+        const reader = new FileReader();
+        reader.readAsDataURL(this.selectedFile);
+        reader.onload = () => {
+            this.selectedFileUrl = reader.result;
+            this.getImage(this.selectedFileUrl);
+        };
     }
 
 
-    getImageClicked(): void {
-        this.supplierInfoService.getImage(1).subscribe(
-            res => {
-                console.log('Image received:');
-                console.log(res);
-                console.log('URL:');
-                console.log(atob(res.picByte));
-
-                /*const objectURL = URL.createObjectURL(this.convertDataUrlToBlob(atob(res.picByte)));
-                    // this.profileImage = objectURL;
-                const file = new File([this.convertDataUrlToBlob(atob(res.picByte))], res.name, {type: res.type});*/
-                this.getImage(atob(res.picByte));
-
-                console.log(this.sanatizeUrl(this.generatedImage));
-
-                // console.log(this.supplier);
-                // this.router.navigate(['../'], {relativeTo: this.activatedRoute, queryParams: {id: this.supplierId}});
-            },
-            err => {
-                console.log(err);
-            }
-        );
-    }
-
+    // METHODS FOR IMAGE
+    // Finally sanitize generatedImageUrl to fit in the src of <img> tag
     sanatizeUrl(generatedImageUrl): SafeResourceUrl {
         return this.domSanitizer.bypassSecurityTrustResourceUrl(generatedImageUrl);
     }
 
-    getImage(imageUrl: string) {
+    /** Get Image from a Base64 Url */
+    getImage(imageUrl: string): void {
         this.windowOPen = true;
         this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
             this.base64TrimmedURL = base64Data;
-            console.log(this.base64DefaultURL);
             this.createBlobImageFileAndShow();
         });
     }
@@ -246,7 +215,7 @@ export class SupplierInfoEditComponent implements OnInit {
     /* Method to create base64Data Url from fetched image */
     getBase64Image(img: HTMLImageElement): string {
         // We create a HTML canvas object that will create a 2d image
-        var canvas: HTMLCanvasElement = document.createElement("canvas");
+        let canvas: HTMLCanvasElement = document.createElement("canvas");
         canvas.width = img.width;
         canvas.height = img.height;
         let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
@@ -258,38 +227,19 @@ export class SupplierInfoEditComponent implements OnInit {
         return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
     }
 
-    /**Method that will create Blob and show in new window */
+    /** Method that will create Blob and show in new window */
     createBlobImageFileAndShow(): void {
         this.dataURItoBlob(this.base64TrimmedURL).subscribe((blob: Blob) => {
             const imageBlob: Blob = blob;
-            const imageName: string = this.generateName();
-            const imageFile: File = new File([imageBlob], imageName, {
-                type: 'image/jpeg'
-            });
+            // console.log(this.generateName());
+            const imageName: string = this.profileImageName/*this.generateName()*/;
+            const imageFile: File = new File([imageBlob], imageName, {type: blob.type});
             this.generatedImage = window.URL.createObjectURL(imageFile);
             // on demo image not open window
             /*if (this.windowOPen) {
                 window.open(this.generatedImage);
             }*/
-            console.log("generated image");
-            console.log(this.generatedImage);
-            this.profileImage = this.sanatizeUrl(this.generatedImage);
         });
-    }
-
-    /** Method to Generate a Name for the Image */
-    generateName(): string {
-        const date: number = new Date().valueOf();
-        let text: string = "";
-        const possibleText: string =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for (let i = 0; i < 5; i++) {
-            text += possibleText.charAt(
-                Math.floor(Math.random() * possibleText.length)
-            );
-        }
-        // Replace extension according to your media type like this
-        return date + "." + text + ".jpeg";
     }
 
     /* Method to convert Base64Data Url as Image Blob */
@@ -307,15 +257,29 @@ export class SupplierInfoEditComponent implements OnInit {
         });
     }
 
-    getImageWithoutWindowOpen(imageUrl: string) {
+    /** Method to Generate a Random Name for the Image */
+    generateName(): string {
+        const date: number = new Date().valueOf();
+        let text = '';
+        const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        for (let i = 0; i < 5; i++) {
+            text += possibleText.charAt(
+                Math.floor(Math.random() * possibleText.length)
+            );
+        }
+        // Replace extension according to your media type like this
+        return date + '.' + text + '.jpeg';
+    }
+
+    /*getDefaultImage(imageUrl: string): void {
         this.windowOPen = false;
         this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
             this.base64TrimmedURL = base64Data;
             this.createBlobImageFileAndShow();
         });
-    }
+    }*/
 
-    // TEMP NOT WORKING
+    // TEMP NOT USING
     convertDataUrlToBlob(dataUrl): Blob {
         const arr = dataUrl.split(',');
         const mime = arr[0].match(/:(.*?);/)[1];
@@ -341,39 +305,4 @@ export class SupplierInfoEditComponent implements OnInit {
         return true;
     }
 
-    // CHUNK TEST METHODS
-
-    /*onSubmit() {
-        // this.submitted = true;
-        /!*this.user.username = this.signupForm.value.userData.username;
-        this.user.email = this.signupForm.value.userData.email;
-        this.user.secretQuestion = this.signupForm.value.secret;
-        this.user.answer = this.signupForm.value.questionAnswer;
-        this.user.gender = this.signupForm.value.gender;
-
-        this.signupForm.reset();*!/
-    }
-*/
-
-    // onSubmit(form: NgForm) {
-    //   console.log(form);
-    // }
-
-    /*suggestUserName() {
-        const suggestedName = 'Superuser';
-        // this.signupForm.setValue({
-        //   userData: {
-        //     username: suggestedName,
-        //     email: ''
-        //   },
-        //   secret: 'pet',
-        //   questionAnswer: '',
-        //   gender: 'male'
-        // });
-        this.signupForm.form.patchValue({
-            userData: {
-                username: suggestedName
-            }
-        });
-    }*/
 }
