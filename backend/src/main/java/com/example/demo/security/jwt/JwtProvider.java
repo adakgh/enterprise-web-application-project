@@ -24,6 +24,7 @@ public class JwtProvider {
 
     @Value("${security.jwt.key-secret}")
     private String secretKey;
+    private String roles;
 
     /**
      * Creates an access token with no sensitive data exposure. Note that HS256 is used as the
@@ -32,15 +33,26 @@ public class JwtProvider {
      * undesirable. RS256 solves these problems, but is out of the scope of this project.
      */
     public String createAccessToken(UserEntity user) {
-        return Jwts.builder()
-                .setSubject(user.getUsername())
-                .setExpiration(generateExpirationTime(accessExpTime, false))
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .claim("uid", user.getId())
-                .claim("sid", user.getSupplier().getId())
-                .claim("roles", user.getRoles().stream().map(RoleEntity::getName).collect(Collectors.joining(",")))
-                .signWith(generateSigningKey(), SignatureAlgorithm.HS256)
-                .compact();
+       if (user.getSupplier() != null){
+           return Jwts.builder()
+                   .setSubject(user.getUsername())
+                   .setExpiration(generateExpirationTime(accessExpTime, false))
+                   .setIssuedAt(new Date(System.currentTimeMillis()))
+                   .claim("uid", user.getId())
+                   .claim("sid", user.getSupplier().getId())
+                   .claim("roles", user.getRoles().stream().map(RoleEntity::getName).collect(Collectors.joining(",")))
+                   .signWith(generateSigningKey(), SignatureAlgorithm.HS256)
+                   .compact();
+       } else {
+           return Jwts.builder()
+                   .setSubject(user.getUsername())
+                   .setExpiration(generateExpirationTime(accessExpTime, false))
+                   .setIssuedAt(new Date(System.currentTimeMillis()))
+                   .claim("uid", user.getId())
+                   .claim("roles", user.getRoles().stream().map(RoleEntity::getName).collect(Collectors.joining(",")))
+                   .signWith(generateSigningKey(), SignatureAlgorithm.HS256)
+                   .compact();
+       }
     }
 
     /**
