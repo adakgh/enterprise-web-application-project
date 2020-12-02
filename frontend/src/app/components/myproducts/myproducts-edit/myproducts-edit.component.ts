@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../../services/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../../services/api.service';
+import {Product} from '../../../models/product';
 
 @Component({
     selector: 'app-myproducts-edit',
@@ -9,10 +10,9 @@ import {ApiService} from '../../../services/api.service';
     styleUrls: ['./myproducts-edit.component.css']
 })
 export class MyproductsEditComponent implements OnInit {
-    private errorMessage: string;
-    productId: string;
-    jsonData: any[];
-    productData: any = {};
+    productId;
+    productData: Product = new Product();
+    jsonProductData: any[];
     categoryMap: any[];
     selectedFile: File = null;
 
@@ -28,8 +28,6 @@ export class MyproductsEditComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(
             res => {
                 if (res.id <= 0 || res.id == null) {
-                    this.productId = res.id;
-                    return;
                 }
                 this.loadProduct(res.id);
             },
@@ -45,38 +43,38 @@ export class MyproductsEditComponent implements OnInit {
     loadProduct(id: number): void {
         this.productService.getOneProduct(id).subscribe(
             res => {
-                console.log('Het werkt');
-                this.jsonData = res;
-                console.log(res);
+                this.jsonProductData = res;
+                this.productId = res.id;
+                this.productData.productName = res.name != null ? res.name : '';
+                this.productData.productPrice = res.price != null ? res.price : '';
+                this.productData.productQuantity2 = res.quantity2 != null ? res.quantity2 : '';
+                this.productData.productCatergory = res.productCategory != null ? res.productCategory : '';
+                this.productData.productDescription = res.description != null ? res.description : '';
             },
             err => {
-                console.log('Het gaat op zijn bek');
                 console.log(err);
             }
         );
     }
 
     updateProduct(): void {
-        // Test if the values are getting placed in.
-        this.productData.id = this.productId;
         console.log(this.productData);
-        // this.apiService.post('/products', this.productData, null).subscribe(
-        //     resp => {
-        //         this.reloadProductPage();
-        //         console.log(this.productData);
-        //     },
-        //     error => {
-        //         this.errorMessage = error.status;
-        //         console.log(error);
-        //     }
-        // );
+        this.apiService.post('/products', this.productData, null).subscribe(
+            resp => {
+                this.reloadProductPage();
+                console.log(this.productData);
+            },
+            error => {
+                console.log(error);
+            }
+        );
     }
 
     reloadProductPage(): void {
         // Reload the page when send button is pressed
-        this.router.navigate(['/myproducts']).then(() => {
-            window.location.reload();
-        });
+        // this.router.navigate(['/myproducts']).then(() => {
+        //     window.location.reload();
+        // });
     }
 
     onFileSelected(event): void {

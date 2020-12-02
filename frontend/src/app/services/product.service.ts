@@ -58,4 +58,8 @@ export class ProductService {
         if (this.productId == null) {}
         return this.productId;
     }
+
+    updateProduct(body): Observable<any> {
+        return this.apiService.putImage('/suppliers', body);
+    }
 }
