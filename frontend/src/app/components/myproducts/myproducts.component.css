@@ -2,7 +2,11 @@
     background-color: #D6FDD6 !important;
 }
 
-.title-background{
+.title-background {
     background-image: url(https://www.designbolts.com/wp-content/uploads/2013/02/Textured-Stripes-Grey-Seamless-Patterns-For-Website-Background.jpg);
 }
 
+a, a:hover{
+    color: white !important;
+    text-decoration: none;
+}
