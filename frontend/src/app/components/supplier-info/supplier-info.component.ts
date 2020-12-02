@@ -16,6 +16,7 @@ import {DemoImage} from "./supplier-info-edit/default-image";
 export class SupplierInfoComponent implements OnInit {
 
     jsonSupplierData;
+    jsonLimitedProductsData: any[] = [];
 
     profileImageName;
     base64TrimmedURL: string;
@@ -56,6 +57,18 @@ export class SupplierInfoComponent implements OnInit {
         this.supplierInfoService.getSupplier(id).subscribe(
             res => {
                 this.jsonSupplierData = res;
+
+                // Limit the shown product to 4 by making de jsonData smaller
+                let productsLength = res.products.length;
+                if (productsLength > 4) {
+                    productsLength = 4;
+                }
+                for (let i = 0; i < productsLength; i++) {
+                    this.jsonLimitedProductsData.push(res.products[i]);
+                }
+                console.log(this.jsonLimitedProductsData);
+
+
 
                 if (res.profileImage != null) {
                     this.profileImageName = res.name;
