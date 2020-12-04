@@ -20,7 +20,7 @@ export class ProductService {
 
         return this.apiService.get('/products' + query).pipe(
             map(res => {
-                return res.content;
+                return res;
             })
         );
     }
@@ -33,12 +33,12 @@ export class ProductService {
         );
     }
 
-    getPageableData(): Observable<any> {
-        const query = this.routeUtil.getUrlQuery();
-        return this.apiService.get('/products' + query).pipe(
-            map(res => {
-                return res.pageable;
-            })
-        );
-    }
+    // getPageableData(): Observable<any> {
+    //     const query = this.routeUtil.getUrlQuery();
+    //     return this.apiService.get('/products' + query).pipe(
+    //         map(res => {
+    //             return res.pageable;
+    //         })
+    //     );
+    // }
 }

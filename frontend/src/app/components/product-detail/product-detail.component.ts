@@ -24,7 +24,7 @@ export class ProductDetailComponent implements OnInit {
         this.productService.getAllProduct().subscribe(
             res => {
                 // console.log(res[0].customData.supplierId);
-                this.jsonData = res;
+                this.jsonData = res.content;
             },
             err => {
                 console.log(err);

@@ -24,6 +24,7 @@ import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
 import { MyproductsComponent } from './components/myproducts/myproducts.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -55,6 +56,7 @@ import { MyproductsComponent } from './components/myproducts/myproducts.componen
         FormsModule,
         RouterModule,
         ReactiveFormsModule,
+        NgbModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
