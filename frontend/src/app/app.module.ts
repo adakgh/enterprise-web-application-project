@@ -16,7 +16,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProductComponent} from './components/product/product.component';
 import {ProductDetailComponent} from './components/product-detail/product-detail.component';
 import {SupplierInfoComponent} from './components/supplier-info/supplier-info.component';
-import {RecentProductComponent} from './components/supplier-info/recent-product/recent-product.component';
 import {SupplierInfoEditComponent} from './components/supplier-info/supplier-info-edit/supplier-info-edit.component';
 import {ContactComponent} from './components/contact/contact.component';
 import {AddProductComponent} from './components/addproduct/add-product.component';
@@ -44,7 +43,6 @@ import {DemoImage} from './components/supplier-info/supplier-info-edit/default-i
         NavbarComponent,
         FooterComponent,
         SupplierInfoComponent,
-        RecentProductComponent,
         SupplierInfoEditComponent,
         ContactComponent,
         AddProductComponent,

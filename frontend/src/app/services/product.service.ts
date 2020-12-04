@@ -62,4 +62,13 @@ export class ProductService {
     updateProduct(body): Observable<any> {
         return this.apiService.putImage('/suppliers', body);
     }
+
+    // For the home page, get standard the most recent products
+    getRecentProducts(): Observable<any> {
+        return this.apiService.get('/products?sort=addedDate,asc').pipe(
+            map(res => {
+                return res.content;
+            })
+        );
+    }
 }

@@ -65,11 +65,8 @@
             <h5 class="text-center"> Aangeboden Producten </h5>
         </div>
 
+        <!-- Recent Products of suppliers -->
         <div class="row col-12">
-            <!--<app-recent-product *ngFor="let recentProduct of jsonLimitedProductsData; let i = index"
-                                [product]="recentProduct"></app-recent-product>-->
-
-
             <div *ngFor="let product of jsonLimitedProductsData; let i = index" class="col-lg-3 col-md-4 mb-3">
                 <div class="card h-100">
                     <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
