@@ -53,4 +53,8 @@ export class MyproductsComponent implements OnInit {
         );
     }
 
+    delete(id: number): void {
+
+    }
+
 }

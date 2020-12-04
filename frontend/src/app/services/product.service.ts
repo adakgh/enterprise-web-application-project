@@ -59,7 +59,8 @@ export class ProductService {
         return this.productId;
     }
 
-    updateProduct(body): Observable<any> {
-        return this.apiService.putImage('/suppliers', body);
+    updateProduct(id, body): Observable<any> {
+        console.log('Laatste punt');
+        return this.apiService.put('/products/' + id, body, null);
     }
 }
