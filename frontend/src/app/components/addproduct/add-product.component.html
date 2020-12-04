@@ -13,7 +13,9 @@
         </div>
         <br>
         <div>
-            <button type="submit" (click)="onUpload()" class="btn btn-primary">Voeg afbeeldig toe</button>
+            <button id="uploadImage" type="submit" (click)="onUpload()" class="btn btn-primary" disabled>Voeg afbeeldig
+                toe
+            </button>
         </div>
     </div>
 
@@ -56,8 +58,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlTextarea1" class="label-title">Beschijving:</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                <label for="textArea" class="label-title">Beschijving:</label>
+                <textarea class="form-control" id="textArea" rows="3"
                           name="description" [(ngModel)]="productData.description" #name="ngModel">
                 </textarea>
             </div>

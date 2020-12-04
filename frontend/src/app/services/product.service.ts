@@ -60,7 +60,11 @@ export class ProductService {
     }
 
     updateProduct(id, body): Observable<any> {
-        console.log('Laatste punt');
         return this.apiService.put('/products/' + id, body, null);
+    }
+
+    deleteProduct(id): Observable<any>{
+        console.log('test');
+        return this.apiService.delete('/products', id);
     }
 }

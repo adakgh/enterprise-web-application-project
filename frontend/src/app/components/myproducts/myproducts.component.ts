@@ -5,6 +5,7 @@ import {MyProductsService} from '../../services/my-products.service';
 import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
 import {SupplierInfoService} from '../../services/supplier-info.service';
+import {log} from 'util';
 
 @Component({
     selector: 'app-myproducts',
@@ -53,8 +54,17 @@ export class MyproductsComponent implements OnInit {
         );
     }
 
-    delete(id: number): void {
-
+    delete(productId: string): void {
+        const idNumber: number = +productId;
+        console.log(idNumber);
+        this.productService.deleteProduct(idNumber).subscribe(
+            resp => {
+                console.log('verwijderd');
+            },
+            error => {
+                console.log(error);
+            }
+        );
     }
 
 }

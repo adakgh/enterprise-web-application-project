@@ -27,7 +27,8 @@
                             Wijzigen
                         </a>
                     </button>
-                    <button type="button" class="btn btn-danger ml-4" value="{{product.id}}">
+                    <button (click)="delete(productId.value)" type="button" class="btn btn-danger ml-4" #productId
+                            value="{{product.id}}">
                         <a>
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
                                  xmlns="http://www.w3.org/2000/svg">
