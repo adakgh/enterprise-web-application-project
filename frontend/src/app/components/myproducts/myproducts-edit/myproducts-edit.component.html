@@ -1,5 +1,5 @@
 <div class="container text-center p-3">
-    <h2 class="h1-responsive font-weight-bold my-4">Update {{jsonProductData.name}}</h2>
+    <h2 class="h1-responsive font-weight-bold my-4">Update <!--{{jsonProductData.name}}--></h2>
 </div>
 
 <div class="row needs-validation block">
@@ -46,7 +46,7 @@
                 <label for="inputStock" class="col-sm-2 col-form-label label-title">Voorraad:</label>
                 <div class="col-sm-8 input-group">
                     <div class="input-group-prepend">
-                        <div class="input-group-text" name="quantity">{{jsonProductData.quantity}}</div>
+                        <div class="input-group-text" name="quantity"><!--{{jsonProductData.quantity}}--></div>
                     </div>
                     <input type="text" class="form-control" id="inputStock"
                            name="quantityNumber" [(ngModel)]="productData.productQuantity2">
@@ -58,8 +58,8 @@
                 <label for="inputStock" class="col-sm-2 col-form-label label-title">Categorie:</label>
                 <div class="col-sm-8">
                     <select class="form-control" name="category" [(ngModel)]="productData.productCatergory"> >
-                        <option *ngFor="let category of categoryMap" (change)="productData.categoryId=$event"
-                                value="{{category.id}}">{{category.name}}</option>
+                       <!-- <option *ngFor="let category of categoryMap" (change)="productData.categoryId=$event"
+                                value="{{category.id}}">{{category.name}}</option>-->
                     </select>
                 </div>
             </div>

@@ -14,10 +14,14 @@
                 </div>
                 <div class="col-md-5 col-sm-12 p-3">
                     <b>Gegevens: </b>
-                    <li *ngIf="jsonSupplierData.website !=null && jsonSupplierData.website!=''">Website: {{jsonSupplierData.website}}</li>
-                    <li *ngIf="jsonSupplierData.phoneNumber !=null && jsonSupplierData.phoneNumber!=''">Telefoon: {{jsonSupplierData.phoneNumber}}</li>
-                    <li *ngIf="jsonSupplierData.contactEmail !=null && jsonSupplierData.contactEmail!=''">Email: {{jsonSupplierData.contactEmail}}</li>
-                    <li *ngIf="jsonSupplierData.addresses !=null && jsonSupplierData.addresses!=''">Adress: {{concatAddress()}}</li>
+                    <li *ngIf="jsonSupplierData.website !=null && jsonSupplierData.website!=''">
+                        Website: {{jsonSupplierData.website}}</li>
+                    <li *ngIf="jsonSupplierData.phoneNumber !=null && jsonSupplierData.phoneNumber!=''">
+                        Telefoon: {{jsonSupplierData.phoneNumber}}</li>
+                    <li *ngIf="jsonSupplierData.contactEmail !=null && jsonSupplierData.contactEmail!=''">
+                        Email: {{jsonSupplierData.contactEmail}}</li>
+                    <li *ngIf="jsonSupplierData.addresses !=null && jsonSupplierData.addresses!=''">
+                        Adress: {{concatAddress()}}</li>
                 </div>
             </div>
             <div class="row">
@@ -33,7 +37,8 @@
                     </ul>
                 </div>
                 <div class="col-md-1">
-                    <a *ngIf="currentUserService.getSupplierId()==jsonSupplierData.id" class="btn btn-primary" class="editButton" [routerLink]="['edit']" [queryParams]="{id:jsonSupplierData.id}">Wijzig</a>
+                    <a *ngIf="currentUserService.getSupplierId()==jsonSupplierData.id" class="btn btn-primary"
+                       class="editButton" [routerLink]="['edit']" [queryParams]="{id:jsonSupplierData.id}">Wijzig</a>
                 </div>
             </div>
         </div>
@@ -60,7 +65,28 @@
             <h5 class="text-center"> Aangeboden Producten </h5>
         </div>
 
-        <app-recent-product *ngFor="let recentProduct of jsonLimitedProductsData; let i = index" [product]="recentProduct"></app-recent-product>
+        <div class="row col-12">
+            <!--<app-recent-product *ngFor="let recentProduct of jsonLimitedProductsData; let i = index"
+                                [product]="recentProduct"></app-recent-product>-->
+
+
+            <div *ngFor="let product of jsonLimitedProductsData; let i = index" class="col-lg-3 col-md-4 mb-3">
+                <div class="card h-100">
+                    <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
+                        id="productImage"
+                        src="../../../assets/images/bloemkolen.jpeg"
+                        alt="{{product.name}}"/></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
+                        </h4>
+                        <h5>€{{product.price}}/Kg</h5>
+                        <p class="card-text">{{product.description}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
         <!-- Refer to page with all products supplier is selling/offering -->
         <div class="col-sm-12">
