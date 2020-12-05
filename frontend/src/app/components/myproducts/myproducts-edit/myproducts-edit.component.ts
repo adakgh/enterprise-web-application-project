@@ -15,6 +15,7 @@ export class MyproductsEditComponent implements OnInit {
     jsonProductData: any[];
     categoryMap: any[];
     selectedFile: File = null;
+    supplierId: number;
 
     constructor(
         private apiService: ApiService,
@@ -49,6 +50,7 @@ export class MyproductsEditComponent implements OnInit {
                 this.productData.price = res.price != null ? res.price : '';
                 this.productData.quantity2 = res.quantity2 != null ? res.quantity2 : '';
                 this.productData.description = res.description != null ? res.description : '';
+                this.supplierId = res.customData.supplierId;
             },
             err => {
                 console.log(err);
@@ -60,19 +62,11 @@ export class MyproductsEditComponent implements OnInit {
         console.log(this.productData);
         this.productService.updateProduct(this.productId, this.productData).subscribe(
             resp => {
-                this.reloadProductPage();
             },
             error => {
                 console.log(error);
             }
         );
-    }
-
-    reloadProductPage(): void {
-        // Reload the page when send button is pressed
-        // this.router.navigate(['/myproducts']).then(() => {
-        //     window.location.reload();
-        // });
     }
 
     onFileSelected(event): void {

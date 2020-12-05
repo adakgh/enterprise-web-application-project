@@ -93,8 +93,7 @@ export class AddProductComponent implements OnInit {
 
     reloadProductPage(): void {
         // Reload the page when send button is pressed
-        this.router.navigate(['/addproduct']).then(() => {
-            window.location.reload();
+        this.router.navigate(['/..']).then(() => {
         });
     }
 

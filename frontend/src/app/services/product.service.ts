@@ -55,7 +55,8 @@ export class ProductService {
     }
 
     getProductId(): number {
-        if (this.productId == null) {}
+        if (this.productId == null) {
+        }
         return this.productId;
     }
 
@@ -63,9 +64,8 @@ export class ProductService {
         return this.apiService.put('/products/' + id, body, null);
     }
 
-    deleteProduct(id): Observable<any>{
-        console.log('test');
-        return this.apiService.delete('/products', id);
+    deleteProduct(id): Observable<any> {
+        return this.apiService.delete('/products/' + id, null);
     }
 
     // For the home page, get standard the most recent products
