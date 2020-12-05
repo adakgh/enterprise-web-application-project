@@ -72,13 +72,13 @@ export class SupplierInfoComponent implements OnInit {
                 }
                 console.log(this.jsonLimitedProductsData);
 
-                /*if (res.profileImage != null) {
+                if (res.profileImage != null) {
                     this.profileImageName = res.name;
                     this.demoImage.getImage(atob(res.profileImage.picByte));
                 } else {
                     // Get the default image and put in src
                     this.demoImage.getImage(this.demoImage.imageBase64Url);
-                }*/
+                }
             },
             err => {
                 console.log(err);
