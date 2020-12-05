@@ -36,11 +36,9 @@ export class AddProductComponent implements OnInit {
     }
 
     addProduct(): void {
-        // Test if the values are getting placed in.
-        console.log(this.productData);
         this.apiService.post('/products', this.productData, null).subscribe(
             resp => {
-                this.reloadProductPage();
+                // this.reloadProductPage();
                 console.log(this.productData);
             },
             error => {

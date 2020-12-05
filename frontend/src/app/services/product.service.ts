@@ -59,8 +59,13 @@ export class ProductService {
         return this.productId;
     }
 
-    updateProduct(body): Observable<any> {
-        return this.apiService.putImage('/suppliers', body);
+    updateProduct(id, body): Observable<any> {
+        return this.apiService.put('/products/' + id, body, null);
+    }
+
+    deleteProduct(id): Observable<any>{
+        console.log('test');
+        return this.apiService.delete('/products', id);
     }
 
     // For the home page, get standard the most recent products

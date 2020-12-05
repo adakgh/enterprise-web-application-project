@@ -45,11 +45,10 @@ export class MyproductsEditComponent implements OnInit {
             res => {
                 this.jsonProductData = res;
                 this.productId = res.id;
-                this.productData.productName = res.name != null ? res.name : '';
-                this.productData.productPrice = res.price != null ? res.price : '';
-                this.productData.productQuantity2 = res.quantity2 != null ? res.quantity2 : '';
-                this.productData.productCatergory = res.productCategory != null ? res.productCategory : '';
-                this.productData.productDescription = res.description != null ? res.description : '';
+                this.productData.name = res.name != null ? res.name : '';
+                this.productData.price = res.price != null ? res.price : '';
+                this.productData.quantity2 = res.quantity2 != null ? res.quantity2 : '';
+                this.productData.description = res.description != null ? res.description : '';
             },
             err => {
                 console.log(err);
@@ -59,10 +58,9 @@ export class MyproductsEditComponent implements OnInit {
 
     updateProduct(): void {
         console.log(this.productData);
-        this.apiService.post('/products', this.productData, null).subscribe(
+        this.productService.updateProduct(this.productId, this.productData).subscribe(
             resp => {
                 this.reloadProductPage();
-                console.log(this.productData);
             },
             error => {
                 console.log(error);

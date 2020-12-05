@@ -1,12 +1,11 @@
 import {Form} from '@angular/forms';
 
 export class Product {
-    public productName: string;
-    public productPrice: string;
-    public productDiscountPrice: string;
-    public productQuantity2: string;
-    public productCatergory: string;
-    public productDescription: string;
+    public name: string;
+    public price: string;
+    public quantity2: string;
+    public categoryId: Event;
+    public description: string;
 
     constructor() {
     }
