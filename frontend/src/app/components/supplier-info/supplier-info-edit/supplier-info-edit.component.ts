@@ -24,12 +24,7 @@ export class SupplierInfoEditComponent implements OnInit {
     submitted = false;                      // Tracks if the update form is submitted or not
     selectedFile: File;                     // The select Files
     selectedFileUrl;                        // The select File's Base64 Url
-
     profileImageName;
-    base64TrimmedURL: string;
-    base64DefaultURL: string;
-    windowOPen: boolean;
-    generatedImage: string;
 
     constructor(
         private apiService: ApiService,
@@ -40,14 +35,14 @@ export class SupplierInfoEditComponent implements OnInit {
         private routeUtil: RouteUtil,
         private httpClient: HttpClient,
         private domSanitizer: DomSanitizer,
-        private demoImage: DemoImage
+        public demoImage: DemoImage
     ) {
     }
 
     // Look at the query and based on that show the data of the supplier
     ngOnInit(): void {
         // Get the default image and put in src
-        this.getImage(this.demoImage.imageBase64Url);
+        this.demoImage.getImage(this.demoImage.imageBase64Url);
         this.activatedRoute.queryParams.subscribe(
             res => {
                 // If there is no query given return user to homepage or if the supplier id in the query
@@ -101,7 +96,7 @@ export class SupplierInfoEditComponent implements OnInit {
 
                 if (res.profileImage != null) {
                     this.profileImageName = res.name;
-                    this.getImage(atob(res.profileImage.picByte));
+                    this.demoImage.getImage(atob(res.profileImage.picByte));
                 }
 
             },
@@ -170,129 +165,8 @@ export class SupplierInfoEditComponent implements OnInit {
         reader.readAsDataURL(this.selectedFile);
         reader.onload = () => {
             this.selectedFileUrl = reader.result;
-            this.getImage(this.selectedFileUrl);
+            this.demoImage.getImage(this.selectedFileUrl);
         };
-    }
-
-
-    // METHODS FOR IMAGE
-    // Finally sanitize generatedImageUrl to fit in the src of <img> tag
-    sanatizeUrl(generatedImageUrl): SafeResourceUrl {
-        return this.domSanitizer.bypassSecurityTrustResourceUrl(generatedImageUrl);
-    }
-
-    /** Get Image from a Base64 Url */
-    getImage(imageUrl: string): void {
-        this.windowOPen = true;
-        this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
-            this.base64TrimmedURL = base64Data;
-            this.createBlobImageFileAndShow();
-        });
-    }
-
-    /* Method to fetch image from Url */
-    getBase64ImageFromURL(url: string): Observable<string> {
-        return Observable.create((observer: Observer<string>) => {
-            // create an image object
-            const img = new Image();
-            img.crossOrigin = 'Anonymous';
-            img.src = url;
-            if (!img.complete) {
-                // This will call another method that will create image from url
-                img.onload = () => {
-                    observer.next(this.getBase64Image(img));
-                    observer.complete();
-                };
-                img.onerror = err => {
-                    observer.error(err);
-                };
-            } else {
-                observer.next(this.getBase64Image(img));
-                observer.complete();
-            }
-        });
-    }
-
-    /* Method to create base64Data Url from fetched image */
-    getBase64Image(img: HTMLImageElement): string {
-        // We create a HTML canvas object that will create a 2d image
-        const canvas: HTMLCanvasElement = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-        // This will draw image
-        ctx.drawImage(img, 0, 0);
-        // Convert the drawn image to Data URL
-        const dataURL: string = canvas.toDataURL('image/png');
-        this.base64DefaultURL = dataURL;
-        return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
-    }
-
-    /** Method that will create Blob and show in new window */
-    createBlobImageFileAndShow(): void {
-        this.dataURItoBlob(this.base64TrimmedURL).subscribe((blob: Blob) => {
-            const imageBlob: Blob = blob;
-            // console.log(this.generateName());
-            const imageName: string = this.profileImageName/*this.generateName()*/;
-            const imageFile: File = new File([imageBlob], imageName, {type: blob.type});
-            this.generatedImage = window.URL.createObjectURL(imageFile);
-            // on demo image not open window
-            /*if (this.windowOPen) {
-                window.open(this.generatedImage);
-            }*/
-        });
-    }
-
-    /* Method to convert Base64Data Url as Image Blob */
-    dataURItoBlob(dataURI: string): Observable<Blob> {
-        return Observable.create((observer: Observer<Blob>) => {
-            const byteString: string = window.atob(dataURI);
-            const arrayBuffer: ArrayBuffer = new ArrayBuffer(byteString.length);
-            const int8Array: Uint8Array = new Uint8Array(arrayBuffer);
-            for (let i = 0; i < byteString.length; i++) {
-                int8Array[i] = byteString.charCodeAt(i);
-            }
-            const blob = new Blob([int8Array], {type: 'image/jpeg'});
-            observer.next(blob);
-            observer.complete();
-        });
-    }
-
-    /** Method to Generate a Random Name for the Image */
-    generateName(): string {
-        const date: number = new Date().valueOf();
-        let text = '';
-        const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 5; i++) {
-            text += possibleText.charAt(
-                Math.floor(Math.random() * possibleText.length)
-            );
-        }
-        // Replace extension according to your media type like this
-        return date + '.' + text + '.jpeg';
-    }
-
-    /*getDefaultImage(imageUrl: string): void {
-        this.windowOPen = false;
-        this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
-            this.base64TrimmedURL = base64Data;
-            this.createBlobImageFileAndShow();
-        });
-    }*/
-
-    // TEMP NOT USING
-    convertDataUrlToBlob(dataUrl): Blob {
-        const arr = dataUrl.split(',');
-        const mime = arr[0].match(/:(.*?);/)[1];
-        const bstr = atob(arr[1]);
-        let n = bstr.length;
-        const u8arr = new Uint8Array(n);
-
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-
-        return new Blob([u8arr], {type: mime});
     }
 
     @HostListener('window:beforeunload')

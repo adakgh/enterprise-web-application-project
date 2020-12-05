@@ -12,7 +12,6 @@ import {RouteUtil} from '../../utils/route.util';
 export class SuppliersListComponent implements OnInit {
 
     jsonSupplierData;
-    varFor = [1, 5, 3, 4];
 
     constructor(
         private router: Router,
@@ -33,8 +32,5 @@ export class SuppliersListComponent implements OnInit {
             }
         );
     }
-
-
-
 
 }
