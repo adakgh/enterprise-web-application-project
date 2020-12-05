@@ -54,11 +54,19 @@ public class ProductService {
         save(product, categoryId, imageEntity);
     }
 
-    public void updateById(long id, ProductEntity newProduct) {
+    public void updateById(long id, ProductEntity newProduct, ImageEntity productImage) {
         ProductEntity currentProduct = entityManager.getReference(ProductEntity.class, id);
         modelmapper.map(newProduct, currentProduct); // new --> updateInto --> current
+
+        if (productImage != null) {
+            currentProduct.setProductImage(productImage);
+        }
         productRepository.save(currentProduct);
     }
 
 
+    public void updateWithImage(long id, ProductEntity updatedProduct, ImageEntity imageEntity) {
+        imageRepository.save(imageEntity);
+        updateById(id, updatedProduct,imageEntity);
+    }
 }

@@ -4,9 +4,9 @@ import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {SupplierInfoService} from '../../services/supplier-info.service';
 import {CurrentUserService} from '../../services/current-user.service';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {Observable, Observer} from "rxjs";
-import {DemoImage} from "./supplier-info-edit/default-image";
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {Observable, Observer} from 'rxjs';
+import {DemoImage} from './supplier-info-edit/default-image';
 
 @Component({
     selector: 'app-supplier-info',
@@ -74,10 +74,12 @@ export class SupplierInfoComponent implements OnInit {
 
                 if (res.profileImage != null) {
                     this.profileImageName = res.name;
-                    this.demoImage.getImage(atob(res.profileImage.picByte));
+                    // this.demoImage.getImage(atob(res.profileImage.picByte));
+                    this.generatedImage = atob(res.profileImage.picByte);
                 } else {
                     // Get the default image and put in src
-                    this.demoImage.getImage(this.demoImage.imageBase64Url);
+                    // this.demoImage.getImage(this.demoImage.imageBase64Url);
+                    this.generatedImage = this.demoImage.imageBase64Url;
                 }
             },
             err => {
@@ -92,4 +94,7 @@ export class SupplierInfoComponent implements OnInit {
             this.jsonSupplierData.addresses[0].postalCode + ' ' + this.jsonSupplierData.addresses[0].city;
     }
 
+    allProducts() {
+        this.router.navigate(['myproducts'], {queryParams: {id: this.jsonSupplierData.id}});
+    }
 }

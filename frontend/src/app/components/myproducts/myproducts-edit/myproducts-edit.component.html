@@ -6,16 +6,17 @@
     <div class="col-3  mb-4">
         <div>
             <picture>
-                <img src="https://simpleicon.com/wp-content/uploads/camera.png" alt="voeg afbeelding toe"
-                     style="width: 80%; height: 100%; opacity: 20%; border: 1px solid gray;" class="img-thumbnail">
+                <img  [src]="demoImage.sanatizeUrl(demoImage.generatedImage)" alt="voeg afbeelding toe"
+                     style="width: 80%; height: 100%; opacity: 100%; border: 1px solid gray;" class="img-thumbnail">
+<!--                src="https://simpleicon.com/wp-content/uploads/camera.png"-->
                 <input type="file" (change)="onFileSelected($event)">
             </picture>
         </div>
         <br>
         <div>
-            <button id="uploadImage" type="submit" (click)="onUpload()" class="btn btn-primary" disabled>Voeg afbeeldig
+            <!--<button id="uploadImage" type="submit" (click)="onUpload()" class="btn btn-primary" disabled>Voeg afbeeldig
                 toe
-            </button>
+            </button>-->
         </div>
     </div>
 

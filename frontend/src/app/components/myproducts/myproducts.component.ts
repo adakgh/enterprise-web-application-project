@@ -6,6 +6,8 @@ import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
 import {SupplierInfoService} from '../../services/supplier-info.service';
 import {log} from 'util';
+import {DemoImage} from "../supplier-info/supplier-info-edit/default-image";
+import {CurrentUserService} from "../../services/current-user.service";
 
 @Component({
     selector: 'app-myproducts',
@@ -17,6 +19,8 @@ export class MyproductsComponent implements OnInit {
     jsonData: any[] = [];
     jsonSupplierData;
 
+    isTheSupplier = false;  // Boolean to check if you have rights for editing
+
     constructor(
         private router: Router,
         private apiService: ApiService,
@@ -24,7 +28,9 @@ export class MyproductsComponent implements OnInit {
         private productService: ProductService,
         private myProductsService: MyProductsService,
         private supplierInfoService: SupplierInfoService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        public demoImage: DemoImage,
+        private currentUserService: CurrentUserService
     ) {
     }
 
@@ -35,6 +41,12 @@ export class MyproductsComponent implements OnInit {
                 if (res.id <= 0 || res.id == null) {
                     this.router.navigate(['/']);
                     return;
+                }
+                console.log(this.currentUserService.getUserId());
+                console.log(this.currentUserService.getSupplierId());
+                console.log(res.id);
+                if (this.currentUserService.getUserId() == res.id) {
+                    this.isTheSupplier = true;
                 }
                 this.loadSupplierData(res.id);
             },

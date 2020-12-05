@@ -33,7 +33,7 @@ export class AddProductComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.demoImage.getImage(this.demoImage.imageBase64Url);
+        this.demoImage.getImage(this.demoImage.productBase64Url);
         this.productService.getAllCategories().subscribe(
             res => this.categoryMap = res
         );
@@ -61,34 +61,21 @@ export class AddProductComponent implements OnInit {
                 }
             );
 
-        } else { // If no Image is selected only send the supplier data
-            /*this.supplierInfoService.updateSupplier({supplier: this.supplier}).subscribe(
-                res => {
-                    this.submitted = true;
-                    console.log('Succesfully updated supplier.');
-                    console.log(this.signupForm);
-                    console.log(this.supplier);
-                    this.router.navigate(['../'], {
-                        relativeTo: this.activatedRoute,
-                        queryParams: {id: this.supplierId}
-                    });
+        } else { // If no Image is selected only send the product data
+            console.log(this.productData);
+            this.apiService.post('/products', this.productData, null).subscribe(
+                resp => {
+                    // this.reloadProductPage();
+                    console.log('Product added!');
+                    console.log(this.productData);
+                    console.log(resp);
                 },
-                err => {
-                    console.log(err);
+                error => {
+                    this.errorMessage = error.status;
+                    console.log(error);
                 }
-            );*/
+            );
         }
-        /*
-                this.apiService.post('/products', this.productData, null).subscribe(
-                    resp => {
-                        // this.reloadProductPage();
-                        console.log(this.productData);
-                    },
-                    error => {
-                        this.errorMessage = error.status;
-                        console.log(error);
-                    }
-                );*/
     }
 
     reloadProductPage(): void {

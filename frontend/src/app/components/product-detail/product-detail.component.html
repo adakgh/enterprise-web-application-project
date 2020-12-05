@@ -1,7 +1,8 @@
 <div class="container">
     <div class="my-5 row">
         <div class="col-md-5 mb-4 mb-md-0">
-            <img class="img-fluid w-100" src="../../../assets/images/bloemkolen.jpeg"
+            <img class="img-fluid w-100"
+                 [src]="demoImage.sanatizeUrl(jsonData[0].productImage!=null?demoImage.atoba(jsonData[0].productImage.picByte):demoImage.productBase64Url)"
                  alt="Sample">
         </div>
 

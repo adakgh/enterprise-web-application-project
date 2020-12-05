@@ -51,7 +51,7 @@
             <div class="card h-100">
                 <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
                     id="productImage"
-                    [src]="demoImage.sanatizeUrl(product.productImage!=null?demoImage.atoba(product.productImage.picByte):demoImage.imageBase64Url)"
+                    [src]="demoImage.sanatizeUrl(product.productImage!=null?demoImage.atoba(product.productImage.picByte):demoImage.productBase64Url)"
                     alt="{{product.name}}"/></a>
                 <div class="card-body">
                     <h4 class="card-title">

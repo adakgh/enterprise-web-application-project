@@ -4,7 +4,7 @@
         <div class="col-md-10 backgroundInfoDetail center">
             <div class="row p-3">
                 <div class="col-md-2 col-sm-12">
-                    <img [src]="demoImage.sanatizeUrl(demoImage.generatedImage)"
+                    <img [src]="demoImage.sanatizeUrl(generatedImage)"
                          class="supplierImg" alt="">
                 </div>
                 <div class="col-md-5 col-sm-12 p-3 pl-5">
@@ -71,7 +71,7 @@
                 <div class="card h-100">
                     <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
                         id="productImage"
-                        [src]="demoImage.sanatizeUrl(product.productImage!=null?demoImage.atoba(product.productImage.picByte):demoImage.imageBase64Url)"
+                        [src]="demoImage.sanatizeUrl(product.productImage!=null?demoImage.atoba(product.productImage.picByte):demoImage.productBase64Url)"
                         alt="{{product.name}}"/></a>
                     <div class="card-body">
                         <h4 class="card-title">
@@ -86,7 +86,7 @@
 
         <!-- Refer to page with all products supplier is selling/offering -->
         <div class="col-sm-12">
-            <a href="" routerLink="supplierProducts" class="float-right">Zie alle producten</a>
+            <a (click)="allProducts()" class="btn float-right" >Zie alle producten</a>
         </div>
 
     </div>

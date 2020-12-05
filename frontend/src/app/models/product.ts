@@ -6,6 +6,9 @@ export class Product {
     public quantity2: string;
     public categoryId: Event;
     public description: string;
+    public imageName;
+    public type;
+    public url;
 
     constructor() {
     }
