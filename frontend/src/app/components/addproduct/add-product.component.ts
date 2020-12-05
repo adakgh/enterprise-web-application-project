@@ -38,7 +38,7 @@ export class AddProductComponent implements OnInit {
     addProduct(): void {
         this.apiService.post('/products', this.productData, null).subscribe(
             resp => {
-                // this.reloadProductPage();
+                this.reloadProductPage();
                 console.log(this.productData);
             },
             error => {
@@ -50,8 +50,7 @@ export class AddProductComponent implements OnInit {
 
     reloadProductPage(): void {
         // Reload the page when send button is pressed
-        this.router.navigate(['/addproduct']).then(() => {
-            window.location.reload();
+        this.router.navigate(['/..']).then(() => {
         });
     }
 

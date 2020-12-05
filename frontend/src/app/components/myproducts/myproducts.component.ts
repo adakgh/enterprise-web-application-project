@@ -60,11 +60,17 @@ export class MyproductsComponent implements OnInit {
         this.productService.deleteProduct(idNumber).subscribe(
             resp => {
                 console.log('verwijderd');
+                this.reloadProductPage();
             },
             error => {
                 console.log(error);
             }
         );
+    }
+
+    reloadProductPage(): void {
+        // Reload the page when send button is pressed
+        window.location.reload();
     }
 
 }
