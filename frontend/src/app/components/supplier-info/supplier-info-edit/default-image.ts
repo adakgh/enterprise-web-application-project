@@ -23,8 +23,15 @@ export class DemoImage {
         return this.domSanitizer.bypassSecurityTrustResourceUrl(generatedImageUrl);
     }
 
+    // TussenFunctie who calls the atob method from2 the frontend .html file
+    atoba(picByte: any) {
+        return atob(picByte);
+    }
+
+
     /** Get Image from a Base64 Url */
-    getImage(imageUrl: string): void{
+    getImage(imageUrl: string): void {
+        this.generatedImage = ' ';
         this.windowOPen = true;
         this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
             this.base64TrimmedURL = base64Data;

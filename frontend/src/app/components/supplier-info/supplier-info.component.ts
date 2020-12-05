@@ -18,6 +18,7 @@ export class SupplierInfoComponent implements OnInit {
     jsonSupplierData;
     jsonLimitedProductsData: any[] = [];
     profileImageName;
+    generatedImage: string;
 
     constructor(
         private router: Router,
@@ -52,7 +53,6 @@ export class SupplierInfoComponent implements OnInit {
         this.supplierInfoService.getSupplier(id).subscribe(
             res => {
                 const LIMIT_PRODUCTS = 4;
-
                 this.jsonSupplierData = res;
 
                 // Limit the shown product to 4 by making de jsonData smaller
@@ -62,18 +62,23 @@ export class SupplierInfoComponent implements OnInit {
                 }
                 for (let i = 0; i < productsLength; i++) {
                     this.jsonLimitedProductsData.push(res.products[i]);
+
+                    // Posible if there is child component
+                    /*if (this.jsonLimitedProductsData[i].productImage.picByte != null) {
+                        this.generatedImage = atob(this.jsonLimitedProductsData[i].productImage.picByte);
+                    } else {
+                        this.generatedImage = this.demoImage.imageBase64Url;
+                    }*/
                 }
                 console.log(this.jsonLimitedProductsData);
 
-
-
-                if (res.profileImage != null) {
+                /*if (res.profileImage != null) {
                     this.profileImageName = res.name;
                     this.demoImage.getImage(atob(res.profileImage.picByte));
                 } else {
                     // Get the default image and put in src
                     this.demoImage.getImage(this.demoImage.imageBase64Url);
-                }
+                }*/
             },
             err => {
                 console.log(err);

@@ -4,7 +4,7 @@
         <div class="col-md-10 backgroundInfoDetail center">
             <div class="row p-3">
                 <div class="col-md-2 col-sm-12">
-                    <img [src]="demoImage.sanatizeUrl(demoImage.generatedImage)"
+                    <img [src]="demoImage.sanatizeUrl(demoImage.atoba(jsonSupplierData.profileImage.picByte))"
                          class="supplierImg" alt="">
                 </div>
                 <div class="col-md-5 col-sm-12 p-3 pl-5">
@@ -71,7 +71,7 @@
                 <div class="card h-100">
                     <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
                         id="productImage"
-                        src="../../../assets/images/bloemkolen.jpeg"
+                        [src]="demoImage.sanatizeUrl(demoImage.atoba(this.jsonLimitedProductsData[i].productImage.picByte))"
                         alt="{{product.name}}"/></a>
                     <div class="card-body">
                         <h4 class="card-title">
@@ -82,7 +82,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <!-- Refer to page with all products supplier is selling/offering -->

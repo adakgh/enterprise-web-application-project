@@ -1,6 +1,7 @@
 package com.example.demo.api.v1;
 
 import com.example.demo.models.RoleType;
+import com.example.demo.persistence.entities.ImageEntity;
 import com.example.demo.persistence.entities.ProductCategoryEntity;
 import com.example.demo.persistence.entities.ProductEntity;
 import com.example.demo.persistence.repositories.ProductCategoryRepository;
@@ -46,9 +47,16 @@ public class ProductController {
     @Secured(RoleType.SUPPLIER)
     @PostMapping
     public void createProduct(@RequestBody Map<String, String> queryMap) {
+        System.out.println(queryMap);
         ProductEntity product = modelMapper.map(queryMap, ProductEntity.class);
         long categoryId = Long.parseLong(queryMap.get("categoryId"));
-        productService.save(product, categoryId);
+
+        if (queryMap.get("url") != null) {
+            ImageEntity imageEntity = new ImageEntity(queryMap.get("imageName"), queryMap.get("type"), queryMap.get("url").getBytes());
+            productService.saveWithImage(product, categoryId,imageEntity);
+        } else {
+            productService.save(product, categoryId, null);
+        }
     }
 
     /**

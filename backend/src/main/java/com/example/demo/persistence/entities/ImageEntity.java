@@ -34,6 +34,10 @@ public class ImageEntity {
     @OneToOne(mappedBy = "profileImage")
     private SupplierEntity supplierEntity;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "productImage")
+    private ProductEntity productEntity;
+
 
     public ImageEntity() {
         super();
