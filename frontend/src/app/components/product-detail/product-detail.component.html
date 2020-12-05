@@ -18,7 +18,7 @@
                     <label for="productAmount">hoeveelheid in kilo's: (minimaal 10 Kg)</label>
                     <input type="number" class="form-control" id="productAmount">
                 </div>
-                <button type="submit" class="btn btn-primary">Factuur aanvragen</button>
+                <button type="submit" class="btn btn-primary" routerLink="/messages">Factuur aanvragen</button>
             </form>
             <a routerLink="/supplierinfo" [queryParams]="{id: jsonData[0].customData.supplierId}">Bezoek verkoper pagina</a>
         </div>

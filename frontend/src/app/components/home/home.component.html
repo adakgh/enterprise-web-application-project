@@ -42,10 +42,9 @@
 
     <!-- label -->
     <span class="label text-center btn-lg btn-block mt-5 mb-5">RECENTE PRODUCTEN</span>
-
     <!-- recent products cards -->
     <div class="card-deck mb-5">
-        <div class="card">
+       <!-- <div class="card">
             <a routerLink="/products" [queryParams]="{id: userId}">
                 <img class="card-img-top"
                      src="https://www.akkerwijzer.nl/site/assets/files/0/01/24/286/7b9096ef9.-detail.jpg"
@@ -91,15 +90,31 @@
                      alt="cart-icon">
                 <h5 class="card-title mt-4">€ 3,50</h5>
                 <p class="card-text">Bosbessen 100 gr</p></div>
+        </div>-->
+        <div class="row col-12 mr-5 p-0">
+            <div *ngFor="let product of jsonData" class="col-lg-3 col-md-4 mb-3">
+                <div class="card" style="width: 110%">
+                    <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
+                        class="productImage"
+                        src="../../../assets/images/bloemkolen.jpeg"
+                        alt="{{product.name}}"/></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
+                        </h4>
+                        <h5>€{{product.price}}/Kg</h5>
+                        <p class="card-text">{{product.description}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- label -->
     <span class="label text-center btn-lg btn-block mt-5 mb-5">BEST VERKOCHT</span>
-
     <!-- most sold products cards -->
     <div class="card-deck mb-5">
-        <div class="card">
+        <!--<div class="card">
             <a routerLink="/products" [queryParams]="{id: userId}">
                 <img class="card-img-top"
                      src="https://www.akkerwijzer.nl/site/assets/files/0/01/24/286/7b9096ef9.-detail.jpg"
@@ -145,6 +160,23 @@
                      alt="cart-icon">
                 <h5 class="card-title mt-4">€ 3,50</h5>
                 <p class="card-text">Bosbessen 100 gr</p></div>
+        </div>-->
+        <div class="row col-12 mr-5 p-0">
+            <div *ngFor="let product of jsonData" class="col-lg-3 col-md-4 mb-3">
+                <div class="card" style="width: 110%">
+                    <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
+                        class="productImage"
+                        src="../../../assets/images/bloemkolen.jpeg"
+                        alt="{{product.name}}"/></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
+                        </h4>
+                        <h5>€{{product.price}}/Kg</h5>
+                        <p class="card-text">{{product.description}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

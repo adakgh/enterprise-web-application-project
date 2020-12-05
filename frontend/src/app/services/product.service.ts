@@ -67,4 +67,13 @@ export class ProductService {
         console.log('test');
         return this.apiService.delete('/products', id);
     }
+
+    // For the home page, get standard the most recent products
+    getRecentProducts(): Observable<any> {
+        return this.apiService.get('/products?sort=addedDate,asc').pipe(
+            map(res => {
+                return res.content;
+            })
+        );
+    }
 }

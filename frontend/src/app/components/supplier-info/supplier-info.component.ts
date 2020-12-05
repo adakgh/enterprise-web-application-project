@@ -56,12 +56,14 @@ export class SupplierInfoComponent implements OnInit {
     loadSupplierData(id: number): void {
         this.supplierInfoService.getSupplier(id).subscribe(
             res => {
+                const LIMIT_PRODUCTS = 4;
+
                 this.jsonSupplierData = res;
 
                 // Limit the shown product to 4 by making de jsonData smaller
                 let productsLength = res.products.length;
-                if (productsLength > 4) {
-                    productsLength = 4;
+                if (productsLength > LIMIT_PRODUCTS) {
+                    productsLength = LIMIT_PRODUCTS;
                 }
                 for (let i = 0; i < productsLength; i++) {
                     this.jsonLimitedProductsData.push(res.products[i]);
