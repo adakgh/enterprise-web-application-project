@@ -93,7 +93,42 @@ export class MyproductsComponent implements OnInit {
                 const data: any[] = Array.of(res);
                 const newArray: any[] = [];
 
+                // tslint:disable-next-line:prefer-for-of
+                for (let i = 0; i < data.length; i++) {
+                    // tslint:disable-next-line:prefer-for-of
+                    for (let j = 0; j < data[i].products.length; j++) {
+                        newArray.push({
+                            // Bedrijfsnaam: data[i].companyName,
+                            // Contactpersoon: data[i].contactPerson,
+                            // 'Contact Email': data[i].contactEmail,
+                            // Telefoonnummer: data[i].phoneNumber,
+                            // Website: data[i].website,
+                            // 'Korte omschrijving': data[i].shortDescription,
+                            // Omschrijving: data[i].description,
+                            'NR.': j + 1,
+                            PRODUCT: data[i].products[j].name,
+                            CATEGORIE: data[i].products[j].productCategory.name,
+                            OMSCHRIJVING: data[i].products[j].description,
+                            VOORRAAD: data[i].products[j].quantity,
+                            PRIJS: data[i].products[j].price,
+                            'DATUM TOEGEVOEGD': data[i].products[j].addedDate.substring(0, 10)
+                        });
+                    }
+                }
+
                 const workSheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(newArray);
+
+                // columns width
+                const wscols = [
+                    {wch: 5},
+                    {wch: 25},
+                    {wch: 20},
+                    {wch: 70},
+                    {wch: 15},
+                    {wch: 8},
+                    {wch: 20},
+                ];
+                workSheet['!cols'] = wscols;
 
                 const workBook: XLSX.WorkBook = XLSX.utils.book_new();
 
