@@ -28,7 +28,7 @@ public class ProductEntity {
     private String quantity;
 
     @Column(name = "PRICE")
-    private BigDecimal price;
+    private String price;
 
     @Column(name = "DISCOUNT_QUANTITY")
     private String quantity2;

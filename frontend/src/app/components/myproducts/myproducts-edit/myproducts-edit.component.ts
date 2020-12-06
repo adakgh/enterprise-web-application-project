@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from '../../../services/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../../services/api.service';
@@ -20,6 +20,10 @@ export class MyproductsEditComponent implements OnInit {
     supplierId: number;
 
     generatedImage;
+
+    priceType;
+    quantityType;
+    @ViewChild('quantity') quantity;
 
     constructor(
         private apiService: ApiService,
@@ -54,8 +58,11 @@ export class MyproductsEditComponent implements OnInit {
                 console.log(res);
                 this.productId = res.id;
                 this.productData.name = res.name != null ? res.name : '';
-                this.productData.price = res.price != null ? res.price : '';
-                this.productData.quantity2 = res.quantity2 != null ? res.quantity2 : '';
+                this.productData.price = res.price != null ? res.price.split(':')[1] : '';
+                this.priceType = res.price.split(':')[0] + ':';
+                this.productData.quantity = res.quantity != null ? res.quantity.split(' ')[0] : '';
+                this.quantityType = ' ' + res.quantity.split(' ')[1];
+                console.log(this.priceType);
                 this.productData.description = res.description != null ? res.description : '';
                 this.supplierId = res.customData.supplierId;
 
@@ -74,6 +81,9 @@ export class MyproductsEditComponent implements OnInit {
     }
 
     updateProduct(): void {
+        this.productData.price = this.priceType + this.productData.price;
+        this.productData.quantity = this.productData.quantity + this.quantityType;
+
         console.log(this.productData);
         this.productService.updateProduct(this.productId, this.productData).subscribe(
             resp => {
@@ -133,15 +143,13 @@ export class MyproductsEditComponent implements OnInit {
         };
     }
 
-    /*onUpload(): void {
-        const pictureFile = new FormData();
-        pictureFile.append('image', this.selectedFile, this.selectedFile.name);
-        localStorage.set(this.selectedFile.name, pictureFile);
-        // this.apiService.post('/products', pictureFile, null)
-        //     .subscribe(res => {
-        //         console.log(res);
-        //         console.log(this.selectedFile);
-        //     });
+    // helper for selecting the price Type - like per kilo or per stuk
+    selectedPriceType(event): void {
+        this.priceType = event.target.value;
+    }
 
-    }*/
+    // helper for selecting the quantity like Kilogram - Gram
+    selectedStock(event): void {
+        this.quantityType = event.target.value;
+    }
 }

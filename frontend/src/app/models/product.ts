@@ -3,7 +3,7 @@ import {Form} from '@angular/forms';
 export class Product {
     public name: string;
     public price: string;
-    public quantity2: string;
+    public quantity: string;
     public categoryId: Event;
     public description: string;
     public imageName;

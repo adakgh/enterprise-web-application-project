@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AddProductService} from '../../services/add-product.service';
 import {ApiService} from '../../services/api.service';
 import {Router} from '@angular/router';
@@ -23,6 +23,10 @@ export class AddProductComponent implements OnInit {
     selectedFileUrl;
     categoryMap: any[];
 
+    priceType;
+    quantityType;
+
+
     constructor(
         private apiService: ApiService,
         private addProductService: AddProductService,
@@ -39,12 +43,21 @@ export class AddProductComponent implements OnInit {
         );
     }
 
-    // helper for selecting the quantity
-    selectedQuantity(event): void {
-        this.productData.quantity = event.target.value;
+    // helper for selecting the price Type - like per kilo or per stuk
+    selectedPriceType(event): void {
+        this.priceType = event.target.value;
+    }
+
+    // helper for selecting the quantity like Kilogram - Gram
+    selectedStock(event): void {
+        this.quantityType = event.target.value;
     }
 
     addProduct(): void {
+
+        this.productData.price = this.priceType + this.productData.price;
+        this.productData.quantity = this.productData.quantity + this.quantityType;
+
         if (this.selectedFile != null) {
             // Create a object with the supplier data and the selected image data and send that
             this.productData.imageName = this.selectedFile.name;
@@ -55,10 +68,10 @@ export class AddProductComponent implements OnInit {
 
             this.apiService.post('/products', this.productData, null).subscribe(
                 resp => {
-                    // this.reloadProductPage();
                     console.log('Product added!');
                     console.log(this.productData);
                     console.log(resp);
+                    this.reloadProductPage();
                 },
                 error => {
                     this.errorMessage = error.status;
@@ -70,10 +83,10 @@ export class AddProductComponent implements OnInit {
             console.log(this.productData);
             this.apiService.post('/products', this.productData, null).subscribe(
                 resp => {
-                    // this.reloadProductPage();
                     console.log('Product added!');
                     console.log(this.productData);
                     console.log(resp);
+                    this.reloadProductPage();
                 },
                 error => {
                     this.errorMessage = error.status;

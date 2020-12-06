@@ -125,7 +125,7 @@ public class DemoApplication {
             product1.setName("Tomaten");
             product1.setDescription("Grote, mooie, rode, verse tomaten uit onze tuin");
             product1.setQuantity("per stuk:");
-            product1.setPrice(new BigDecimal("4.95"));
+            product1.setPrice(("4.95"));
             product1.setAddedDate(new Date());
             product1.addProductCategory(productCategoryRepository.getOne(1L)); // lazy load
             supp1.addProduct(product1); // resolve relationship (supplier <-> product)
@@ -134,7 +134,7 @@ public class DemoApplication {
             product2.setName("Kip filet");
             product2.setDescription("Filetlapje gemarineerd verpakt");
             product2.setQuantity("per stuk:");
-            product2.setPrice(new BigDecimal("1.85"));
+            product2.setPrice(("1.85"));
             product2.setAddedDate(new Date());
             product2.addProductCategory(productCategoryRepository.getOne(5L)); // lazy load
             supp1.addProduct(product2); // resolve relationship (supplier <-> product)
@@ -169,7 +169,7 @@ public class DemoApplication {
             product2_1.setName("Honing");
             product2_1.setDescription("100% Natuurzuivere Honing");
             product2_1.setQuantity("per stuk:");
-            product2_1.setPrice(new BigDecimal("6.95"));
+            product2_1.setPrice(("6.95"));
             product2_1.setAddedDate(new Date());
             product2_1.addProductCategory(productCategoryRepository.getOne(7L)); // lazy load
             supp2.addProduct(product2_1); // resolve relationship (supplier <-> product)
@@ -178,7 +178,7 @@ public class DemoApplication {
             product2_2.setName("Champignons");
             product2_2.setDescription("Filetlapje gemarineerd verpakt");
             product2_2.setQuantity("per 500 gram:");
-            product2_2.setPrice(new BigDecimal("3.49"));
+            product2_2.setPrice(("3.49"));
             product2_2.setAddedDate(new Date());
             product2_2.addProductCategory(productCategoryRepository.getOne(1L)); // lazy load
             supp2.addProduct(product2_2); // resolve relationship (supplier <-> product)
@@ -187,7 +187,7 @@ public class DemoApplication {
             product2_3.setName("Aardbeien");
             product2_3.setDescription("De Hollandse aarbei, fris en vol van smaak!");
             product2_3.setQuantity("per doos:");
-            product2_3.setPrice(new BigDecimal("2.79"));
+            product2_3.setPrice(("2.79"));
             product2_3.setAddedDate(new Date());
             product2_3.addProductCategory(productCategoryRepository.getOne(1L)); // lazy load
             supp2.addProduct(product2_3); // resolve relationship (supplier <-> product)
@@ -196,7 +196,7 @@ public class DemoApplication {
             product2_4.setName("Volkoren Brood");
             product2_4.setDescription("Volkoren brood voor een lekkere, stevige boterham.");
             product2_4.setQuantity("per stuk:");
-            product2_4.setPrice(new BigDecimal("1.25"));
+            product2_4.setPrice(("1.25"));
             product2_4.setAddedDate(new Date());
             product2_4.addProductCategory(productCategoryRepository.getOne(3L)); // lazy load
             supp2.addProduct(product2_4); // resolve relationship (supplier <-> product)
@@ -205,7 +205,7 @@ public class DemoApplication {
             product2_5.setName("Veganistische Mayonaise");
             product2_5.setDescription("Mayonaise waarbj de eierdooier is vervangen door plantaardige ingrediënten.");
             product2_5.setQuantity("per stuk:");
-            product2_5.setPrice(new BigDecimal("1.84"));
+            product2_5.setPrice(("1.84"));
             product2_5.setAddedDate(new Date());
             product2_5.addProductCategory(productCategoryRepository.getOne(6L)); // lazy load
             supp2.addProduct(product2_5); // resolve relationship (supplier <-> product)
@@ -214,7 +214,7 @@ public class DemoApplication {
             product2_6.setName("Santpoorts Tripel");
             product2_6.setDescription("Waar alles mee begon! Dit is ons aller-eerste bier, alleen voor echte mannen!");
             product2_6.setQuantity("per stuk:");
-            product2_6.setPrice(new BigDecimal("2.49"));
+            product2_6.setPrice(("2.49"));
             product2_6.setAddedDate(new Date());
             product2_6.addProductCategory(productCategoryRepository.getOne(4L)); // lazy load
             supp2.addProduct(product2_6); // resolve relationship (supplier <-> product)
@@ -251,7 +251,7 @@ public class DemoApplication {
             product3_1.setName("Geitenkaas");
             product3_1.setDescription("Honingklaver Biologische geitenkaas in blokjes in zonnebloemolie.");
             product3_1.setQuantity("per stuk:");
-            product3_1.setPrice(new BigDecimal("6.25"));
+            product3_1.setPrice(("6.25"));
             product3_1.setAddedDate(new Date());
             product3_1.addProductCategory(productCategoryRepository.getOne(2L)); // lazy load
             supp3.addProduct(product3_1); // resolve relationship (supplier <-> product)
