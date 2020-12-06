@@ -26,7 +26,7 @@ public class UserController {
     private final UserRepository userRepository;
 
     /**
-     * Registers a new user in the database and send a verification email.
+     * Registers a new user in the database and sends a verification email.
      */
     @PostMapping("/register")
     public RegistrationResponse registerUser(@RequestBody UserEntity user) throws MessagingException {

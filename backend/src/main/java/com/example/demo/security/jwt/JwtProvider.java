@@ -24,7 +24,6 @@ public class JwtProvider {
 
     @Value("${security.jwt.key-secret}")
     private String secretKey;
-    private String roles;
 
     /**
      * Creates an access token with no sensitive data exposure. Note that HS256 is used as the
@@ -33,26 +32,26 @@ public class JwtProvider {
      * undesirable. RS256 solves these problems, but is out of the scope of this project.
      */
     public String createAccessToken(UserEntity user) {
-       if (user.getSupplier() != null){
-           return Jwts.builder()
-                   .setSubject(user.getUsername())
-                   .setExpiration(generateExpirationTime(accessExpTime, false))
-                   .setIssuedAt(new Date(System.currentTimeMillis()))
-                   .claim("uid", user.getId())
-                   .claim("sid", user.getSupplier().getId())
-                   .claim("roles", user.getRoles().stream().map(RoleEntity::getName).collect(Collectors.joining(",")))
-                   .signWith(generateSigningKey(), SignatureAlgorithm.HS256)
-                   .compact();
-       } else {
-           return Jwts.builder()
-                   .setSubject(user.getUsername())
-                   .setExpiration(generateExpirationTime(accessExpTime, false))
-                   .setIssuedAt(new Date(System.currentTimeMillis()))
-                   .claim("uid", user.getId())
-                   .claim("roles", user.getRoles().stream().map(RoleEntity::getName).collect(Collectors.joining(",")))
-                   .signWith(generateSigningKey(), SignatureAlgorithm.HS256)
-                   .compact();
-       }
+        if (user.getSupplier() != null) {
+            return Jwts.builder()
+                    .setSubject(user.getUsername())
+                    .setExpiration(generateExpirationTime(accessExpTime, false))
+                    .setIssuedAt(new Date(System.currentTimeMillis()))
+                    .claim("uid", user.getId())
+                    .claim("sid", user.getSupplier().getId())
+                    .claim("roles", user.getRoles().stream().map(RoleEntity::getName).collect(Collectors.joining(",")))
+                    .signWith(generateSigningKey(), SignatureAlgorithm.HS256)
+                    .compact();
+        } else {
+            return Jwts.builder()
+                    .setSubject(user.getUsername())
+                    .setExpiration(generateExpirationTime(accessExpTime, false))
+                    .setIssuedAt(new Date(System.currentTimeMillis()))
+                    .claim("uid", user.getId())
+                    .claim("roles", user.getRoles().stream().map(RoleEntity::getName).collect(Collectors.joining(",")))
+                    .signWith(generateSigningKey(), SignatureAlgorithm.HS256)
+                    .compact();
+        }
     }
 
     /**
@@ -117,14 +116,23 @@ public class JwtProvider {
      */
     public Object verify(String token) {
         try {
-            Jws<Claims> claimsJws = Jwts.parser()
-                    .setSigningKey(secretKey)
-                    .parseClaimsJws(token);
-            return claimsJws.getBody().get("email");
-        } catch (ExpiredJwtException e) {
-            return "Token expired";
+            if (token != null) {
+                Claims decodedToken = resolveTokenClaims(token);
+                Date expirationDate = decodedToken.getExpiration();
+                Date currentDate = new Date();
+
+                if (expirationDate.before(currentDate)) {
+                    return null;
+                } else {
+                    Jws<Claims> claimsJws = Jwts.parser()
+                            .setSigningKey(secretKey)
+                            .parseClaimsJws(token);
+                    return claimsJws.getBody().get("email");
+                }
+            }
+            return null;
         } catch (Exception e) {
-            return "Exception " + e;
+            return e;
         }
     }
 }
