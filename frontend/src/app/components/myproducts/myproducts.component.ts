@@ -6,8 +6,9 @@ import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
 import {SupplierInfoService} from '../../services/supplier-info.service';
 import {log} from 'util';
-import {DemoImage} from "../supplier-info/supplier-info-edit/default-image";
-import {CurrentUserService} from "../../services/current-user.service";
+import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
+import {CurrentUserService} from '../../services/current-user.service';
+import * as XLSX from 'xlsx';
 
 @Component({
     selector: 'app-myproducts',
@@ -83,6 +84,24 @@ export class MyproductsComponent implements OnInit {
     reloadProductPage(): void {
         // Reload the page when send button is pressed
         window.location.reload();
+    }
+
+    downloadSupplierProducts(): void {
+        const id = this.activatedRoute.snapshot.queryParams.id;
+        this.supplierInfoService.getSupplier(id).subscribe(
+            res => {
+                const data: any[] = Array.of(res);
+                const newArray: any[] = [];
+
+                const workSheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(newArray);
+
+                const workBook: XLSX.WorkBook = XLSX.utils.book_new();
+
+                XLSX.utils.book_append_sheet(workBook, workSheet, 'producten_export');
+                XLSX.writeFile(workBook, 'producten_export.xlsx');
+            }, err => {
+                console.log(err);
+            });
     }
 
 }

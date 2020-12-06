@@ -3,6 +3,8 @@
         <h2 class="h1-responsive font-weight-bold my-4">Mijn producten</h2>
     </div>
 
+    <button class="btn btn-dark float-right mt-2 mb-2" (click)="downloadSupplierProducts()">Mijn producten exporteren</button>
+
     <div class="row col-12 mt-5">
         <div *ngFor="let product of jsonSupplierData.products; let i = index" class="col-lg-12">
             <div class="row" id="productbalk" name="productbalk">
