@@ -39,6 +39,11 @@ export class AddProductComponent implements OnInit {
         );
     }
 
+    // helper for selecting the quantity
+    selectedQuantity(event): void {
+        this.productData.quantity = event.target.value;
+    }
+
     addProduct(): void {
         if (this.selectedFile != null) {
             // Create a object with the supplier data and the selected image data and send that
