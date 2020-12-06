@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-6 p-4" name="information">
                     <h4>{{product.name}}</h4>
-                    <h5>€{{product.price}}/Kg</h5>
+                    <h5>€{{product.price}}/{{product.quantity.slice(4, -1)}}</h5>
                     <h6>{{product.description}}</h6>
                 </div>
                 <div class="col-4 align-self-center" id="interactions" name="interactions">
