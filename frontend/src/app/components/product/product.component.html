@@ -57,7 +57,7 @@
                     <h4 class="card-title">
                         <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
                     </h4>
-                    <h5>€{{product.price}}/Kg</h5>
+                    <h5>{{product.price.split(":")[0]}} €{{product.price.split(":")[1]}}</h5>
                     <p class="card-text">{{product.description}}</p>
                 </div>
             </div>

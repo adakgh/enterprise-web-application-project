@@ -110,6 +110,7 @@ public class DemoApplication {
             var supp1 = new SupplierEntity();
             supp1.setCompanyName("Slachterij Hooijmans");
             supp1.setContactPerson("Willem Hooijmans");
+            supp1.setContactEmail("willem@gmail.com");
 
             // supplier address
             var supp1_addr = new SupplierAddressEntity();
@@ -124,8 +125,8 @@ public class DemoApplication {
             var product1 = new ProductEntity();
             product1.setName("Tomaten");
             product1.setDescription("Grote, mooie, rode, verse tomaten uit onze tuin");
-            product1.setQuantity("per stuk:");
-            product1.setPrice(("4.95"));
+            product1.setQuantity("50 Kilogram-(KG)");
+            product1.setPrice(("per kilo:4.95"));
             product1.setAddedDate(new Date());
             product1.addProductCategory(productCategoryRepository.getOne(1L)); // lazy load
             supp1.addProduct(product1); // resolve relationship (supplier <-> product)
@@ -133,8 +134,8 @@ public class DemoApplication {
             var product2 = new ProductEntity();
             product2.setName("Kip filet");
             product2.setDescription("Filetlapje gemarineerd verpakt");
-            product2.setQuantity("per stuk:");
-            product2.setPrice(("1.85"));
+            product2.setQuantity("50 Kilogram-(KG)");
+            product2.setPrice(("per 500 gram:1.85"));
             product2.setAddedDate(new Date());
             product2.addProductCategory(productCategoryRepository.getOne(5L)); // lazy load
             supp1.addProduct(product2); // resolve relationship (supplier <-> product)
@@ -154,6 +155,7 @@ public class DemoApplication {
             var supp2 = new SupplierEntity();
             supp2.setCompanyName("Boerderij Theo Machielsen");
             supp2.setContactPerson("Theo Machielsen");
+            supp2.setContactEmail("theoMachielsen@gmai.com");
 
             // supplier address
             var supp2_addr = new SupplierAddressEntity();
@@ -168,8 +170,8 @@ public class DemoApplication {
             var product2_1 = new ProductEntity();
             product2_1.setName("Honing");
             product2_1.setDescription("100% Natuurzuivere Honing");
-            product2_1.setQuantity("per stuk:");
-            product2_1.setPrice(("6.95"));
+            product2_1.setQuantity("100 Stuk(s)");
+            product2_1.setPrice(("per stuk:6.95"));
             product2_1.setAddedDate(new Date());
             product2_1.addProductCategory(productCategoryRepository.getOne(7L)); // lazy load
             supp2.addProduct(product2_1); // resolve relationship (supplier <-> product)
@@ -177,8 +179,8 @@ public class DemoApplication {
             var product2_2 = new ProductEntity();
             product2_2.setName("Champignons");
             product2_2.setDescription("Filetlapje gemarineerd verpakt");
-            product2_2.setQuantity("per 500 gram:");
-            product2_2.setPrice(("3.49"));
+            product2_2.setQuantity("25000 Gram-(G)");
+            product2_2.setPrice(("per 500 gram:3.49"));
             product2_2.setAddedDate(new Date());
             product2_2.addProductCategory(productCategoryRepository.getOne(1L)); // lazy load
             supp2.addProduct(product2_2); // resolve relationship (supplier <-> product)
@@ -186,8 +188,8 @@ public class DemoApplication {
             var product2_3 = new ProductEntity();
             product2_3.setName("Aardbeien");
             product2_3.setDescription("De Hollandse aarbei, fris en vol van smaak!");
-            product2_3.setQuantity("per doos:");
-            product2_3.setPrice(("2.79"));
+            product2_3.setQuantity("50 Dozen");
+            product2_3.setPrice(("per doos:2.79"));
             product2_3.setAddedDate(new Date());
             product2_3.addProductCategory(productCategoryRepository.getOne(1L)); // lazy load
             supp2.addProduct(product2_3); // resolve relationship (supplier <-> product)
@@ -195,8 +197,8 @@ public class DemoApplication {
             var product2_4 = new ProductEntity();
             product2_4.setName("Volkoren Brood");
             product2_4.setDescription("Volkoren brood voor een lekkere, stevige boterham.");
-            product2_4.setQuantity("per stuk:");
-            product2_4.setPrice(("1.25"));
+            product2_4.setQuantity("50 Stuk(s)");
+            product2_4.setPrice(("per stuk:1.25"));
             product2_4.setAddedDate(new Date());
             product2_4.addProductCategory(productCategoryRepository.getOne(3L)); // lazy load
             supp2.addProduct(product2_4); // resolve relationship (supplier <-> product)
@@ -204,8 +206,8 @@ public class DemoApplication {
             var product2_5 = new ProductEntity();
             product2_5.setName("Veganistische Mayonaise");
             product2_5.setDescription("Mayonaise waarbj de eierdooier is vervangen door plantaardige ingrediënten.");
-            product2_5.setQuantity("per stuk:");
-            product2_5.setPrice(("1.84"));
+            product2_5.setQuantity("145 Stuk(s)");
+            product2_5.setPrice(("per stuk:1.84"));
             product2_5.setAddedDate(new Date());
             product2_5.addProductCategory(productCategoryRepository.getOne(6L)); // lazy load
             supp2.addProduct(product2_5); // resolve relationship (supplier <-> product)
@@ -213,8 +215,8 @@ public class DemoApplication {
             var product2_6 = new ProductEntity();
             product2_6.setName("Santpoorts Tripel");
             product2_6.setDescription("Waar alles mee begon! Dit is ons aller-eerste bier, alleen voor echte mannen!");
-            product2_6.setQuantity("per stuk:");
-            product2_6.setPrice(("2.49"));
+            product2_6.setQuantity("33 Stuk(s)");
+            product2_6.setPrice(("per stuk:2.49"));
             product2_6.setAddedDate(new Date());
             product2_6.addProductCategory(productCategoryRepository.getOne(4L)); // lazy load
             supp2.addProduct(product2_6); // resolve relationship (supplier <-> product)
@@ -236,6 +238,7 @@ public class DemoApplication {
             var supp3 = new SupplierEntity();
             supp3.setCompanyName("VITAMINEHOEK DE KRAGGE");
             supp3.setContactPerson("Sonja de Kragge");
+            supp3.setContactEmail("sonjaDeKraase@hotmail.com");
 
             // supplier address
             var supp3_addr = new SupplierAddressEntity();
@@ -250,8 +253,8 @@ public class DemoApplication {
             var product3_1 = new ProductEntity();
             product3_1.setName("Geitenkaas");
             product3_1.setDescription("Honingklaver Biologische geitenkaas in blokjes in zonnebloemolie.");
-            product3_1.setQuantity("per stuk:");
-            product3_1.setPrice(("6.25"));
+            product3_1.setQuantity("500 Stuk(s)");
+            product3_1.setPrice(("per stuk:6.25"));
             product3_1.setAddedDate(new Date());
             product3_1.addProductCategory(productCategoryRepository.getOne(2L)); // lazy load
             supp3.addProduct(product3_1); // resolve relationship (supplier <-> product)
