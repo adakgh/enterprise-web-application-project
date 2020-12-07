@@ -96,13 +96,12 @@
                     <div (click)="onClick(message)" *ngFor="let message of allMessages" class="chat_list"
                          [class.active_chat]="message === selectedMessage">
                         <div class="chat_people">
-                            <div class="chat_img"><img src="https://ptetutorials.com/images/user-profile.png"
-                                                       alt="sunil"></div>
+                            <div class="chat_img"><!--<img src="https://ptetutorials.com/images/user-profile.png"
+                                                       alt="sunil">--></div>
                             <div class="chat_ib">
-                                <h5>Johan Klaas - NIEUW PRODUCT (OnderwerpGesprek IF ITS about a new product) <span
+                                <h5>Johan Klaas - Factuur aanvraag <span
                                     class="chat_date">Dec 25</span></h5>
-                                <p>Test, which is a new approach to have all solutions
-                                    astrology under one roof.</p>
+                                <p>Ik wil graag 10 kilo tomaten van u</p>
                             </div>
                         </div>
                     </div>
@@ -110,22 +109,11 @@
             </div>
 
             <div class="mesgs" *ngIf="selectedMessage!=null">
-                <!-- Messages receiver and sender-->
+                <!-- Messages receiver and sender-->    
                 <div class="msg_history">
-                    <div class="incoming_msg">
-                        <div class="incoming_msg_img"><img src="https://ptetutorials.com/images/user-profile.png"
-                                                           alt="sunil"></div>
-                        <div class="received_msg">
-                            <div class="received_withd_msg">
-                                <p>Test which is a new approach to have all
-                                    solutions</p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span></div>
-                        </div>
-                    </div>
                     <div class="outgoing_msg">
                         <div class="sent_msg">
-                            <p>Test which is a new approach to have all
-                                solutions</p>
+                            <p>Ik wil graag 10 kilo tomaten van u.</p>
                             <span class="time_date"> 11:01 AM    |    June 9</span></div>
                     </div>
                     <div class="incoming_msg">
@@ -133,13 +121,13 @@
                                                            alt="sunil"></div>
                         <div class="received_msg">
                             <div class="received_withd_msg">
-                                <p>Test, which is a new approach to have</p>
-                                <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
+                                <p>Voor wanneer wilt u het hebben en komt u het ophalen of wilt u dat we het verzenden.</p>
+                                <span class="time_date"> 11:01 AM    |    June 9</span></div>
                         </div>
                     </div>
                     <div class="outgoing_msg">
                         <div class="sent_msg">
-                            <p>Apollo University, Delhi, India Test</p>
+                            <p>Ik wil het graag voor maandag 07-12-2020 hebben, we komen het zelf wel ophalen.</p>
                             <span class="time_date"> 11:01 AM    |    Today</span></div>
                     </div>
                     <div class="incoming_msg">
@@ -147,9 +135,7 @@
                                                            alt="sunil"></div>
                         <div class="received_msg">
                             <div class="received_withd_msg">
-                                <p>We work directly with our designers and suppliers,
-                                    and sell direct to you, which means quality, exclusive
-                                    products, at a price anyone can afford.</p>
+                                <p>Duidelijk! U kunt maandag de gewenste producten komen ophalen wij maken het klaar voor u ook zetten we de factuur klaar.</p>
                                 <span class="time_date"> 11:01 AM    |    Today</span></div>
                         </div>
                     </div>

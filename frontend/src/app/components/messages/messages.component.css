@@ -50,7 +50,7 @@ img {
 
 
 .inbox_people {
-    background: #f8f8f8 none repeat scroll 0 0;
+    background-image: url(https://i.imgur.com/XnU9DsV.png) ;
     float: left;
     overflow: hidden;
     width: 40%;
@@ -118,7 +118,7 @@ img {
 }
 
 .active_chat {
-    background: #ebebeb;
+    background: #beff7a;
 }
 
 .incoming_msg_img {
