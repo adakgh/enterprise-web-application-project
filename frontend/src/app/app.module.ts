@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 
-import { CookieModule } from 'ngx-cookie';
+import {CookieModule} from 'ngx-cookie';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -23,9 +23,7 @@ import {AddProductComponent} from './components/addproduct/add-product.component
 import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
-import { MyproductsComponent } from './components/myproducts/myproducts.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import {MyproductsComponent} from './components/myproducts/myproducts.component';
 
 
 @NgModule({
@@ -56,7 +54,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         FormsModule,
         RouterModule,
         ReactiveFormsModule,
-        NgbModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
