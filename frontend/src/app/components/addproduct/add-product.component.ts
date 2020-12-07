@@ -55,6 +55,9 @@ export class AddProductComponent implements OnInit {
 
     addProduct(): void {
 
+        console.log(this.priceType);
+        console.log(this.quantityType);
+
         this.productData.price = this.priceType + this.productData.price;
         this.productData.quantity = this.productData.quantity + this.quantityType;
 

@@ -26,13 +26,13 @@
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <p>Feedback Waarderingen:</p>
-                    <img src="https://i.imgur.com/hQr5v1E.png" alt="" style="max-width: 100px"> (5/5)
+                    <!--<p>Feedback Waarderingen:</p>
+                    <img src="https://i.imgur.com/hQr5v1E.png" alt="" style="max-width: 100px"> (5/5)-->
                 </div>
                 <div class="col-md-8 col-sm-12">
                     <ul class="text-left quickLinks">
-                        <li><a href="#" routerLink="/supplierinfo">| Aangeboden Objecten | </a></li>
-                        <li><a href="mailto:{{jsonSupplierData.contactEmail}}"> Contact | </a></li>
+                        <li><a class="btn" (click)="allProducts()">| Aangeboden Objecten | </a></li>
+                        <li><a class="btn" href="mailto:{{jsonSupplierData.contactEmail}}"> Contact | </a></li>
                         <!--<li><a href="https://www.facebook.com/deduintuinheemskerk/" target="_blank"> Facebook | </a></li>-->
                     </ul>
                 </div>
@@ -77,7 +77,7 @@
                         <h4 class="card-title">
                             <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
                         </h4>
-                        <h5>€{{product.price}}/Kg</h5>
+                        <h5>{{product.price.split(":")[0]}} €{{product.price.split(":")[1]}}</h5>
                         <p class="card-text">{{product.description}}</p>
                     </div>
                 </div>

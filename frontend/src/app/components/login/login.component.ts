@@ -58,10 +58,10 @@ export class LoginComponent implements OnInit {
                         res => this.navToHomepage(),
                         err => this.loginErrMsg = 'E-mail of wachtwoord is niet correct'
                     );
-                } else if (resp === true){
+                } else if (resp === true) {
                     // if account is locked give alert
                     alert('Verifieer eerst jouw e-mailadres om gebruik te maken van het account!');
-                } else if (resp === null){
+                } else if (resp === null) {
                     this.loginErrMsg = 'E-mail of wachtwoord is niet correct';
                 }
             }, err => console.log(err));
@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit {
                     username: user.email,
                     password: user.password,
                     roles: [{id: 2}],
-                    supplier: {companyName: user.company}
+                    supplier: {companyName: user.company, contactEmail: user.email}
                 };
             }
 

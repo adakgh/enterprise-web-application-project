@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../services/api.service";
 import {RouteUtil} from "../../utils/route.util";
 import {ProductService} from "../../services/product.service";
+import {DemoImage} from "../supplier-info/supplier-info-edit/default-image";
 
 @Component({
     selector: 'app-home',
@@ -22,7 +23,9 @@ export class HomeComponent implements OnInit {
                 private apiService: ApiService,
                 private routeUtil: RouteUtil,
                 private productService: ProductService,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                public demoImage: DemoImage
+    ) {
     }
 
     ngOnInit(): void {

@@ -70,7 +70,7 @@ export class ProductService {
 
     // For the home page, get standard the most recent products
     getRecentProducts(): Observable<any> {
-        return this.apiService.get('/products?sort=addedDate,asc').pipe(
+        return this.apiService.get('/products?sort=addedDate,desc').pipe(
             map(res => {
                 return res.content;
             })
