@@ -27,6 +27,7 @@ public class DemoApplication {
     private final InquiryRepository inquiryRepository;
     private final ProductCategoryRepository productCategoryRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ChatRepository chatRepository;
 
     @Bean
     public CommandLineRunner init() {
@@ -264,6 +265,62 @@ public class DemoApplication {
             userRepository.save(user3);
 
             // -----------------------------------------------------
+
+// chat
+            var user4 = new UserEntity();
+            user4.setUsername("myUsername4@gmail.com");
+            user4.setPassword(passwordEncoder.encode("myPassword1!"));
+            user4.addRole(customerRole);
+
+            var cust1 = new CustomerEntity();
+            cust1.setFirstName("Roberto");
+            cust1.setLastName("Indemans");
+            user4.setCustomer(cust1);
+            userRepository.save(user4);
+
+            // chat-conversation (cust1 with supp3)
+            var chatC11 = new ChatEntity();
+            chatC11.setMessage("Goedemiddag meneer Citik. Heeft u nog verse tomaten op voorraad?");
+            user4.addChatMessage(chatC11, user3);
+            chatRepository.save(chatC11);
+
+            var chatC12 = new ChatEntity();
+            chatC12.setMessage("Ik had trouwens ook een vraag over turks fruit, kunt u dat ook leveren?");
+            user4.addChatMessage(chatC12, user3);
+            chatRepository.save(chatC12);
+
+            // chat-conversation (cust1 with supp2)
+            var chatC21 = new ChatEntity();
+            chatC21.setMessage("Beste Theo. Verkoopt u ook vers lams vlees?");
+            user4.addChatMessage(chatC21, user2);
+            chatRepository.save(chatC21);
+
+            // chat-conversation, continuation (cust1 with supp3)
+            var chatC13 = new ChatEntity();
+            chatC13.setMessage("Hallo? Ik heb niks meer van u vernomen afgelopen week. Kunt u aub reageren?!");
+            user4.addChatMessage(chatC13, user3);
+            chatRepository.save(chatC13);
+
+            // chat-conversation (supp3 replying to cust1)
+            var chatS11 = new ChatEntity();
+            chatS11.setMessage("Beste meneer indemans, ik ben helaas op dit moment niet aanwezig op mijn boerderij. " +
+                    "Ik zit momenteel met mijn familie in Turkije en ben pas over 2 weken terug in Nederland. " +
+                    "Als u over 2 weken nog geinteresseerd bent, kunt u mij dan een berichtje sturen?");
+            user3.addChatMessage(chatS11, user4);
+            chatRepository.save(chatS11);
+
+            // chat-conversation, continuation (cust1 with supp3)
+            var chatC14 = new ChatEntity();
+            chatC14.setMessage("Klinkt als een goed plan, ik neem over 2 weken nog een keer contact met u op.");
+            user4.addChatMessage(chatC14, user3);
+            chatRepository.save(chatC14);
+
+            // chat-conversation (supp2 replying to cust1)
+            var chatS22 = new ChatEntity();
+            chatS22.setMessage("Hallo Roberto, Theo hier. Ik heb pas volgende maand weer vers lams vlees je.");
+            user2.addChatMessage(chatS22, user4);
+            chatRepository.save(chatS22);
+
         };
     }
 }

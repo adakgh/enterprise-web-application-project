@@ -24,6 +24,9 @@ public class ProductEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "UNIT")
+    private String unit;
+
     @Column(name = "QUANTITY")
     private String quantity;
 

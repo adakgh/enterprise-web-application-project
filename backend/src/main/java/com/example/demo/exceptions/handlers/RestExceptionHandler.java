@@ -1,7 +1,7 @@
 package com.example.demo.exceptions.handlers;
 
 import com.example.demo.exceptions.ExpiredTokenException;
-import com.example.demo.models.responses.ExceptionResponse;
+import com.example.demo.models.dto.ExceptionDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,8 +20,8 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(ExpiredTokenException.class)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public ExceptionResponse handleExpiredTokenException(HttpServletRequest request) {
+    public ExceptionDto handleExpiredTokenException(HttpServletRequest request) {
         String message = "Token expired, please refresh in order to continue";
-        return new ExceptionResponse(HttpStatus.UNAUTHORIZED, message, request.getRequestURI());
+        return new ExceptionDto(HttpStatus.UNAUTHORIZED, message, request.getRequestURI());
     }
 }

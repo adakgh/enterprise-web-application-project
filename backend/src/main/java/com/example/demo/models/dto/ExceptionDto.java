@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import java.sql.Timestamp;
 
 @Getter
-public class ExceptionResponse {
+public class ExceptionDto {
 
     private Timestamp timestamp;
     private int status;
@@ -14,7 +14,7 @@ public class ExceptionResponse {
     private String message;
     private String path;
 
-    public ExceptionResponse(HttpStatus status, String message, String path) {
+    public ExceptionDto(HttpStatus status, String message, String path) {
         this.timestamp = new Timestamp(System.currentTimeMillis());
         this.status = status.value();
         this.reason = status.getReasonPhrase();

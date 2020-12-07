@@ -1,5 +1,6 @@
 package com.example.demo.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,6 +37,14 @@ public class UserEntity {
     @JoinColumn(name = "SUPPLIER_ID")
     private SupplierEntity supplier;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMER_ID")
+    private CustomerEntity customer;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private Set<ChatEntity> chatMessages = new HashSet<>();
+
     @Column(name = "LOCKED")
     private boolean locked;
 
@@ -43,6 +52,16 @@ public class UserEntity {
     public void addRole(RoleEntity role) {
         roles.add(role);
         role.getUsers().add(this);
+    }
+
+    /**
+     * Convenience method to add a single chat-message
+     */
+    public void addChatMessage(ChatEntity chatMessage, UserEntity receiver) {
+        this.chatMessages.add(chatMessage);
+        chatMessage.setSender(this);
+        chatMessage.setReceiver(receiver);
+        chatMessage.setConversationId(this.getId(), receiver.getId());
     }
 }
 
