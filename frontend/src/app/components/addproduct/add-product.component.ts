@@ -41,6 +41,10 @@ export class AddProductComponent implements OnInit {
         this.productService.getAllCategories().subscribe(
             res => this.categoryMap = res
         );
+
+        // temporary setting the values otherwise will be recognized as 'undefined'
+        this.priceType = 'per stuk:';
+        this.quantityType = ' Kilogram-(KG)';
     }
 
     // helper for selecting the price Type - like per kilo or per stuk
