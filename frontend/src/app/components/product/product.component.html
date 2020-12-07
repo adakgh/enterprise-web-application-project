@@ -39,8 +39,8 @@
                     <option value="name,desc">naam (Z-A)</option>
                     <option value="price,asc">prijs (laag-hoog)</option>
                     <option value="price,desc">prijs (hoog-laag)</option>
-                    <option value="addedDate,asc">datum toegevoegd (nieuwste eerst)</option>
-                    <option value="addedDate,desc">datum toegevoegd (oudste eerst)</option>
+                    <option value="addedDate,desc">datum toegevoegd (nieuwste eerst)</option>
+                    <option value="addedDate,asc">datum toegevoegd (oudste eerst)</option>
                 </select>
             </div>
         </fieldset>
@@ -51,20 +51,20 @@
             <div class="card h-100">
                 <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
                     id="productImage"
-                    src="../../../assets/images/bloemkolen.jpeg"
+                    [src]="demoImage.sanatizeUrl(product.productImage!=null?demoImage.atoba(product.productImage.picByte):demoImage.productBase64Url)"
                     alt="{{product.name}}"/></a>
                 <div class="card-body">
                     <h4 class="card-title">
                         <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
                     </h4>
-                    <h5>€{{product.price}}/Kg</h5>
+                    <h5>{{product.price.split(":")[0]}} €{{product.price.split(":")[1]}}</h5>
                     <p class="card-text">{{product.description}}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="panel-group">
+<div class="panel-group" *ngIf="authService.isAuthenticated() && currentUserService.isCustomer()">
     <div class="panel panel-default">
         <div class="section_popup-bottom-right">
             <h5 class="mt-2 mr-1" data-toggle="collapse" data-target="#collapse1">Product niet gevonden?</h5>

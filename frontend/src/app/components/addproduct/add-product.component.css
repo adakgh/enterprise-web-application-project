@@ -7,3 +7,7 @@
     color: #265139;
     font-weight: bold;
 }
+
+#uploadImage {
+    text-decoration: line-through !important;
+}

@@ -4,7 +4,7 @@
         <div class="col-md-10 backgroundInfoDetail center">
             <div class="row p-3">
                 <div class="col-md-2 col-sm-12">
-                    <img src="https://image.freepik.com/vrije-vector/fruit-en-groenten-logo_7085-159.jpg"
+                    <img [src]="demoImage.sanatizeUrl(generatedImage)"
                          class="supplierImg" alt="">
                 </div>
                 <div class="col-md-5 col-sm-12 p-3 pl-5">
@@ -14,26 +14,31 @@
                 </div>
                 <div class="col-md-5 col-sm-12 p-3">
                     <b>Gegevens: </b>
-                    <li *ngIf="jsonSupplierData.website !=null && jsonSupplierData.website!=''">Website: {{jsonSupplierData.website}}</li>
-                    <li *ngIf="jsonSupplierData.phoneNumber !=null && jsonSupplierData.phoneNumber!=''">Telefoon: {{jsonSupplierData.phoneNumber}}</li>
-                    <li *ngIf="jsonSupplierData.contactEmail !=null && jsonSupplierData.contactEmail!=''">Email: {{jsonSupplierData.contactEmail}}</li>
-                    <li *ngIf="jsonSupplierData.addresses !=null && jsonSupplierData.addresses!=''">Adress: {{concatAddress()}}</li>
+                    <li *ngIf="jsonSupplierData.website !=null && jsonSupplierData.website!=''">
+                        Website: {{jsonSupplierData.website}}</li>
+                    <li *ngIf="jsonSupplierData.phoneNumber !=null && jsonSupplierData.phoneNumber!=''">
+                        Telefoon: {{jsonSupplierData.phoneNumber}}</li>
+                    <li *ngIf="jsonSupplierData.contactEmail !=null && jsonSupplierData.contactEmail!=''">
+                        Email: {{jsonSupplierData.contactEmail}}</li>
+                    <li *ngIf="jsonSupplierData.addresses !=null && jsonSupplierData.addresses!=''">
+                        Adress: {{concatAddress()}}</li>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <p>Feedback Waarderingen:</p>
-                    <img src="https://i.imgur.com/hQr5v1E.png" alt="" style="max-width: 100px"> (5/5)
+                    <!--<p>Feedback Waarderingen:</p>
+                    <img src="https://i.imgur.com/hQr5v1E.png" alt="" style="max-width: 100px"> (5/5)-->
                 </div>
                 <div class="col-md-8 col-sm-12">
                     <ul class="text-left quickLinks">
-                        <li><a href="#" routerLink="/supplierinfo">| Aangeboden Objecten | </a></li>
-                        <li><a href="mailto:{{jsonSupplierData.contactEmail}}"> Contact | </a></li>
+                        <li><a class="btn" (click)="allProducts()">| Aangeboden Objecten | </a></li>
+                        <li><a class="btn" href="mailto:{{jsonSupplierData.contactEmail}}"> Contact | </a></li>
                         <!--<li><a href="https://www.facebook.com/deduintuinheemskerk/" target="_blank"> Facebook | </a></li>-->
                     </ul>
                 </div>
                 <div class="col-md-1">
-                    <a *ngIf="currentUserService.getSupplierId()==jsonSupplierData.id" class="btn btn-primary" class="editButton" [routerLink]="['edit']" [queryParams]="{id:jsonSupplierData.id}">Wijzig</a>
+                    <a *ngIf="currentUserService.getSupplierId()==jsonSupplierData.id" class="btn btn-primary"
+                       class="editButton" [routerLink]="['edit']" [queryParams]="{id:jsonSupplierData.id}">Wijzig</a>
                 </div>
             </div>
         </div>
@@ -60,11 +65,28 @@
             <h5 class="text-center"> Aangeboden Producten </h5>
         </div>
 
-        <app-recent-product *ngFor="let recentProduct of jsonSupplierData.products; let i = index" [product]="recentProduct"></app-recent-product>
+        <!-- Recent Products of suppliers -->
+        <div class="row col-12">
+            <div *ngFor="let product of jsonLimitedProductsData; let i = index" class="col-lg-3 col-md-4 mb-3">
+                <div class="card h-100">
+                    <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
+                        id="productImage"
+                        [src]="demoImage.sanatizeUrl(product.productImage!=null?demoImage.atoba(product.productImage.picByte):demoImage.productBase64Url)"
+                        alt="{{product.name}}"/></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
+                        </h4>
+                        <h5>{{product.price.split(":")[0]}} €{{product.price.split(":")[1]}}</h5>
+                        <p class="card-text">{{product.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Refer to page with all products supplier is selling/offering -->
         <div class="col-sm-12">
-            <a href="" routerLink="supplierProducts" class="float-right">Zie alle producten</a>
+            <a (click)="allProducts()" class="btn float-right" >Zie alle producten</a>
         </div>
 
     </div>

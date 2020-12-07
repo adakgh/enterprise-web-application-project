@@ -13,13 +13,23 @@ export class MyProductsService {
                 private apiService: ApiService) {
     }
 
-    getAllMyProducts(): Observable<any> {
-        const query = this.routeUtil.getUrlQuery();
+    getProduct(id: number): Observable<any>{
+        const quary = id;
 
-        return this.apiService.get('/products' + query).pipe(
+        return this.apiService.get('/product/' + quary).pipe(
             map(res => {
-                return res.content;
+                console.log('Test');
+                console.log(res);
+                return res;
             })
         );
     }
+
+    updateProduct(): Observable<any>{
+        const product: any = {};
+        return this.apiService.post('/products', product, null).pipe(
+            tap(res => console.log('Received status: ' + res.status))
+        );
+    }
 }
+

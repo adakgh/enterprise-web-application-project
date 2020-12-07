@@ -31,6 +31,12 @@ export class LoginComponent implements OnInit {
                 private registerService: RegisterService) {
     }
 
+    // getting the form controls
+    // tslint:disable-next-line:typedef
+    get f() {
+        return this.registerForm.controls;
+    }
+
     ngOnInit(): void {
         this.authService.deleteAuthentication(); // force a logout;
         // register form validation
@@ -38,16 +44,27 @@ export class LoginComponent implements OnInit {
         this.setTypeValidators();
 
         // TODO: remove after testing --> test values for input fields
-        this.loginData.username = 'myUsername@gmail.com';
-        this.loginData.password = 'myPassword1!';
+        // this.loginData.username = 'myUsername@gmail.com';
+        // this.loginData.password = 'myPassword1!';
     }
 
     login(): void {
-        console.log(this.loginData);
-        this.loginsService.requestAccessToken(this.loginData).subscribe(
-            res => this.navToHomepage(),
-            err => this.loginErrMsg = 'E-mail of wachtwoord is niet correct'
-        );
+        this.loginsService.isLocked(this.loginData.username).subscribe(
+            resp => {
+                // if account is not locked log the user in
+                if (resp === false) {
+                    console.log(this.loginData);
+                    this.loginsService.requestAccessToken(this.loginData).subscribe(
+                        res => this.navToHomepage(),
+                        err => this.loginErrMsg = 'E-mail of wachtwoord is niet correct'
+                    );
+                } else if (resp === true) {
+                    // if account is locked give alert
+                    alert('Verifieer eerst jouw e-mailadres om gebruik te maken van het account!');
+                } else if (resp === null) {
+                    this.loginErrMsg = 'E-mail of wachtwoord is niet correct';
+                }
+            }, err => console.log(err));
     }
 
     LoginRememberMe(values: any): void {
@@ -74,12 +91,6 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    // getting the form controls
-    // tslint:disable-next-line:typedef
-    get f() {
-        return this.registerForm.controls;
-    }
-
     register(): void {
         this.submitted = true;
 
@@ -92,17 +103,29 @@ export class LoginComponent implements OnInit {
             // body construction based on choice
             let body = {};
             if (user.type === 'customer') {
-                body = {username: user.email, password: user.password, roles: [{id: 3}]};
+                body = {
+                    fullname: user.firstName + ' ' + user.lastName,
+                    username: user.email,
+                    password: user.password,
+                    roles: [{id: 3}]
+                };
             } else if (user.type === 'supplier') {
-                body = {username: user.email, password: user.password, roles: [{id: 2}], supplier: {companyName: user.company}};
+                body = {
+                    fullname: user.company,
+                    username: user.email,
+                    password: user.password,
+                    roles: [{id: 2}],
+                    supplier: {companyName: user.company, contactEmail: user.email}
+                };
             }
 
             // register the user
             this.registerService.register(body).subscribe(
                 res => {
-                    // log the user in
-                    this.loginsService.requestAccessToken(body).subscribe(
-                        resp => this.navToHomepage());
+                    alert('Het registreren is gelukt. Volg de aanwijzingen in de verificatiemail verstuurd naar jouw e-mailadres.');
+                    this.router.navigate(['/login']).then(() => {
+                        window.location.reload();
+                    });
                 }, err => {
                     console.log(err);
                     if (err.status === 409) {

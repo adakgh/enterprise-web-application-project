@@ -1,0 +1,161 @@
+<div class="container text-center title-background p-3">
+    <h2 class="h1-responsive font-weight-bold my-4">Update {{productData.name}}</h2>
+</div>
+
+<div class="row needs-validation block mt-5">
+    <div class="col-3  mb-4">
+        <div>
+            <picture>
+                <img  [src]="demoImage.sanatizeUrl(demoImage.generatedImage)" alt="voeg afbeelding toe"
+                     style="width: 80%; height: 100%; opacity: 100%; border: 1px solid gray;" class="img-thumbnail">
+<!--                src="https://simpleicon.com/wp-content/uploads/camera.png"-->
+                <input type="file" (change)="onFileSelected($event)">
+            </picture>
+        </div>
+        <br>
+        <div>
+            <!--<button id="uploadImage" type="submit" (click)="onUpload()" class="btn btn-primary" disabled>Voeg afbeeldig
+                toe
+            </button>-->
+        </div>
+    </div>
+
+    <div class="col-6 mb-4">
+        <form class="login-form" name="form" #form="ngForm" novalidate>
+
+            <!-- Naam product -->
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label label-title">Titel:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="inputTitel"
+                           name="name" [(ngModel)]="productData.name">
+                </div>
+            </div>
+
+            <!-- Prijs product -->
+            <div class="form-group row">
+                <label for="inputCost" class="col-sm-2 col-form-label label-title">Prijs:</label>
+                <div class="col-sm-8 input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">€</div>
+                    </div>
+                    <input type="text" class="form-control" id="inputCost"
+                           name="price" [(ngModel)]="productData.price">
+                    <div class="col-sm-8 input-group" (change)="selectedPriceType($event)">
+                        <select class="form-control" id="inputCostType">
+                            <option disabled value=""></option>
+                            <option [selected]="true" value="per stuk:">per stuk</option>
+                            <option value="per 500 gram:">per 500 gram</option>
+                            <option value="per kg:">per kg</option>
+                            <option value="per liter:">per liter</option>
+                            <option value="per doos:">per doos</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hoeveelheid product -->
+            <div class="form-group row">
+                <label for="inputStock" class="col-sm-2 col-form-label label-title">Voorraad:</label>
+                <div class="col-sm-8 input-group">
+                    <div class="input-group-prepend">
+                        <!--                        <div class="input-group-text" name="quantity">{{jsonProductData.quantity}}</div>-->
+                    </div>
+                    <input type="text" class="form-control" id="inputStock"
+                           name="quantityNumber" [(ngModel)]="productData.quantity">
+                    <div class="col-sm-8 input-group" (change)="selectedStock($event)">
+                        <select class="form-control" id="inputStockSecond" #quantity [(ngModel)]="quantityType">
+                            <option disabled value=""></option>
+                            <option value="Kilogram-(KG)">Kilogram (KG)</option>
+                            <option value=" Gram-(G) ">Gram (G)</option>
+                            <option value=" Liter-(L) ">Liter (L)</option>
+                            <option value=" Stuk(s) ">Stuk(s)</option>
+                            <option value=" Doos/Dozen ">Doos/Dozen</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category product -->
+            <div class="form-group row">
+                <label for="inputStock" class="col-sm-2 col-form-label label-title">Categorie:</label>
+                <div class="col-sm-8">
+                    <select class="form-control" name="category" [(ngModel)]="productData.categoryId"> >
+                        <option *ngFor="let category of categoryMap" (change)="productData.categoryId=$event"
+                                value="{{category.id}}">{{category.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Description product -->
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" class="label-title">Beschijving:</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                          name="description" [(ngModel)]="productData.description" #name="ngModel"
+                >
+                </textarea>
+            </div>
+            <!-- Buttons -->
+            <div class="row">
+                <div class="col-auto">
+                    <button data-toggle="modal" (click)="updateProduct()" data-target="#add-product-popup"
+                            class="btn btn-primary">Update product
+                    </button>
+                </div>
+                <div class="col-auto">
+                    <button data-toggle="modal" data-target="#annul-product-popup" class="btn btn-danger">
+                        Annuleren
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Toevoegen -->
+<div class="modal fade" id="add-product-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add-product-lable">Het product is geupdated!</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-auto align-self-end">
+                        <button [routerLink]="['../']" [queryParams]="{id:supplierId}" class="btn btn-primary w-100"
+                                data-dismiss="modal">Sluiten
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Annuleren -->
+<div class="modal fade" id="annul-product-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="annul-label-popup">Weet u zeker dat u wilt annuleren?</h5>
+            </div>
+            <div class="modal-body container-fluid">
+                <div class="row">
+                    <div class="col-4">
+                        <button [routerLink]="['../']" [queryParams]="{id:supplierId}" class="btn btn-warning w-100"
+                                data-dismiss="modal">Ja
+                        </button>
+                    </div>
+                    <div class="col-5">
+                        <button class="btn btn-secondary w-100" data-dismiss="modal">Verder met update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

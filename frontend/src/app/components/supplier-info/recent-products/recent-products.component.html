@@ -1,0 +1,12 @@
+    <div class="card bg-primary col-md-4 h-100">
+        <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
+            id="productImage"
+            src="https://simpleicon.com/wp-content/uploads/camera.png"
+            alt="{{product.name}}"/></a>
+        <div class="card-body">
+            <h4 class="card-title">
+                <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
+            </h4>
+            <h5>€{{product.price}}/Kg</h5>
+            <p class="card-text">{{product.description}}</p>
+        </div>

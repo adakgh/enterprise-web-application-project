@@ -28,7 +28,7 @@ public class ProductEntity {
     private String quantity;
 
     @Column(name = "PRICE")
-    private BigDecimal price;
+    private String price;
 
     @Column(name = "DISCOUNT_QUANTITY")
     private String quantity2;
@@ -51,8 +51,20 @@ public class ProductEntity {
     @JoinColumn(name = "PRODUCT_CATEGORY_ID")
     private ProductCategoryEntity productCategory;
 
+    @OneToOne
+    private ImageEntity productImage;
+
     public void addProductCategory(ProductCategoryEntity productCategory) {
         this.productCategory = productCategory;
         productCategory.getProducts().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

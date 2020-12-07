@@ -8,6 +8,7 @@ import {map} from 'rxjs/operators';
     providedIn: 'root'
 })
 export class ProductService {
+    private productId: number;
 
     constructor(private routeUtil: RouteUtil,
                 private apiService: ApiService) {
@@ -25,6 +26,17 @@ export class ProductService {
         );
     }
 
+    // 1 product is sent to the HTML
+    getOneProduct(id: number): Observable<any> {
+        const query = id;
+
+        return this.apiService.get('/products/' + query).pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
+
     getAllCategories(): Observable<any> {
         return this.apiService.get('/products/categories').pipe(
             map(res => {
@@ -33,12 +45,44 @@ export class ProductService {
         );
     }
 
-    // getPageableData(): Observable<any> {
-    //     const query = this.routeUtil.getUrlQuery();
-    //     return this.apiService.get('/products' + query).pipe(
-    //         map(res => {
-    //             return res.pageable;
-    //         })
-    //     );
-    // }
+    getPageableData(): Observable<any> {
+        const query = this.routeUtil.getUrlQuery();
+        return this.apiService.get('/products' + query).pipe(
+            map(res => {
+                return res.pageable;
+            })
+        );
+    }
+
+    getProductId(): number {
+        if (this.productId == null) {
+        }
+        return this.productId;
+    }
+
+    updateProduct(id, body): Observable<any> {
+        return this.apiService.put('/products/' + id, body, null);
+    }
+
+    deleteProduct(id): Observable<any> {
+        return this.apiService.delete('/products/' + id, null);
+    }
+
+    // For the home page, get standard the most recent products
+    getRecentProducts(): Observable<any> {
+        return this.apiService.get('/products?sort=addedDate,desc').pipe(
+            map(res => {
+                return res.content;
+            })
+        );
+    }
+
+    // For the home page, a temporary filler for the most bought products
+    getMostBoughtProducts(): Observable<any> {
+        return this.apiService.get('/products?sort=addedDate,asc').pipe(
+            map(res => {
+                return res.content;
+            })
+        );
+    }
 }

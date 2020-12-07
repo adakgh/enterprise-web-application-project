@@ -1,7 +1,8 @@
 <div class="container">
     <div class="my-5 row">
         <div class="col-md-5 mb-4 mb-md-0">
-            <img class="img-fluid w-100" src="../../../assets/images/bloemkolen.jpeg"
+            <img class="img-fluid w-100"
+                 [src]="demoImage.sanatizeUrl(jsonData[0].productImage!=null?demoImage.atoba(jsonData[0].productImage.picByte):demoImage.productBase64Url)"
                  alt="Sample">
         </div>
 
@@ -9,7 +10,8 @@
             <h5>{{jsonData[0].name}}</h5>
             <p class="mb-2 text-muted text-uppercase small">{{jsonData[0].productCategory.name}}</p>
 
-            <p><span class="mr-1"><strong>prijs {{jsonData[0].quantity}} €{{jsonData[0].price}}</strong></span></p>
+            <p><span class="mr-1"><strong>Prijs {{type}} €{{price}}</strong></span></p>
+            <p><span class="mr-1"><i>Voorraad: {{jsonData[0].quantity}}</i></span></p>
             <p class="pt-1">{{jsonData[0].description}}</p>
             <hr>
             <p class="pt-1">{{jsonData[0].stock}}</p>
@@ -18,7 +20,7 @@
                     <label for="productAmount">hoeveelheid in kilo's: (minimaal 10 Kg)</label>
                     <input type="number" class="form-control" id="productAmount">
                 </div>
-                <button type="submit" class="btn btn-primary">Factuur aanvragen</button>
+                <button type="submit" class="btn btn-primary" routerLink="/messages">Factuur aanvragen</button>
             </form>
             <a routerLink="/supplierinfo" [queryParams]="{id: jsonData[0].customData.supplierId}">Bezoek verkoper pagina</a>
         </div>

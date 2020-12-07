@@ -3,7 +3,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {SupplierInfoService} from '../../services/supplier-info.service';
-import {CurrentUserService} from "../../services/current-user.service";
+import {CurrentUserService} from '../../services/current-user.service';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {Observable, Observer} from 'rxjs';
+import {DemoImage} from './supplier-info-edit/default-image';
 
 @Component({
     selector: 'app-supplier-info',
@@ -13,6 +16,9 @@ import {CurrentUserService} from "../../services/current-user.service";
 export class SupplierInfoComponent implements OnInit {
 
     jsonSupplierData;
+    jsonLimitedProductsData: any[] = [];
+    profileImageName;
+    generatedImage: string;
 
     constructor(
         private router: Router,
@@ -20,12 +26,14 @@ export class SupplierInfoComponent implements OnInit {
         private routeUtil: RouteUtil,
         private supplierInfoService: SupplierInfoService,
         private activatedRoute: ActivatedRoute,
-        public currentUserService: CurrentUserService
+        public currentUserService: CurrentUserService,
+        private domSanitizer: DomSanitizer,
+        public demoImage: DemoImage
     ) {
     }
 
-    // Subscribe to the query paramaters in the URL
     ngOnInit(): void {
+        // Subscribe to the query paramaters in the URL
         this.activatedRoute.queryParams.subscribe(
             res => {
                 // If there is no query given return user to homepage
@@ -44,7 +52,35 @@ export class SupplierInfoComponent implements OnInit {
     loadSupplierData(id: number): void {
         this.supplierInfoService.getSupplier(id).subscribe(
             res => {
+                const LIMIT_PRODUCTS = 4;
                 this.jsonSupplierData = res;
+
+                // Limit the shown product to 4 by making de jsonData smaller
+                let productsLength = res.products.length;
+                if (productsLength > LIMIT_PRODUCTS) {
+                    productsLength = LIMIT_PRODUCTS;
+                }
+                for (let i = 0; i < productsLength; i++) {
+                    this.jsonLimitedProductsData.push(res.products[i]);
+
+                    // Posible if there is child component
+                    /*if (this.jsonLimitedProductsData[i].productImage.picByte != null) {
+                        this.generatedImage = atob(this.jsonLimitedProductsData[i].productImage.picByte);
+                    } else {
+                        this.generatedImage = this.demoImage.imageBase64Url;
+                    }*/
+                }
+                console.log(this.jsonLimitedProductsData);
+
+                if (res.profileImage != null) {
+                    this.profileImageName = res.name;
+                    // this.demoImage.getImage(atob(res.profileImage.picByte));
+                    this.generatedImage = atob(res.profileImage.picByte);
+                } else {
+                    // Get the default image and put in src
+                    // this.demoImage.getImage(this.demoImage.imageBase64Url);
+                    this.generatedImage = this.demoImage.imageBase64Url;
+                }
             },
             err => {
                 console.log(err);
@@ -58,4 +94,7 @@ export class SupplierInfoComponent implements OnInit {
             this.jsonSupplierData.addresses[0].postalCode + ' ' + this.jsonSupplierData.addresses[0].city;
     }
 
+    allProducts() {
+        this.router.navigate(['myproducts'], {queryParams: {id: this.jsonSupplierData.id}});
+    }
 }

@@ -13,7 +13,12 @@ import {AddProductComponent} from './components/addproduct/add-product.component
 import {ErrorComponent} from './components/error/error.component';
 import {RequestproductComponent} from './components/requestproduct/requestproduct.component';
 import {AddrequestproductComponent} from './components/requestproduct/addrequestproduct/addrequestproduct.component';
+import {SuppliersListComponent} from './components/suppliers-list/suppliers-list.component';
+import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service';
 import {MyproductsComponent} from './components/myproducts/myproducts.component';
+import {MyproductsEditComponent} from './components/myproducts/myproducts-edit/myproducts-edit.component';
+import {VerifyUserComponent} from './components/verify-user/verify-user.component';
+import {MessagesComponent} from "./components/messages/messages.component";
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -22,12 +27,16 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
-    {path: 'supplierinfo/edit', component: SupplierInfoEditComponent},
+    {path: 'supplierinfo/edit', component: SupplierInfoEditComponent, canDeactivate: [UnsavedChangesGuardService]},
+    {path: 'suppliers', component: SuppliersListComponent},
     {path: 'addproduct', component: AddProductComponent, canActivate: [AuthGuardService]},
     {path: 'myproducts', component: MyproductsComponent, canActivate: [AuthGuardService]},
+    {path: 'myproducts/edit', component: MyproductsEditComponent, canActivate: [AuthGuardService]},
     {path: 'addrequestproduct', component: AddrequestproductComponent},
     {path: 'requestedproducts', component: RequestproductComponent},
     {path: 'contact', component: ContactComponent},
+    {path: 'verify', component: VerifyUserComponent},
+    {path: 'messages', component: MessagesComponent},
     {path: 'error', component: ErrorComponent},
     {path: '**', redirectTo: '/error'} // If page not found: goes to error 404 page
 ];
