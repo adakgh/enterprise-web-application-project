@@ -18,17 +18,17 @@
             </div>
         </fieldset>
         <br/>
-        <form class="col-md-2" [formGroup]="priceRangeForm"
-              (ngSubmit)="priceRange(priceRangeForm.value)">
+        <form class="col-md-2" [formGroup]="priceRangeForm">
             <div class="form-group">
                 <h5><label for="priceMin">Prijs van: </label></h5>
-                <input class="form-control" id="priceMin" type="text" value="0" formControlName="min">
+                <input class="form-control" id="priceMin" type="text" value="0" formControlName="min"
+                       (keyup)="priceRange(priceRangeForm.value)">
             </div>
             <div class="form-group">
                 <h5><label for="priceMax"> Tot: </label></h5>
-                <input class="form-control" id="priceMax" type="text" formControlName="max">
+                <input class="form-control" id="priceMax" type="text" formControlName="max"
+                       (keyup)="priceRange(priceRangeForm.value)">
             </div>
-            <input type="submit" class="btn btn-primary mb-2" value="Toepassen">
         </form>
         <fieldset class="col-md-3">
             <div class="form-group">
