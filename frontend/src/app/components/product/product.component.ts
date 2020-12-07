@@ -20,6 +20,9 @@ export class ProductComponent implements OnInit {
     selectedCategories: any = [];
     priceRangeForm;
 
+    page = 1;
+    pageSize = 4;
+
     constructor(
         private router: Router,
         private apiService: ApiService,
@@ -42,6 +45,7 @@ export class ProductComponent implements OnInit {
         this.activatedRoute.queryParamMap.subscribe(
             res => {
                 this.loadData();
+                console.log(res);
             }
         );
         this.productService.getAllCategories().subscribe(
@@ -57,7 +61,7 @@ export class ProductComponent implements OnInit {
     loadData(): void {
         this.productService.getAllProduct().subscribe(
             res => {
-                this.jsonData = res;
+                this.jsonData = res.content;
             },
             err => {
                 console.log(err);
@@ -106,5 +110,9 @@ export class ProductComponent implements OnInit {
         } else {
             this.routeUtil.deleteParam('category');
         }
+    }
+
+    setPageSize(values: any): void {
+        this.pageSize = values.target.value;
     }
 }

@@ -21,7 +21,7 @@ export class ProductService {
 
         return this.apiService.get('/products' + query).pipe(
             map(res => {
-                return res.content;
+                return res;
             })
         );
     }
