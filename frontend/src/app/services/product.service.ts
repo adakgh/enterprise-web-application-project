@@ -76,4 +76,13 @@ export class ProductService {
             })
         );
     }
+
+    // For the home page, a temporary filler for the most bought products
+    getMostBoughtProducts(): Observable<any> {
+        return this.apiService.get('/products?sort=addedDate,asc').pipe(
+            map(res => {
+                return res.content;
+            })
+        );
+    }
 }

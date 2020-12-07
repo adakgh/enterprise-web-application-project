@@ -109,8 +109,8 @@ export class MyproductsComponent implements OnInit {
                             PRODUCT: data[i].products[j].name,
                             CATEGORIE: data[i].products[j].productCategory.name,
                             OMSCHRIJVING: data[i].products[j].description,
-                            VOORRAAD: data[i].products[j].quantity,
                             PRIJS: data[i].products[j].price,
+                            VOORRAAD: data[i].products[j].quantity,
                             'DATUM TOEGEVOEGD': data[i].products[j].addedDate.substring(0, 10)
                         });
                     }
@@ -124,8 +124,8 @@ export class MyproductsComponent implements OnInit {
                     {wch: 25},
                     {wch: 20},
                     {wch: 70},
-                    {wch: 15},
-                    {wch: 8},
+                    {wch: 17},
+                    {wch: 20},
                     {wch: 20},
                 ];
                 workSheet['!cols'] = wscols;

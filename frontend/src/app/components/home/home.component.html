@@ -161,22 +161,23 @@
                 <p class="card-text">Bosbessen 100 gr</p></div>
         </div>-->
         <div class="row col-12 mr-5 p-0">
-            <div *ngFor="let product of jsonData" class="col-lg-3 col-md-4 mb-3">
-                <div class="card" style="width: 110%">
+            <div *ngFor="let product of jsonData2" class="col-lg-3 col-md-4 mb-3">
+                <div class="card" style="width: 110%; height: 100%">
                     <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
                         class="productImage"
-                        src="../../../assets/images/bloemkolen.jpeg"
+                        [src]="demoImage.sanatizeUrl(product.productImage!=null?demoImage.atoba(product.productImage.picByte):demoImage.productBase64Url)"
                         alt="{{product.name}}"/></a>
                     <div class="card-body">
                         <h4 class="card-title">
                             <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
                         </h4>
-                        <h5>€{{product.price}}/{{product.quantity.slice(4, -1)}}</h5>
+                        <h5>{{product.price.split(":")[0]}} €{{product.price.split(":")[1]}}</h5>
                         <p class="card-text">{{product.description}}</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 </div>
