@@ -64,7 +64,7 @@
         </div>
     </div>
 </div>
-<div class="panel-group">
+<div class="panel-group" *ngIf="authService.isAuthenticated() && currentUserService.isCustomer()">
     <div class="panel panel-default">
         <div class="section_popup-bottom-right">
             <h5 class="mt-2 mr-1" data-toggle="collapse" data-target="#collapse1">Product niet gevonden?</h5>

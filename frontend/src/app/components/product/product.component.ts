@@ -4,7 +4,9 @@ import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
 import {FormBuilder} from '@angular/forms';
-import {DemoImage} from "../supplier-info/supplier-info-edit/default-image";
+import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
+import {CurrentUserService} from '../../services/current-user.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
     selector: 'app-product',
@@ -25,7 +27,9 @@ export class ProductComponent implements OnInit {
         private productService: ProductService,
         private activatedRoute: ActivatedRoute,
         private formBuilder: FormBuilder,
-        public demoImage: DemoImage
+        public demoImage: DemoImage,
+        public currentUserService: CurrentUserService,
+        public authService: AuthService
     ) {
     }
 
