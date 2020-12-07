@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {ApiService} from "../../services/api.service";
-import {RouteUtil} from "../../utils/route.util";
-import {ProductService} from "../../services/product.service";
-import {DemoImage} from "../supplier-info/supplier-info-edit/default-image";
+import {ActivatedRoute, Router} from '@angular/router';
+import {ApiService} from '../../services/api.service';
+import {RouteUtil} from '../../utils/route.util';
+import {ProductService} from '../../services/product.service';
+import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
 
 @Component({
     selector: 'app-home',
@@ -13,6 +13,7 @@ import {DemoImage} from "../supplier-info/supplier-info-edit/default-image";
 export class HomeComponent implements OnInit {
 
     jsonData = [];
+    jsonData2 = [];
 
     isLoggedIn = false;
     hasAdminRole = false;
@@ -58,5 +59,29 @@ export class HomeComponent implements OnInit {
             }
         );
 
+        this.mostBoughtProducts();
+    }
+
+    mostBoughtProducts(): void {
+        this.productService.getMostBoughtProducts().subscribe(
+            res => {
+                const LIMIT_PRODUCTS = 4;
+
+                // console.log(res); all products sorted on newest to oldest
+
+                // Limit the shown product to 4 by making de jsonData smaller
+                let productsLength = res.length;
+                if (productsLength > LIMIT_PRODUCTS) {
+                    productsLength = LIMIT_PRODUCTS;
+                }
+                for (let i = 0; i < productsLength; i++) {
+                    this.jsonData2.push(res[i]);
+                }
+                // console.log(this.jsonData); all products sorted on newest to oldest but limited to 4
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 }
