@@ -94,6 +94,37 @@
             </select>
         </div>
     </div>
+    <!--    <div class="row col-12 justify-content-center">-->
+    <!--        <div class="row">-->
+    <!--            <div *ngFor="let product of jsonData | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"-->
+    <!--                 class="col-lg-3 col-md-4 mb-3">-->
+    <!--                <div class="card h-100">-->
+    <!--                    <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img-->
+    <!--                        id="productImage"-->
+    <!--                        src="../../../assets/images/bloemkolen.jpeg"-->
+    <!--                        alt="{{product.name}}"/></a>-->
+    <!--                    <div class="card-body">-->
+    <!--                        <h4 class="card-title">-->
+    <!--                            <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>-->
+    <!--                        </h4>-->
+    <!--                        <h5>€{{product.price}}/Kg</h5>-->
+    <!--                        <p class="card-text">{{product.description}}</p>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <div class="row">-->
+    <!--&lt;!&ndash;            <ngb-pagination [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="false"></ngb-pagination>&ndash;&gt;-->
+    <!--            <ngb-pagination class="d-flex justify-content-center" [collectionSize]="21" [(page)]="page" ></ngb-pagination>-->
+    <!--            <label for="pageSize">aantal producten per pagina:</label>-->
+    <!--            <select id="pageSize" class="customDropdownStyle" (change)="setPageSize($event)">-->
+    <!--                <option value="4">4</option>-->
+    <!--                <option value="8">8</option>-->
+    <!--                <option value="16">16</option>-->
+    <!--                <option value="32">32</option>-->
+    <!--            </select>-->
+    <!--        </div>-->
+    <!--    </div>-->
 </div>
 <div class="panel-group">
     <div class="panel panel-default">
