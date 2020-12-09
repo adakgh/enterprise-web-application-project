@@ -148,4 +148,20 @@ export class DemoImage {
         return new Blob([u8arr], {type: mime});
     }
 
+    // Determine the prijs per .... - If de Unit of a product is gram for example we should just keep using
+    // €5,00/KG and not €5,00/G this to keep a cosistent and easier way of calculating price
+    determineUnitPricing(product): string {
+        if (product.unit != null) {
+            if (product.unit === 'Gram (G)') {
+                return 'Kilogram (KG)';
+            }
+            if (product.unit === 'Stuk(s)') {
+                return 'Stuk';
+            }
+
+            return product.unit;
+        }
+        return '';
+    }
+
 }

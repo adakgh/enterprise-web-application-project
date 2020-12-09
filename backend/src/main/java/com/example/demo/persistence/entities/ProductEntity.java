@@ -28,10 +28,10 @@ public class ProductEntity {
     private String unit;
 
     @Column(name = "QUANTITY")
-    private String quantity;
+    private Double quantity;
 
     @Column(name = "PRICE")
-    private String price;
+    private BigDecimal price;
 
     @Column(name = "DISCOUNT_QUANTITY")
     private String quantity2;

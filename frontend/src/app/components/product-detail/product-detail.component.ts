@@ -29,9 +29,10 @@ export class ProductDetailComponent implements OnInit {
         this.productService.getAllProduct().subscribe(
             res => {
                 // console.log(res[0].customData.supplierId);
-                this.jsonData = res;
-                this.type = res[0].price.split(':')[0];
-                this.price = res[0].price.split(':')[1];
+                this.jsonData = res.content;
+                console.log(this.jsonData);
+                // this.type = res[0].price.split(':')[0];
+                // this.price = res[0].price.split(':')[1];
                 // console.log(this.price);
             },
             err => {
@@ -39,5 +40,4 @@ export class ProductDetailComponent implements OnInit {
             }
         );
     }
-
 }

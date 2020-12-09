@@ -115,4 +115,5 @@ export class ProductComponent implements OnInit {
     setPageSize(values: any): void {
         this.pageSize = values.target.value;
     }
+
 }
