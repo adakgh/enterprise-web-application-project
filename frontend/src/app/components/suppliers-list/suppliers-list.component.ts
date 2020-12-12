@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SupplierInfoService} from '../../services/supplier-info.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 
@@ -11,14 +11,13 @@ import {RouteUtil} from '../../utils/route.util';
 })
 export class SuppliersListComponent implements OnInit {
 
-    jsonSupplierData;
+    jsonSupplierData; // Holds the values for the result of all suppliers
 
     constructor(
         private router: Router,
         private apiService: ApiService,
         private routeUtil: RouteUtil,
         private supplierInfoService: SupplierInfoService,
-        private activatedRoute: ActivatedRoute,
     ) {
     }
 

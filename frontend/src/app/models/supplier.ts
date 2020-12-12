@@ -8,7 +8,12 @@ export class Supplier {
     public website: string;
     public shortDescription: string;
     public description: string;
-    public addresses: any[] = [];
+    public addresses: any[] = [{
+        street: '',
+        number: 0,
+        postalCode: '',
+        city: '',
+    }];
 
     constructor() {
     }
