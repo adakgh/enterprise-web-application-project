@@ -11,3 +11,11 @@
 #uploadImage {
     text-decoration: line-through !important;
 }
+
+#line-collapse{
+    border-width: 0px;
+    border-color: black;
+    border-style: solid;
+    border-bottom-width: 1px;
+    font-size: smaller;
+}

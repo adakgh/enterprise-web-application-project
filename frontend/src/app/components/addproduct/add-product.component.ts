@@ -23,6 +23,7 @@ export class AddProductComponent implements OnInit {
     categoryMap: any[];
 
     unit: string;
+    addNumber = 0;
 
     constructor(
         private apiService: ApiService,
@@ -79,6 +80,7 @@ export class AddProductComponent implements OnInit {
         }
     }
 
+
     reloadProductPage(): void {
         // Reload the page when send button is pressed
         this.router.navigate(['/..']).then(() => {
@@ -111,8 +113,8 @@ export class AddProductComponent implements OnInit {
     // this method return a string with the shorten of the unit for placing in the html
     getUnit(): string {
         if (this.unit != null) {
-            if (this.unit === 'G') {
-                return '/KG';
+            if (this.unit === 'g') {
+                return '/kg';
             }
 
             return '/' + this.unit;
