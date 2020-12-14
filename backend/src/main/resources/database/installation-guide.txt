@@ -2,6 +2,10 @@
 
 pre-requisite: run backend once to create required files in '/resources/database'
 
+------------------------------------------------------------------------
+
+#version 2020.2 or lower
+
 1. click on database (button right side of application)
 2. click on '+'
 3. click 'data source from path'
@@ -9,4 +13,17 @@ pre-requisite: run backend once to create required files in '/resources/database
 5. new config screen should open now
 6. in url field, append ';AUTO_SERVER=true' to the current url
 7. enter default H2 credentials (username = 'sa', no password)
+8. apply and reload
+
+------------------------------------------------------------------------
+
+#version 2020.3
+
+1. click on '+'
+2. select 'Data Source' -> select 'H2'
+3. new config screen should open now
+4. make sure the connection type = 'embedded'
+5. username is 'sa', password is empty
+6. in the url field paste the absolute path of 'ewa.mv.db' (rightclick ewa.mv.db -> copy path -> absolute path)
+7. then append ';AUTO_SERVER=true' to the current url
 8. apply and reload

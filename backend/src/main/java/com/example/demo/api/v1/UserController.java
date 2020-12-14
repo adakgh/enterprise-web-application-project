@@ -1,8 +1,8 @@
 package com.example.demo.api.v1;
 
 import com.example.demo.models.RoleType;
-import com.example.demo.models.responses.RegistrationResponse;
-import com.example.demo.models.responses.UserResponse;
+import com.example.demo.models.dto.RegistrationResponse;
+import com.example.demo.models.dto.UserResponse;
 import com.example.demo.persistence.entities.UserEntity;
 import com.example.demo.persistence.repositories.UserRepository;
 import com.example.demo.security.jwt.JwtProvider;

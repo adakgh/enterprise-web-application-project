@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
                 private apiService: ApiService,
                 private routeUtil: RouteUtil,
                 private productService: ProductService,
-                private activatedRoute: ActivatedRoute,
                 public demoImage: DemoImage
     ) {
     }
@@ -84,4 +83,5 @@ export class HomeComponent implements OnInit {
             }
         );
     }
+
 }

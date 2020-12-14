@@ -85,9 +85,9 @@ export class ProductComponent implements OnInit {
         }
     }
 
-    async sortProducts(values: any): Promise<void> {
+    sortProducts(values: any): void {
         if (values.target.value.split(',')[0] === 'location') {
-            await this.getCurrentAddress();
+            this.getCurrentAddress();
             // TODO: Get the postalCode from the supplier.
             this.lookupAddress('1111SM');
 
@@ -107,14 +107,12 @@ export class ProductComponent implements OnInit {
         this.locationService.getAddressInfo(address).subscribe(
             (data) => {
                 console.log(data);
-
                 if (data) {
                     this.addressInfo = data;
                     this.errorMessage = null;
                 } else {
                     this.errorMessage = 'Unable to find address';
                 }
-
             },
             (error) => {
                 this.errorMessage = error;

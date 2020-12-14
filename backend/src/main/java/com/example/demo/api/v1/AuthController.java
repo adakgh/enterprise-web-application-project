@@ -1,7 +1,7 @@
 package com.example.demo.api.v1;
 
 import com.example.demo.models.RoleType;
-import com.example.demo.models.responses.JwtAuthResponse;
+import com.example.demo.models.dto.JwtAuthResponse;
 import com.example.demo.security.Principal;
 import com.example.demo.security.jwt.JwtProvider;
 import com.example.demo.services.AuthService;

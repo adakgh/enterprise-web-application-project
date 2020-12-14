@@ -3,7 +3,7 @@ import {ProductService} from '../../../services/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../../services/api.service';
 import {Product} from '../../../models/product';
-import {DemoImage} from "../../supplier-info/supplier-info-edit/default-image";
+import {DemoImage} from '../../supplier-info/supplier-info-edit/default-image';
 
 @Component({
     selector: 'app-myproducts-edit',
@@ -21,8 +21,7 @@ export class MyproductsEditComponent implements OnInit {
 
     generatedImage;
 
-    priceType;
-    quantityType;
+    unit;
     @ViewChild('quantity') quantity;
 
     constructor(
@@ -58,13 +57,13 @@ export class MyproductsEditComponent implements OnInit {
                 console.log(res);
                 this.productId = res.id;
                 this.productData.name = res.name != null ? res.name : '';
-                this.productData.price = res.price != null ? res.price.split(':')[1] : '';
-                this.priceType = res.price.split(':')[0] + ':';
-                this.productData.quantity = res.quantity != null ? res.quantity.split(' ')[0] : '';
-                this.quantityType = ' ' + res.quantity.split(' ')[1];
-                console.log(this.priceType);
+                this.productData.price = res.price != null ? res.price : '';
+                this.productData.quantity = res.quantity != null ? res.quantity : '';
+                this.productData.unit = res.unit != null ? res.unit : '';
                 this.productData.description = res.description != null ? res.description : '';
                 this.supplierId = res.customData.supplierId;
+
+                this.getUnitOnLoadData(this.productData.unit);
 
                 if (res.productImage != null) {
                     // this.generatedImage = atob(res.productImage.picByte);
@@ -81,12 +80,10 @@ export class MyproductsEditComponent implements OnInit {
     }
 
     updateProduct(): void {
-        this.productData.price = this.priceType + this.productData.price;
-        this.productData.quantity = this.productData.quantity + this.quantityType;
-
         console.log(this.productData);
         this.productService.updateProduct(this.productId, this.productData).subscribe(
             resp => {
+                console.log(resp);
             },
             error => {
                 console.log(error);
@@ -107,6 +104,7 @@ export class MyproductsEditComponent implements OnInit {
                     // this.reloadProductPage();
                     console.log('Succesfully updated c. with another Image');
                     console.log(this.productData);
+                    console.log(resp);
                 },
                 error => {
                     console.log(error);
@@ -117,6 +115,7 @@ export class MyproductsEditComponent implements OnInit {
             this.productService.updateProduct(this.productId, this.productData).subscribe(
                 res => {
                     console.log('Succesfully updated product.');
+                    console.log(res);
                     /*this.router.navigate(['../'], {
                         relativeTo: this.activatedRoute,
                         queryParams: {id: this.supplierId}
@@ -143,13 +142,35 @@ export class MyproductsEditComponent implements OnInit {
         };
     }
 
-    // helper for selecting the price Type - like per kilo or per stuk
-    selectedPriceType(event): void {
-        this.priceType = event.target.value;
+    // helper for selecting the unit like Kilogram - Gram
+    selectedUnit(event): void {
+        this.unit = event.target.value;
+        this.unit = this.unit.split(' ')[1];
+        this.unit = this.unit.replace('(', '');
+        this.unit = this.unit.replace(')', '');
+        console.log(this.unit);
     }
 
-    // helper for selecting the quantity like Kilogram - Gram
-    selectedStock(event): void {
-        this.quantityType = event.target.value;
+    // this method return a string with the shorten of the unit for placing in the html
+    getUnit(): string {
+        if (this.unit != null) {
+            if (this.unit === 'G') {
+                return '/KG';
+            }
+
+            return '/' + this.unit;
+        }
+        return '';
     }
+
+    // When loading data of product this function is called and it initializes the unit on the load data
+    getUnitOnLoadData(productDataUnit): void {
+        this.unit = productDataUnit;
+        if (this.unit !== '') {
+            this.unit = this.unit.split(' ')[1];
+            this.unit = this.unit.replace('(', '');
+            this.unit = this.unit.replace(')', '');
+        }
+    }
+
 }

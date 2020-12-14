@@ -17,7 +17,8 @@
                 <div class="col-6 p-4" name="information">
                     <h4>{{product.name}}</h4>
 
-                    <h5>{{product.price.split(":")[0]}} €{{product.price.split(":")[1]}}/{{product.quantity}}</h5>
+                    <h5> €{{product.price}}/{{demoImage.determineUnitPricing(product)}}</h5> <!-- Het beste alles €/kg-->
+
                     <h6>{{product.description}}</h6>
                 </div>
                 <div class="col-4 align-self-center" id="interactions" name="interactions">

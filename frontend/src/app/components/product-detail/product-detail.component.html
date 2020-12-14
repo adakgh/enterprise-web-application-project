@@ -10,11 +10,10 @@
             <h5>{{jsonData[0].name}}</h5>
             <p class="mb-2 text-muted text-uppercase small">{{jsonData[0].productCategory.name}}</p>
 
-            <p><span class="mr-1"><strong>Prijs {{type}} €{{price}}</strong></span></p>
-            <p><span class="mr-1"><i>Voorraad: {{jsonData[0].quantity}}</i></span></p>
+            <p><span class="mr-1"><strong>Prijs € {{jsonData[0].price}}/{{demoImage.determineUnitPricing(jsonData[0])}}</strong></span></p>
+            <p><span class="mr-1"><i>Voorraad: {{jsonData[0].quantity}} {{jsonData[0].unit}}</i></span></p>
             <p class="pt-1">{{jsonData[0].description}}</p>
             <hr>
-            <p class="pt-1">{{jsonData[0].stock}}</p>
             <form>
                 <div class="form-group">
                     <label for="productAmount">hoeveelheid in kilo's: (minimaal 10 Kg)</label>
