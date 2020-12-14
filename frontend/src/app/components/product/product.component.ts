@@ -7,6 +7,8 @@ import {FormBuilder} from '@angular/forms';
 import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
 import {CurrentUserService} from '../../services/current-user.service';
 import {AuthService} from '../../services/auth.service';
+import {LocationService} from '../../services/location.service';
+import {AddressInfo} from '../../models/AddressInfo';
 
 @Component({
     selector: 'app-product',
@@ -20,8 +22,13 @@ export class ProductComponent implements OnInit {
     selectedCategories: any = [];
     priceRangeForm;
 
-    page = 1;
-    pageSize = 4;
+    // Error message
+    errorMessage: string;
+
+    // Address Information reference
+    addressInfo: AddressInfo;
+
+    position: string;
 
     constructor(
         private router: Router,
@@ -32,7 +39,8 @@ export class ProductComponent implements OnInit {
         private formBuilder: FormBuilder,
         public demoImage: DemoImage,
         public currentUserService: CurrentUserService,
-        public authService: AuthService
+        public authService: AuthService,
+        private locationService: LocationService
     ) {
     }
 
@@ -77,11 +85,52 @@ export class ProductComponent implements OnInit {
         }
     }
 
-    sortProducts(values: any): void {
-        if (values.target.value !== '') {
+    async sortProducts(values: any): Promise<void> {
+        if (values.target.value.split(',')[0] === 'location') {
+            await this.getCurrentAddress();
+            // TODO: Get the postalCode from the supplier.
+            this.lookupAddress('1111SM');
+
+            // TODO: Filter on the supplier distance.
+
+
+
+        } else if (values.target.value !== '') {
             this.routeUtil.addParam('sort', values.target.value);
         } else {
             this.routeUtil.deleteParam('sort');
+        }
+    }
+
+    lookupAddress(address: string): void {
+
+        this.locationService.getAddressInfo(address).subscribe(
+            (data) => {
+                console.log(data);
+
+                if (data) {
+                    this.addressInfo = data;
+                    this.errorMessage = null;
+                } else {
+                    this.errorMessage = 'Unable to find address';
+                }
+
+            },
+            (error) => {
+                this.errorMessage = error;
+            }
+        );
+    }
+
+    getCurrentAddress(): void {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position1 => {
+                this.position = 'Latitude: ' + position1.coords.latitude +
+                    ', Longitude: ' + position1.coords.longitude;
+            });
+        } else {
+            console.log('Geolocation is not supported by this browser.');
+            this.position = 'Geolocation is not supported by this browser.';
         }
     }
 
@@ -110,9 +159,5 @@ export class ProductComponent implements OnInit {
         } else {
             this.routeUtil.deleteParam('category');
         }
-    }
-
-    setPageSize(values: any): void {
-        this.pageSize = values.target.value;
     }
 }

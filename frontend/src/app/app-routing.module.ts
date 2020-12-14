@@ -18,7 +18,7 @@ import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service
 import {MyproductsComponent} from './components/myproducts/myproducts.component';
 import {MyproductsEditComponent} from './components/myproducts/myproducts-edit/myproducts-edit.component';
 import {VerifyUserComponent} from './components/verify-user/verify-user.component';
-import {MessagesComponent} from "./components/messages/messages.component";
+import {MessagesComponent} from './components/messages/messages.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
