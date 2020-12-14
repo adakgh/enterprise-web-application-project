@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
-import {DemoImage} from "../supplier-info/supplier-info-edit/default-image";
+import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
 
 @Component({
     selector: 'app-product-detail',
@@ -22,8 +22,7 @@ export class ProductDetailComponent implements OnInit {
         private routeUtil: RouteUtil,
         private productService: ProductService,
         public demoImage: DemoImage
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
         this.productService.getAllProduct().subscribe(
