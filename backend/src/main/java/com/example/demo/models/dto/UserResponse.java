@@ -1,4 +1,4 @@
-package com.example.demo.models.responses;
+package com.example.demo.models.dto;
 
 import com.example.demo.persistence.entities.UserEntity;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.example.demo.models.responses;
+package com.example.demo.models.dto;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

@@ -37,20 +37,9 @@
                 <label for="inputCost" class="col-sm-2 col-form-label label-title">Prijs:</label>
                 <div class="col-sm-8 input-group">
                     <div class="input-group-prepend">
-                        <div class="input-group-text">€</div>
+                        <div class="input-group-text">€{{getUnit()}}</div>
                     </div>
-                    <input type="text" class="form-control" id="inputCost"
-                           name="price" [(ngModel)]="productData.price">
-                    <div class="col-sm-8 input-group" (change)="selectedPriceType($event)">
-                        <select class="form-control" id="inputCostType">
-                            <option disabled value=""></option>
-                            <option [selected]="true" value="per stuk:">per stuk</option>
-                            <option value="per 500 gram:">per 500 gram</option>
-                            <option value="per kg:">per kg</option>
-                            <option value="per liter:">per liter</option>
-                            <option value="per doos:">per doos</option>
-                        </select>
-                    </div>
+                    <input type="text" class="form-control" id="inputCost" name="price" [(ngModel)]="productData.price">
                 </div>
             </div>
 
@@ -59,18 +48,17 @@
                 <label for="inputStock" class="col-sm-2 col-form-label label-title">Voorraad:</label>
                 <div class="col-sm-8 input-group">
                     <div class="input-group-prepend">
-                        <!--                        <div class="input-group-text" name="quantity">{{jsonProductData.quantity}}</div>-->
+                        <!-- <div class="input-group-text" name="quantity">{{jsonProductData.quantity}}</div>-->
                     </div>
-                    <input type="text" class="form-control" id="inputStock"
-                           name="quantityNumber" [(ngModel)]="productData.quantity">
-                    <div class="col-sm-8 input-group" (change)="selectedStock($event)">
-                        <select class="form-control" id="inputStockSecond" #quantity [(ngModel)]="quantityType">
+                    <input type="text" class="form-control" id="inputStock" name="quantityNumber" [(ngModel)]="productData.quantity">
+
+                    <div class="col-sm-8 input-group" (change)="selectedUnit($event)">
+                        <select class="form-control" id="inputStockSecond" name="unit" [(ngModel)]="productData.unit">
                             <option disabled value=""></option>
-                            <option value="Kilogram-(KG)">Kilogram (KG)</option>
-                            <option value=" Gram-(G) ">Gram (G)</option>
-                            <option value=" Liter-(L) ">Liter (L)</option>
-                            <option value=" Stuk(s) ">Stuk(s)</option>
-                            <option value=" Doos/Dozen ">Doos/Dozen</option>
+                            <option value="Kilogram (KG)">Kilogram (KG)</option>
+                            <option value="Gram (G)">Gram (G)</option>
+                            <option value="Liter (L)">Liter (L)</option>
+                            <option value="Stuk(s)">Stuk(s)</option>
                         </select>
                     </div>
                 </div>

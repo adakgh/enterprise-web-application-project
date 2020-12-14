@@ -10,7 +10,6 @@ import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
     templateUrl: './add-product.component.html',
     styleUrls: ['./add-product.component.css']
 })
-
 // TODO 1. Adding a possiblity to add a picture to the page
 // TODO 2. Giving a popup when the product is finished
 // TODO 3. Styling the webpage
@@ -23,9 +22,7 @@ export class AddProductComponent implements OnInit {
     selectedFileUrl;
     categoryMap: any[];
 
-    priceType;
-    quantityType;
-
+    unit: string;
 
     constructor(
         private apiService: ApiService,
@@ -41,30 +38,9 @@ export class AddProductComponent implements OnInit {
         this.productService.getAllCategories().subscribe(
             res => this.categoryMap = res
         );
-
-        // temporary setting the values otherwise will be recognized as 'undefined'
-        this.priceType = 'per stuk:';
-        this.quantityType = ' Kilogram-(KG)';
-    }
-
-    // helper for selecting the price Type - like per kilo or per stuk
-    selectedPriceType(event): void {
-        this.priceType = event.target.value;
-    }
-
-    // helper for selecting the quantity like Kilogram - Gram
-    selectedStock(event): void {
-        this.quantityType = event.target.value;
     }
 
     addProduct(): void {
-
-        console.log(this.priceType);
-        console.log(this.quantityType);
-
-        this.productData.price = this.priceType + this.productData.price;
-        this.productData.quantity = this.productData.quantity + this.quantityType;
-
         if (this.selectedFile != null) {
             // Create a object with the supplier data and the selected image data and send that
             this.productData.imageName = this.selectedFile.name;
@@ -123,15 +99,24 @@ export class AddProductComponent implements OnInit {
         };
     }
 
-    /*onUpload(): void {
-        const pictureFile = new FormData();
-        pictureFile.append('image', this.selectedFile, this.selectedFile.name);
-        localStorage.set(this.selectedFile.name, pictureFile);
-        // this.apiService.post('/products', pictureFile, null)
-        //     .subscribe(res => {
-        //         console.log(res);
-        //         console.log(this.selectedFile);
-        //     });
+    // helper for selecting the unit like Kilogram - Gram
+    selectedUnit(event): void {
+        this.unit = event.target.value;
+        this.unit = this.unit.split(' ')[1];
+        this.unit = this.unit.replace('(', '');
+        this.unit = this.unit.replace(')', '');
+        console.log(this.unit);
+    }
 
-    }*/
+    // this method return a string with the shorten of the unit for placing in the html
+    getUnit(): string {
+        if (this.unit != null) {
+            if (this.unit === 'G') {
+                return '/KG';
+            }
+
+            return '/' + this.unit;
+        }
+        return '';
+    }
 }
