@@ -27,12 +27,9 @@ export class ProductDetailComponent implements OnInit {
     ngOnInit(): void {
         this.productService.getAllProduct().subscribe(
             res => {
-                // console.log(res[0].customData.supplierId);
                 this.jsonData = res.content;
-                console.log(this.jsonData);
-                // this.type = res[0].price.split(':')[0];
-                // this.price = res[0].price.split(':')[1];
-                // console.log(this.price);
+                this.type = res.content[0].price.split(':')[0];
+                this.price = res.content[0].price.split(':')[1];
             },
             err => {
                 console.log(err);
