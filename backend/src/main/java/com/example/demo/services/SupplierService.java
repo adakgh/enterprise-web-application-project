@@ -55,7 +55,7 @@ public class SupplierService {
      * retrieving a reference of the supplierEntity through lazy-loading without having to
      * access the actual database and finally mapping the new data into the current data.
      */
-    public void updateById(SupplierEntity newSupplier, ImageEntity imageEntity) {
+    public boolean updateById(SupplierEntity newSupplier, ImageEntity imageEntity) {
         var principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long supplierId = ((Number) principal.getClaims().get("sid")).longValue();
         SupplierEntity currentSupplier = supplierRepository.getOne(supplierId); // lazy load
@@ -68,7 +68,7 @@ public class SupplierService {
         if (imageEntity != null) {
             currentSupplier.setProfileImage(imageEntity);
         }
-        supplierRepository.save(currentSupplier);
+        return supplierRepository.save(currentSupplier) != null ? true : false;
     }
 
     /**
@@ -76,7 +76,7 @@ public class SupplierService {
      * also have send a image. If we also uploaded a image we must first save that then
      * update the supplier
      */
-    public void updateWithImage(SupplierImage file) throws IOException {
+    public boolean updateWithImage(SupplierImage file) throws IOException {
 
         SupplierEntity newSupplier = file.getSupplier();
         if (file.getName() != null) {
@@ -84,7 +84,8 @@ public class SupplierService {
             /* TODO delete previous image before saving new one
             // If supplier already has a profileImage uploaded delete that first
             if (newSupplier.getProfileImage() != null){
-                Optional<ImageEntity> previousProfileImage = imageRepository.findById(newSupplier.getProfileImage().getId());
+                Optional<ImageEntity> previousProfileImage = imageRepository.findById(newSupplier.getProfileImage()
+                .getId());
                 imageRepository.delete(previousProfileImage.get());
             }*/
 
@@ -96,10 +97,10 @@ public class SupplierService {
             imageRepository.save(imageEntity);
 
             // send the saved image with the supplier to be saved
-            updateById(newSupplier, imageEntity);
+            return updateById(newSupplier, imageEntity);
         } else {
             // Update supplier without image
-            updateById(newSupplier, null);
+            return updateById(newSupplier, null);
         }
 
     }
