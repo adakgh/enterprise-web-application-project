@@ -1,18 +1,23 @@
 package com.example.demo.services;
 
 import com.example.demo.exceptions.ResourceNotFoundException;
+import com.example.demo.models.dto.ProductDto;
 import com.example.demo.persistence.entities.ImageEntity;
 import com.example.demo.persistence.entities.ProductEntity;
 import com.example.demo.persistence.entities.UserEntity;
 import com.example.demo.persistence.repositories.ImageRepository;
 import com.example.demo.persistence.repositories.ProductCategoryRepository;
 import com.example.demo.persistence.repositories.ProductRepository;
+import com.example.demo.search.ProductSpecification;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.Date;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -24,6 +29,17 @@ public class ProductService {
     private final ProductCategoryRepository productCategoryRepository;
     private final UserService userService;
     private final ImageRepository imageRepository;
+
+    public Page<ProductDto> searchAll(Map<String, String> queryMap, Pageable pageable) {
+        var productPage = productRepository.findAll(new ProductSpecification(queryMap), pageable);
+
+        return productPage.map((ProductEntity p) -> {
+            ProductDto dto = modelmapper.map(p, ProductDto.class);
+            dto.setSupplierId(p.getSupplier().getId());
+            dto.setSupplierPostalCode(p.getSupplier().getAddresses().iterator().next().getPostalCode());
+            return dto;
+        });
+    }
 
     public ProductEntity findById(long id) {
         return productRepository.findById(id).orElseThrow(() ->

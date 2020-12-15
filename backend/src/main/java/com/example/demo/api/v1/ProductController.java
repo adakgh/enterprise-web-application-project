@@ -1,6 +1,7 @@
 package com.example.demo.api.v1;
 
 import com.example.demo.models.RoleType;
+import com.example.demo.models.dto.ProductDto;
 import com.example.demo.persistence.entities.ImageEntity;
 import com.example.demo.persistence.entities.ProductCategoryEntity;
 import com.example.demo.persistence.entities.ProductEntity;
@@ -23,7 +24,6 @@ import java.util.Map;
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
-    private final ProductRepository productRepository;
     private final ProductService productService;
     private final ProductCategoryRepository productCategoryRepository;
     private final ModelMapper modelMapper;
@@ -32,13 +32,11 @@ public class ProductController {
      * Retrieves all products and returns them as a page object to support pagination.
      */
     @GetMapping
-    public Page<ProductEntity> search(@RequestParam(required = false) Map<String, String> queryMap,
-                                      @RequestParam(value = "page", required = false) Integer page,
-                                      @RequestParam(value = "size", required = false) Integer size,
-                                      Pageable pageable) {
-        var productPage = productRepository.findAll(new ProductSpecification(queryMap), pageable);
-        productPage.map(p -> p.getCustomData().put("supplierId", p.getSupplier().getId()));
-        return productPage;
+    public Page<ProductDto> search(@RequestParam(required = false) Map<String, String> queryMap,
+                                   @RequestParam(value = "page", required = false) Integer page,
+                                   @RequestParam(value = "size", required = false) Integer size,
+                                   Pageable pageable) {
+        return productService.searchAll(queryMap, pageable);
     }
 
     /**
