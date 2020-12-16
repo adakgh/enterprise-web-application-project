@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
@@ -83,5 +83,4 @@ export class HomeComponent implements OnInit {
             }
         );
     }
-
 }
