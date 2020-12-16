@@ -29,18 +29,52 @@
 This project brings local suppliers effectively in contact with local customers. Suppliers can place products on the system. Where customers can buy those products. This system also gives the opportunity to have a conversation with each other. The system is build with _angular_ in the frontend and _spring_ in the backend part.
 [Projectdescription]
 
+### Technology Stack
+Spring Boot  
+Spring MVC  
+Spring Data JPA  
+JPA  
+Hibernate 5.2  
+Spring Security  
+Swagger/Swagger2Markup/Spring Rest Docs  
+Spring Test/JUnit/Mockito/JBehave/RestAssured  
+Lombok  
+ModelMapper  
+AngularJS  
+Bootstrap  
+
+ Technologies | 
+--- |
+Spring Boot |
+Spring MVC |
+Spring Data JPA  |
+JPA |
+Hibernate 5.2 |
+Spring Security |
+Swagger/Swagger2Markup/Spring Rest Docs  |
+JPA |
+
+
 <!-- GETTING STARTED -->
 ## Getting Started
 
 There are some requirments that needs to be done before the installation
 
 ### Prerequisites
-First we need to have the latest npm installed and afterward angular. If you have not installed it yet run the commands below 
-* npm
-  ```sh
-  npm install npm@latest -g
+
+* NodeJS
+
+  NodeJS is required to build the frontend static resources.  
+  Download [NodeJS](http://nodejs.org) and install it into your local system. 
+ 
+  After it is installed, open terminal, and using `node -v` command to confirm.
+ 
   ```
-* angular
+  node -v 
+  >v4.2.2
+  ```
+
+* Angular
   ```sh
   npm install -g @angular/cli
   ```
@@ -68,6 +102,9 @@ First we need to have the latest npm installed and afterward angular. If you hav
    ```
    The backend server should start together with the database when running the DemoApplication file on localhost:8080   
 
+    ![alt text](https://i.imgur.com/HVUGGEd.png "Logo Title Text 1")
+  
+
 ### Configuration
 
 Both for the frontend and the backend application we can configure the port they run on.  
@@ -89,6 +126,14 @@ TODO
 ## Classes
 **In your README.md file, you should specify individual classes built per team member.**
 TODO
+Omer:    
+  Angular:  
+  - supplier.info.service.ts  
+  - unsaved-changes-guard.service.ts  
+  - supplier.info.service.ts  
+  - supplier.info.service.ts  
+  - supplier.info.service.ts  
+    
 
 <!-- CONTRIBUTING -->
 ## System Documentation
