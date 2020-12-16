@@ -25,6 +25,7 @@ public class UserService {
     private static final String EMAIL_SUBJECT = "Activeer je account";
     private static final String FROM_ADDRESS = "info@vanstreek.nl";
     private static final String HOST_ADDRESS = "http://localhost:4200";
+    private static final String HEROKU_ADDRESS = "https://vanstreek2-fe-app-staging.herokuapp.com";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender javaMailSender;
@@ -37,7 +38,7 @@ public class UserService {
      */
     public UserEntity registerUser(UserEntity user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new ResourceAlreadyExistsException("Username", user.getUsername());
+            throw new ResourceAlreadyExistsException("An existing resource was found");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setLocked(true);

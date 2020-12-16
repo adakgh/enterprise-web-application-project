@@ -126,9 +126,9 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/login']).then(() => {
                         window.location.reload();
                     });
-                }, err => {
-                    console.log(err);
-                    if (err.status === 409) {
+                }, error => {
+                    console.log(error);
+                    if (error.status === 409) {
                         alert('Dit e-mailadres is al in gebruik. Probeer het opnieuw.');
                     } else {
                         alert('Er is iets misgegaan. Probeer het opnieuw.');
