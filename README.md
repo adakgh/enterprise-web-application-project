@@ -27,21 +27,8 @@
 ![alt text](https://cdn.shopify.com/s/files/1/0021/1966/3675/files/Van-streek-logo-liggend-zwart_482x.png "Logo Title Text 1")  
     
 This project brings local suppliers effectively in contact with local customers. Suppliers can place products on the system. Where customers can buy those products. This system also gives the opportunity to have a conversation with each other. The system is build with _angular_ in the frontend and _spring_ in the backend part.
-[Projectdescription]
 
 ### Technology Stack
-Spring Boot  
-Spring MVC  
-Spring Data JPA  
-JPA  
-Hibernate 5.2  
-Spring Security  
-Swagger/Swagger2Markup/Spring Rest Docs  
-Spring Test/JUnit/Mockito/JBehave/RestAssured  
-Lombok  
-ModelMapper  
-AngularJS  
-Bootstrap  
 
  Technologies | 
 --- |
@@ -52,8 +39,9 @@ JPA |
 Hibernate 5.2 |
 Spring Security |
 Swagger/Swagger2Markup/Spring Rest Docs  |
-JPA |
-
+Lombok  |
+AngularJS |
+Bootstrap |
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -61,6 +49,9 @@ JPA |
 There are some requirments that needs to be done before the installation
 
 ### Prerequisites
+
+* Java 8
+* Maven 3.3.9+ or Gradle 3.3+
 
 * NodeJS
 
@@ -122,18 +113,83 @@ To change the port of the backend application you should add a property to the f
 _For more examples, please refer to the [Documentation](https://example.com)_*
 TODO
 
+### Accessing Application
+Component         | URL                                      | Credentials
+---               | ---                                      | ---
+Frontend          |  http://localhost:4040                   | 
+H2 Database       |  http://localhost:8080/h2-console        |  Driver:`org.h2.Driver` <br/> JDBC URL:`jdbc:h2:file:./src/main/resources/database/ewa;AUTO_SERVER=TRUE` <br/> User Name:`sa`
+**Live Demo:** |  https://vanstreek2-fe-app-staging.herokuapp.com/   | 
+
+
 <!-- USAGE EXAMPLES -->
 ## Classes
 **In your README.md file, you should specify individual classes built per team member.**
 TODO
-Omer:    
-  Angular:  
-  - supplier.info.service.ts  
-  - unsaved-changes-guard.service.ts  
-  - supplier.info.service.ts  
-  - supplier.info.service.ts  
-  - supplier.info.service.ts  
-    
+
+### Omer:    
+
+  ```
+  Angular (frontend):  
+
+  supplier.info.service.ts  - unsaved-changes-guard.service.ts  - supplier.ts - supplier-info.component.ts - supplier-info-edit.component.ts  
+  supplier.list.component.ts  - supplier-item.component.ts - default_image.ts 
+
+  Spring (backend):  
+
+  SupplierController.java  - SupplierService.java  - SupplierImage.java - SupplierEntity.java - ImageEntity.java 
+  ImageRepository.java  - SupplierRepository.java 
+
+  ``` 
+
+  ### Ghizlane:    
+
+  ```
+  Angular (frontend):  
+
+  <class>.ts  - <class>.ts  - 
+
+  Spring (backend):  
+  
+  <class>.java  - <class>.java  - 
+
+  ``` 
+
+  ### Tycho:    
+
+  ```
+  Angular (frontend):  
+
+  <class>.ts  - <class>.ts  - 
+
+  Spring (backend):  
+  
+  <class>.java  - <class>.java  - 
+
+  ``` 
+  ### Roberto:    
+
+  ```
+  Angular (frontend):  
+
+  <class>.ts  - <class>.ts  - 
+
+  Spring (backend):  
+  
+  <class>.java  - <class>.java  - 
+
+  ``` 
+  ### Mikal:    
+
+  ```
+  Angular (frontend):  
+
+  <class>.ts  - <class>.ts  - 
+
+  Spring (backend):  
+  
+  <class>.java  - <class>.java  - 
+
+  ```   
 
 <!-- CONTRIBUTING -->
 ## System Documentation
