@@ -33,6 +33,7 @@ import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service
 import {DemoImage} from './components/supplier-info/supplier-info-edit/default-image';
 import {MessagesComponent} from './components/messages/messages.component';
 import { RecentProductsComponent } from './components/supplier-info/recent-products/recent-products.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 @NgModule({
     declarations: [
@@ -58,6 +59,7 @@ import { RecentProductsComponent } from './components/supplier-info/recent-produ
         MyproductsEditComponent,
         MessagesComponent,
         RecentProductsComponent,
+        FaqComponent,
     ],
     imports: [
         CookieModule.forRoot(),

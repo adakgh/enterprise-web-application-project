@@ -18,7 +18,8 @@ import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service
 import {MyproductsComponent} from './components/myproducts/myproducts.component';
 import {MyproductsEditComponent} from './components/myproducts/myproducts-edit/myproducts-edit.component';
 import {VerifyUserComponent} from './components/verify-user/verify-user.component';
-import {MessagesComponent} from "./components/messages/messages.component";
+import {MessagesComponent} from './components/messages/messages.component';
+import {FaqComponent} from './components/faq/faq.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -37,6 +38,7 @@ const routes: Routes = [
     {path: 'contact', component: ContactComponent},
     {path: 'verify', component: VerifyUserComponent},
     {path: 'messages', component: MessagesComponent},
+    {path: 'faq', component: FaqComponent},
     {path: 'error', component: ErrorComponent},
     {path: '**', redirectTo: '/error'} // If page not found: goes to error 404 page
 ];
