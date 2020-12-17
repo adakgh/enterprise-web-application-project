@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {Observable, Observer} from "rxjs";
-import {DemoImage} from "../../supplier-info/supplier-info-edit/default-image";
+import {DemoImage} from '../../supplier-info/supplier-info-edit/default-image';
 
 @Component({
     selector: 'app-supplier-item',
@@ -10,25 +8,23 @@ import {DemoImage} from "../../supplier-info/supplier-info-edit/default-image";
 })
 export class SupplierItemComponent implements OnInit {
 
-    @Input() supplier;
-    profileImageName;
-    generatedImage: string;
+    @Input() supplier;      // Hold the supplier data retrieved from the parent SupplierListComponent
+    generatedImage: string; // The profile image src of the supplier
 
     constructor(public demoImage: DemoImage) {
     }
 
+    // On init set the src of the profile image of the supplier if there is a image available
     ngOnInit(): void {
         if (this.supplier.profileImage != null) {
-            this.profileImageName = this.supplier.name;
             this.generatedImage = atob(this.supplier.profileImage.picByte);
         } else {
             // Get the default image and put in src
             this.generatedImage = (this.demoImage.imageBase64Url);
         }
-
     }
 
-    // Just a helper method to combines all adress detail into one String
+    // Just a helper method to combines all loose address details into one String
     concatAddress(): string {
         return this.supplier.addresses[0].street + ' ' + this.supplier.addresses[0].number + ', ' +
             this.supplier.addresses[0].postalCode + ' ' + this.supplier.addresses[0].city;

@@ -19,8 +19,8 @@ export class SupplierInfoService {
 
         return this.apiService.get('/suppliers/' + query).pipe(
             map(res => {
-                console.log('Data recieved for the supplierInfo Page: ');
-                console.log(res);
+                /*console.log('Data recieved for the supplierInfo Page: ');
+                console.log(res);*/
                 return res;
             })
         );

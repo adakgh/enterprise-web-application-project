@@ -40,9 +40,6 @@ public class SupplierController {
 
     private final SupplierService supplierService;
 
-    @Autowired
-    ImageRepository imageRepository;
-
     /**
      * Retrieves supplier-info with the given supplier-id.
      */
@@ -60,37 +57,12 @@ public class SupplierController {
     }
 
     /**
-     * Updates the supplier-info of the current logged-in user.
+     * Updates the supplier-info of the current logged-in user. and return wheter update succeeded
      */
     @PutMapping
-    public void updateSupplierInfo(@RequestBody SupplierImage file) throws IOException {
-        this.supplierService.updateWithImage(file);
+    public boolean updateSupplierInfo(@RequestBody SupplierImage file) throws IOException {
+        return this.supplierService.updateWithImage(file);
     }
 
-
-
-
-    // TEMP, TEST ENDPOINTS
-    /*
-    @GetMapping(path = {"/get/{imageId}"})
-    public ImageEntity getImage(@PathVariable("imageId") long imageId) throws IOException {
-        final Optional<ImageEntity> retrievedImage = imageRepository.findById(imageId);
-        //String s = new String(retrievedImage.get().getPicByte(), StandardCharsets.UTF_8);
-        // Gson g = new Gson();
-        JSONParser jsonParser = new JSONParser(s);
-        //System.out.println(s);
-        return retrievedImage.get();
-    }
-
-    @PutMapping("/upload")
-    public ResponseEntity<Void> uploadImage(@RequestBody SupplierImage file) throws IOException {
-                System.out.println("Original Image Byte Size - " + file.getBytes().length);
-        ImageEntity img = new ImageEntity(file.getOriginalFilename(), file.getContentType(),
-                compressBytes(file.getBytes()));
-//        img.setSupplierEntity(null);
-        imageRepository.save(img);
-        return ResponseEntity.ok().build();
-    }
-*/
 
 }
