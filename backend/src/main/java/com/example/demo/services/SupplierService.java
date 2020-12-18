@@ -39,8 +39,7 @@ public class SupplierService {
      * ResourceNotFoundException indicating that the supplier-info could not be found.
      */
     public SupplierEntity findById(Long id) {
-        return supplierRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Supplier not be found with id: " + id));
+        return supplierRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Supplier not be found with id: " + id));
     }
 
     /**
@@ -100,6 +99,8 @@ public class SupplierService {
             return updateById(newSupplier, imageEntity);
         } else {
             // Update supplier without image
+            System.out.println("DEZE GA IK UPDATEN");
+            System.out.println(newSupplier);
             return updateById(newSupplier, null);
         }
 

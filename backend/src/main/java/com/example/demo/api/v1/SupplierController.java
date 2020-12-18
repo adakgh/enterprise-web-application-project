@@ -30,8 +30,6 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-import static com.example.demo.services.SupplierService.compressBytes;
-import static com.example.demo.services.SupplierService.decompressBytes;
 
 @RestController
 @AllArgsConstructor
@@ -57,10 +55,12 @@ public class SupplierController {
     }
 
     /**
-     * Updates the supplier-info of the current logged-in user. and return wheter update succeeded
+     * Updates the supplier-info of the current logged-in user. and return whether update succeeded
      */
     @PutMapping
     public boolean updateSupplierInfo(@RequestBody SupplierImage file) throws IOException {
+        System.out.println("ANANNNNNNNNNNNN");
+        System.out.println(file);
         return this.supplierService.updateWithImage(file);
     }
 
