@@ -210,6 +210,6 @@ Omer Citik | 500833046 | omer.citik@hva.nl | 0685298845 |
 Mikal van Eijk | 500828984 | mikal.van.eijk@hva.nl | 0631251505 |
 Ghizlane el Adak | 500828922 | ghizlane.el.adak@hva.nl | 0684919415 |
 Tycho Stam | .... | tycho.stam@hva.nl | 0615687192 |
-Roberto Indemans | ..... | roberto.indemans@hva.nl | 0642232349 |
+Roberto Indemans | 500676036 | roberto.indemans@hva.nl | 0642232349 |
 
 Project Link: https://gitlab.fdmci.hva.nl/se-ewa-2020-2021/vanstreek-2
