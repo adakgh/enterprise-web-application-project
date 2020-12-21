@@ -12,7 +12,7 @@
     text-decoration: line-through !important;
 }
 
-#line-collapse{
+.line-collapse{
     border-width: 0px;
     border-color: black;
     border-style: solid;

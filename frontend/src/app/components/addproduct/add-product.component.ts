@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AddProductService} from '../../services/add-product.service';
 import {ApiService} from '../../services/api.service';
 import {Router} from '@angular/router';
@@ -24,6 +24,7 @@ export class AddProductComponent implements OnInit {
 
     unit: string;
     addNumber = 0;
+    count = new Array();
 
     constructor(
         private apiService: ApiService,
@@ -39,6 +40,7 @@ export class AddProductComponent implements OnInit {
         this.productService.getAllCategories().subscribe(
             res => this.categoryMap = res
         );
+
     }
 
     addProduct(): void {
@@ -80,7 +82,6 @@ export class AddProductComponent implements OnInit {
         }
     }
 
-
     reloadProductPage(): void {
         // Reload the page when send button is pressed
         this.router.navigate(['/..']).then(() => {
@@ -120,5 +121,25 @@ export class AddProductComponent implements OnInit {
             return '/' + this.unit;
         }
         return '';
+    }
+
+    countup(): void {
+        if (this.addNumber === -1) {
+            this.addNumber = 0;
+        }
+        if (this.addNumber <= 3) {
+            this.count.push(this.addNumber);
+            this.addNumber++;
+            console.log(this.count);
+        }
+    }
+
+    countdown(): void {
+        if (this.addNumber >= 0) {
+            this.count.splice(this.addNumber);
+            this.addNumber--;
+            console.log(this.count);
+        }
+
     }
 }
