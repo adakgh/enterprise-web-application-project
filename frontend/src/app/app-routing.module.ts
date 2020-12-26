@@ -20,6 +20,8 @@ import {MyproductsEditComponent} from './components/myproducts/myproducts-edit/m
 import {VerifyUserComponent} from './components/verify-user/verify-user.component';
 import {MessagesComponent} from './components/messages/messages.component';
 import {FaqComponent} from './components/faq/faq.component';
+import {TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
+import {PrivacyPolicyComponent} from './components/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -39,6 +41,8 @@ const routes: Routes = [
     {path: 'verify', component: VerifyUserComponent},
     {path: 'messages', component: MessagesComponent},
     {path: 'faq', component: FaqComponent},
+    {path: 'terms-and-conditions', component: TermsAndConditionsComponent},
+    {path: 'privacy-policy', component: PrivacyPolicyComponent},
     {path: 'error', component: ErrorComponent},
     {path: '**', redirectTo: '/error'} // If page not found: goes to error 404 page
 ];
