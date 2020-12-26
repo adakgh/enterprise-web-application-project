@@ -139,7 +139,7 @@ export class ProductComponent implements OnInit {
         console.log(productDistance);
 
         const newArray: any[] = [];
-        // set the products witht he corect order in a new array
+        // set the products with he correct order in a new array
         for (let i = 0; i < productDistance.length; i++) {
             newArray[i] = this.getProductById(this.jsonData, productDistance[i].productId);
         }
@@ -177,7 +177,7 @@ export class ProductComponent implements OnInit {
     }
 
     getCurrentAddress(): void {
-        // get the address of the current user
+        // get the current users address
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position1 => {
                 this.position = {

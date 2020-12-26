@@ -7,7 +7,8 @@ import {map} from 'rxjs/operators';
 })
 export class LocationService {
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) {
+    }
 
     getAddressInfo(searchString: string): any {
 
