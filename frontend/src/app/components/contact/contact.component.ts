@@ -15,6 +15,9 @@ export class ContactComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        // scroll to the top of page after fully loading
+        window.scrollTo(0, 0);
+
         this.contactForm = new FormGroup({
             name: new FormControl(''),
             email: new FormControl('', [Validators.required, Validators.email]),
@@ -43,7 +46,7 @@ export class ContactComponent implements OnInit {
             this.contactService.sendMail(message).subscribe(res => {
                 console.log(res);
                 alert('Email is verzonden. We proberen zo snel mogelijk te reageren.');
-                // this.contactForm.reset();
+                this.contactForm.reset();
             }, err => {
                 console.log(err);
                 alert('Er is iets misgegaan. Probeer het opnieuw.');

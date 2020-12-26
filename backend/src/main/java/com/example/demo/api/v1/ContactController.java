@@ -22,7 +22,7 @@ public class ContactController {
     private final ContactService contactService;
 
     /**
-     * Sends the email to us.
+     * Sends an email to us.
      */
     @PostMapping("/contact")
     public ResponseEntity contactUs(@RequestBody ContactMail contactMail) throws MessagingException,
