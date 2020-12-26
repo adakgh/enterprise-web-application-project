@@ -39,7 +39,8 @@ public class SupplierService {
      * ResourceNotFoundException indicating that the supplier-info could not be found.
      */
     public SupplierEntity findById(Long id) {
-        return supplierRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Supplier not be found with id: " + id));
+        return supplierRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Supplier not be found" +
+                " with id: " + id));
     }
 
     /**
@@ -55,8 +56,10 @@ public class SupplierService {
      * access the actual database and finally mapping the new data into the current data.
      */
     public boolean updateById(SupplierEntity newSupplier, ImageEntity imageEntity) {
-        var principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long supplierId = ((Number) principal.getClaims().get("sid")).longValue();
+        // var principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // long supplierId((Number) principal.getClaims().get("sid")).longValue()
+
+        long supplierId = newSupplier.getId();
         SupplierEntity currentSupplier = supplierRepository.getOne(supplierId); // lazy load
 
         // update address relationship
@@ -80,6 +83,8 @@ public class SupplierService {
         SupplierEntity newSupplier = file.getSupplier();
         if (file.getName() != null) {
 
+            System.out.println("UPDATING WITH A IMAGE");
+
             /* TODO delete previous image before saving new one
             // If supplier already has a profileImage uploaded delete that first
             if (newSupplier.getProfileImage() != null){
@@ -94,6 +99,8 @@ public class SupplierService {
             imageEntity.setType(file.getType());
             imageEntity.setPicByte(file.getUrl().getBytes());
             imageRepository.save(imageEntity);
+
+            System.out.println(imageEntity);
 
             // send the saved image with the supplier to be saved
             return updateById(newSupplier, imageEntity);

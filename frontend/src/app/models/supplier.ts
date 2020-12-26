@@ -1,6 +1,7 @@
 import {Form} from '@angular/forms';
 
 export class Supplier {
+    public id: number;
     public companyName: string;
     public contactPerson: string;
     public contactEmail: string;

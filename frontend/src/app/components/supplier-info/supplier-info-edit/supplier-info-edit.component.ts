@@ -109,6 +109,7 @@ export class SupplierInfoEditComponent implements OnInit {
     // Gets triggered when user(supplier) is done editing and click the button to update
     onUpdateSupplier(): void {
 
+        this.supplier.id = this.supplierId;
         if (this.selectedFile != null) {
             // Create a object with the supplier data and the selected image data and send that
             const image = {
