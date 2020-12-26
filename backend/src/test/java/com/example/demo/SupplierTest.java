@@ -1,12 +1,10 @@
 package com.example.demo;
 
-import com.example.demo.api.v1.SupplierController;
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.persistence.SupplierImage;
 import com.example.demo.persistence.entities.ImageEntity;
 import com.example.demo.persistence.entities.SupplierEntity;
 import com.example.demo.persistence.repositories.ImageRepository;
-import com.example.demo.persistence.repositories.SupplierRepository;
 import com.example.demo.services.SupplierService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +15,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.client.RestClientException;
-
-import java.io.IOException;
-import java.util.Optional;
-
-import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 /**
  * @author Omer Citik
@@ -46,11 +30,10 @@ class SupplierTest {
     private int port;
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    private TestRestTemplate restTemplate;  // Used for doing requests to end-points
 
     @Autowired
     private SupplierService supplierService;
-
     @Autowired
     private ImageRepository imageRepository;
 
@@ -105,7 +88,8 @@ class SupplierTest {
         SupplierEntity supplierToUpdate = supplierService.findById(1l);
 
         // Another way to get the supplier, by doing a request in the restcontroller
-        // SupplierEntity retrievedSupplier = this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/suppliers/1", SupplierEntity.class);
+        // SupplierEntity retrievedSupplier = this.restTemplate.getForObject("http://localhost:" + port +
+        // "/api/v1/suppliers/1", SupplierEntity.class);
 
         // Update the CompanyName and The contact persons name but no images
         supplierToUpdate.setCompanyName(supplierToUpdate.getCompanyName() + "-UPDATED");
@@ -134,7 +118,7 @@ class SupplierTest {
 
     /**
      * Retrieve first supplier with the use of the supplierservice/repository.
-     * Update some data and try to update the supplier with the use of the controller without an image
+     * Update some data and try to update the supplier with the use of the controller WITH an image
      * And when done with the test reset all data as it was, so we dont actually change the data on the system
      */
     @Test
@@ -168,37 +152,12 @@ class SupplierTest {
 
             assertTrue(editedSupplier.getProfileImage() != null);
             assertTrue(imageEntity != null);
+            assertTrue(imageEntity.getName().equals("supplierTestImage"));
             assertTrue(true);
-
         } catch (Exception e) {
             // If we come here we know the update failed and then we also fail the entire test
             throw new Exception(e);
         }
     }
-
-
-    /*    @Test
-    void updateSupplierOneNameAndEmail() throws Exception {
-
-        // Get first supplier with the supplierRepository
-//        Optional<SupplierEntity> supplierToEdit = supplierRepository.findById(1l);
-        SupplierEntity supplierToEdit = new SupplierEntity();
-
-        // Edit the values of the supplier
-        supplierToEdit.setCompanyName(supplierToEdit.getCompanyName() + " - UPDATED");
-        supplierToEdit.setContactEmail(supplierToEdit.getContactEmail() + " - UPDATED");
-        SupplierImage updatedSupplier = new SupplierImage(supplierToEdit, null, null, null);
-
-        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.put("/api/v1/suppliers/", updatedSupplier);
-        this.mockMvc.perform(builder).andExpect(MockMvcResultMatchers.status().isOk());
-
-        this.mockMvc.perform(get("/api/v1/suppliers/", updatedSupplier)).andDo(print()).andExpect(status().isOk());
-
-
-//        boolean lol = this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/suppliers", Boolean.class);
-        System.out.println(supplierToEdit);
-//        assertTrue(supplierToEdit.isPresent());
-    }*/
-
 
 }
