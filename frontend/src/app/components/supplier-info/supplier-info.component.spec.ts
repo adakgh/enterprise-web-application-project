@@ -3,24 +3,21 @@ import {SupplierInfoComponent} from './supplier-info.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {HttpClientModule} from '@angular/common/http';
-import {CookieModule} from "ngx-cookie";
+import {CookieModule} from 'ngx-cookie';
 import {DemoImage} from './supplier-info-edit/default-image';
-import {BrowserModule} from "@angular/platform-browser";
-import {AppRoutingModule} from "../../app-routing.module";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ActivatedRoute, Router, RouterModule} from "@angular/router";
-import {UnsavedChangesGuardService} from "../../guards/unsaved-changes-guard.service";
-import {of} from "rxjs";
-import {Component, NgZone} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from '../../app-routing.module';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import {UnsavedChangesGuardService} from '../../guards/unsaved-changes-guard.service';
+import {of} from 'rxjs';
 
 describe('SupplierInfoComponent', () => {
     let fixture: ComponentFixture<SupplierInfoComponent>;   // The supplierInfoComponent
     let component: SupplierInfoComponent;                   // The supplierInfoComponent typescript file
     let componentHtml: HTMLElement;                         // The supplierInfoComponent template HTML file
+    let router: Router;                                     // The Router
 
-    let mockActiveRoute;                                    // The supplierInfoComponent typscript file
-    let router: Router;                                     // The supplierInfoComponent typscript file
-
+    /** Configure the moduels needed for the test before each test */
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [SupplierInfoComponent],
@@ -30,33 +27,30 @@ describe('SupplierInfoComponent', () => {
                 AppRoutingModule,
                 RouterTestingModule,
                 HttpClientModule,
-                FormsModule,
                 RouterModule,
-                ReactiveFormsModule,
             ],
-            providers: [UnsavedChangesGuardService, DemoImage
-            ],
+            providers: [UnsavedChangesGuardService, DemoImage]
         }).compileComponents();
     }));
 
+    /** Initialize global variables before each test */
     beforeEach(() => {
             fixture = TestBed.createComponent(SupplierInfoComponent);
             component = fixture.componentInstance;
             componentHtml = fixture.debugElement.nativeElement;
-            mockActiveRoute = {
-                snapshot: {
-                    queryParams: {
-                        id: 1,
-                    }
-                }
-            };
             router = TestBed.get(Router);
             fixture.detectChanges();
         }
     );
 
+
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should navigate to edit page', () => {
+        router.navigate(['edit'], {queryParams: {id: 1}});
+        // debugger;
     });
 
 });

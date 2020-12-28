@@ -9,19 +9,29 @@ import {DemoImage} from './default-image';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../../../app-routing.module';
-import {ActivatedRoute, Router, RouterModule} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router, RouterModule} from '@angular/router';
 import {UnsavedChangesGuardService} from '../../../guards/unsaved-changes-guard.service';
 import {Observable, of} from 'rxjs';
 import {SupplierInfoService} from '../../../services/supplier-info.service';
-import {SupplierInfoComponent} from "../supplier-info.component";
 
+/**
+ * @author Omer Citik
+ * Testing the SupplierInfoEditComponent
+ */
 describe('SupplierInfoEditComponent', () => {
-    let component: SupplierInfoEditComponent;
-    let componentHtml: HTMLElement;
-    let fixture: ComponentFixture<SupplierInfoEditComponent>;
-    let router: Router;                                     // The supplierInfoComponent typscript file
+    let component: SupplierInfoEditComponent;                   // The supplierInfoEditComponent typescript class
+    let componentHtml: HTMLElement;                             // The supplierInfoEditComponent HTML template
+    let fixture: ComponentFixture<SupplierInfoEditComponent>;   // The supplierInfoEditComponent
+    let router: Router;                                         // Router
+    let supplierServiceMock: any;                               // Jasmine fake service shizzle
 
+    /** Configure the moduels needed for the test before each test */
     beforeEach(async(() => {
+
+        supplierServiceMock = jasmine.createSpyObj('SupplierInfoService', ['getSupplier']);
+        supplierServiceMock.getSupplier.and.returnValue(of([]));
+
+        // Configuring the modules/imports/providers needed
         TestBed.configureTestingModule({
             declarations: [SupplierInfoEditComponent],
             imports: [
@@ -30,35 +40,18 @@ describe('SupplierInfoEditComponent', () => {
                 HttpClientModule,
                 FormsModule,
                 RouterModule,
-                RouterTestingModule.withRoutes(
-                    [{path: 'supplierinfo', component: SupplierInfoComponent}]
-                )
+                RouterTestingModule
             ],
-            providers: [UnsavedChangesGuardService, DemoImage, {
-                provide: SupplierInfoService,
-                useClass: SupplierInfoServiceMock
-            },
+            providers: [UnsavedChangesGuardService, DemoImage,
                 {
-                    provide: ActivatedRoute,
-                    useValue: {
-                        params: {id: 1},
-                    }
+                    provide: SupplierInfoService,
+                    useValue: supplierServiceMock
                 }
-
-                /*,
-                {
-                    provide: ActivatedRoute,
-                    useValue: { // Mock
-                        queryParams: of(
-                            {
-                                id: 1
-                            }
-                        )
-                    }
-                }*/],
+            ],
         }).compileComponents();
     }));
 
+    /** Initialize global variables before each test */
     beforeEach(() => {
         fixture = TestBed.createComponent(SupplierInfoEditComponent);
         component = fixture.componentInstance;
@@ -71,46 +64,35 @@ describe('SupplierInfoEditComponent', () => {
         expect(component).toBeTruthy();
     });
 
-
-    it('should have h5 tag with the titel', () => {
+    it('should have h5 tag with the titel: Wijzig Leverancier gegevens:', () => {
         const h5Element = componentHtml.querySelector('h5');
         // debugger;
         expect(h5Element.innerText).toContain('Wijzig Leverancier gegevens:');
     });
 
-    it('Annuleer button should exist', () => {
+    it('should create annuleer button', () => {
         const annuleerButton: HTMLButtonElement = componentHtml.querySelector('#annuleerButton');
         // debugger;
         expect(annuleerButton).toBeTruthy();
     });
 
-    it('When clicked on Annuleer button we should navigate back to supplier info component', () => {
-        /*   const location = TestBed.get(Location);
-           const annuleerButton: HTMLButtonElement = componentHtml.querySelector('#annuleerButton');
-           annuleerButton.click();
-           fixture.detectChanges();
-           fixture.whenStable().then(() => {
-               debugger;
-               expect(location.path()).toBe('supplierinfo');
-           });*/
-        //
-    });
 
+
+    it('should navigate back to supplier info component when clicked on annuleer button ', () => {
+        spyOn(router, 'navigateByUrl');
+        const annuleerButton: HTMLButtonElement = componentHtml.querySelector('#annuleerButton');
+        annuleerButton.click();
+        fixture.whenStable().then(() => {
+            expect(router.navigateByUrl).toHaveBeenCalledWith(router.createUrlTree(['/supplierinfo'], {queryParams: {id: 1}}), {
+                skipLocationChange: false,
+                replaceUrl: false
+            });
+        });
+    });
 
     it('Get first supplier', fakeAsync(() => {
 
-        /*router.navigate(['/1']);
-         */
 
-        /*    component.supplierId = 1;
-            component.loadSupplierData(component.supplierId);
-            tick(1500);*/
-
-        console.log('Supplier id:');
-        console.log(component.supplierId);
-        expect(component).toBeTruthy();
     }));
 });
 
-class SupplierInfoServiceMock {
-}
