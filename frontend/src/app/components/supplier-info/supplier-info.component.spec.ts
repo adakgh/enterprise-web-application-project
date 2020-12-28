@@ -14,11 +14,12 @@ import {of} from "rxjs";
 import {Component, NgZone} from '@angular/core';
 
 describe('SupplierInfoComponent', () => {
-    let component: SupplierInfoComponent;
-    let componentHtml: HTMLElement;
-    let fixture: ComponentFixture<SupplierInfoComponent>;
-    let mockActiveRoute;
-    let router: Router;
+    let fixture: ComponentFixture<SupplierInfoComponent>;   // The supplierInfoComponent
+    let component: SupplierInfoComponent;                   // The supplierInfoComponent typescript file
+    let componentHtml: HTMLElement;                         // The supplierInfoComponent template HTML file
+
+    let mockActiveRoute;                                    // The supplierInfoComponent typscript file
+    let router: Router;                                     // The supplierInfoComponent typscript file
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -58,9 +59,4 @@ describe('SupplierInfoComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Get first supplier', fakeAsync(() => {
-        router.navigate(['/1']);
-        tick();
-        expect(component).toBeTruthy();
-    }));
 });
