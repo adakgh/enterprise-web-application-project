@@ -81,23 +81,76 @@
             </div>
 
             <!-- hidden content -->
-            <div class="" id="value-with-stock" *ngFor="let index of count">
+            <div class="value-with-stock">
                 <div class="form-group row">
-                    <label for="inputCost" class="col-sm-2 col-form-label label-title">{{count[index] + 1}}e Actie prijs
+                    <label for="inputCost" class="col-sm-2 col-form-label label-title">2e Actie prijs
                         & voorraad:</label>
                     <div class="col-sm-3 input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">€{{getUnit()}}</div>
                         </div>
-                        <input type="text" class="form-control" id="inputCost3" placeholder="prijs" name="price"
-                               [(ngModel)]="productData.discount_price" #name="ngModel">
+                        <input type="text" class="form-control" id="inputCost1" placeholder="prijs" name="discount_price"
+                               [(ngModel)]="productData.price_range1" #name="ngModel">
                     </div>
                     <div class="col-sm-6 input-group">
-                        <input type="text" class="form-control" id="inputStock3" placeholder="voorraad"
-                               name="stock" [(ngModel)]="productData.quantity" #name="ngModel">
+                        <input type="text" class="form-control" id="inputStock1" placeholder="voorraad"
+                               name="stock" [(ngModel)]="productData.quantity_range1" #name="ngModel">
                     </div>
                 </div>
             </div>
+            <div class="value-with-stock">
+                <div class="form-group row">
+                    <label for="inputCost" class="col-sm-2 col-form-label label-title">2e Actie prijs
+                        & voorraad:</label>
+                    <div class="col-sm-3 input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">€{{getUnit()}}</div>
+                        </div>
+                        <input type="text" class="form-control" id="inputCost2" placeholder="prijs" name="discount_price"
+                               [(ngModel)]="productData.price_range2" #name="ngModel">
+                    </div>
+                    <div class="col-sm-6 input-group">
+                        <input type="text" class="form-control" id="inputStock2" placeholder="voorraad"
+                               name="stock" [(ngModel)]="productData.quantity_range2" #name="ngModel">
+                    </div>
+                </div>
+            </div>
+            <div class="value-with-stock">
+                <div class="form-group row">
+                    <label for="inputCost" class="col-sm-2 col-form-label label-title">2e Actie prijs
+                        & voorraad:</label>
+                    <div class="col-sm-3 input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">€{{getUnit()}}</div>
+                        </div>
+                        <input type="text" class="form-control" id="inputCost3" placeholder="prijs" name="discount_price"
+                               [(ngModel)]="productData.price_range3" #name="ngModel">
+                    </div>
+                    <div class="col-sm-6 input-group">
+                        <input type="text" class="form-control" id="inputStock3" placeholder="voorraad"
+                               name="stock" [(ngModel)]="productData.quantity_range3" #name="ngModel">
+                    </div>
+                </div>
+            </div>
+            <div class="value-with-stock">
+                <div class="form-group row">
+                    <label for="inputCost" class="col-sm-2 col-form-label label-title">2e Actie prijs
+                        & voorraad:</label>
+                    <div class="col-sm-3 input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">€{{getUnit()}}</div>
+                        </div>
+                        <input type="text" class="form-control" id="inputCost4" placeholder="prijs" name="discount_price"
+                               [(ngModel)]="productData.price_range4" #name="ngModel">
+                    </div>
+                    <div class="col-sm-6 input-group">
+                        <input type="text" class="form-control" id="inputStock4" placeholder="voorraad"
+                               name="stock" [(ngModel)]="productData.quantity_range4" #name="ngModel">
+                    </div>
+                </div>
+            </div>
+
+
             <br>
 
             <!-- Categoty -->
