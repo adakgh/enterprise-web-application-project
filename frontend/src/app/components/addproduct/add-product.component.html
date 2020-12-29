@@ -8,7 +8,6 @@
             <picture>
                 <img [src]="demoImage.sanatizeUrl(demoImage.generatedImage)" alt="voeg afbeelding toe"
                      style="width: 80%; height: 100%; opacity: 100%; border: 1px solid gray;" class="img-thumbnail">
-                <!--src="https://simpleicon.com/wp-content/uploads/camera.png"-->
                 <input type="file" (change)="onFileSelected($event)">
             </picture>
         </div>
@@ -80,6 +79,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- hidden content -->
             <div class="" id="value-with-stock" *ngFor="let index of count">
                 <div class="form-group row">
@@ -90,7 +90,7 @@
                             <div class="input-group-text">€{{getUnit()}}</div>
                         </div>
                         <input type="text" class="form-control" id="inputCost3" placeholder="prijs" name="price"
-                               [(ngModel)]="productData.price" #name="ngModel">
+                               [(ngModel)]="productData.discount_price" #name="ngModel">
                     </div>
                     <div class="col-sm-6 input-group">
                         <input type="text" class="form-control" id="inputStock3" placeholder="voorraad"
@@ -99,6 +99,7 @@
                 </div>
             </div>
             <br>
+
             <!-- Categoty -->
             <div class="form-group row">
                 <label for="inputStock" class="col-sm-2 col-form-label label-title">Categorie:</label>
@@ -128,8 +129,6 @@
                     </button>
                 </div>
             </div>
-
-
         </form>
     </div>
 </div>

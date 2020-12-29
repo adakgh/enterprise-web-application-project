@@ -22,6 +22,13 @@ export class AddProductComponent implements OnInit {
     selectedFileUrl;
     categoryMap: any[];
 
+    scopeTeller: any[];
+    scopeName = [{
+        id: 1
+    }, {
+        id: 2
+    }];
+
     unit: string;
     addNumber = 0;
     count = new Array();
@@ -40,6 +47,7 @@ export class AddProductComponent implements OnInit {
         this.productService.getAllCategories().subscribe(
             res => this.categoryMap = res
         );
+        console.log(this.scopeName);
 
     }
 
@@ -124,6 +132,9 @@ export class AddProductComponent implements OnInit {
     }
 
     countup(): void {
+        if (this.count.length >= 5){
+            this.count.splice(4);
+        }
         if (this.addNumber === -1) {
             this.addNumber = 0;
         }
@@ -135,6 +146,9 @@ export class AddProductComponent implements OnInit {
     }
 
     countdown(): void {
+        if (this.count.length >= 5){
+            this.count.splice(4);
+        }
         if (this.addNumber >= 0) {
             this.count.splice(this.addNumber);
             this.addNumber--;

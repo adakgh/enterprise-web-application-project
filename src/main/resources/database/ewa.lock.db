@@ -1,6 +1,6 @@
 #FileLock
-#Sat Dec 12 14:38:17 CET 2020
-server=172.29.89.66\:58306
-hostName=DESKTOP-9TU3D99
+#Tue Dec 29 15:50:47 CET 2020
+server=192.168.0.13\:49816
+hostName=192.168.0.13
 method=file
-id=176572c60ea6c0b6c88a6fb15dc49303ac8501ea870
+id=176aefae711cb2d9760b2da5e7cd4935fc0b96d6e41
