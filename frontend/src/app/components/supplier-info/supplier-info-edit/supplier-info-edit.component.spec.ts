@@ -9,10 +9,37 @@ import {DemoImage} from './default-image';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../../../app-routing.module';
-import {ActivatedRoute, NavigationExtras, Router, RouterModule} from '@angular/router';
+import {
+    ActivatedRoute,
+    convertToParamMap,
+    NavigationExtras,
+    ParamMap,
+    Params,
+    Router,
+    RouterModule
+} from '@angular/router';
 import {UnsavedChangesGuardService} from '../../../guards/unsaved-changes-guard.service';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, ReplaySubject} from 'rxjs';
 import {SupplierInfoService} from '../../../services/supplier-info.service';
+import {Injectable} from "@angular/core";
+
+export class ActivatedRouteStub {
+    // Use a ReplaySubject to share previous values with subscribers
+    // and pump new values into the `paramMap` observable
+    private subject = new ReplaySubject<Params>();
+
+    constructor(initialParams?: Params) {
+        this.setParamMap(initialParams);
+    }
+
+    /** The mock paramMap observable */
+    readonly paramMap = this.subject.asObservable();
+
+    /** Set the paramMap observables's next value */
+    setParamMap(params?: Params) {
+        this.subject.next((params));
+    }
+}
 
 /**
  * @author Omer Citik
@@ -24,9 +51,16 @@ describe('SupplierInfoEditComponent', () => {
     let fixture: ComponentFixture<SupplierInfoEditComponent>;   // The supplierInfoEditComponent
     let router: Router;                                         // Router
     let supplierServiceMock: any;                               // Jasmine fake service shizzle
+    let activatedRoute;
 
     /** Configure the moduels needed for the test before each test */
+
+
+    let mockParams, mockActivatedRoute;
+
     beforeEach(async(() => {
+        mockActivatedRoute = new ActivatedRouteStub();
+        mockActivatedRoute.setParamMap({id: 2});
 
         supplierServiceMock = jasmine.createSpyObj('SupplierInfoService', ['getSupplier']);
         supplierServiceMock.getSupplier.and.returnValue(of([]));
@@ -43,16 +77,14 @@ describe('SupplierInfoEditComponent', () => {
                 RouterTestingModule
             ],
             providers: [UnsavedChangesGuardService, DemoImage,
-                {
-                    provide: SupplierInfoService,
-                    useValue: supplierServiceMock
-                }
+                {provide: ActivatedRoute, useValue: mockActivatedRoute}
             ],
         }).compileComponents();
     }));
 
     /** Initialize global variables before each test */
     beforeEach(() => {
+        mockActivatedRoute.testParams = {id: '2'};
         fixture = TestBed.createComponent(SupplierInfoEditComponent);
         component = fixture.componentInstance;
         componentHtml = fixture.debugElement.nativeElement;
@@ -76,9 +108,20 @@ describe('SupplierInfoEditComponent', () => {
         expect(annuleerButton).toBeTruthy();
     });
 
+    it('should form be invalid with empty input field', () => {
+
+        console.log("SupplierID: ");
+        console.log(component.supplierId);
+
+        component.signupForm.controls.name.setValue('');
+        component.signupForm.controls.email.setValue('');
+        component.signupForm.controls.phonenumber.setValue('');
+
+        expect(component.signupForm.valid).toBeFalsy();
+    });
 
 
-    it('should navigate back to supplier info component when clicked on annuleer button ', () => {
+    /*it('should navigate back to supplier info component when clicked on annuleer button ', () => {
         spyOn(router, 'navigateByUrl');
         const annuleerButton: HTMLButtonElement = componentHtml.querySelector('#annuleerButton');
         annuleerButton.click();
@@ -88,7 +131,7 @@ describe('SupplierInfoEditComponent', () => {
                 replaceUrl: false
             });
         });
-    });
+    });*/
 
     it('Get first supplier', fakeAsync(() => {
 

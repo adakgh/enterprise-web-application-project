@@ -39,11 +39,15 @@ export class SupplierInfoEditComponent implements OnInit {
     ) {
     }
 
+    randomClick(): any {
+        this.signupForm.controls.name.setValue('');
+    }
+
     // Look at the query and based on that show the data of the supplier
     ngOnInit(): void {
         // Get the default image and put in src
         this.demoImage.getImage(this.demoImage.imageBase64Url);
-        this.activatedRoute.queryParams.subscribe(
+        this.activatedRoute.params.subscribe(
             res => {
                 // If there is no query given return user to homepage or if the supplier id in the query
                 // is not equal to the logged in supplier

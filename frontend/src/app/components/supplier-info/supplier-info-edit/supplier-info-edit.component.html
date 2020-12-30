@@ -1,6 +1,8 @@
 <div class="container">
     <h5>Wijzig Leverancier gegevens:</h5>
 
+<!--    <button class="btn btn-warning" (click)="randomClick()">RANDOM</button>-->
+
     <form (ngSubmit)="onUpdateSupplier()" #f="ngForm" enctype="multipart/form-data">
 
         <div class="row">
@@ -89,7 +91,7 @@
         <!--        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Opslaan</button>-->
 
         <div class="row">
-            <button id="annuleerButton" class="btn btn-danger mb-2 m-1 col-md-2 col-sm-12"><a href="" [routerLink]="['../']"
+            <button id="annuleerButton" class="btn btn-danger mb-2 m-1 col-md-2 col-sm-12"><a href="" routerLink="/supplierinfo"
                                                                           [queryParams]="{id:supplierId}"
                                                                           style="color:white;">
                 Annuleren </a>

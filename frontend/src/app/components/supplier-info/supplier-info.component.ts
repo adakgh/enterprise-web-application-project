@@ -46,10 +46,10 @@ export class SupplierInfoComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(
             res => {
                 // If there is no query given return user to homepage
-                if (res.id <= 0 || res.id == null) {
+                /*if (res.id <= 0 || res.id == null) {
                     this.router.navigate(['/']);
                     return;
-                }
+                }*/
                 this.loadSupplierData(res.id);
             },
             err => {
