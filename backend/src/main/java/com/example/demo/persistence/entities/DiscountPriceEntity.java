@@ -19,7 +19,7 @@ public class DiscountPriceEntity {
     private Long id;
 
     @Column(name = "DISCOUNT_PRICE")
-    private BigDecimal discountPrice;
+    private String discountPrice;
 
     @Column(name = "DISCOUNT_QUANTITY")
     private String discountQuantity;
@@ -28,8 +28,23 @@ public class DiscountPriceEntity {
     private Map<Object, Object> customData = new HashMap<>();
 
     @ManyToMany
-    @JoinTable(name = "PRODUCT_DISCOUNT", joinColumns = @JoinColumn(name = "PRODUCT_ID"), inverseJoinColumns = @JoinColumn(name = "DISCOUNT_ID"))
+    @JoinTable(name = "PRODUCT_DISCOUNT", joinColumns = @JoinColumn(name = "DISCOUNT_ID"), inverseJoinColumns =
+    @JoinColumn(name = "PRODUCT_ID"))
     @JsonBackReference
     private List<ProductEntity> product = new ArrayList<>();
 
+    public void addProduct(ProductEntity product) {
+        this.product.add(product);
+    }
+
+    @Override
+    public String toString() {
+        return "DiscountPriceEntity{" +
+                "id=" + id +
+                ", discountPrice='" + discountPrice + '\'' +
+                ", discountQuantity='" + discountQuantity + '\'' +
+                ", customData=" + customData +
+                ", product=" + product +
+                '}';
+    }
 }

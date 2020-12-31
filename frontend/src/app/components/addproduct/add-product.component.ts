@@ -85,7 +85,9 @@ export class AddProductComponent implements OnInit {
             );
 
         } else { // If no Image is selected only send the product data
+
             this.transfermFormDataInProductData();
+
             console.log(this.productData);
             this.apiService.post('/products', this.productData, null).subscribe(
                 resp => {
@@ -173,6 +175,7 @@ export class AddProductComponent implements OnInit {
         return this.productForm.get('productDiscounts') as FormArray;
     }
 
+    /** Puts the values of the Form into the productData object */
     transfermFormDataInProductData(): any {
         this.productData.title = this.productForm.value.title;
         this.productData.price = this.productForm.value.price;
@@ -180,11 +183,18 @@ export class AddProductComponent implements OnInit {
         this.productData.unit = this.productForm.value.unit;
         this.productData.category = this.productForm.value.category;
         this.productData.description = this.productForm.value.description;
+        this.productData.productDiscounts = this.productDiscounts.value;
     }
 
     randomButton(): any {
         console.log('Productform:');
         console.log(this.productForm.value);
         console.log(this.productForm);
+        console.log(this.productDiscounts);
+        console.log(JSON.stringify(this.productDiscounts.value));
+
+        this.transfermFormDataInProductData();
+        console.log(this.productData);
+
     }
 }

@@ -62,12 +62,14 @@ public class ProductEntity {
         productCategory.getProducts().add(this);
     }
 
+    public void addProductDiscount(DiscountPriceEntity discountPriceEntity) {
+        this.discounts.add(discountPriceEntity);
+    }
+
+
     @Override
     public String toString() {
         return "ProductEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+                ", name='" + name + '\'' ;
     }
 }

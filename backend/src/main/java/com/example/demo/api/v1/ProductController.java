@@ -8,6 +8,7 @@ import com.example.demo.persistence.repositories.ProductCategoryRepository;
 import com.example.demo.persistence.repositories.ProductRepository;
 import com.example.demo.search.ProductSpecification;
 import com.example.demo.services.ProductService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -46,17 +47,8 @@ public class ProductController {
      */
     @Secured(RoleType.SUPPLIER)
     @PostMapping
-    public void createProduct(@RequestBody Map<String, String> queryMap) {
-        System.out.println(queryMap);
-        ProductEntity product = modelMapper.map(queryMap, ProductEntity.class);
-        long categoryId = Long.parseLong(queryMap.get("categoryId"));
-
-        if (queryMap.get("url") != null) {
-            ImageEntity imageEntity = new ImageEntity(queryMap.get("imageName"), queryMap.get("type"), queryMap.get("url").getBytes());
-            productService.saveWithImage(product, categoryId,imageEntity);
-        } else {
-            productService.save(product, categoryId, null);
-        }
+    public void createProduct(@RequestBody ObjectNode queryMap) {
+        productService.save(queryMap);
     }
 
     /**
