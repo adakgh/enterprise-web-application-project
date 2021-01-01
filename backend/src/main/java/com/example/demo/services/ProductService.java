@@ -31,12 +31,22 @@ public class ProductService {
     private final ImageRepository imageRepository;
     private final DiscountPriceRepository discountPriceRepository;
 
-
+    /**
+     * Find a product by ID
+     *
+     * @param id The id of the product you want
+     * @return The found product
+     */
     public ProductEntity findById(long id) {
         return productRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Product not found with id: " + id));
     }
 
+    /**
+     * Delete a product by ID
+     *
+     * @param id The id of the product
+     */
     public void deleteById(long id) {
         // TODO: allow only product removals belonging to user.
         productRepository.deleteById(id);
@@ -45,6 +55,7 @@ public class ProductService {
     /**
      * Create and Save the product to the database, we also check for a Product Image if provided
      * And also Product Discounnt if provided
+     *
      * @param queryMap The JSON productData received From the Frontend / User
      */
     public ProductEntity save(ObjectNode queryMap) {
@@ -77,7 +88,8 @@ public class ProductService {
         // If a image is provided first add and save the image and assign it with the product
         if (queryMap.get("url") != null) {
             // Create the Image
-            ImageEntity imageEntity = new ImageEntity(queryMap.get("imageName").asText(), queryMap.get("type").asText(), queryMap.get("url").asText().getBytes());
+            ImageEntity imageEntity = new ImageEntity(queryMap.get("imageName").asText(),
+                    queryMap.get("type").asText(), queryMap.get("url").asText().getBytes());
             // Save the Image in the database
             imageRepository.save(imageEntity);
             // Assign the product with the saved image
@@ -85,7 +97,7 @@ public class ProductService {
         }
 
         // If there is any productDiscount added
-        if (queryMap.get("productDiscounts").size() >0) {
+        if (queryMap.get("productDiscounts").size() > 0) {
 
             // Get the productDiscount Array
             JsonNode productDiscountsproductDiscounts = queryMap.get("productDiscounts");
@@ -94,8 +106,9 @@ public class ProductService {
             for (int i = 0; i < productDiscountsproductDiscounts.size(); i++) {
                 // For each Product discount add and save the disountPrice entity
                 DiscountPriceEntity discountPriceEntity = new DiscountPriceEntity();
-                discountPriceEntity.setDiscountPrice(productDiscountsproductDiscounts.get(i).get("discountPrice").asText());
-                discountPriceEntity.setDiscountQuantity(productDiscountsproductDiscounts.get(i).get("discountQuantity").asText());
+                discountPriceEntity.setDiscountPrice(productDiscountsproductDiscounts.get(i).get("discountPrice").decimalValue());
+                discountPriceEntity.setDiscountQuantity(productDiscountsproductDiscounts.get(i).get("discountQuantity"
+                ).asText());
 
                 // Assign the product with the discount and save discount
                 discountPriceEntity.addProduct(product);
@@ -111,18 +124,77 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void updateById(long id, ProductEntity newProduct, ImageEntity productImage) {
-        ProductEntity currentProduct = entityManager.getReference(ProductEntity.class, id);
-        modelmapper.map(newProduct, currentProduct); // new --> updateInto --> current
+    /**
+     * Update and Save a Prodcut By Id
+     *
+     * @param id      the product ID
+     * @param product The updated Product values
+     * @return The updated Product
+     */
+    public ProductEntity update(long id, ObjectNode product) {
 
-        if (productImage != null) {
-            currentProduct.setProductImage(productImage);
+        // Find the product to update with the ID
+        ProductEntity newUpdatedProduct = productRepository.findById(id).get();
+
+        // Set the values of the product
+        newUpdatedProduct.setName(product.get("title").asText());
+        newUpdatedProduct.setPrice(product.get("price").decimalValue());
+        newUpdatedProduct.setQuantity(product.get("stock").asDouble());
+        newUpdatedProduct.setUnit(product.get("unit").asText());
+        long categoryId = Long.parseLong(product.get("category").asText());
+        newUpdatedProduct.addProductCategory(productCategoryRepository.getOne(categoryId));
+        newUpdatedProduct.setDescription(product.get("description").asText());
+
+        // If a image is provided first add and save the image and assign it with the product
+        if (product.get("url") != null) {
+            /*if(newUpdatedProduct.getProductImage()!=null){
+                imageRepository.delete(newUpdatedProduct.getProductImage());
+            }*/
+            // Create the Image
+            ImageEntity imageEntity = new ImageEntity(product.get("imageName").asText(), product.get("type").asText()
+                    , product.get("url").asText().getBytes());
+            // Save the Image in the database
+            imageRepository.save(imageEntity);
+            // Assign the product with the saved image
+            newUpdatedProduct.setProductImage(imageEntity);
         }
-        productRepository.save(currentProduct);
+
+        // If there is any productDiscount added
+        if (product.get("productDiscounts").size() > 0) {
+            // Get the productDiscount Array
+            JsonNode productDiscountsproductDiscounts = product.get("productDiscounts");
+
+            // Delete all existing discount if there is any
+            for (DiscountPriceEntity temp : newUpdatedProduct.getDiscounts()) {
+                newUpdatedProduct.removeDiscount(temp);
+                temp.removeProduct(newUpdatedProduct);
+                discountPriceRepository.delete(temp);
+            }
+
+            // Loop through all discount fields
+            for (int i = 0; i < productDiscountsproductDiscounts.size(); i++) {
+                // For each Product discount add and save the disountPrice entity
+                DiscountPriceEntity discountPriceEntity = new DiscountPriceEntity();
+                discountPriceEntity.setDiscountPrice(productDiscountsproductDiscounts.get(i).get("discountPrice").decimalValue());
+                discountPriceEntity.setDiscountQuantity(productDiscountsproductDiscounts.get(i).get("discountQuantity").asText());
+
+                // Assign the product with the discount and save discount
+                discountPriceEntity.addProduct(newUpdatedProduct);
+                discountPriceRepository.save(discountPriceEntity);
+
+                // Assign the discount with the product
+                newUpdatedProduct.addProductDiscount(discountPriceEntity);
+            }
+        }
+
+        /*
+        ProductEntity currentProduct = entityManager.getReference(ProductEntity.class, id);
+        modelmapper.map(newUpdatedProduct, currentProduct); // new --> updateInto --> current
+
+        System.out.println(currentProduct);*/
+
+        // Return the updated Product
+        return productRepository.save(newUpdatedProduct);
     }
 
-    public void updateWithImage(long id, ProductEntity updatedProduct, ImageEntity imageEntity) {
-        imageRepository.save(imageEntity);
-        updateById(id, updatedProduct, imageEntity);
-    }
 }

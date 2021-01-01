@@ -75,16 +75,8 @@ public class ProductController {
      */
     @Secured(RoleType.SUPPLIER)
     @PutMapping("/{id}")
-    public void update(@PathVariable long id,
-                       @RequestBody Map<String, String> product) {
-        ProductEntity updatedProduct = modelMapper.map(product, ProductEntity.class);
-
-        if (product.get("url") != null) {
-            ImageEntity imageEntity = new ImageEntity(product.get("imageName"), product.get("type"), product.get("url").getBytes());
-            productService.updateWithImage(id,updatedProduct,imageEntity);
-        } else {
-            productService.updateById(id, updatedProduct,null);
-        }
+    public void update(@PathVariable long id, @RequestBody ObjectNode product) {
+        productService.update(id, product);
     }
 
     /**

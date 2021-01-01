@@ -17,8 +17,8 @@ import * as XLSX from 'xlsx';
 })
 export class MyproductsComponent implements OnInit {
 
-    jsonData: any[] = [];
-    jsonSupplierData;
+    jsonSupplierData;       // All the products of the supplier
+    deleteProductId;        // The id of the product to delete
 
     isTheSupplier = false;  // Boolean to check if you have rights for editing
 
@@ -35,7 +35,10 @@ export class MyproductsComponent implements OnInit {
     ) {
     }
 
+    /** Initialize the products list and check wheter the logged in user is the supplier */
     ngOnInit(): void {
+
+        // Get the supplierid of the queryParams
         this.activatedRoute.queryParams.subscribe(
             res => {
                 // If there is no query given return user to homepage
@@ -56,6 +59,7 @@ export class MyproductsComponent implements OnInit {
             });
     }
 
+    /** Query all products and supplierinfo of the supplier provided in the queryParams */
     loadSupplierData(id: number): void {
         this.supplierInfoService.getSupplier(id).subscribe(
             res => {
@@ -67,6 +71,7 @@ export class MyproductsComponent implements OnInit {
         );
     }
 
+    /** Delete the product by ID  */
     delete(productId: string): void {
         const idNumber: number = +productId;
         console.log(idNumber);
@@ -86,6 +91,7 @@ export class MyproductsComponent implements OnInit {
         window.location.reload();
     }
 
+    /** Export products to excell */
     downloadSupplierProducts(): void {
         const id = this.activatedRoute.snapshot.queryParams.id;
         this.supplierInfoService.getSupplier(id).subscribe(
@@ -139,4 +145,8 @@ export class MyproductsComponent implements OnInit {
             });
     }
 
+    /** Store the id of the product to delete  */
+    storeDeleteProductId(productId): any {
+        this.deleteProductId = productId;
+    }
 }

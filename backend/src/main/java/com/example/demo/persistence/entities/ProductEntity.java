@@ -50,12 +50,11 @@ public class ProductEntity {
     @JoinColumn(name = "PRODUCT_CATEGORY_ID")
     private ProductCategoryEntity productCategory;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ImageEntity productImage;
 
-    @ManyToMany(mappedBy = "product")
-    @JsonIgnore
-    List<DiscountPriceEntity> discounts = new ArrayList<>();
+    @ManyToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    Set<DiscountPriceEntity> discounts = new HashSet<>();
 
     public void addProductCategory(ProductCategoryEntity productCategory) {
         this.productCategory = productCategory;
@@ -66,10 +65,14 @@ public class ProductEntity {
         this.discounts.add(discountPriceEntity);
     }
 
+    public void removeDiscount(DiscountPriceEntity discount) {
+        this.discounts.remove(discount);
+    }
 
     @Override
     public String toString() {
         return "ProductEntity{" +
+                ", id='" + id + '\'' +
                 ", name='" + name + '\'' ;
     }
 }
