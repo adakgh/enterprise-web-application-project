@@ -79,7 +79,7 @@
                     <!-- Delete Product Discount Row Toggle -->
                     <button class="btn" data-toggle="tooltip" data-placement="right"
                             title="klik om te beginnen met verwijderen" (click)="removeLastDiscountPrice()">
-                        <u>Verwijder prijs per voorraad</u>
+                        <u>Verwijder prijs per hoeveelheid</u>
 
                         <!-- Icon up arrow -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -93,7 +93,7 @@
                     <!-- Add Product Discount Row Toggle -->
                     <button class="btn" data-toggle="tooltip" data-placement="right"
                             title="Max 4 nieuwe prijzen" (click)="addDiscountPrice()">
-                        <u>Nieuwe prijs per voorraad</u>
+                        <u>Nieuwe prijs per hoeveelheid</u>
 
                         <!-- Icon down arrow -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -111,7 +111,7 @@
                 <div class="form-group row" [formGroupName]="i">
 
                     <label for="inputCost1" class="col-sm-2 col-form-label label-title">{{i + 1}}e Actie prijs &
-                        voorraad:</label>
+                        hoeveelheid:</label>
 
                     <div class="col-sm-3 input-group">
                         <div class="">
@@ -123,7 +123,7 @@
                                name="discountPrice" formControlName="discountPrice">
                     </div>
                     <div class="col-sm-6 input-group">
-                        <input type="text" class="form-control" id="inputStock1" placeholder="Voorraad"
+                        <input type="text" class="form-control" id="inputStock1" placeholder="Hoeveelheid"
                                name="discountQuantity" formControlName="discountQuantity" >
                     </div>
                 </div>

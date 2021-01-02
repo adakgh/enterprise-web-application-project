@@ -1,6 +1,7 @@
 package com.example.demo.exceptions.handlers;
 
 import com.example.demo.exceptions.ExpiredTokenException;
+import com.example.demo.exceptions.ResourceAlreadyExistsException;
 import com.example.demo.models.dto.ExceptionDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,5 +24,12 @@ public class RestExceptionHandler {
     public ExceptionDto handleExpiredTokenException(HttpServletRequest request) {
         String message = "Token expired, please refresh in order to continue";
         return new ExceptionDto(HttpStatus.UNAUTHORIZED, message, request.getRequestURI());
+    }
+
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ExceptionDto handleExistingResourceException(HttpServletRequest request) {
+        String message = "An existing resource was found";
+        return new ExceptionDto(HttpStatus.CONFLICT, message, request.getRequestURI());
     }
 }

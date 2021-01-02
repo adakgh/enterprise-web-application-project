@@ -38,7 +38,8 @@
                 </div>
                 <div class="col-md-1">
                     <a *ngIf="currentUserService.getSupplierId()==jsonSupplierData.id" class="btn btn-primary"
-                       class="editButton" [routerLink]="['edit']" [queryParams]="{id:jsonSupplierData.id}">Wijzig</a>
+                       class="editButton" [routerLink]="['edit',jsonSupplierData.id]">Wijzig</a>
+                    <!--[queryParams]="{id:jsonSupplierData.id}"-->
                 </div>
             </div>
         </div>

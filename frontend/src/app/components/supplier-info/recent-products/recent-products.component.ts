@@ -7,7 +7,20 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class RecentProductsComponent implements OnInit {
 
-    @Input() product;
+    @Input() product = {
+        addedDate: '',
+        customData: null,
+        description: '',
+        id: 1,
+        name: '',
+        price: 4.95,
+        price2: null,
+        productCategory: null,
+        productImage: null,
+        quantity: 50,
+        quantity2: null,
+        unit: '',
+    };
 
     constructor() {
     }

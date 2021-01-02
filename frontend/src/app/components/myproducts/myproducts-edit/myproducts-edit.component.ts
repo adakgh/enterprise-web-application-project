@@ -146,6 +146,7 @@ export class MyproductsEditComponent implements OnInit {
                     // this.reloadProductPage();
                     console.log('Succesfully updated c. with another Image');
                     console.log(this.productData);
+                    console.log(resp);
                 },
                 error => {
                     console.log(error);
@@ -159,6 +160,7 @@ export class MyproductsEditComponent implements OnInit {
             this.productService.updateProduct(this.productId, this.productData).subscribe(
                 res => {
                     console.log('Succesfully updated product.');
+                    console.log(res);
                     /*this.router.navigate(['../'], {
                         relativeTo: this.activatedRoute,
                         queryParams: {id: this.supplierId}

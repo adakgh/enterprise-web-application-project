@@ -53,8 +53,8 @@ public class ProductEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private ImageEntity productImage;
 
-    @ManyToMany(mappedBy = "product", cascade = CascadeType.MERGE)
-    Set<DiscountPriceEntity> discounts = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
+    List<DiscountPriceEntity> discounts = new ArrayList<>();
 
     public void addProductCategory(ProductCategoryEntity productCategory) {
         this.productCategory = productCategory;
@@ -73,6 +73,6 @@ public class ProductEntity {
     public String toString() {
         return "ProductEntity{" +
                 ", id='" + id + '\'' +
-                ", name='" + name + '\'' ;
+                ", name='" + name + '\'';
     }
 }

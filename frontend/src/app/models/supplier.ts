@@ -1,6 +1,7 @@
 import {Form} from '@angular/forms';
 
 export class Supplier {
+    public id: number;
     public companyName: string;
     public contactPerson: string;
     public contactEmail: string;
@@ -8,7 +9,12 @@ export class Supplier {
     public website: string;
     public shortDescription: string;
     public description: string;
-    public addresses: any[] = [];
+    public addresses: any[] = [{
+        street: '',
+        number: 0,
+        postalCode: '',
+        city: '',
+    }];
 
     constructor() {
     }

@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.exceptions.ResourceNotFoundException;
+import com.example.demo.models.dto.ProductDto;
 import com.example.demo.persistence.entities.DiscountPriceEntity;
 import com.example.demo.persistence.entities.ImageEntity;
 import com.example.demo.persistence.entities.ProductEntity;
@@ -9,15 +10,18 @@ import com.example.demo.persistence.repositories.DiscountPriceRepository;
 import com.example.demo.persistence.repositories.ImageRepository;
 import com.example.demo.persistence.repositories.ProductCategoryRepository;
 import com.example.demo.persistence.repositories.ProductRepository;
+import com.example.demo.search.ProductSpecification;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -30,6 +34,17 @@ public class ProductService {
     private final UserService userService;
     private final ImageRepository imageRepository;
     private final DiscountPriceRepository discountPriceRepository;
+
+    public Page<ProductDto> searchAll(Map<String, String> queryMap, Pageable pageable) {
+        var productPage = productRepository.findAll(new ProductSpecification(queryMap), pageable);
+
+        return productPage.map((ProductEntity p) -> {
+            ProductDto dto = modelmapper.map(p, ProductDto.class);
+            dto.setSupplierId(p.getSupplier().getId());
+            dto.setSupplierPostalCode(p.getSupplier().getAddresses().iterator().next().getPostalCode());
+            return dto;
+        });
+    }
 
     /**
      * Find a product by ID
@@ -111,7 +126,7 @@ public class ProductService {
                 ).asText());
 
                 // Assign the product with the discount and save discount
-                discountPriceEntity.addProduct(product);
+                discountPriceEntity.setProduct(product);
                 discountPriceRepository.save(discountPriceEntity);
 
                 // Assign the discount with the product
@@ -162,24 +177,25 @@ public class ProductService {
         // If there is any productDiscount added
         if (product.get("productDiscounts").size() > 0) {
             // Get the productDiscount Array
-            JsonNode productDiscountsproductDiscounts = product.get("productDiscounts");
+            JsonNode productDiscounts = product.get("productDiscounts");
 
             // Delete all existing discount if there is any
             for (DiscountPriceEntity temp : newUpdatedProduct.getDiscounts()) {
-                newUpdatedProduct.removeDiscount(temp);
-                temp.removeProduct(newUpdatedProduct);
+                newUpdatedProduct.setDiscounts(new ArrayList<>());
+                temp.setProduct(null);
                 discountPriceRepository.delete(temp);
             }
 
             // Loop through all discount fields
-            for (int i = 0; i < productDiscountsproductDiscounts.size(); i++) {
+            for (int i = 0; i < productDiscounts.size(); i++) {
                 // For each Product discount add and save the disountPrice entity
                 DiscountPriceEntity discountPriceEntity = new DiscountPriceEntity();
-                discountPriceEntity.setDiscountPrice(productDiscountsproductDiscounts.get(i).get("discountPrice").decimalValue());
-                discountPriceEntity.setDiscountQuantity(productDiscountsproductDiscounts.get(i).get("discountQuantity").asText());
+                discountPriceEntity.setDiscountPrice(productDiscounts.get(i).get("discountPrice").decimalValue());
+                discountPriceEntity.setDiscountQuantity(productDiscounts.get(i).get("discountQuantity"
+                ).asText());
 
                 // Assign the product with the discount and save discount
-                discountPriceEntity.addProduct(newUpdatedProduct);
+                discountPriceEntity.setProduct(newUpdatedProduct);
                 discountPriceRepository.save(discountPriceEntity);
 
                 // Assign the discount with the product
