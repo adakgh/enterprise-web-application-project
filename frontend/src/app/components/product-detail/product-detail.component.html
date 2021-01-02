@@ -15,25 +15,19 @@
             <p><span class="mr-1"><i>Voorraad: {{jsonData[0].quantity}} {{jsonData[0].unit}}</i></span></p>
             <p class="pt-1">{{jsonData[0].description}}</p>
             <hr>
-            <h5>kortingen op basis van hoeveelheid</h5>
-            <table class="table" *ngIf="jsonData[0].discounts.length == 0">
-                <tr>
-                    <th scope="col">prijs per {{jsonData[0].unit}}:</th>
-                </tr>
-                <tr>
-                    <td>{{jsonData[0].price.toFixed(2)}}</td>
-                </tr>
-            </table>
-            <table class="table" *ngIf="jsonData[0].discounts.length !== 0">
-                <tr>
-                    <th scope="col">prijs per {{jsonData[0].unit}}:</th>
-                    <th scope="col">hoeveelheid:</th>
-                </tr>
-                <tr *ngFor="let discount of jsonData[0].discounts">
-                    <td>{{discount.discountPrice.toFixed(2)}}</td>
-                    <td>{{discount.discountQuantity}}</td>
-                </tr>
-            </table>
+            <div *ngIf="jsonData[0].discounts.length > 0">
+                <h5>kortingen op basis van hoeveelheid</h5>
+                <table class="table">
+                    <tr>
+                        <th scope="col">prijs per {{jsonData[0].unit}}:</th>
+                        <th scope="col">hoeveelheid:</th>
+                    </tr>
+                    <tr *ngFor="let discount of jsonData[0].discounts">
+                        <td>{{discount.discountPrice.toFixed(2)}}</td>
+                        <td>{{discount.discountQuantity}}</td>
+                    </tr>
+                </table>
+            </div>
             <form>
                 <div class="form-group">
                     <label for="productAmount">hoeveelheid in {{jsonData[0].unit}}:</label>
