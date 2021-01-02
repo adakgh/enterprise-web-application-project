@@ -109,7 +109,7 @@
             </div>
 
             <div class="mesgs" *ngIf="selectedMessage!=null">
-                <!-- Messages receiver and sender-->    
+                <!-- Messages receiver and sender-->
                 <div class="msg_history">
                     <div class="outgoing_msg">
                         <div class="sent_msg">
@@ -121,7 +121,17 @@
                                                            alt="sunil"></div>
                         <div class="received_msg">
                             <div class="received_withd_msg">
-                                <p>Voor wanneer wilt u het hebben en komt u het ophalen of wilt u dat we het verzenden.</p>
+
+                                <h5>[Naam] doet een verzoek voor:</h5>
+                                <h5><i>[hoeveelheid] [unit] [product naam] (10 kilo tomaten)</i></h5>
+                                <h5>
+                                    <button class="btn btn-success">Accepteren</button>
+                                    <button class="btn btn-danger">Weigeren</button>
+                                </h5>
+
+                                <p><i>[SupplierName] heeft u verzoek geaccepteerd/geweigerd</i></p>
+                                <p>Voor wanneer wilt u het hebben en komt u het ophalen of wilt u dat we het
+                                    verzenden.</p>
                                 <span class="time_date"> 11:01 AM    |    June 9</span></div>
                         </div>
                     </div>
@@ -135,7 +145,8 @@
                                                            alt="sunil"></div>
                         <div class="received_msg">
                             <div class="received_withd_msg">
-                                <p>Duidelijk! U kunt maandag de gewenste producten komen ophalen wij maken het klaar voor u ook zetten we de factuur klaar.</p>
+                                <p>Duidelijk! U kunt maandag de gewenste producten komen ophalen wij maken het klaar
+                                    voor u ook zetten we de factuur klaar.</p>
                                 <span class="time_date"> 11:01 AM    |    Today</span></div>
                         </div>
                     </div>

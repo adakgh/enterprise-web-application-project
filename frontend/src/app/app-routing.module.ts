@@ -27,7 +27,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
-    {path: 'supplierinfo/edit', component: SupplierInfoEditComponent, canDeactivate: [UnsavedChangesGuardService]},
+    {path: 'supplierinfo/edit/:id', component: SupplierInfoEditComponent, canDeactivate: [UnsavedChangesGuardService]},
     {path: 'suppliers', component: SuppliersListComponent},
     {path: 'addproduct', component: AddProductComponent, canActivate: [AuthGuardService]},
     {path: 'myproducts', component: MyproductsComponent, canActivate: [AuthGuardService]},
