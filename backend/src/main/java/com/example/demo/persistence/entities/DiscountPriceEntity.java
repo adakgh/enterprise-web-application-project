@@ -1,6 +1,7 @@
 package com.example.demo.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,19 +28,10 @@ public class DiscountPriceEntity {
     @Transient
     private Map<Object, Object> customData = new HashMap<>();
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "PRODUCT_DISCOUNT", joinColumns = @JoinColumn(name = "DISCOUNT_ID"), inverseJoinColumns =
-    @JoinColumn(name = "PRODUCT_ID"))
-    @JsonBackReference
-    private Set<ProductEntity> product = new HashSet<>();
-
-    public void addProduct(ProductEntity product) {
-        this.product.add(product);
-    }
-
-    public void removeProduct(ProductEntity product) {
-        this.product.remove(product);
-    }
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PRODUCT_ID")
+    @JsonIgnore
+    private ProductEntity product;
 
     @Override
     public String toString() {
@@ -51,4 +43,5 @@ public class DiscountPriceEntity {
                 ", product=" + product +
                 '}';
     }
+
 }

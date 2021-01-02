@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiService} from './api.service';
 import {map} from 'rxjs/operators';
-import {RouteUtil} from '../utils/route.util';
 import {ActivatedRoute} from '@angular/router';
 
 @Injectable({
@@ -10,7 +9,6 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class VerifyUserService {
     constructor(private apiService: ApiService,
-                private routeUtil: RouteUtil,
                 private route: ActivatedRoute) {
     }
 

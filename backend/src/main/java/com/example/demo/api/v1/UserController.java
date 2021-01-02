@@ -51,7 +51,7 @@ public class UserController {
      * Verifies an user by token.
      */
     @GetMapping("/verify")
-    public ResponseEntity verifyUser(@RequestParam String token){
+    public ResponseEntity verifyUser(@RequestParam String token) {
         userService.verifyUser(token);
         return new ResponseEntity(HttpStatus.OK);
     }

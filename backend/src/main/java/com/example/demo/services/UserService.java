@@ -25,6 +25,7 @@ public class UserService {
     private static final String EMAIL_SUBJECT = "Activeer je account";
     private static final String FROM_ADDRESS = "info@vanstreek.nl";
     private static final String HOST_ADDRESS = "http://localhost:4200";
+    private static final String HEROKU_ADDRESS = "https://vanstreek2-fe-app-staging.herokuapp.com";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender javaMailSender;
@@ -37,7 +38,7 @@ public class UserService {
      */
     public UserEntity registerUser(UserEntity user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new ResourceAlreadyExistsException("Username", user.getUsername());
+            throw new ResourceAlreadyExistsException("An existing resource was found");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setLocked(true);
@@ -109,7 +110,7 @@ public class UserService {
                         "</td></tr>\n <tr><td align=\"center\" style=\"padding:15px 0 40px 0; border-bottom:1px solid #f3f6f9;\">\n" +
                         "<table border=\"0\" cellpadding=\"0\"\n" +
                         "cellspacing=\"0\"\n style=\"border-collapse:separate !important; border-radius:15px; width:210px;\">\n" +
-                        "<tbody><tr><a href=\"" + HOST_ADDRESS + "/verify?token=" + token + "\"\n target=\"_blank\"\n style=\"background-color:#255239; " +
+                        "<tbody><tr><a href=\"" + HEROKU_ADDRESS + "/verify?token=" + token + "\"\n target=\"_blank\"\n style=\"background-color:#255239; " +
                         "border-collapse:separate !important; border-top:10px solid #255239;\n" +
                         "border-bottom:10px solid #255239; border-right:45px solid #255239; border-left:45px solid #255239;\n" +
                         "border-radius:4px; color:#ffffff; display:inline-block; font-size:13px; font-weight:bold;\n" +
@@ -117,8 +118,8 @@ public class UserService {
                         "</table>\n</td>\n</tr>\n<tr><td style=\"padding-top:25px;\">\n" +
                         "       <p style=\"margin: 20px 0 20px 0;color: black;\">Of kopieer en plak deze link in je web browser</p>\n" +
                         "       <p style=\"margin:20px 0; font-size:12px; line-height:17px; word-wrap:break-word; word-break:break-all;\">\n" +
-                        "       <a href=\"" + HOST_ADDRESS + "/verify?token=" + token + "\"\nstyle=\"color:#5885ff; text-decoration:underline;\"\n" +
-                        "       target=\"_blank\"> " + HOST_ADDRESS + "/verify?token=" + token + "</a>\n</p>\n</td>\n</tr>\n</tbody>\n" +
+                        "       <a href=\"" + HEROKU_ADDRESS + "/verify?token=" + token + "\"\nstyle=\"color:#5885ff; text-decoration:underline;\"\n" +
+                        "       target=\"_blank\"> " + HEROKU_ADDRESS + "/verify?token=" + token + "</a>\n</p>\n</td>\n</tr>\n</tbody>\n" +
                         "</table>\n</div>\n</td>\n</tr>\n<tr><td style=\"background-color:#255239; height:1px; " +
                         "width:100%; line-height:1px; font-size:0;\">&nbsp;</td>\n </tr><tr> <td style=\"background-color:#255239; height:1px; width:100%; line-height:1px; font-size:0;\">&nbsp;</td></tr>\n" +
                         "<tr></tr><td style=\"background-color:#255239; height:1px; width:100%; line-height:1px; font-size:0;\">&nbsp;</td></tr>\n" +
@@ -133,7 +134,7 @@ public class UserService {
                         "style=\"font-size:12px; line-height:18px; width:auto;\">\n" +
                         "<tbody><tr><td style=\"color:#b7bdc1;\">\n<p style=\"margin:0;\">" +
                         "           <span class=\"appleLinksGrey\">Bezoek rechtstreeks onze website op </span>\n" +
-                        "           <a href=\"" + HOST_ADDRESS + "\"\n" +
+                        "           <a href=\"" + HEROKU_ADDRESS + "\"\n" +
                         "           style=\"color:#5885ff; text-decoration:underline;\"\n" +
                         "           target=\"_blank\">vanstreek.nl</a></p></td></tr></tbody>\n</table>\n" +
                         "</td>\n</tr>\n</tbody>\n</table>\n</div>\n</div>\n</td>\n</tr>\n</tbody>\n</table>\n</body>\n</html>",
