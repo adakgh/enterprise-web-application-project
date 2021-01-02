@@ -13,7 +13,7 @@ export class ContactService {
                 private route: ActivatedRoute) {
     }
 
-    sendMail(message: string[]): Observable<any> {
+    sendMail(message): Observable<any> {
         return this.apiService.post('/contact', message, null).pipe(
             map(res => {
                 return res;

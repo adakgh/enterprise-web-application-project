@@ -36,10 +36,12 @@ export class ContactComponent implements OnInit {
         if (this.contactForm.invalid) {
             return;
         } else {
-            const message = [this.contactForm.value.name,
-                this.contactForm.value.subject,
-                this.contactForm.value.email,
-                this.contactForm.value.message];
+            const message = {
+                name: this.contactForm.value.name,
+                subject: this.contactForm.value.subject,
+                email: this.contactForm.value.email,
+                message: this.contactForm.value.message
+            };
 
             console.log(message);
 

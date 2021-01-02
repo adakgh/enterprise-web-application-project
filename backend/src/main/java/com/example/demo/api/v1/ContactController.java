@@ -27,6 +27,7 @@ public class ContactController {
     @PostMapping("/contact")
     public ResponseEntity contactUs(@RequestBody ContactMail contactMail) throws MessagingException,
             UnsupportedEncodingException {
+
         contactService.sendContactEmail(contactMail);
 
         return new ResponseEntity(HttpStatus.OK);
