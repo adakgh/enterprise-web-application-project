@@ -38,6 +38,11 @@
     padding-left: 0;
 }
 
+#discountSubText {
+    color: red;
+    font-style: italic;
+}
+
 .customDropdownStyle {
     height: 60%;
     margin: 5px;
