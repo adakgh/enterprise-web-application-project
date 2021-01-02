@@ -59,7 +59,7 @@
                         <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
                     </h4>
                     <h5>
-                        €{{product.price}}/{{demoImage.determineUnitPricing(product)}}
+                        €{{product.price}}/{{demoImage.determineUnitPricing(product)}}<br/>
                         <sub id="discountSubText" *ngIf="product.discounts.length > 0">Korting op basis van hoeveelheid</sub>
                     </h5>
                     <p class="card-text">{{product.description}}</p>
