@@ -1,6 +1,8 @@
 package com.example.demo.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,12 +35,6 @@ public class ProductEntity {
     @Column(name = "PRICE")
     private BigDecimal price;
 
-    @Column(name = "DISCOUNT_QUANTITY")
-    private String quantity2;
-
-    @Column(name = "DISCOUNT_PRICE")
-    private BigDecimal price2;
-
     @Column(name = "DATE_ADDED")
     private Date addedDate;
 
@@ -54,20 +50,29 @@ public class ProductEntity {
     @JoinColumn(name = "PRODUCT_CATEGORY_ID")
     private ProductCategoryEntity productCategory;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ImageEntity productImage;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
+    List<DiscountPriceEntity> discounts = new ArrayList<>();
 
     public void addProductCategory(ProductCategoryEntity productCategory) {
         this.productCategory = productCategory;
         productCategory.getProducts().add(this);
     }
 
+    public void addProductDiscount(DiscountPriceEntity discountPriceEntity) {
+        this.discounts.add(discountPriceEntity);
+    }
+
+    public void removeDiscount(DiscountPriceEntity discount) {
+        this.discounts.remove(discount);
+    }
+
     @Override
     public String toString() {
         return "ProductEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'';
     }
 }

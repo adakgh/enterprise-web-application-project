@@ -39,7 +39,7 @@ export class ProductComponent implements OnInit {
         public demoImage: DemoImage,
         public currentUserService: CurrentUserService,
         public authService: AuthService,
-        private locationService: LocationService
+        /*private locationService: LocationService*/
     ) {
     }
 
@@ -89,7 +89,7 @@ export class ProductComponent implements OnInit {
 
     sortProducts(values: any): void {
         if (values.target.value === 'location') {
-            this.sortProductsOnDistance();
+            // this.sortProductsOnDistance();
         } else if (values.target.value !== '') {
             this.routeUtil.addParam('sort', values.target.value);
         } else {
@@ -121,7 +121,7 @@ export class ProductComponent implements OnInit {
         }
     }
 
-    sortProductsOnDistance(): void {
+    /*    sortProductsOnDistance(): void {
         const productDistance: any[] = [];
         // set the distace of the supplier per product with the product id
         console.log('All lat and longs of all the products');
@@ -147,7 +147,7 @@ export class ProductComponent implements OnInit {
         console.log(newArray);
         // set the value of the new array in the jsonData array
         this.jsonData = newArray;
-    }
+    }*/
 
     getProductById(data: any[], id: number): any {
         // find the product with a certain id

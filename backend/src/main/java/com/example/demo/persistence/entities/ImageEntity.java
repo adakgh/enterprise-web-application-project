@@ -35,7 +35,7 @@ public class ImageEntity {
     private SupplierEntity supplierEntity;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "productImage")
+    @OneToOne(mappedBy = "productImage", cascade = CascadeType.ALL)
     private ProductEntity productEntity;
 
 
