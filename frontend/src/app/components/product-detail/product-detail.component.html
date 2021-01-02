@@ -16,7 +16,15 @@
             <p class="pt-1">{{jsonData[0].description}}</p>
             <hr>
             <h5>kortingen op basis van hoeveelheid</h5>
-            <table class="table">
+            <table class="table" *ngIf="jsonData[0].discounts.length == 0">
+                <tr>
+                    <th scope="col">prijs per {{jsonData[0].unit}}:</th>
+                </tr>
+                <tr>
+                    <td>{{jsonData[0].price.toFixed(2)}}</td>
+                </tr>
+            </table>
+            <table class="table" *ngIf="jsonData[0].discounts.length !== 0">
                 <tr>
                     <th scope="col">prijs per {{jsonData[0].unit}}:</th>
                     <th scope="col">hoeveelheid:</th>
