@@ -8,7 +8,7 @@ import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
 import {CurrentUserService} from '../../services/current-user.service';
 import {AuthService} from '../../services/auth.service';
 import {LocationService} from '../../services/location.service';
-import randomLocation from 'random-location';
+// import randomLocation from 'random-location';
 
 @Component({
     selector: 'app-product',
@@ -71,7 +71,7 @@ export class ProductComponent implements OnInit {
             res => {
                 this.jsonData = res.content;
                 // get the geolocation of the products
-                this.getProductLocations(res.content);
+                /*this.getProductLocations(res.content);*/
             },
             err => {
                 console.log(err);
@@ -97,7 +97,7 @@ export class ProductComponent implements OnInit {
         }
     }
 
-    getProductLocations(allData): void {
+    /*getProductLocations(allData): void {
         // empty productLatLong array
         this.productLatLongs = [];
         for (const product of allData) {
@@ -119,7 +119,7 @@ export class ProductComponent implements OnInit {
                 }
             );
         }
-    }
+    }*/
 
     /*    sortProductsOnDistance(): void {
         const productDistance: any[] = [];

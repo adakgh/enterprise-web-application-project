@@ -53,7 +53,7 @@ public class ProductEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private ImageEntity productImage;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
     List<DiscountPriceEntity> discounts = new ArrayList<>();
 
     public void addProductCategory(ProductCategoryEntity productCategory) {
