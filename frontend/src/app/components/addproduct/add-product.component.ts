@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AddProductService} from '../../services/add-product.service';
 import {ApiService} from '../../services/api.service';
 import {Router} from '@angular/router';

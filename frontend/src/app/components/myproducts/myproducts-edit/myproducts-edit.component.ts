@@ -83,6 +83,7 @@ export class MyproductsEditComponent implements OnInit {
         console.log(this.productData);
         this.productService.updateProduct(this.productId, this.productData).subscribe(
             resp => {
+                console.log(resp);
             },
             error => {
                 console.log(error);
@@ -103,6 +104,7 @@ export class MyproductsEditComponent implements OnInit {
                     // this.reloadProductPage();
                     console.log('Succesfully updated c. with another Image');
                     console.log(this.productData);
+                    console.log(resp);
                 },
                 error => {
                     console.log(error);
@@ -113,6 +115,7 @@ export class MyproductsEditComponent implements OnInit {
             this.productService.updateProduct(this.productId, this.productData).subscribe(
                 res => {
                     console.log('Succesfully updated product.');
+                    console.log(res);
                     /*this.router.navigate(['../'], {
                         relativeTo: this.activatedRoute,
                         queryParams: {id: this.supplierId}
@@ -161,7 +164,7 @@ export class MyproductsEditComponent implements OnInit {
     }
 
     // When loading data of product this function is called and it initializes the unit on the load data
-    getUnitOnLoadData(productDataUnit) {
+    getUnitOnLoadData(productDataUnit): void {
         this.unit = productDataUnit;
         if (this.unit !== '') {
             this.unit = this.unit.split(' ')[1];
