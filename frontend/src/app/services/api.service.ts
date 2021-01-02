@@ -65,7 +65,7 @@ export class ApiService {
         if (status === 401) {
             this.router.navigate(['/logout']);
         }
-        return throwError(resp.error.message || 'server error');
+        return throwError(resp.error || 'server error');
     }
 
     createHeaders(fields: Map<string, string>): HttpHeaders {
