@@ -15,7 +15,7 @@ import java.io.UnsupportedEncodingException;
 @AllArgsConstructor
 public class ContactService {
 
-    private static final String TO_ADDRESS = "of.c.58@hotmail.com"; // vanstreek2@gmail.com
+    private static final String TO_ADDRESS = "vanstreek2@gmail.com";
     private final JavaMailSender javaMailSender;
 
     public void sendContactEmail(ContactMail contactMail) throws MailException, MessagingException,

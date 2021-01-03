@@ -13,9 +13,8 @@ export class VerifyUserService {
     }
 
     verifyRegister(token: string): Observable<any> {
-        // obtaining token from the url
+        // obtain token from the url
         token = this.route.snapshot.queryParams.token;
-        // console.log('token: ' + token);
         return this.apiService.get('/users/verify?token=' + token).pipe(
             map(res => {
                 return res;

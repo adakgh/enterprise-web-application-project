@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ContactService} from '../../services/contact.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-contact',
@@ -11,7 +12,7 @@ export class ContactComponent implements OnInit {
     contactForm: FormGroup;
     submitted = false;
 
-    constructor(private contactService: ContactService) {
+    constructor(private contactService: ContactService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -48,7 +49,9 @@ export class ContactComponent implements OnInit {
             this.contactService.sendMail(message).subscribe(res => {
                 console.log(res);
                 alert('Email is verzonden. We proberen zo snel mogelijk te reageren.');
-                this.contactForm.reset();
+                this.router.navigate(['/contact']).then(() => {
+                    window.location.reload();
+                });
             }, err => {
                 console.log(err);
                 alert('Er is iets misgegaan. Probeer het opnieuw.');

@@ -8,39 +8,15 @@
     <div class="row mb-3 mt-1">
         <div class="col-8 mb-4">
             <form name="form" #form="ngForm" (ngSubmit)="postRequest()">
-                <!--                <div class="form-group row">-->
-                <!--                    <label for="inputTitel" class="col-sm-2 col-form-label">Product:</label>-->
-                <!--                    <div class="col-sm-8">-->
-                <!--                        <input type="text" class="form-control" id="inputTitel" placeholder="Titel">-->
-                <!--                    </div>-->
-                <!--                </div>-->
                 <div class="form-group row">
                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label">Categorie:</label>
                     <div class="col-sm-8">
                         <select class="form-control" id="exampleFormControlInput1" name="category"
                                 [(ngModel)]="inquiry.categoryId" #name="ngModel">
                             <option *ngFor="let c of category" value="{{c.id}}">{{c.name}}</option>
-                            <!--                            <option value="3">Groente en fruit</option>-->
-                            <!--                            <option value="4">Zuivel</option>-->
-                            <!--                            <option value="5">Bakkerij</option>-->
-                            <!--                            <option value="6">Dranken</option>-->
-                            <!--                            <option value="7">Vlees</option>-->
-                            <!--                            <option value="8">Vega</option>-->
                         </select>
                     </div>
                 </div>
-                <!--                <div class="form-group row">-->
-                <!--                    <label for="inputStock" class="col-sm-2 col-form-label">Hoeveelheid:</label>-->
-                <!--                    <div class="col-sm-8">-->
-                <!--                        <input type="text" class="form-control" id="inputStock" placeholder="kg">-->
-                <!--                    </div>-->
-                <!--                </div>-->
-                <!--                <div class="form-group row">-->
-                <!--                    <label class="col-sm-2 col-form-label">Datum:</label>-->
-                <!--                    <div class="col-sm-8">-->
-                <!--                        <input class="form-control" type="date" value="2020-11-20" id="example-date-input">-->
-                <!--                    </div>-->
-                <!--                </div>-->
                 <div class="form-group row">
                     <div class="col-10">
                         <label for="exampleFormControlTextarea1">Beschrijving:</label>
