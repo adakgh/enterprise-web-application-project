@@ -47,7 +47,7 @@ export class SupplierInfoEditComponent implements OnInit {
     ngOnInit(): void {
         // Get the default image and put in src
         this.demoImage.getImage(this.demoImage.imageBase64Url);
-        this.activatedRoute.params.subscribe(
+        this.activatedRoute.queryParams.subscribe(
             res => {
                 // If there is no query given return user to homepage or if the supplier id in the query
                 // is not equal to the logged in supplier
@@ -114,6 +114,8 @@ export class SupplierInfoEditComponent implements OnInit {
     onUpdateSupplier(): void {
 
         this.supplier.id = this.supplierId;
+        // this.supplier.description = this.supplier.description.replace(/\n\r?/g, '<br>');
+
         if (this.selectedFile != null) {
             // Create a object with the supplier data and the selected image data and send that
             const image = {

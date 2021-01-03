@@ -71,7 +71,7 @@ export class ProductComponent implements OnInit {
             res => {
                 this.jsonData = res.content;
                 // get the geolocation of the products
-                this.getProductLocations(res.content);
+                /*this.getProductLocations(res.content);*/
             },
             err => {
                 console.log(err);

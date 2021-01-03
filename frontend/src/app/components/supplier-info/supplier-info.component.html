@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-1">
                     <a *ngIf="currentUserService.getSupplierId()==jsonSupplierData.id" class="btn btn-primary"
-                       class="editButton" [routerLink]="['edit',jsonSupplierData.id]">Wijzig</a>
+                       class="editButton" [routerLink]="['edit']" [queryParams]="{id:jsonSupplierData.id}">Wijzig</a>
                     <!--[queryParams]="{id:jsonSupplierData.id}"-->
                 </div>
             </div>
@@ -78,7 +78,8 @@
                         <h4 class="card-title">
                             <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
                         </h4>
-                        <h5> €{{product.price}}/{{demoImage.determineUnitPricing(product)}}</h5> <!-- Het beste alles €/kg-->
+                        <h5> €{{product.price}}/{{demoImage.determineUnitPricing(product)}}</h5>
+                        <!-- Het beste alles €/kg-->
                         <p class="card-text">{{product.description}}</p>
                     </div>
                 </div>
@@ -87,7 +88,7 @@
 
         <!-- Refer to page with all products supplier is selling/offering -->
         <div class="col-sm-12">
-            <a (click)="allProducts()" class="btn float-right" >Zie alle producten</a>
+            <a (click)="allProducts()" class="btn float-right">Zie alle producten</a>
         </div>
 
     </div>

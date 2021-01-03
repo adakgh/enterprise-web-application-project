@@ -29,8 +29,6 @@ export class ProductDetailComponent implements OnInit {
             res => {
                 console.log(res);
                 this.jsonData = res.content;
-                this.type = res.content[0].price.split(':')[0];
-                this.price = res.content[0].price.split(':')[1];
             },
             err => {
                 console.log(err);

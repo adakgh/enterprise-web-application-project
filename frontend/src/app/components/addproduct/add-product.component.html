@@ -23,11 +23,11 @@
     <div class="col-9 mb-4">
         <form [formGroup]="productForm">
 
-            <!-- Product Title -->
+            <!-- Product Title/NAME -->
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label label-title" for="inputTitel">Titel:</label>
+                <label class="col-sm-2 col-form-label label-title" for="inputTitel">Naam:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="inputTitel" placeholder="Titel" name="name"
+                    <input type="text" class="form-control" id="inputTitel" placeholder="Naam" name="name"
                            formControlName="title"
                            [ngClass]="{'is-valid':productForm.controls['title'].valid ,'is-invalid':!productForm.controls['title'].valid && productForm.controls['title'].touched }">
                 </div>
