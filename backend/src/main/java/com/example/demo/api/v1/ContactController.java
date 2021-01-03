@@ -1,7 +1,9 @@
 package com.example.demo.api.v1;
 
 import com.example.demo.models.ContactMail;
+import com.example.demo.models.FactuurMail;
 import com.example.demo.services.ContactService;
+import com.example.demo.services.MailService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 public class ContactController {
 
     private final ContactService contactService;
+    private final MailService mailService;
 
     /**
      * Sends an email to us.
@@ -32,4 +35,17 @@ public class ContactController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    /**
+     * Sends factuur.
+     */
+    @PostMapping("/requestFactuur")
+    public ResponseEntity sendFactuur(@RequestBody FactuurMail factuurMail) throws MessagingException,
+            UnsupportedEncodingException {
+
+        mailService.sendFactuurEmail(factuurMail);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }

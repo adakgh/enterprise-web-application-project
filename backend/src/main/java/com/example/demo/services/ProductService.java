@@ -41,6 +41,7 @@ public class ProductService {
         return productPage.map((ProductEntity p) -> {
             ProductDto dto = modelmapper.map(p, ProductDto.class);
             dto.setSupplierId(p.getSupplier().getId());
+            dto.setSupplierEmail(p.getSupplier().getContactEmail());
             dto.setSupplierPostalCode(p.getSupplier().getAddresses().iterator().next().getPostalCode());
             return dto;
         });

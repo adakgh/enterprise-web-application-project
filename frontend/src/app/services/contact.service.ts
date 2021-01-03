@@ -18,4 +18,12 @@ export class ContactService {
             })
         );
     }
+
+    requestFactuur(message): Observable<any> {
+        return this.apiService.post('/requestFactuur', message, null).pipe(
+            map(res => {
+                return res;
+            })
+        );
+    }
 }

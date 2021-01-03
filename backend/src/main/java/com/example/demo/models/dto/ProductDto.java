@@ -30,4 +30,5 @@ public class ProductDto {
 
     private Long supplierId;
     private String supplierPostalCode;
+    private String supplierEmail;
 }

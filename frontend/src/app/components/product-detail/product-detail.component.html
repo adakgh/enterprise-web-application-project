@@ -28,14 +28,18 @@
                     </tr>
                 </table>
             </div>
-            <form>
+            <form *ngIf="currentUser.getUserId()">
                 <div class="form-group">
                     <label for="productAmount">hoeveelheid in {{jsonData[0].unit}}:</label>
-                    <input type="number" class="form-control" id="productAmount">
+                    <input type="number" class="form-control" id="productAmount" name="productAmount" [(ngModel)]="purchaseAmount">
                 </div>
-                <button type="submit" class="btn btn-primary" routerLink="/messages">Factuur aanvragen</button>
+                <button type="submit" class="btn btn-primary" (click)="sendMail()">Factuur aanvragen</button>
+                <button type="submit" class="btn btn-success ml-2" routerLink="/messages" [queryParams]="{id: jsonData[0].supplierId}">Stuur bericht</button>
             </form>
-            <a routerLink="/supplierinfo" [queryParams]="{id: jsonData[0].supplierId}">Bezoek verkoper pagina</a>
+            <div *ngIf="!currentUser.getUserId()">
+                <p><i>Log aub in om een factuur te kunnen aanvragen of te chatten met de leverancier</i></p>
+            </div>
+            <a routerLink="/supplierinfo" [queryParams]="{id: jsonData[0].id}">Bezoek verkoper pagina</a>
         </div>
     </div>
 </div>
