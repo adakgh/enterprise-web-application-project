@@ -1,15 +1,12 @@
-<div class="container text-center p-3">
+<div class="container text-center title-background p-3">
     <h2 class="h1-responsive font-weight-bold my-4">Plaats een product</h2>
-
     <div class="aler alert-danger" *ngIf="errorMessage">
         <p>{{errorMessage}}</p>
     </div>
 </div>
-
-<!--<button class="btn btn-danger" (click)="randomButton()">Rnaomd</button>-->
+<br><br>
 
 <div class="row needs-validation block">
-
     <!-- Add Product Image Section -->
     <div class="col-3 mb-4">
         <div>
@@ -75,7 +72,7 @@
             <div class="form-group row">
                 <div class="col-sm-2"></div>
                 <!-- Toggles for Product Discount add/delete -->
-                <div class="col-sm-9 d-flex flex-row-reverse line-collapse">
+                <div class="col-sm-8 d-flex flex-row-reverse line-collapse">
                     <!-- Delete Product Discount Row Toggle -->
                     <button class="btn" data-toggle="tooltip" data-placement="right"
                             title="klik om te beginnen met verwijderen" (click)="removeLastDiscountPrice()">

@@ -32,7 +32,7 @@
                 <div class="col-md-8 col-sm-12">
                     <ul class="text-left quickLinks">
                         <li><a class="btn" (click)="allProducts()">| Aangeboden Objecten | </a></li>
-                        <li><a class="btn" href="mailto:{{jsonSupplierData.contactEmail}}"> Contact | </a></li>
+                        <li><a class="btn" href="mailto:{{jsonSupplierData.contactEmail}}">Contact | </a></li>
                         <!--<li><a href="https://www.facebook.com/deduintuinheemskerk/" target="_blank"> Facebook | </a></li>-->
                     </ul>
                 </div>
@@ -52,7 +52,7 @@
     <!-- Supplier Description Section -->
     <div class="row p-3">
         <div class="col-sm-12">
-            <h5> {{jsonSupplierData.companyName}} </h5>
+            <h5 class="label-title"> {{jsonSupplierData.companyName}} </h5>
             <p>
                 {{jsonSupplierData.description}}
             </p>
@@ -63,7 +63,7 @@
     <!-- List of Recent Added products horizontally aligned -->
     <div class="row p-3 pb-5" style="margin: auto">
         <div class="col-sm-12">
-            <h5 class="text-center"> Aangeboden Producten </h5>
+            <h5 class="text-center label-title title-background"> Aangeboden Producten </h5>
         </div>
 
         <!-- Recent Products of suppliers -->

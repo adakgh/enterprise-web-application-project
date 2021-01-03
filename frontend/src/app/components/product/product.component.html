@@ -1,5 +1,5 @@
 <div class="container">
-    <h3>Filter de producten: </h3>
+    <h3 class="label-title">Filter de producten: </h3>
     <div id="filterBox" class="form-group row col-md-12">
         <div class="col-md-3">
             <h5><label for="searchBar">Zoek een product:</label></h5>
@@ -21,18 +21,18 @@
         <form class="col-md-2" [formGroup]="priceRangeForm">
             <div class="form-group">
                 <h5><label for="priceMin">Prijs van: </label></h5>
-                <input class="form-control" id="priceMin" type="text" value="0" formControlName="min"
+                <input class="form-control" id="priceMin" type="text" placeholder="€" value="0" formControlName="min"
                        (keyup)="priceRange(priceRangeForm.value)">
             </div>
             <div class="form-group">
                 <h5><label for="priceMax"> Tot: </label></h5>
-                <input class="form-control" id="priceMax" type="text" formControlName="max"
+                <input class="form-control" id="priceMax" type="text" placeholder="€" formControlName="max"
                        (keyup)="priceRange(priceRangeForm.value)">
             </div>
         </form>
         <fieldset class="col-md-3">
             <div class="form-group">
-                <h5><label for="sortDropdown">sorteer:</label></h5>
+                <h5><label for="sortDropdown">Sorteer:</label></h5>
                 <select id="sortDropdown" class="form-check customDropdownStyle" (change)="sortProducts($event)">
                     <option value="">selecteer...</option>
                     <!--<option value="location">afstand</option>-->

@@ -1,14 +1,13 @@
+<div class="container text-center title-background p-3">
+    <h2 class="h1-responsive font-weight-bold my-4">Contact</h2>
+</div>
+<br>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center mt-5">
-            <h2>Contact</h2>
-        </div>
-    </div>
-    <div class="row ">
+    <div class="row justify-content-center">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3">
             <form id="contact-form" class="form" role="form" [formGroup]="contactForm">
                 <div class="form-group">
-                    <label class="form-label" for="name">Naam</label>
+                    <label class="form-label label-title" for="name">Naam</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Vul hier je naam in"
                            tabindex="1" formControlName="name"
                            [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
@@ -19,7 +18,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="email">E-mailadres</label>
+                    <label class="form-label label-title" for="email">E-mailadres</label>
                     <input type="email" class="form-control" id="email" name="email"
                            placeholder="Vul hier je e-mailadres in" tabindex="2" formControlName="email"
                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
@@ -30,7 +29,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="subject">Onderwerp</label>
+                    <label class="form-label label-title" for="subject">Onderwerp</label>
                     <input type="text" class="form-control" id="subject" name="subject" placeholder="Onderwerp"
                            tabindex="3" formControlName="subject"
                            [ngClass]="{ 'is-invalid': submitted && f.subject.errors }" required>
@@ -40,7 +39,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="message">Bericht</label>
+                    <label class="form-label label-title" for="message">Bericht</label>
                     <textarea rows="5" cols="400" name="message" class="form-control" id="message"
                               placeholder="Hier typen..." tabindex="4" formControlName="message"
                               [ngClass]="{ 'is-invalid': submitted && f.message.errors }" required></textarea>

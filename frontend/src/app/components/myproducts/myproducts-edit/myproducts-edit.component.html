@@ -4,18 +4,15 @@
         <p>{{errorMessage}}</p>
     </div>
 </div>
+<br><br>
 
-<!--<button class="btn btn-danger" (click)="randomButton()">Rnaomd</button>-->
-
-<div class="row needs-validation block mt-5">
-
+<div class="row needs-validation block">
     <!-- Add Product Image Section -->
-    <div class="col-3  mb-4">
+    <div class="col-3 mb-4">
         <div>
             <picture>
                 <img [src]="demoImage.sanatizeUrl(demoImage.generatedImage)" alt="voeg afbeelding toe"
                      style="width: 80%; height: 100%; opacity: 100%; border: 1px solid gray;" class="img-thumbnail">
-                <!--src="https://simpleicon.com/wp-content/uploads/camera.png"-->
                 <input type="file" (change)="onFileSelected($event)">
             </picture>
         </div>
@@ -23,7 +20,7 @@
     </div>
 
     <!-- Product Form -->
-    <div class="col-6 mb-4">
+    <div class="col-9 mb-4">
         <form [formGroup]="productForm">
 
             <!-- Title/Naam product -->
@@ -76,7 +73,7 @@
             <div class="form-group row">
                 <div class="col-sm-2"></div>
                 <!-- Toggles for Product Discount add/delete -->
-                <div class="col-sm-9 d-flex flex-row-reverse line-collapse">
+                <div class="col-sm-8 d-flex flex-row-reverse line-collapse">
                     <!-- Delete Product Discount Row Toggle -->
                     <button class="btn" data-toggle="tooltip" data-placement="right"
                             title="klik om te beginnen met verwijderen" (click)="removeLastDiscountPrice()">
@@ -125,7 +122,7 @@
                     </div>
                     <div class="col-sm-6 input-group">
                         <input type="text" class="form-control" id="inputStock1" placeholder="Hoeveelheid"
-                               name="discountQuantity" formControlName="discountQuantity" >
+                               name="discountQuantity" formControlName="discountQuantity">
                     </div>
                 </div>
             </section>
@@ -143,13 +140,17 @@
             </div>
 
             <!-- Description product -->
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1" class="label-title">Beschijving:</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+            <div class="form-group row">
+                <label for="textArea"
+                       class="col-sm-2 col-form-label label-title">Beschijving:</label>
+                <div class="col-sm-8">
+                <textarea class="form-control" id="textArea" rows="3"
                           name="description" formControlName="description"
                           [ngClass]="{'is-valid':productForm.controls['description'].valid ,'is-invalid':!productForm.controls['description'].valid && productForm.controls['description'].touched }"
                 >
+
                 </textarea>
+                </div>
             </div>
             <!-- Buttons -->
             <div class="row">
