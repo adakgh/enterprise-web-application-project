@@ -36,3 +36,14 @@ li{
     width: 100%;
     height: 100%;
 }
+
+/* Base Styling */
+.title-background {
+    background-image: url(https://www.designbolts.com/wp-content/uploads/2013/02/Textured-Stripes-Grey-Seamless-Patterns-For-Website-Background.jpg);
+}
+
+.label-title{
+    color: #265139;
+    font-weight: bold;
+}
+

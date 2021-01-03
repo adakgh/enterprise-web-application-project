@@ -103,4 +103,5 @@ export class SupplierInfoComponent implements OnInit {
     allProducts(): void {
         this.router.navigate(['myproducts'], {queryParams: {id: this.jsonSupplierData.id}});
     }
+
 }

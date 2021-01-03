@@ -38,6 +38,7 @@ export class LoginService {
         return 'Basic ' + btoa(loginData.username + ':' + loginData.password);
     }
 
+    // check if user's account is locked
     isLocked(username: string): Observable<any> {
         return this.apiService.get('/users/info/' + username).pipe(
             tap(res => {

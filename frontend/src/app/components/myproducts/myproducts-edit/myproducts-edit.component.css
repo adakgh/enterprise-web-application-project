@@ -16,4 +16,30 @@
     background-image: url(https://www.designbolts.com/wp-content/uploads/2013/02/Textured-Stripes-Grey-Seamless-Patterns-For-Website-Background.jpg);
 }
 
+.block {
+    margin-left: 5%;
+    overflow: hidden;
+}
+
+.label-title{
+    color: #265139;
+    font-weight: bold;
+}
+
+#uploadImage {
+    text-decoration: line-through !important;
+}
+
+.line-collapse{
+    border-width: 0px;
+    border-color: black;
+    border-style: solid;
+    border-bottom-width: 1px;
+    font-size: smaller;
+}
+
+#add-margin {
+    margin-left: -3% !important;
+}
+
 

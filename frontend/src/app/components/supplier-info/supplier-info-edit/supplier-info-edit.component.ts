@@ -39,6 +39,10 @@ export class SupplierInfoEditComponent implements OnInit {
     ) {
     }
 
+    randomClick(): any {
+        this.signupForm.controls.name.setValue('');
+    }
+
     // Look at the query and based on that show the data of the supplier
     ngOnInit(): void {
         // Get the default image and put in src
@@ -108,6 +112,9 @@ export class SupplierInfoEditComponent implements OnInit {
 
     // Gets triggered when user(supplier) is done editing and click the button to update
     onUpdateSupplier(): void {
+
+        this.supplier.id = this.supplierId;
+        // this.supplier.description = this.supplier.description.replace(/\n\r?/g, '<br>');
 
         if (this.selectedFile != null) {
             // Create a object with the supplier data and the selected image data and send that

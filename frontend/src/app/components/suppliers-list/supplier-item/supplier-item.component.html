@@ -15,7 +15,7 @@
             <div class="col-md-12 col-sm-12">
 
                 <ul class="quickLinks p-1">
-                    <li><a href="#" routerLink="/supplierinfo">| Aangeboden Objecten | </a></li>
+                    <li><a href="#" routerLink="/supplierinfo" (click)="allProducts()">| Aangeboden Objecten | </a></li>
                     <li><a href="mailto:{{supplier.contactEmail}}"> Contact | </a></li>
                     <li><a routerLink="/supplierinfo" [queryParams]="{id: supplier.id}" href=""> Zie volledige pagina | </a></li>
                     <!--<li><a href="https://www.facebook.com/deduintuinheemskerk/" target="_blank"> Facebook | </a></li>-->

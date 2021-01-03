@@ -1,14 +1,3 @@
-<!-- moved to navbar -->
-<!--<p>This is the index page when you open the app.</p>-->
-<!--<a *ngIf="!isLoggedIn" routerLink="/login">login</a>-->
-<!--<a *ngIf="isLoggedIn" routerLink="/logout">logout</a>-->
-<!--<a routerLink="/users">users</a>-->
-<!--<a routerLink="/products" [queryParams]="{id: userId}">products</a>-->
-
-<!-- should be in .ts file -->
-<!--<span *ngIf="hasAdminRole">this message should only be visible to an user with an admin-role</span>-->
-<!--<span *ngIf="hasUserRole || hasAdminRole">this message should only be visible to an user with an user-role or admin-role</span>-->
-
 <!-- full-width container with jumbotron -->
 <div class="container-fluid">
     <!-- jumbotron with image and text -->
@@ -25,11 +14,11 @@
 <!-- container with body content -->
 <div class="container text-left mt-4 p-3 mb-4">
     <!-- label -->
-    <span class="label text-center btn-lg btn-block">WIE ZIJN WIJ?</span>
+    <span class="label text-center btn-lg btn-block label-title">WIE ZIJN WIJ?</span>
 
     <!-- about the company -->
-    <h4 class="font-weight-bold mt-5">Hoe breng je lokale leveranciers het meest effectief in contact met lokale
-        afnemers?</h4>
+    <h4 class="font-weight-bold mt-5 label-title">Hoe breng je lokale leveranciers het meest effectief in contact met
+        lokale afnemers?</h4>
     <br>
     <h6>Dat vroegen we ons af voordat Van Streek werd opgericht.
         <br>
@@ -41,56 +30,10 @@
     </h6>
 
     <!-- label -->
-    <span class="label text-center btn-lg btn-block mt-5 mb-5">RECENTE PRODUCTEN</span>
+    <span class="label text-center btn-lg btn-block mt-5 mb-5 label-title">RECENTE PRODUCTEN</span>
     <!-- recent products cards -->
     <div class="card-deck mb-5">
-       <!-- <div class="card">
-            <a routerLink="/products" [queryParams]="{id: userId}">
-                <img class="card-img-top"
-                     src="https://www.akkerwijzer.nl/site/assets/files/0/01/24/286/7b9096ef9.-detail.jpg"
-                     alt="Card image cap">
-            </a>
-            <div class="card-body">
-                <a routerLink="">
-                    <img class="add-to-cart-icon"
-                         src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Add-Basket-icon.png"
-                         alt="cart-icon">
-                </a>
-                <h5 class="card-title mt-4">€ 4,50</h5>
-                <p class="card-text">Broccoli 750 gr</p>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card-img-top" src="https://www.phryso.com/wp-content/uploads/2019/10/wortel-winterpeen.jpg"
-                 alt="Card image cap">
-            <div class="card-body">
-                <img class="add-to-cart-icon"
-                     src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Add-Basket-icon.png"
-                     alt="cart-icon">
-                <h5 class="card-title mt-4">€ 2,50</h5>
-                <p class="card-text">Wortels 500 gr</p></div>
-        </div>
-        <div class="card">
-            <img class="card-img-top"
-                 src="https://uwkaasboer.nl/wp-content/uploads/2020/03/oud-brokkel-online-kopen-scaled.jpg"
-                 alt="Card image cap">
-            <div class="card-body">
-                <img class="add-to-cart-icon"
-                     src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Add-Basket-icon.png"
-                     alt="cart-icon">
-                <h5 class="card-title mt-4">€ 7,50</h5>
-                <p class="card-text">Oude kaas 1kg</p></div>
-        </div>
-        <div class="card">
-            <img class="card-img-top" src="https://www.kokenmetkarin.nl/wp-content/uploads/2008/05/blauwebes_ft.jpg"
-                 alt="Card image cap">
-            <div class="card-body">
-                <img class="add-to-cart-icon"
-                     src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Add-Basket-icon.png"
-                     alt="cart-icon">
-                <h5 class="card-title mt-4">€ 3,50</h5>
-                <p class="card-text">Bosbessen 100 gr</p></div>
-        </div>-->
+
         <div class="row col-12 mr-5 p-0">
             <div *ngFor="let product of jsonData" class="col-lg-3 col-md-4 mb-3">
                 <div class="card" style="width: 110%; height: 100%">
@@ -102,82 +45,37 @@
                         <h4 class="card-title">
                             <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
                         </h4>
-                        <h5> €{{product.price}}/{{demoImage.determineUnitPricing(product)}}</h5> <!-- Het beste alles €/kg-->
+                        <h5> €{{product.price}}/{{demoImage.determineUnitPricing(product)}}</h5>
+                        <!-- Het beste alles €/kg-->
                         <p class="card-text">{{product.description}}</p>
                     </div>
                 </div>
             </div>
         </div>
 
-    <!-- label -->
-    <span class="label text-center btn-lg btn-block mt-5 mb-5">BEST VERKOCHT</span>
-    <!-- most sold products cards -->
-    <div class="card-deck mb-5">
-        <!--<div class="card">
-            <a routerLink="/products" [queryParams]="{id: userId}">
-                <img class="card-img-top"
-                     src="https://www.akkerwijzer.nl/site/assets/files/0/01/24/286/7b9096ef9.-detail.jpg"
-                     alt="Card image cap">
-            </a>
-            <div class="card-body">
-                <a routerLink="">
-                    <img class="add-to-cart-icon"
-                         src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Add-Basket-icon.png"
-                         alt="cart-icon">
-                </a>
-                <h5 class="card-title mt-4">€ 4,50</h5>
-                <p class="card-text">Broccoli 750 gr</p>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card-img-top" src="https://www.phryso.com/wp-content/uploads/2019/10/wortel-winterpeen.jpg"
-                 alt="Card image cap">
-            <div class="card-body">
-                <img class="add-to-cart-icon"
-                     src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Add-Basket-icon.png"
-                     alt="cart-icon">
-                <h5 class="card-title mt-4">€ 2,50</h5>
-                <p class="card-text">Wortels 500 gr</p></div>
-        </div>
-        <div class="card">
-            <img class="card-img-top"
-                 src="https://uwkaasboer.nl/wp-content/uploads/2020/03/oud-brokkel-online-kopen-scaled.jpg"
-                 alt="Card image cap">
-            <div class="card-body">
-                <img class="add-to-cart-icon"
-                     src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Add-Basket-icon.png"
-                     alt="cart-icon">
-                <h5 class="card-title mt-4">€ 7,50</h5>
-                <p class="card-text">Oude kaas 1kg</p></div>
-        </div>
-        <div class="card">
-            <img class="card-img-top" src="https://www.kokenmetkarin.nl/wp-content/uploads/2008/05/blauwebes_ft.jpg"
-                 alt="Card image cap">
-            <div class="card-body">
-                <img class="add-to-cart-icon"
-                     src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Add-Basket-icon.png"
-                     alt="cart-icon">
-                <h5 class="card-title mt-4">€ 3,50</h5>
-                <p class="card-text">Bosbessen 100 gr</p></div>
-        </div>-->
-        <div class="row col-12 mr-5 p-0">
-            <div *ngFor="let product of jsonData2" class="col-lg-3 col-md-4 mb-3">
-                <div class="card" style="width: 110%; height: 100%">
-                    <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
-                        class="productImage"
-                        [src]="demoImage.sanatizeUrl(product.productImage!=null?demoImage.atoba(product.productImage.picByte):demoImage.productBase64Url)"
-                        alt="{{product.name}}"/></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
-                        </h4>
-                        <h5> €{{product.price}}/{{demoImage.determineUnitPricing(product)}}</h5> <!-- Het beste alles €/kg-->
-                        <p class="card-text">{{product.description}}</p>
+        <!-- label -->
+        <span class="label text-center btn-lg btn-block mt-5 mb-5 label-title">BEST VERKOCHT</span>
+        <!-- most sold products cards -->
+        <div class="card-deck mb-5">
+
+            <div class="row col-12 mr-5 p-0">
+                <div *ngFor="let product of jsonData2" class="col-lg-3 col-md-4 mb-3">
+                    <div class="card" style="width: 110%; height: 100%">
+                        <a routerLink="/product-detail" [queryParams]="{id: product.id}"><img
+                            class="productImage"
+                            [src]="demoImage.sanatizeUrl(product.productImage!=null?demoImage.atoba(product.productImage.picByte):demoImage.productBase64Url)"
+                            alt="{{product.name}}"/></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a routerLink="/product-detail" [queryParams]="{id: product.id}">{{product.name}}</a>
+                            </h4>
+                            <h5> €{{product.price}}/{{demoImage.determineUnitPricing(product)}}</h5>
+                            <!-- Het beste alles €/kg-->
+                            <p class="card-text">{{product.description}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-
 </div>

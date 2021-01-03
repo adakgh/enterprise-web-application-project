@@ -1,77 +1,59 @@
-<!--Section: Contact v.2-->
-<section class="mb-4">
+<div class="container text-center title-background p-3">
+    <h2 class="h1-responsive font-weight-bold my-4">Contact</h2>
+</div>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xs-offset-3">
+            <form id="contact-form" class="form" role="form" [formGroup]="contactForm">
+                <div class="form-group">
+                    <label class="form-label label-title" for="name">Naam</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Vul hier je naam in"
+                           tabindex="1" formControlName="name"
+                           [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                           required>
 
-    <!--Section heading-->
-    <h2 class="h1-responsive font-weight-bold  my-4">Contact</h2>
-    <!--Section description-->
-    <div class="row" style="margin: auto">
-
-        <!--Grid column-->
-        <div class="col-md-9 mb-md-0 mb-5">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <input type="text" id="name" name="name" class="form-control">
-                            <label for="name" class="">naam: </label>
-                        </div>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <input type="text" id="email" name="email" class="form-control">
-                            <label for="email" class="">.....</label>
-                        </div>
-                    </div>
-                    <!--Grid column-->
-
-                </div>
-                <!--Grid row-->
-
-                <!--Grid row-->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <input type="text" id="subject" name="subject" class="form-control">
-                            <label for="subject" class="">.....</label>
-                        </div>
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Naam is verplicht</div>
                     </div>
                 </div>
-                <!--Grid row-->
+                <div class="form-group">
+                    <label class="form-label label-title" for="email">E-mailadres</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                           placeholder="Vul hier je e-mailadres in" tabindex="2" formControlName="email"
+                           [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
 
-                <!--Grid row-->
-                <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-12">
-
-                        <div class="md-form">
-                            <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
-                            <label for="message"></label>
-                        </div>
-
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">E-mailadres is verplicht</div>
+                        <div *ngIf="f.email.errors.email">E-mailadres is niet geldig</div>
                     </div>
                 </div>
-                <!--Grid row-->
+                <div class="form-group">
+                    <label class="form-label label-title" for="subject">Onderwerp</label>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Onderwerp"
+                           tabindex="3" formControlName="subject"
+                           [ngClass]="{ 'is-invalid': submitted && f.subject.errors }" required>
 
+                    <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
+                        <div *ngIf="f.subject.errors.required">Onderwerp is verplicht</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label label-title" for="message">Bericht</label>
+                    <textarea rows="5" cols="400" name="message" class="form-control" id="message"
+                              placeholder="Hier typen..." tabindex="4" formControlName="message"
+                              [ngClass]="{ 'is-invalid': submitted && f.message.errors }" required></textarea>
+
+                    <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+                        <div *ngIf="f.message.errors.required">Bericht is verplicht</div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" (click)="sendMail()" class="btn my-3 mb-5 p-3 send-button float-right">
+                        Verzend
+                    </button>
+                </div>
             </form>
-
-            <div class="text-center text-md-left">
-                <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
-            </div>
-            <div class="status"></div>
         </div>
-        <!--Grid column-->
-
-
-
     </div>
-
-</section>
-<!--Section: Contact v.2-->
+</div>
