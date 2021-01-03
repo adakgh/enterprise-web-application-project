@@ -38,14 +38,10 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authService.deleteAuthentication(); // force a logout;
+        this.authService.deleteAuthentication(); // force a logout
         // register form validation
         this.buildForm();
         this.setTypeValidators();
-
-        // TODO: remove after testing --> test values for input fields
-        // this.loginData.username = 'myUsername@gmail.com';
-        // this.loginData.password = 'myPassword1!';
     }
 
     login(): void {
@@ -129,7 +125,7 @@ export class LoginComponent implements OnInit {
                 }, error => {
                     console.log(error);
                     if (error.status === 409) {
-                        alert('Dit e-mailadres is al in gebruik. Probeer het opnieuw.');
+                        alert('Dit e-mailadres is al in gebruik. Probeer het opnieuw met een andere e-mailadres.');
                     } else {
                         alert('Er is iets misgegaan. Probeer het opnieuw.');
                     }

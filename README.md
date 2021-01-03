@@ -146,11 +146,13 @@ TODO
   ```
   Angular (frontend):  
 
-  <class>.ts  - <class>.ts  - 
+  contact.component.ts - login.component.ts - requestproduct.component.ts - verify-user.component.ts - contact.service.ts - 
+  inquiry.service.ts - inquiry.service.ts - register.service.ts - verify-user.service.ts
 
   Spring (backend):  
   
-  <class>.java  - <class>.java  - 
+  ContactController.java - InquiryController.java - UserController.java - ContactMail.java - ContactService.java - 
+  UserService.java
 
   ``` 
 
