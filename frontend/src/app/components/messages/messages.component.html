@@ -24,7 +24,7 @@
                 <!-- Left panel chats-->
                 <div class="inbox_chat">
                     <div (click)="selectInboxRow(row)" *ngFor="let row of inbox" class="chat_list"
-                        [class.active_chat]="row === selectedRow">
+                         [class.active_chat]="row === selectedRow">
                         <div class="chat_people">
                             <div class="chat_ib">
                                 <h5>
@@ -47,7 +47,7 @@
                         <!-- sender -->
                         <div *ngIf="msgData.direction=='LEFT'" class="incoming_msg">
                             <div class="incoming_msg_img_left"><img
-                                    src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div>
+                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div>
                             <div class="received_msg">
                                 <div class="received_withd_msg">
                                     <p class="chatName">{{msgData.sender.chatName}}</p>
@@ -56,14 +56,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
                         <!-- receiver -->
                         <div *ngIf="msgData.direction=='RIGHT'" class="outgoing_msg">
                             <div class="incoming_msg_img_right"><img
-                                    src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div>
+                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div>
                             <div class="sent_msg">
                                 <p class="chatName">{{msgData.sender.chatName}}</p>
                                 <p>{{msgData.message}}</p>
@@ -78,8 +75,8 @@
                     <div class="input_msg_write">
                         <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="newMessage" />
                         <button (click)="sendMessage()" class="msg_send_btn" type="button"
-                            [disabled]="isInvalidMessage()" [ngClass]="{'msg_send_btn_blocked':isInvalidMessage()}"><i
-                                class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                [disabled]="isInvalidMessage()" [ngClass]="{'msg_send_btn_blocked':isInvalidMessage()}"><i
+                            class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>

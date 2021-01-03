@@ -27,7 +27,7 @@ export class ProductDetailComponent implements OnInit {
         private routeUtil: RouteUtil,
         private productService: ProductService,
         public demoImage: DemoImage,
-        private currentUser: CurrentUserService,
+        public currentUser: CurrentUserService,
         private contactService: ContactService
     ) {
     }

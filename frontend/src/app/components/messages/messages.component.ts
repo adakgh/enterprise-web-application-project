@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Observable, interval  } from 'rxjs';
-import { Message } from 'src/app/models/message.model';
-import { CurrentUserService } from 'src/app/services/current-user.service';
-import { MessagesService } from 'src/app/services/messages.service';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Observable, interval} from 'rxjs';
+import {Message} from 'src/app/models/message.model';
+import {CurrentUserService} from 'src/app/services/current-user.service';
+import {MessagesService} from 'src/app/services/messages.service';
 
 @Component({
     selector: 'app-messages',
@@ -45,9 +45,9 @@ export class MessagesComponent implements OnInit {
         });
     }
 
-    ngAfterViewChecked() {        
-        this.scrollToBottom();        
-    } 
+    ngAfterViewChecked(): any {
+        this.scrollToBottom();
+    }
 
     // -----------------------------------------------------------------------------
     // [CHAT]
@@ -58,11 +58,11 @@ export class MessagesComponent implements OnInit {
     }
 
     public selectInboxRow(row: Message): void {
-        this.selectedRow = row;   
+        this.selectedRow = row;
         this.updateChatMessages(row);
 
         // reset
-        this.messages = []
+        this.messages = [];
         this.messagesLoaded = false;
     }
 
@@ -75,35 +75,36 @@ export class MessagesComponent implements OnInit {
     }
 
     public updateChatMessages(row: Message): void {
-        const chattingToId = this.isCustomer ? row.supplier.id : row.customer.id; 
+        const chattingToId = this.isCustomer ? row.supplier.id : row.customer.id;
         this.messagesService.getChatMessages(chattingToId).subscribe(
             messages => {
-                this.messages = messages;                
+                this.messages = messages;
                 this.messagesLoaded = true;
                 this.scrollToBottom();
             });
     }
 
     public sendMessage(): void {
-        const toUserId = this.isCustomer ? this.selectedRow.supplier.id : this.selectedRow.customer.id        
+        const toUserId = this.isCustomer ? this.selectedRow.supplier.id : this.selectedRow.customer.id
         this.messagesService.sendChatMessage(this.newMessage, toUserId, this.isCustomer).subscribe(
             status => {
-                console.log("message successfully added!");
+                console.log('message successfully added!');
             }
-        )
+        );
     }
 
     // -----------------------------------------------------------------------------
     // [OTHER]
     // -----------------------------------------------------------------------------
 
-    private scrollToBottom(): void {
+    public scrollToBottom(): void {
         try {
-          this.scrollWrapper.nativeElement.scrollTop = this.scrollWrapper.nativeElement.scrollHeight;
-        } catch(err) { }
+            this.scrollWrapper.nativeElement.scrollTop = this.scrollWrapper.nativeElement.scrollHeight;
+        } catch (err) {
+        }
     }
 
-    private isInvalidMessage(): boolean {
+    public isInvalidMessage(): boolean {
         return this.newMessage == null || this.newMessage.length <= 1;
     }
 }
