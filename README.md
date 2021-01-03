@@ -183,13 +183,13 @@ TODO
   ```
   Angular (frontend):  
 
-  <class>.ts  - <class>.ts  - 
+  product.component.ts - product-detail.component.ts - my-products.service.ts - product.service.ts - location.service.ts
 
   Spring (backend):  
   
-  <class>.java  - <class>.java  - 
+  BaseSpecification.java - ProdutSpecification.java - ProductController.java - ProductService.java
 
-  ```   
+  ```
 
 <!-- CONTRIBUTING -->
 ## System Documentation
