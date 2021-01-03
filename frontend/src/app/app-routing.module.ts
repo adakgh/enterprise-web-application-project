@@ -18,7 +18,10 @@ import {UnsavedChangesGuardService} from './guards/unsaved-changes-guard.service
 import {MyproductsComponent} from './components/myproducts/myproducts.component';
 import {MyproductsEditComponent} from './components/myproducts/myproducts-edit/myproducts-edit.component';
 import {VerifyUserComponent} from './components/verify-user/verify-user.component';
-import {MessagesComponent} from "./components/messages/messages.component";
+import {MessagesComponent} from './components/messages/messages.component';
+import {FaqComponent} from './components/faq/faq.component';
+import {TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
+import {PrivacyPolicyComponent} from './components/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -27,7 +30,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'logout', component: LogoutComponent},
     {path: 'supplierinfo', component: SupplierInfoComponent},
-    {path: 'supplierinfo/edit', component: SupplierInfoEditComponent, canDeactivate: [UnsavedChangesGuardService]},
+    {path: 'supplierinfo/edit/:id', component: SupplierInfoEditComponent, canDeactivate: [UnsavedChangesGuardService]},
     {path: 'suppliers', component: SuppliersListComponent},
     {path: 'addproduct', component: AddProductComponent, canActivate: [AuthGuardService]},
     {path: 'myproducts', component: MyproductsComponent, canActivate: [AuthGuardService]},
@@ -37,6 +40,9 @@ const routes: Routes = [
     {path: 'contact', component: ContactComponent},
     {path: 'verify', component: VerifyUserComponent},
     {path: 'messages', component: MessagesComponent},
+    {path: 'faq', component: FaqComponent},
+    {path: 'terms-and-conditions', component: TermsAndConditionsComponent},
+    {path: 'privacy-policy', component: PrivacyPolicyComponent},
     {path: 'error', component: ErrorComponent},
     {path: '**', redirectTo: '/error'} // If page not found: goes to error 404 page
 ];

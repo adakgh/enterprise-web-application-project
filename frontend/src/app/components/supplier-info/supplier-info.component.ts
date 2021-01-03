@@ -4,8 +4,6 @@ import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {SupplierInfoService} from '../../services/supplier-info.service';
 import {CurrentUserService} from '../../services/current-user.service';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {Observable, Observer} from 'rxjs';
 import {DemoImage} from './supplier-info-edit/default-image';
 
 @Component({
@@ -15,11 +13,23 @@ import {DemoImage} from './supplier-info-edit/default-image';
 })
 export class SupplierInfoComponent implements OnInit {
 
-    jsonSupplierData;
-    jsonLimitedProductsData: any[] = [];
-    profileImageName;
-    generatedImage: string;
+    jsonSupplierData = { // Object with the data of the supplier
+        addresses: null,
+        companyName: '',
+        contactEmail: '',
+        contactPerson: '',
+        description: null,
+        id: 1,
+        phoneNumber: null,
+        products: null,
+        profileImage: null,
+        shortDescription: null,
+        website: null,
+    };
+    jsonLimitedProductsData: any[] = [];    // Limited object with only 4 products
+    generatedImage: string;                 // The profile image src of the supplier
 
+    // Inject needed classes
     constructor(
         private router: Router,
         private apiService: ApiService,
@@ -27,20 +37,19 @@ export class SupplierInfoComponent implements OnInit {
         private supplierInfoService: SupplierInfoService,
         private activatedRoute: ActivatedRoute,
         public currentUserService: CurrentUserService,
-        private domSanitizer: DomSanitizer,
         public demoImage: DemoImage
     ) {
     }
 
+    // Subscribe to the query parameters in the URL and load data of supplier with id if there is a supplier
     ngOnInit(): void {
-        // Subscribe to the query paramaters in the URL
         this.activatedRoute.queryParams.subscribe(
             res => {
                 // If there is no query given return user to homepage
-                if (res.id <= 0 || res.id == null) {
+                /*if (res.id <= 0 || res.id == null) {
                     this.router.navigate(['/']);
                     return;
-                }
+                }*/
                 this.loadSupplierData(res.id);
             },
             err => {
@@ -50,8 +59,7 @@ export class SupplierInfoComponent implements OnInit {
 
     // Get all information about the supplier with the given id in the query
     loadSupplierData(id: number): void {
-        this.supplierInfoService.getSupplier(id).subscribe(
-            res => {
+        this.supplierInfoService.getSupplier(id).subscribe(res => {
                 const LIMIT_PRODUCTS = 4;
                 this.jsonSupplierData = res;
 
@@ -70,11 +78,8 @@ export class SupplierInfoComponent implements OnInit {
                         this.generatedImage = this.demoImage.imageBase64Url;
                     }*/
                 }
-                console.log(this.jsonLimitedProductsData);
 
                 if (res.profileImage != null) {
-                    this.profileImageName = res.name;
-                    // this.demoImage.getImage(atob(res.profileImage.picByte));
                     this.generatedImage = atob(res.profileImage.picByte);
                 } else {
                     // Get the default image and put in src
@@ -94,7 +99,8 @@ export class SupplierInfoComponent implements OnInit {
             this.jsonSupplierData.addresses[0].postalCode + ' ' + this.jsonSupplierData.addresses[0].city;
     }
 
-    allProducts() {
+    // Link click event that refers user to the page with all product the current supplier is offering
+    allProducts(): void {
         this.router.navigate(['myproducts'], {queryParams: {id: this.jsonSupplierData.id}});
     }
 }

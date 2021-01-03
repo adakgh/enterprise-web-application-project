@@ -1,9 +1,11 @@
 <div class="row m-5 supplierRow">
 
+    <!-- Left section - Profile Image -->
     <div class="col-md-2 col-sm-12">
         <img [src]="demoImage.sanatizeUrl(generatedImage)"
              class="supplierImg" alt="">
     </div>
+    <!-- Middle section - Short description plus some links-->
     <div class="col-md-6 col-sm-12">
         <div class="row">
             <div class="col-md-12 col-sm-12"><b>{{supplier.companyName}}</b></div>
@@ -22,7 +24,7 @@
             </div>
         </div>
     </div>
-
+    <!-- Right section - Further details -->
     <div class="col-md-4 col-sm-12">
         <b>Gegevens: </b>
         <li *ngIf="supplier.website !=null && supplier.website!=''">Website: {{supplier.website}}</li>

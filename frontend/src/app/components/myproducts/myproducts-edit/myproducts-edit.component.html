@@ -1,34 +1,38 @@
 <div class="container text-center title-background p-3">
     <h2 class="h1-responsive font-weight-bold my-4">Update {{productData.name}}</h2>
+    <div class="aler alert-danger" *ngIf="errorMessage">
+        <p>{{errorMessage}}</p>
+    </div>
 </div>
 
+<!--<button class="btn btn-danger" (click)="randomButton()">Rnaomd</button>-->
+
 <div class="row needs-validation block mt-5">
+
+    <!-- Add Product Image Section -->
     <div class="col-3  mb-4">
         <div>
             <picture>
-                <img  [src]="demoImage.sanatizeUrl(demoImage.generatedImage)" alt="voeg afbeelding toe"
+                <img [src]="demoImage.sanatizeUrl(demoImage.generatedImage)" alt="voeg afbeelding toe"
                      style="width: 80%; height: 100%; opacity: 100%; border: 1px solid gray;" class="img-thumbnail">
-<!--                src="https://simpleicon.com/wp-content/uploads/camera.png"-->
+                <!--src="https://simpleicon.com/wp-content/uploads/camera.png"-->
                 <input type="file" (change)="onFileSelected($event)">
             </picture>
         </div>
         <br>
-        <div>
-            <!--<button id="uploadImage" type="submit" (click)="onUpload()" class="btn btn-primary" disabled>Voeg afbeeldig
-                toe
-            </button>-->
-        </div>
     </div>
 
+    <!-- Product Form -->
     <div class="col-6 mb-4">
-        <form class="login-form" name="form" #form="ngForm" novalidate>
+        <form [formGroup]="productForm">
 
-            <!-- Naam product -->
+            <!-- Title/Naam product -->
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label label-title">Titel:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="inputTitel"
-                           name="name" [(ngModel)]="productData.name">
+                    <input type="text" class="form-control" id="inputTitel" name="title"
+                           formControlName="title"
+                           [ngClass]="{'is-valid':productForm.controls['title'].valid ,'is-invalid':!productForm.controls['title'].valid && productForm.controls['title'].touched }">
                 </div>
             </div>
 
@@ -39,36 +43,99 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">€{{getUnit()}}</div>
                     </div>
-                    <input type="text" class="form-control" id="inputCost" name="price" [(ngModel)]="productData.price">
+                    <input type="number" class="form-control" id="inputCost" name="price" formControlName="price"
+                           [ngClass]="{'is-valid':productForm.controls['price'].valid ,'is-invalid':!productForm.controls['price'].valid && productForm.controls['price'].touched }">
                 </div>
             </div>
 
-            <!-- Hoeveelheid product -->
+            <!-- Stock product -->
             <div class="form-group row">
                 <label for="inputStock" class="col-sm-2 col-form-label label-title">Voorraad:</label>
                 <div class="col-sm-8 input-group">
                     <div class="input-group-prepend">
                         <!-- <div class="input-group-text" name="quantity">{{jsonProductData.quantity}}</div>-->
                     </div>
-                    <input type="text" class="form-control" id="inputStock" name="quantityNumber" [(ngModel)]="productData.quantity">
+                    <input type="text" class="form-control" id="inputStock" name="quantityNumber"
+                           formControlName="stock"
+                           [ngClass]="{'is-valid':productForm.controls['stock'].valid ,'is-invalid':!productForm.controls['stock'].valid && productForm.controls['stock'].touched }">
 
                     <div class="col-sm-8 input-group" (change)="selectedUnit($event)">
-                        <select class="form-control" id="inputStockSecond" name="unit" [(ngModel)]="productData.unit">
+                        <select class="form-control" id="inputStockSecond" name="unit" formControlName="unit"
+                                [ngClass]="{'is-valid':productForm.controls['unit'].valid ,'is-invalid':!productForm.controls['unit'].valid && productForm.controls['unit'].touched }">
                             <option disabled value=""></option>
-                            <option value="Kilogram (KG)">Kilogram (KG)</option>
-                            <option value="Gram (G)">Gram (G)</option>
-                            <option value="Liter (L)">Liter (L)</option>
+                            <option value="Kilogram (kg)">Kilogram (kg)</option>
+                            <option value="Gram (g)">Gram (g)</option>
+                            <option value="Liter (l)">Liter (l)</option>
                             <option value="Stuk(s)">Stuk(s)</option>
                         </select>
                     </div>
                 </div>
             </div>
 
+            <!-- Adding new Product Discount Price -->
+            <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <!-- Toggles for Product Discount add/delete -->
+                <div class="col-sm-9 d-flex flex-row-reverse line-collapse">
+                    <!-- Delete Product Discount Row Toggle -->
+                    <button class="btn" data-toggle="tooltip" data-placement="right"
+                            title="klik om te beginnen met verwijderen" (click)="removeLastDiscountPrice()">
+                        <u>Verwijder prijs per hoeveelheid</u>
+
+                        <!-- Icon up arrow -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+
+                    </button>
+
+                    <!-- Add Product Discount Row Toggle -->
+                    <button class="btn" data-toggle="tooltip" data-placement="right"
+                            title="Max 4 nieuwe prijzen" (click)="addDiscountPrice()">
+                        <u>Nieuwe prijs per hoeveelheid</u>
+
+                        <!-- Icon down arrow -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Here the different product discount fields -->
+            <section formArrayName="productDiscounts"
+                     *ngFor="let tagControl of productDiscounts.controls; let i = index">
+                <div class="form-group row" [formGroupName]="i">
+
+                    <label for="inputCost1" class="col-sm-2 col-form-label label-title">{{i + 1}}e Actie prijs &
+                        hoeveelheid:</label>
+
+                    <div class="col-sm-3 input-group">
+                        <div class="">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">€{{getUnit()}}</div>
+                            </div>
+                        </div>
+                        <input type="number" class="form-control" id="inputCost1" placeholder="Prijs"
+                               name="discountPrice" formControlName="discountPrice">
+                    </div>
+                    <div class="col-sm-6 input-group">
+                        <input type="text" class="form-control" id="inputStock1" placeholder="Hoeveelheid"
+                               name="discountQuantity" formControlName="discountQuantity" >
+                    </div>
+                </div>
+            </section>
+
             <!-- Category product -->
             <div class="form-group row">
                 <label for="inputStock" class="col-sm-2 col-form-label label-title">Categorie:</label>
                 <div class="col-sm-8">
-                    <select class="form-control" name="category" [(ngModel)]="productData.categoryId"> >
+                    <select class="form-control" name="category" formControlName="category"
+                            [ngClass]="{'is-valid':productForm.controls['category'].valid ,'is-invalid':!productForm.controls['category'].valid && productForm.controls['category'].touched }">
                         <option *ngFor="let category of categoryMap" (change)="productData.categoryId=$event"
                                 value="{{category.id}}">{{category.name}}</option>
                     </select>
@@ -79,7 +146,8 @@
             <div class="form-group">
                 <label for="exampleFormControlTextarea1" class="label-title">Beschijving:</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                          name="description" [(ngModel)]="productData.description" #name="ngModel"
+                          name="description" formControlName="description"
+                          [ngClass]="{'is-valid':productForm.controls['description'].valid ,'is-invalid':!productForm.controls['description'].valid && productForm.controls['description'].touched }"
                 >
                 </textarea>
             </div>
@@ -87,7 +155,7 @@
             <div class="row">
                 <div class="col-auto">
                     <button data-toggle="modal" (click)="updateProduct()" data-target="#add-product-popup"
-                            class="btn btn-primary">Update product
+                            class="btn btn-primary" [disabled]="!productForm.valid">Update product
                     </button>
                 </div>
                 <div class="col-auto">
