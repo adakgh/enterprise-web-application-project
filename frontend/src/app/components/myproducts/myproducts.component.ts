@@ -46,9 +46,9 @@ export class MyproductsComponent implements OnInit {
                     this.router.navigate(['/']);
                     return;
                 }
-                console.log(this.currentUserService.getUserId());
-                console.log(this.currentUserService.getSupplierId());
-                console.log(res.id);
+                // console.log(this.currentUserService.getUserId());
+                // console.log(this.currentUserService.getSupplierId());
+                // console.log(res.id);
                 if (this.currentUserService.getUserId() == res.id) {
                     this.isTheSupplier = true;
                 }

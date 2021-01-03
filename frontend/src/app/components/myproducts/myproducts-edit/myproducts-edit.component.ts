@@ -78,7 +78,7 @@ export class MyproductsEditComponent implements OnInit {
         this.productService.getOneProduct(id).subscribe(
             res => {
 
-                console.log(res);
+                // console.log(res);
 
                 // Receive and store the values of the product
                 this.productId = res.id;

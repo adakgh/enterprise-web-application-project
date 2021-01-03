@@ -52,7 +52,7 @@ export class ProductComponent implements OnInit {
         this.activatedRoute.queryParamMap.subscribe(
             res => {
                 this.loadData();
-                console.log(res);
+                // console.log(res);
             }
         );
         this.productService.getAllCategories().subscribe(
