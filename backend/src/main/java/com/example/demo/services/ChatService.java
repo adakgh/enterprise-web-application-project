@@ -1,13 +1,23 @@
 package com.example.demo.services;
 
+import com.example.demo.security.Principal;
 import com.example.demo.models.dto.ChatDto;
 import com.example.demo.persistence.entities.ChatEntity;
 import com.example.demo.persistence.entities.UserEntity;
 import com.example.demo.persistence.repositories.ChatRepository;
+import com.example.demo.persistence.repositories.SupplierRepository;
+import com.example.demo.persistence.repositories.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.transaction.ChainedTransactionManager;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.persistence.EntityManager;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +28,23 @@ public class ChatService {
 
     private final ChatRepository chatRepository;
     private final ModelMapper modelMapper;
+    private final SupplierRepository supplierRepository;
+    private final CustomerRepository customerRepository;
+
+    public void saveMessage(Principal principal, long toUserId, boolean isCustomer, String message) {
+        ChatEntity chat = new ChatEntity();
+        chat.setMessage(message);
+
+        if (isCustomer) {
+            var chatter = customerRepository.findById(toUserId).get();
+            principal.addChatMessage(chat, chatter.getUser());
+
+;        } else {
+            var chatter = supplierRepository.findById(toUserId).get();
+            principal.addChatMessage(chat, chatter.getUser());
+        }
+        chatRepository.save(chat);
+    }
 
     /**
      * Retrieves all chat-messages from the database.
@@ -59,22 +86,30 @@ public class ChatService {
      */
     private ChatDto convertToDto(ChatEntity chat) {
         ChatDto dto = modelMapper.map(chat, ChatDto.class);
-        dto.getSender().setChatName(resolveChatName(chat.getSender()));
-        dto.getReceiver().setChatName(resolveChatName(chat.getReceiver()));
+        dto.getSender().setChatName(resolveChatName(chat.getSender(), dto));
+        dto.getReceiver().setChatName(resolveChatName(chat.getReceiver(), dto));
         return dto;
     }
 
     /**
      * Convenience method that resolves the name for a chat-user.
      */
-    private String resolveChatName(UserEntity user) {
+    private String resolveChatName(UserEntity user, ChatDto dto) {
         // supplier
         var supplier = user.getSupplier();
-        if (supplier != null) return supplier.getCompanyName();
+        if (supplier != null) {
+            String name = supplier.getCompanyName();
+            dto.setSupplier(new ChatDto.Supplier(supplier.getId(), name));
+            return name;
+        }
 
         // customer
         var customer = user.getCustomer();
-        if (customer != null) return customer.getFirstName() + " " + customer.getLastName();
+        if (customer != null) {
+            String name = customer.getFirstName() + " " + customer.getLastName();
+            dto.setCustomer(new ChatDto.Customer(customer.getId(), name));
+            return name;
+        }
 
         // something went wrong if we came this far
         return null;

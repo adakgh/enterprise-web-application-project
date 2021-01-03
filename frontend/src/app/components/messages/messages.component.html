@@ -1,5 +1,5 @@
 <div class="container">
-    <h3 class=" text-center">Berichten</h3>
+    <h3 class="text-center" style="margin: 10px;">Berichten</h3>
     <div class="messaging">
 
         <div class="inbox_msg">
@@ -9,134 +9,63 @@
                 <!-- Heading left panel-->
                 <div class="headind_srch">
                     <div class="recent_heading">
-                        <h4>Recent</h4>
+                        <h4>Inbox berichten</h4>
                     </div>
-                    <div class="srch_bar">
+                    <!-- <div class="srch_bar">
                         <div class="stylish-input-group">
                             <input type="text" class="search-bar" placeholder="Search">
                             <span class="input-group-addon">
-                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                </span></div>
-                    </div>
+                                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                            </span>
+                        </div>
+                    </div> -->
                 </div>
 
                 <!-- Left panel chats-->
                 <div class="inbox_chat">
-                    <!--<div class="chat_list active_chat">
+                    <div (click)="selectInboxRow(row)" *ngFor="let row of inbox" class="chat_list"
+                        [class.active_chat]="row === selectedRow">
                         <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                             <div class="chat_ib">
-                                <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                <p>Test, which is a new approach to have all solutions
-                                    astrology under one roof.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chat_list">
-                        <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                            <div class="chat_ib">
-                                <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                <p>Test, which is a new approach to have all solutions
-                                    astrology under one roof.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chat_list">
-                        <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                            <div class="chat_ib">
-                                <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                <p>Test, which is a new approach to have all solutions
-                                    astrology under one roof.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chat_list">
-                        <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                            <div class="chat_ib">
-                                <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                <p>Test, which is a new approach to have all solutions
-                                    astrology under one roof.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chat_list">
-                        <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                            <div class="chat_ib">
-                                <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                <p>Test, which is a new approach to have all solutions
-                                    astrology under one roof.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chat_list">
-                        <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                            <div class="chat_ib">
-                                <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                <p>Test, which is a new approach to have all solutions
-                                    astrology under one roof.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chat_list">
-                        <div class="chat_people">
-                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                            <div class="chat_ib">
-                                <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                <p>Test, which is a new approach to have all solutions
-                                    astrology under one roof.</p>
-                            </div>
-                        </div>
-                    </div>-->
-
-                    <div (click)="onClick(message)" *ngFor="let message of allMessages" class="chat_list"
-                         [class.active_chat]="message === selectedMessage">
-                        <div class="chat_people">
-                            <div class="chat_img"><!--<img src="https://ptetutorials.com/images/user-profile.png"
-                                                       alt="sunil">--></div>
-                            <div class="chat_ib">
-                                <h5>Johan Klaas - Factuur aanvraag <span
-                                    class="chat_date">Dec 25</span></h5>
-                                <p>Ik wil graag 10 kilo tomaten van u</p>
+                                <h5>
+                                    <span *ngIf="isCustomer" class="chat_inbox_name">{{row.supplier.name}}</span>
+                                    <span *ngIf="!isCustomer" class="chat_inbox_name">{{row.customer.name}}</span>
+                                    <span class="chat_date">{{row.createdDate}}</span>
+                                </h5>
+                                <p class="chat_inbox">{{row.message}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mesgs" *ngIf="selectedMessage!=null">
-                <!-- Messages receiver and sender-->    
-                <div class="msg_history">
-                    <div class="outgoing_msg">
-                        <div class="sent_msg">
-                            <p>Ik wil graag 10 kilo tomaten van u.</p>
-                            <span class="time_date"> 11:01 AM    |    June 9</span></div>
-                    </div>
-                    <div class="incoming_msg">
-                        <div class="incoming_msg_img"><img src="https://ptetutorials.com/images/user-profile.png"
-                                                           alt="sunil"></div>
-                        <div class="received_msg">
-                            <div class="received_withd_msg">
-                                <p>Voor wanneer wilt u het hebben en komt u het ophalen of wilt u dat we het verzenden.</p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span></div>
+            <div class="mesgs" *ngIf="chatMessagesLoaded()">
+                <!-- Messages receiver and sender-->
+                <div class="msg_history" #scrollWrapper>
+
+                    <div *ngFor="let msgData of messages">
+                        <!-- sender -->
+                        <div *ngIf="msgData.direction=='LEFT'" class="incoming_msg">
+                            <div class="incoming_msg_img_left"><img
+                                    src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div>
+                            <div class="received_msg">
+                                <div class="received_withd_msg">
+                                    <p class="chatName">{{msgData.sender.chatName}}</p>
+                                    <p>{{msgData.message}}</p>
+                                    <span class="time_date">{{msgData.createdDate}}</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="outgoing_msg">
-                        <div class="sent_msg">
-                            <p>Ik wil het graag voor maandag 07-12-2020 hebben, we komen het zelf wel ophalen.</p>
-                            <span class="time_date"> 11:01 AM    |    Today</span></div>
-                    </div>
-                    <div class="incoming_msg">
-                        <div class="incoming_msg_img"><img src="https://ptetutorials.com/images/user-profile.png"
-                                                           alt="sunil"></div>
-                        <div class="received_msg">
-                            <div class="received_withd_msg">
-                                <p>Duidelijk! U kunt maandag de gewenste producten komen ophalen wij maken het klaar voor u ook zetten we de factuur klaar.</p>
-                                <span class="time_date"> 11:01 AM    |    Today</span></div>
+
+                        <!-- receiver -->
+                        <div *ngIf="msgData.direction=='RIGHT'" class="outgoing_msg">
+                            <div class="incoming_msg_img_right"><img
+                                    src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div>
+                            <div class="sent_msg">
+                                <p class="chatName">{{msgData.sender.chatName}}</p>
+                                <p>{{msgData.message}}</p>
+                                <span class="time_date">{{msgData.createdDate}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,16 +73,17 @@
                 <!-- Message input field -->
                 <div class="type_msg">
                     <div class="input_msg_write">
-                        <input type="text" class="write_msg" placeholder="Type a message"/>
-                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
-                                                                      aria-hidden="true"></i></button>
+                        <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="newMessage" />
+                        <button (click)="sendMessage()" class="msg_send_btn" type="button"
+                            [disabled]="isInvalidMessage()" [ngClass]="{'msg_send_btn_blocked':isInvalidMessage()}"><i
+                                class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
 
             <!-- Show this when no message is selected-->
-            <div *ngIf="selectedMessage==null" class="mesgs text-center">
-                Klik op een bericht om die te tonen
+            <div *ngIf="!inboxRowSelected()" class="mesgs text-center">
+                Selecteer een selectie links in de inbox om de berichten te lezen.
             </div>
         </div>
 

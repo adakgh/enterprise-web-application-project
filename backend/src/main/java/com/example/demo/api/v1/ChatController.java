@@ -2,6 +2,7 @@ package com.example.demo.api.v1;
 
 import com.example.demo.models.RoleType;
 import com.example.demo.models.dto.ChatDto;
+import com.example.demo.models.dto.ChatMessageDto;
 import com.example.demo.persistence.entities.ChatEntity;
 import com.example.demo.security.Principal;
 import com.example.demo.services.ChatService;
@@ -10,6 +11,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import java.sql.Timestamp;
 import java.util.*;
 
 @RestController
@@ -56,4 +59,14 @@ public class ChatController {
         String conversationId = ChatEntity.generateConversationId(principal.getId(), chattingToId);
         return chatService.findAllByConversationId(conversationId);
     }
+
+    @Secured({RoleType.SUPPLIER, RoleType.CUSTOMER})
+    @PostMapping("/conversation/{toUserId}")
+    public void SendMessage(@PathVariable long toUserId,
+                            @RequestBody ChatMessageDto dto,
+                            @AuthenticationPrincipal Principal principal) {
+
+        chatService.saveMessage(principal, toUserId, dto.isCustomer(), dto.getMessage());
+    }
+
 }

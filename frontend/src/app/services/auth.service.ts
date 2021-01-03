@@ -10,8 +10,10 @@ export class AuthService {
 
     readonly tokenRef = 'access_token';
 
-    constructor(private tokenService: TokenService,
-                private cookieService: CookieService) {}
+    constructor(
+        private tokenService: TokenService,
+        private cookieService: CookieService) {
+    }
 
     registerAuthentication(resp: AuthResponse): void {
         this.setAuthentication(resp.accessToken);

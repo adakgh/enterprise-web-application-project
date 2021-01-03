@@ -80,7 +80,6 @@ public class ProductService {
         productRepository.save(currentProduct);
     }
 
-
     public void updateWithImage(long id, ProductEntity updatedProduct, ImageEntity imageEntity) {
         imageRepository.save(imageEntity);
         updateById(id, updatedProduct,imageEntity);

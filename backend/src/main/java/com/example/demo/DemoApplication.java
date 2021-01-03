@@ -275,7 +275,7 @@ public class DemoApplication {
 
             // -----------------------------------------------------
 
-// chat
+            // chat
             var user4 = new UserEntity();
             user4.setUsername("myUsername4@gmail.com");
             user4.setPassword(passwordEncoder.encode("myPassword1!"));
@@ -329,7 +329,6 @@ public class DemoApplication {
             chatS22.setMessage("Hallo Roberto, Theo hier. Ik heb pas volgende maand weer vers lams vlees je.");
             user2.addChatMessage(chatS22, user4);
             chatRepository.save(chatS22);
-
         };
     }
 }

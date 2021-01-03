@@ -6,8 +6,6 @@ import com.example.demo.persistence.entities.ImageEntity;
 import com.example.demo.persistence.entities.ProductCategoryEntity;
 import com.example.demo.persistence.entities.ProductEntity;
 import com.example.demo.persistence.repositories.ProductCategoryRepository;
-import com.example.demo.persistence.repositories.ProductRepository;
-import com.example.demo.search.ProductSpecification;
 import com.example.demo.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
