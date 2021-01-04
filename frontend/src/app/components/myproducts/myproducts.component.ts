@@ -5,7 +5,6 @@ import {MyProductsService} from '../../services/my-products.service';
 import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
 import {SupplierInfoService} from '../../services/supplier-info.service';
-import {log} from 'util';
 import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
 import {CurrentUserService} from '../../services/current-user.service';
 import * as XLSX from 'xlsx';
@@ -115,8 +114,10 @@ export class MyproductsComponent implements OnInit {
                             PRODUCT: data[i].products[j].name,
                             CATEGORIE: data[i].products[j].productCategory.name,
                             OMSCHRIJVING: data[i].products[j].description,
-                            PRIJS: data[i].products[j].price,
-                            VOORRAAD: data[i].products[j].quantity,
+                            PRIJS: data[i].products[j].price + ' / ' + this.demoImage.determineUnitPricing(data[i].products[j]),
+                            // KORTING: data[i].products[j].discounts[i].discountPrice + ' / ' +
+                            //     data[i].products[j].discounts[i].discountQuantity,
+                            VOORRAAD: data[i].products[j].quantity + ' ' + data[i].products[j].unit,
                             'DATUM TOEGEVOEGD': data[i].products[j].addedDate.substring(0, 10)
                         });
                     }

@@ -145,13 +145,11 @@ TODO
   ```
   Angular (frontend):  
 
-  contact.component.ts - login.component.ts - requestproduct.component.ts - verify-user.component.ts - contact.service.ts - 
-  inquiry.service.ts - inquiry.service.ts - register.service.ts - verify-user.service.ts
+  contact.component.ts - login.component.ts - requestproduct.component.ts - verify-user.component.ts - contact.service.ts - inquiry.service.ts - register.service.ts - verify-user.service.ts
 
   Spring (backend):  
   
-  ContactController.java - InquiryController.java - UserController.java - ContactMail.java - ContactService.java - 
-  UserService.java
+  ContactController.java - InquiryController.java - UserController.java - ContactMail.java - ContactService.java - UserService.java
 
   ``` 
 
@@ -196,7 +194,7 @@ TODO
 <!-- CONTRIBUTING -->
 ## System Documentation
 
-If you want a in dept look at this system/project take a look at the **System Documentation**  
+If you want an in depth look at this system/project, take a look at the **System Documentation**.  
 https://drive.google.com/file/d/1Lm-riTbjEXors63FON0X-mdYC76r3lgS/view?usp=sharing
 
 <!-- LICENSE -->
