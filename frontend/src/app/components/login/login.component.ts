@@ -103,7 +103,8 @@ export class LoginComponent implements OnInit {
                     fullname: user.firstName + ' ' + user.lastName,
                     username: user.email,
                     password: user.password,
-                    roles: [{id: 3}]
+                    roles: [{id: 3}],
+                    customer: {firstName: user.firstName, lastName: user.lastName}
                 };
             } else if (user.type === 'supplier') {
                 body = {
