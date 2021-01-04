@@ -52,7 +52,7 @@ export class MessagesComponent implements OnInit {
     ngOnInit(): void {
         this.updateInbox();
         this.isCustomer = this.currentUserService.isCustomer();
-        this.pollChatMessages();
+        //this.pollChatMessages();
 
         this.activatedRoute.queryParams.subscribe(qp => {
             if (this.isRequestedChat(qp)) { this.requestedParams = qp; }
