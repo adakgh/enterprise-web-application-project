@@ -36,20 +36,20 @@ export class MessagesService {
                     // clear inbox if page is revisited
                     this.inbox = [];
 
+                    // save inbox messages
                     res.forEach((e: Message) => {
                         const row = e[0];
-                        row.createdDate = formatDate(row.createdDate, 'dd-MM-yyyy', 'en-UK');
+                        row.createdDate = this.constructInboxDateTime(row.createdDate);
                         this.inbox.push(row);
                     });
 
-                    // sort inbox on name
+                    // sort inbox on receiver-name
                     const isCustomer = this.currentUserService.isCustomer();
                     this.inbox.sort((a, b) => {
                         return isCustomer
                             ? a.supplier.name.localeCompare(b.supplier.name)
                             : a.customer.name.localeCompare(b.customer.name);
                     });
-                    console.log(this.inbox);
                     return this.inbox;
                 }
             ));
@@ -63,7 +63,6 @@ export class MessagesService {
                     this.messages = [];
 
                     res.forEach((e: Message[]) => {
-
                         // iterate chat messages
                         e.forEach(msg => {
                             msg.direction = this.resolveMessageDirection(msg);
@@ -86,10 +85,11 @@ export class MessagesService {
     // -----------------------------------------------------------------------------
 
     private resolveMessageDirection(message: Message): string {
-        if (message.receiver.id === this.currentUserService.getUserId()) {
-            return 'RIGHT';
-        }
-        return 'LEFT';
+        return message.receiver.id === this.currentUserService.getUserId() ? 'RIGHT' : 'LEFT';
+    }
+
+    public constructInboxDateTime(date: Date): string {
+        return formatDate(date, 'dd-MM-yyyy', 'en-UK');
     }
 
     private constructMessageDateTime(date: Date): string {
@@ -98,7 +98,7 @@ export class MessagesService {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        if (date >= today) {
+        if (date > today) {
             const month = date.toLocaleString('default', { month: 'long' }); // name of month
             const day = date.getUTCDate(); // number of day
             shortDate = month + ' ' + day;
@@ -106,16 +106,14 @@ export class MessagesService {
             shortDate = 'Today';
         }
 
-
         // construct time
         const options = {
             hour: 'numeric',
             minute: 'numeric',
             hour12: true
         };
-        const time = date.toLocaleString('en-UK', options);
 
         // return constructed chat dateTime
-        return time + ' | ' + shortDate;
+        return date.toLocaleString('en-UK', options) + ' | ' + shortDate;
     }
 }

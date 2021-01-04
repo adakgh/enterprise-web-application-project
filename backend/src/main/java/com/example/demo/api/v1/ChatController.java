@@ -58,6 +58,9 @@ public class ChatController {
         return chatService.findAllByConversationId(conversationId);
     }
 
+    /**
+     * TODO: JavaDoc
+     */
     @Secured({RoleType.SUPPLIER, RoleType.CUSTOMER})
     @PostMapping("/conversation/{toUserId}")
     public void SendMessage(@PathVariable long toUserId,

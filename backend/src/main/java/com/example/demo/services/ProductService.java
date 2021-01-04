@@ -2,10 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.models.dto.ProductDto;
-import com.example.demo.persistence.entities.DiscountPriceEntity;
-import com.example.demo.persistence.entities.ImageEntity;
-import com.example.demo.persistence.entities.ProductEntity;
-import com.example.demo.persistence.entities.UserEntity;
+import com.example.demo.persistence.entities.*;
 import com.example.demo.persistence.repositories.DiscountPriceRepository;
 import com.example.demo.persistence.repositories.ImageRepository;
 import com.example.demo.persistence.repositories.ProductCategoryRepository;
@@ -40,9 +37,7 @@ public class ProductService {
 
         return productPage.map((ProductEntity p) -> {
             ProductDto dto = modelmapper.map(p, ProductDto.class);
-            dto.setSupplierId(p.getSupplier().getId());
-            dto.setSupplierEmail(p.getSupplier().getContactEmail());
-            dto.setSupplierPostalCode(p.getSupplier().getAddresses().iterator().next().getPostalCode());
+            dto.setSupplierData(p.getSupplier());
             return dto;
         });
     }

@@ -149,6 +149,15 @@ public class DemoApplication {
 
             // -----------------------------------------------------
 
+            // test customer with no chat history
+            var userNoChat = new UserEntity();
+            userNoChat.addRole(customerRole);
+                userNoChat.setUsername("myUsernameNoChat@gmail.com");
+            userNoChat.setPassword(passwordEncoder.encode("myPassword1!"));
+            userRepository.save(userNoChat);
+
+            // -----------------------------------------------------
+
             // supplier 2
             var user2 = new UserEntity();
             user2.setUsername("myUsername2@gmail.com");

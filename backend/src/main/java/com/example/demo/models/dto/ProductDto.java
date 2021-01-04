@@ -3,6 +3,7 @@ package com.example.demo.models.dto;
 import com.example.demo.persistence.entities.DiscountPriceEntity;
 import com.example.demo.persistence.entities.ImageEntity;
 import com.example.demo.persistence.entities.ProductCategoryEntity;
+import com.example.demo.persistence.entities.SupplierEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,8 +28,17 @@ public class ProductDto {
     private ProductCategoryEntity productCategory;
     private List<DiscountPriceEntity> discounts;
 
-
     private Long supplierId;
     private String supplierPostalCode;
     private String supplierEmail;
+    private String supplierName;
+    private Long supplier2UserId;
+
+    public void setSupplierData(SupplierEntity supplier) {
+        this.supplierId = supplier.getId();
+        this.supplierPostalCode = supplier.getAddresses().iterator().next().getPostalCode();
+        this.supplierEmail = supplier.getContactEmail();
+        this.supplierName = supplier.getCompanyName();
+        this.supplier2UserId = supplier.getUser().getId();
+    }
 }

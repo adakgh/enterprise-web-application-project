@@ -36,6 +36,7 @@ import { RecentProductsComponent } from './components/supplier-info/recent-produ
 import { FaqComponent } from './components/faq/faq.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -73,6 +74,7 @@ import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-poli
         FormsModule,
         RouterModule,
         ReactiveFormsModule,
+        FontAwesomeModule,
     ],
     providers: [UnsavedChangesGuardService, DemoImage],
     bootstrap: [AppComponent]

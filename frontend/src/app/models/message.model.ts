@@ -6,7 +6,6 @@ export class Message {
     sender: any;
     receiver: any;
     direction: string;
-    
     supplier: any;
     customer: any;
 }

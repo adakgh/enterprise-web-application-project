@@ -4,8 +4,8 @@ import {ApiService} from '../../services/api.service';
 import {RouteUtil} from '../../utils/route.util';
 import {ProductService} from '../../services/product.service';
 import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
-import {CurrentUserService} from "../../services/current-user.service";
-import {ContactService} from "../../services/contact.service";
+import {CurrentUserService} from '../../services/current-user.service';
+import {ContactService} from '../../services/contact.service';
 
 @Component({
     selector: 'app-product-detail',

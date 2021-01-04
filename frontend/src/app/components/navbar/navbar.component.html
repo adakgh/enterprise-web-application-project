@@ -2,30 +2,35 @@
     <!-- brand, login/register, and cart -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="header-item">
                     <a class="navbar-brand"><img class="vanstreek-logo"
-                                                 src="https://cdn.shopify.com/s/files/1/0021/1966/3675/files/Van-streek-logo-liggend-zwart_482x.png"
-                                                 alt="company-logo"></a>
+                            src="https://cdn.shopify.com/s/files/1/0021/1966/3675/files/Van-streek-logo-liggend-zwart_482x.png"
+                            alt="company-logo"></a>
                 </li>
             </ul>
-
+            <!-- chat icon -->
+            <a *ngIf="isLoggedIn" routerLink="/messages">
+                <fa-icon class="far fa-lg chatIcon" [icon]="chatIcon"></fa-icon>
+            </a>
             <!-- user login/register/logout-->
             <span class="navbar-right userbox">
                 <a *ngIf="!isLoggedIn" routerLink="/login">
-                <img class="user-icon"
-                     src="https://i.pinimg.com/originals/ca/f3/93/caf393479404b953bc5368a63c32e4e4.png" alt="user-icon">
+                    <img class="user-icon"
+                        src="https://i.pinimg.com/originals/ca/f3/93/caf393479404b953bc5368a63c32e4e4.png"
+                        alt="user-icon">
                     <span class="font-weight-bold">WELKOM, GAST</span>
                 </a>
                 <a *ngIf="isLoggedIn" routerLink="/profile">
-                <img class="user-icon"
-                     src="https://i.pinimg.com/originals/ca/f3/93/caf393479404b953bc5368a63c32e4e4.png" alt="user-icon">
-                      <span class="font-weight-bold">{{username}}</span>
-                    </a>
+                    <img class="user-icon"
+                        src="https://i.pinimg.com/originals/ca/f3/93/caf393479404b953bc5368a63c32e4e4.png"
+                        alt="user-icon">
+                    <span class="font-weight-bold">{{username}}</span>
+                </a>
                 <br>
                 <a *ngIf="!isLoggedIn" routerLink="/login" href="">
                     <span class="mr-5">INLOGGEN / REGISTREREN</span>
@@ -50,7 +55,7 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navigation">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -60,12 +65,13 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         PRODUCTEN
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" routerLink="/products">ALLE</a>
-                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 1}">GROENTE & FRUIT</a>
+                        <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 1}">GROENTE &
+                            FRUIT</a>
                         <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 2}">ZUIVEL</a>
                         <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 3}">BAKKERIJ</a>
                         <a class="dropdown-item" routerLink="/products" [queryParams]="{category: 4}">DRANKEN</a>
@@ -75,16 +81,18 @@
                 </li>
                 <li class="nav-item dropdown" *ngIf="isLoggedIn && currentUserService.isSupplier()">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         LEVERANCIER
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                        <a class="dropdown-item" routerLink="/supplierinfo" [queryParams]="{id: currentUserService.getSupplierId()}">LEVERANCIER
+                        <a class="dropdown-item" routerLink="/supplierinfo"
+                            [queryParams]="{id: currentUserService.getSupplierId()}">LEVERANCIER
                             PAGINA</a>
                         <a class="dropdown-item" routerLink="/addproduct" [queryParams]="{id: userId}">VOEG PRODUCT
                             TOE</a>
-                        <a class="dropdown-item" routerLink="/myproducts" [queryParams]="{id: currentUserService.getSupplierId()}">MIJN PRODUCTEN
-                            </a>
+                        <a class="dropdown-item" routerLink="/myproducts"
+                            [queryParams]="{id: currentUserService.getSupplierId()}">MIJN PRODUCTEN
+                        </a>
                         <a class="dropdown-item" routerLink="/requestedproducts">AANVRAGEN ({{inquiry.length}})</a>
                     </div>
                 </li>
