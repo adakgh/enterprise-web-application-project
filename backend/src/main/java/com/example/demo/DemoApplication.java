@@ -151,9 +151,14 @@ public class DemoApplication {
 
             // test customer with no chat history
             var userNoChat = new UserEntity();
-            userNoChat.addRole(customerRole);
-                userNoChat.setUsername("myUsernameNoChat@gmail.com");
+            userNoChat.setUsername("myUsernameNoChat@gmail.com");
             userNoChat.setPassword(passwordEncoder.encode("myPassword1!"));
+            userNoChat.addRole(customerRole);
+
+            var custNoChat = new CustomerEntity();
+            custNoChat.setFirstName("Omer");
+            custNoChat.setLastName("Citik");
+            userNoChat.setCustomer(custNoChat);
             userRepository.save(userNoChat);
 
             // -----------------------------------------------------

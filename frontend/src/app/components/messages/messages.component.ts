@@ -123,10 +123,10 @@ export class MessagesComponent implements OnInit {
                 this.messages = messages;
                 this.messagesLoaded = true;
                 
-                if (this.numUserMessages >= this.countUserMessages(this.messages)) {
+                if (this.numUserMessages >= this.countUserMessages(messages)) {
                     this.showLoadingButton = false;
                 }
-                
+
                 // if (this.scrollDown === true) { // TODO: doesnt work!
                 //     this.scrollDown = false;
                 //     this.scrollToBottom();
@@ -194,8 +194,8 @@ export class MessagesComponent implements OnInit {
         this.newRow.createdDate = this.messagesService.constructInboxDateTime(new Date());
         this.newRow.supplier = { id: qp.id, name: qp.name };
         this.newRow.customer = { id: this.currentUserService.getUserId, name: "TODO" };
-        this.newRow.sender = { id: this.currentUserService.getUserId, name: "TODO" };
-        this.newRow.receiver = { id: qp.id, name: qp.name };
+        this.newRow.sender = { id: this.currentUserService.getUserId, chatName: "TODO" };
+        this.newRow.receiver = { id: qp.id, chatName: qp.name };
     }
 
     public requestedChatHasNoHistory(): boolean {

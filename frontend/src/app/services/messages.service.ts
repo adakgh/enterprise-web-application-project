@@ -58,7 +58,7 @@ export class MessagesService {
     public getChatMessages(chattingToId: number): Observable<Message[]> {
         return this.apiService.get('/chat/conversation/' + chattingToId)
             .pipe(map(
-                res => {
+                res => {                    
                     // clear messages if different user selected
                     this.messages = [];
 
