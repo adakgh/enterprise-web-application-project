@@ -171,11 +171,24 @@ TODO
   ```
   Angular (frontend):  
 
-  <class>.ts  - <class>.ts  - 
+  Messages.component.ts - authguard.ts - auth-response.model.ts - chat-receiver.model.ts - claims.model.ts - 
+  message.model.ts - api.service.ts - auth.service.ts - current-user.service.ts - messages.service.ts - 
+  token.service.ts - route.util.ts - environment.ts
 
   Spring (backend):  
   
-  <class>.java  - <class>.java  - 
+  DemoApplication.java - <BeanProvider.java - AuthService.java - ChatService.java - ProductService.java (partially) -
+  SupplierService.java (partially) - UserService.java - JwtCache.java - JwtFilter.java - JwtProvider.java - 
+  AuthenticationHandler.java - Principal.java - PrincipalService.java - QueryMap.java - BaseSpecification.java -
+  ProductSpecification.java - ChatEntity.java - CustomerEntity.java - InquiryCategoryEntity.java - InquiryEntity.java -
+  ProductCategoryEntity.java - ProductEntity.java - RoleEntity.java - SupplierAddressEntity.java - SupplierEntity.java - 
+  UserEntity.java - ChatRepository.java - CustomerRepository.java - ProductCategoryRepository.java - ProductRepository.java -
+  RoleRepository.java - SupplierRepository.java - UserRepository.java - ChatDto.java - ChatMessageDto.java - 
+  ExceptionDto.java - JwtAuthResponse.java - ProductDto.java - RegistrationResponse.java - UserResponse.java -
+  LoginCredentials.java - RoleType.java - FilterExceptionHandler.java - RestExceptionHandler.java - ExpiredTokenException.java -
+  InvalidHeaderException.java - InvalidTokenException.java - ResourceAlreadyExistsException.java - ResourceNotFoundException.java -
+  CorsFilter.java - WebSecurityConfig.java - AuthController.java - ChatController.java - ProductController.java - 
+  SupplierController.java - UserController.java
 
   ``` 
   ### Mikal:    
