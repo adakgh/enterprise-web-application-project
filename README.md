@@ -109,21 +109,15 @@ To change the port of the backend application you should add a property to the f
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-*Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-_For more examples, please refer to the [Documentation](https://example.com)_*
-TODO
-
 ### Accessing Application
 Component         | URL                                      | Credentials
 ---               | ---                                      | ---
-Frontend          |  http://localhost:4200 <br/> https://vanstreek2-fe-app-staging.herokuapp.com/ | email: myUsername@gmail.com <br/> password: myPassword1! 
+Frontend          |  http://localhost:4200 <br/> https://vanstreek2-fe-app-staging.herokuapp.com/ | SUPPLIER ACCOUNT: <br/> email: myUsername2@gmail.com <br/> password: myPassword1! <br/><br/> CUSTOMER ACCOUNT: <br/> email: myUsername4@gmail.com <br/> password: myPassword1!
 **Live Demo:** |  https://vanstreek2-fe-app-staging.herokuapp.com/   | 
 
 
 <!-- USAGE EXAMPLES -->
 ## Classes
-**In your README.md file, you should specify individual classes built per team member.**
-TODO
 
 ### Omer:    
 
