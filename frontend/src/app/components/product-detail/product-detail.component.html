@@ -41,7 +41,7 @@
             <div *ngIf="!currentUser.getUserId()">
                 <p><i>Log aub in om een factuur te kunnen aanvragen of te chatten met de leverancier</i></p>
             </div>
-            <a routerLink="/supplierinfo" [queryParams]="{id: jsonData[0].id}">Bezoek verkoper pagina</a>
+            <a routerLink="/supplierinfo" [queryParams]="{id: jsonData[0].supplierId}">Bezoek verkoper pagina</a>
         </div>
     </div>
 </div>
