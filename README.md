@@ -161,11 +161,11 @@ TODO
   ```
   Angular (frontend):  
 
-  <class>.ts  - <class>.ts  - 
+  add-product.component.ts - myproducts.component.ts - myproducts-edit.component.ts -  product.service.ts - add-products.service.ts myprodcuts.service.ts 
 
   Spring (backend):  
   
-  <class>.java  - <class>.java  - 
+  ProductController.java - ProductService.java
 
   ``` 
   ### Roberto:    
