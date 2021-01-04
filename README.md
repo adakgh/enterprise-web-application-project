@@ -116,8 +116,7 @@ TODO
 ### Accessing Application
 Component         | URL                                      | Credentials
 ---               | ---                                      | ---
-Frontend          |  http://localhost:4040                   | 
-H2 Database       |  http://localhost:8080/h2-console        |  Driver:`org.h2.Driver` <br/> JDBC URL:`jdbc:h2:file:./src/main/resources/database/ewa;AUTO_SERVER=TRUE` <br/> User Name:`sa`
+Frontend          |  http://localhost:4040 <br/> https://vanstreek2-fe-app-staging.herokuapp.com/ | email: myUsername@gmail.com <br/> password: myPassword1! 
 **Live Demo:** |  https://vanstreek2-fe-app-staging.herokuapp.com/   | 
 
 
@@ -131,8 +130,8 @@ TODO
   ```
   Angular (frontend):  
 
-  supplier.info.service.ts  - unsaved-changes-guard.service.ts  - supplier.ts - supplier-info.component.ts - supplier-info-edit.component.ts  
-  supplier.list.component.ts  - supplier-item.component.ts - default_image.ts 
+  supplier.info.service.ts  - unsaved-changes-guard.service.ts  - supplier.ts - supplier-info.component.ts -  
+  supplier-info-edit.component.ts - supplier.list.component.ts  - supplier-item.component.ts - default_image.ts 
 
   Spring (backend):  
 
@@ -161,7 +160,8 @@ TODO
   ```
   Angular (frontend):  
 
-  add-product.component.ts - myproducts.component.ts - myproducts-edit.component.ts -  product.service.ts - add-products.service.ts myprodcuts.service.ts 
+  add-product.component.ts - myproducts.component.ts - myproducts-edit.component.ts -  product.service.ts - add-products.service.ts -  
+  myprodcuts.service.ts 
 
   Spring (backend):  
   
@@ -211,7 +211,7 @@ Name | Student Number | Email | Phone Number |
 Omer Citik | 500833046 | omer.citik@hva.nl | 0685298845 |
 Mikal van Eijk | 500828984 | mikal.van.eijk@hva.nl | 0631251505 |
 Ghizlane el Adak | 500828922 | ghizlane.el.adak@hva.nl | 0684919415 |
-Tycho Stam | .... | tycho.stam@hva.nl | 0615687192 |
+Tycho Stam | 500826360 | tycho.stam@hva.nl | 0615687192 |
 Roberto Indemans | 500676036 | roberto.indemans@hva.nl | 0642232349 |
 
 Project Link: https://gitlab.fdmci.hva.nl/se-ewa-2020-2021/vanstreek-2
