@@ -36,7 +36,14 @@ public class ProductDto {
 
     public void setSupplierData(SupplierEntity supplier) {
         this.supplierId = supplier.getId();
-        this.supplierPostalCode = supplier.getAddresses().iterator().next().getPostalCode();
+
+        // TODO: bugfix if no postalcode is available
+        if (supplier.getAddresses().size() > 0) {
+            this.supplierPostalCode = supplier.getAddresses().iterator().next().getPostalCode();
+        } else {
+            this.supplierPostalCode = "1000";
+        }
+
         this.supplierEmail = supplier.getContactEmail();
         this.supplierName = supplier.getCompanyName();
         this.supplier2UserId = supplier.getUser().getId();
