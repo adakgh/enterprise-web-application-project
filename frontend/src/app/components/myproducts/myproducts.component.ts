@@ -48,7 +48,7 @@ export class MyproductsComponent implements OnInit {
                 // console.log(this.currentUserService.getUserId());
                 // console.log(this.currentUserService.getSupplierId());
                 // console.log(res.id);
-                if (this.currentUserService.getUserId() == res.id) {
+                if (this.currentUserService.getSupplierId() == res.id) {
                     this.isTheSupplier = true;
                 }
                 this.loadSupplierData(res.id);
