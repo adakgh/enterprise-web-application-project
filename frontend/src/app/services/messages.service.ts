@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Message } from '../models/message.model';
 import { ApiService } from './api.service';
 import { formatDate } from '@angular/common';
@@ -44,11 +44,12 @@ export class MessagesService {
 
                     // sort inbox on name
                     const isCustomer = this.currentUserService.isCustomer();
-                    this.inbox.sort((a,b) => {
-                        return isCustomer 
-                            ? a.supplier.name.localeCompare(b.supplier.name) 
-                            : a.customer.name.localeCompare(b.customer.name) 
-                    })
+                    this.inbox.sort((a, b) => {
+                        return isCustomer
+                            ? a.supplier.name.localeCompare(b.supplier.name)
+                            : a.customer.name.localeCompare(b.customer.name);
+                    });
+                    console.log(this.inbox);
                     return this.inbox;
                 }
             ));
@@ -62,23 +63,23 @@ export class MessagesService {
                     this.messages = [];
 
                     res.forEach((e: Message[]) => {
-                    
+
                         // iterate chat messages
                         e.forEach(msg => {
                             msg.direction = this.resolveMessageDirection(msg);
                             msg.createdDate = this.constructMessageDateTime(new Date(msg.createdDate));
                             this.messages.push(msg);
-                        })
+                        });
                     });
                     return this.messages;
                 }
             ));
     }
 
-    public sendChatMessage(message: string, toUserId: number, isCustomer: boolean): Observable<any> {
-        const body = {isCustomer: isCustomer, message: message}
+    public sendChatMessage(message: string, toUserId: number): Observable<any> {
+        const body = {message};
         return this.apiService.post('/chat/conversation/' + toUserId, body, null);
-    } 
+    }
 
     // -----------------------------------------------------------------------------
     // [OTHER]
@@ -86,36 +87,35 @@ export class MessagesService {
 
     private resolveMessageDirection(message: Message): string {
         if (message.receiver.id === this.currentUserService.getUserId()) {
-            return "RIGHT";
+            return 'RIGHT';
         }
-        return "LEFT";
+        return 'LEFT';
     }
 
     private constructMessageDateTime(date: Date): string {
         // construct date
-        var shortDate = '';
-        var today = new Date();
+        let shortDate = '';
+        const today = new Date();
         today.setHours(0, 0, 0, 0);
 
         if (date >= today) {
-            const month = date.toLocaleString('default', { month: 'long' }) // name of month
+            const month = date.toLocaleString('default', { month: 'long' }); // name of month
             const day = date.getUTCDate(); // number of day
-            shortDate = month + " " + day;
+            shortDate = month + ' ' + day;
         } else {
-            shortDate = "Today"
+            shortDate = 'Today';
         }
-        
+
 
         // construct time
-        var options = {
+        const options = {
             hour: 'numeric',
             minute: 'numeric',
             hour12: true
         };
-        const time = date.toLocaleString('en-UK', options)
+        const time = date.toLocaleString('en-UK', options);
 
-        // return constructed chat dateTime        
-        return time + " | " + shortDate;
-
+        // return constructed chat dateTime
+        return time + ' | ' + shortDate;
     }
 }

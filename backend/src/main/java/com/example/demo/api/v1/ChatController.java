@@ -11,8 +11,6 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import java.sql.Timestamp;
 import java.util.*;
 
 @RestController
@@ -65,8 +63,7 @@ public class ChatController {
     public void SendMessage(@PathVariable long toUserId,
                             @RequestBody ChatMessageDto dto,
                             @AuthenticationPrincipal Principal principal) {
-
-        chatService.saveMessage(principal, toUserId, dto.isCustomer(), dto.getMessage());
+        chatService.saveMessage(principal, toUserId, dto.getMessage());
     }
 
 }

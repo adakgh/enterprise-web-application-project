@@ -11,11 +11,11 @@ public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
     @Query("select c from TBL_CHAT c where c.sender.id = :id or c.receiver.id = :id")
     List<ChatEntity> findAllByUserId(long id);
 
-    @Query(value = "SELECT * FROM TBL_CHAT " +
-                   "WHERE (CONVERSATION_ID, CHAT_ID) " +
-                   "IN (SELECT CONVERSATION_ID, MAX(CHAT_ID) " +
-                   "FROM TBL_CHAT WHERE (RECEIVER_ID=4 OR SENDER_ID=4) GROUP BY CONVERSATION_ID)",
-            nativeQuery = true)
+    @Query(value = "SELECT * FROM tbl_chat " +
+                   "WHERE (conversation_id, chat_id) " +
+                   "IN (SELECT conversation_id, MAX(chat_id) " +
+                   "FROM tbl_chat WHERE (receiver_id=:id OR sender_id=:id) GROUP BY conversation_id)",
+                    nativeQuery = true)
     List<ChatEntity> findLastMessagesByUserId(long id);
 
     List<ChatEntity> findAllByConversationId(String id);

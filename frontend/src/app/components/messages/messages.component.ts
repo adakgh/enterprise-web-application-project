@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Observable, interval} from 'rxjs';
+import {interval} from 'rxjs';
 import {Message} from 'src/app/models/message.model';
 import {CurrentUserService} from 'src/app/services/current-user.service';
 import {MessagesService} from 'src/app/services/messages.service';
@@ -39,12 +39,15 @@ export class MessagesComponent implements OnInit {
 
         interval(1000).subscribe(x => { // milliseconds
             if (this.inboxRowSelected) {
-                this.updateInbox();
-                this.updateChatMessages(this.selectedRow);
+                if (this.selectedRow != null) {
+                    this.updateInbox();
+                    this.updateChatMessages(this.selectedRow);
+                }
             }
         });
     }
 
+    // tslint:disable-next-line:use-lifecycle-interface
     ngAfterViewChecked(): any {
         this.scrollToBottom();
     }
@@ -85,9 +88,9 @@ export class MessagesComponent implements OnInit {
     }
 
     public sendMessage(): void {
-        const toUserId = this.isCustomer ? this.selectedRow.supplier.id : this.selectedRow.customer.id
-        this.messagesService.sendChatMessage(this.newMessage, toUserId, this.isCustomer).subscribe(
-            status => {
+        const toUserId = this.isCustomer ? this.selectedRow.supplier.id : this.selectedRow.customer.id;
+        this.messagesService.sendChatMessage(this.newMessage, toUserId).subscribe(
+            () => {
                 console.log('message successfully added!');
             }
         );

@@ -276,12 +276,12 @@ public class DemoApplication {
             // -----------------------------------------------------
 
             // chat
-            var user4 = new UserEntity();
+            var user4 = new UserEntity(); // userId = 4
             user4.setUsername("myUsername4@gmail.com");
             user4.setPassword(passwordEncoder.encode("myPassword1!"));
             user4.addRole(customerRole);
 
-            var cust1 = new CustomerEntity();
+            var cust1 = new CustomerEntity(); // customerId = 1
             cust1.setFirstName("Roberto");
             cust1.setLastName("Indemans");
             user4.setCustomer(cust1);

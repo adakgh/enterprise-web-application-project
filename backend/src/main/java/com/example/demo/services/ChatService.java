@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.persistence.repositories.UserRepository;
 import com.example.demo.security.Principal;
 import com.example.demo.models.dto.ChatDto;
 import com.example.demo.persistence.entities.ChatEntity;
@@ -28,21 +29,14 @@ public class ChatService {
 
     private final ChatRepository chatRepository;
     private final ModelMapper modelMapper;
-    private final SupplierRepository supplierRepository;
-    private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
-    public void saveMessage(Principal principal, long toUserId, boolean isCustomer, String message) {
+    public void saveMessage(Principal principal, long toUserId, String message) {
         ChatEntity chat = new ChatEntity();
         chat.setMessage(message);
 
-        if (isCustomer) {
-            var chatter = customerRepository.findById(toUserId).get();
-            principal.addChatMessage(chat, chatter.getUser());
-
-;        } else {
-            var chatter = supplierRepository.findById(toUserId).get();
-            principal.addChatMessage(chat, chatter.getUser());
-        }
+        UserEntity toUser = userRepository.findById(toUserId).get(); // TODO exception if user null
+        principal.addChatMessage(chat, toUser);
         chatRepository.save(chat);
     }
 
@@ -99,7 +93,7 @@ public class ChatService {
         var supplier = user.getSupplier();
         if (supplier != null) {
             String name = supplier.getCompanyName();
-            dto.setSupplier(new ChatDto.Supplier(supplier.getId(), name));
+            dto.setSupplier(new ChatDto.Supplier(supplier.getUser().getId(), name));
             return name;
         }
 
@@ -107,7 +101,7 @@ public class ChatService {
         var customer = user.getCustomer();
         if (customer != null) {
             String name = customer.getFirstName() + " " + customer.getLastName();
-            dto.setCustomer(new ChatDto.Customer(customer.getId(), name));
+            dto.setCustomer(new ChatDto.Customer(customer.getUser().getId(), name));
             return name;
         }
 

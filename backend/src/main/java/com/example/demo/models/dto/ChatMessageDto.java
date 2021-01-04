@@ -7,6 +7,5 @@ import lombok.Setter;
 @Setter
 public class ChatMessageDto {
 
-    private boolean isCustomer;
     private String message;
 }
