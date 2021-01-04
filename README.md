@@ -116,7 +116,7 @@ TODO
 ### Accessing Application
 Component         | URL                                      | Credentials
 ---               | ---                                      | ---
-Frontend          |  http://localhost:4040 <br/> https://vanstreek2-fe-app-staging.herokuapp.com/ | email: myUsername@gmail.com <br/> password: myPassword1! 
+Frontend          |  http://localhost:4200 <br/> https://vanstreek2-fe-app-staging.herokuapp.com/ | email: myUsername@gmail.com <br/> password: myPassword1! 
 **Live Demo:** |  https://vanstreek2-fe-app-staging.herokuapp.com/   | 
 
 
