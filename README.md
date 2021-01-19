@@ -125,7 +125,8 @@ Frontend          |  http://localhost:4200 <br/> https://vanstreek2-fe-app-stagi
   Angular (frontend):  
 
   supplier.info.service.ts  - unsaved-changes-guard.service.ts  - supplier.ts - supplier-info.component.ts -  
-  supplier-info-edit.component.ts - supplier.list.component.ts  - supplier-item.component.ts - default_image.ts 
+  supplier-info-edit.component.ts - supplier.list.component.ts  - supplier-item.component.ts - default_image.ts -  
+  supplier-info-component.spec.ts - supplier-list-component.spec.ts -  supplier-info-edit-component.spec.ts -   
 
   Spring (backend):  
 

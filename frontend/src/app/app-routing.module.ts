@@ -23,7 +23,7 @@ import {FaqComponent} from './components/faq/faq.component';
 import {TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
 import {PrivacyPolicyComponent} from './components/privacy-policy/privacy-policy.component';
 
-const routes: Routes = [
+export const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'products', component: ProductComponent},
     {path: 'product-detail', component: ProductDetailComponent, /*canActivate: [AuthGuardService]*/},

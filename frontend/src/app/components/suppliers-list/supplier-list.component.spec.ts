@@ -1,28 +1,28 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {SupplierInfoComponent} from './supplier-info.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {CookieModule} from 'ngx-cookie';
-import {DemoImage} from './supplier-info-edit/default-image';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../../app-routing.module';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {UnsavedChangesGuardService} from '../../guards/unsaved-changes-guard.service';
 import {Location} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { routes } from '../../app-routing.module';
+import {routes} from '../../app-routing.module';
+import {SuppliersListComponent} from './suppliers-list.component';
+import {DemoImage} from '../supplier-info/supplier-info-edit/default-image';
 
-describe('SupplierInfoComponent', () => {
-    let fixture: ComponentFixture<SupplierInfoComponent>;   // The supplierInfoComponent
-    let component: SupplierInfoComponent;                   // The supplierInfoComponent typescript file
-    let componentHtml: HTMLElement;                         // The supplierInfoComponent template HTML file
-    let router: Router;                                     // The Router
-    let location: Location;                                 // Current Location
+describe('SuppliersListComponent', () => {
+    let fixture: ComponentFixture<SuppliersListComponent>;      // The supplierInfoComponent
+    let component: SuppliersListComponent;                      // The supplierInfoComponent typescript file
+    let componentHtml: HTMLElement;                             // The supplierInfoComponent template HTML file
+    let router: Router;                                         // The Router
+    let location: Location;
 
     /** Configure the modules needed for the test before each test */
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SupplierInfoComponent],
+            declarations: [SuppliersListComponent],
             imports: [
                 CookieModule.forRoot(),
                 BrowserModule,
@@ -39,7 +39,7 @@ describe('SupplierInfoComponent', () => {
 
     /** Initialize global variables before each test */
     beforeEach(() => {
-            fixture = TestBed.createComponent(SupplierInfoComponent);
+            fixture = TestBed.createComponent(SuppliersListComponent);
             component = fixture.componentInstance;
             componentHtml = fixture.debugElement.nativeElement;
             router = TestBed.get(Router);
@@ -48,12 +48,17 @@ describe('SupplierInfoComponent', () => {
         }
     );
 
-    /** Should navigate the user when clicked on 'Wijzigen' link to the supplier edit page the wijzigen click is faked */
-    it('should navigate to "supplierinfo/edit" page', fakeAsync(() => {
-        router.navigate(['supplierinfo/edit']);
+    /** The description of the page should be rendered correctly */
+    it('should render description of the page in a p tag', async(() => {
+        expect(componentHtml.querySelector('p').textContent).toContain('Hier zijn alle geregistreerde leverancier te zien.');
+    }));
+
+    /** Should navigate the user to supplierinfo page 'when clicked' on 'zie volledige leverancier pagina' the click is faked */
+    it('should navigate to supplier', fakeAsync(() => {
+        router.navigate(['/supplierinfo'], {queryParams: {id: 1}});
         tick();
         fixture.detectChanges();
-        expect(location.path()).toBe('/supplierinfo/edit');
+        expect(location.path()).toBe('/supplierinfo?id=1');
     }));
 
 });

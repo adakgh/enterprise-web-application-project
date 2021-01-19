@@ -22,6 +22,10 @@ export class SuppliersListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.initializeAllSuppliers();
+    }
+
+    initializeAllSuppliers(): any {
         this.supplierInfoService.getAllSuppliers().subscribe(
             res => {
                 this.jsonSupplierData = res;
