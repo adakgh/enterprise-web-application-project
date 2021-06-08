@@ -1,31 +1,3 @@
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#configuration">Configuration</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#system-documentation">System Documentation</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#maintainers-contact">Maintainers & Contact</a></li>
-  </ol>
-</details>
-
-
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-![alt text](https://cdn.shopify.com/s/files/1/0021/1966/3675/files/Van-streek-logo-liggend-zwart_482x.png "Logo Title Text 1")  
-    
 This project brings local suppliers effectively in contact with local customers. Suppliers can place products on the system. Where customers can buy those products. This system also gives the opportunity to have a conversation with each other. The system is build with _angular_ in the frontend and _spring_ in the backend part.
 
 ### Technology Stack
@@ -92,8 +64,6 @@ There are some requirments that needs to be done before the installation
    -Run DemoAplication
    ```
    The backend server should start together with the database when running the DemoApplication file on localhost:8080   
-
-    ![alt text](https://i.imgur.com/HVUGGEd.png "Logo Title Text 1")
   
 
 ### Configuration
@@ -105,119 +75,7 @@ To change the port of the front-end you should not type the _ng serve_ command b
    ```
 To change the port of the backend application you should add a property to the file **_application.properties_**  (under backend/src/main/resources/):
 
-![alt text](https://i.imgur.com/YO2C7F3.png "Backend port option")
-<!-- USAGE EXAMPLES -->
-## Usage
-
-### Accessing Application
-Component         | URL                                      | Credentials
----               | ---                                      | ---
-Frontend          |  http://localhost:4200 <br/> https://vanstreek2-fe-app-staging.herokuapp.com/ | SUPPLIER ACCOUNT: <br/> email: myUsername2@gmail.com <br/> password: myPassword1! <br/><br/> CUSTOMER ACCOUNT: <br/> email: myUsername4@gmail.com <br/> password: myPassword1!
-**Live Demo:** |  https://vanstreek2-fe-app-staging.herokuapp.com/   | 
-
-
-<!-- USAGE EXAMPLES -->
-## Classes
-
-### Omer:    
-
-  ```
-  Angular (frontend):  
-
-  supplier.info.service.ts  - unsaved-changes-guard.service.ts  - supplier.ts - supplier-info.component.ts -  
-  supplier-info-edit.component.ts - supplier.list.component.ts  - supplier-item.component.ts - default_image.ts -  
-  supplier-info-component.spec.ts - supplier-list-component.spec.ts -  supplier-info-edit-component.spec.ts -   
-
-  Spring (backend):  
-
-  SupplierController.java  - SupplierService.java  - SupplierImage.java - SupplierEntity.java - ImageEntity.java 
-  ImageRepository.java  - SupplierRepository.java 
-
-  ``` 
-
-  ### Ghizlane:    
-
-  ```
-  Angular (frontend):  
-
-  contact.component.ts - login.component.ts - requestproduct.component.ts - verify-user.component.ts - contact.service.ts - inquiry.service.ts - register.service.ts - verify-user.service.ts
-
-  Spring (backend):  
-  
-  ContactController.java - InquiryController.java - UserController.java - ContactMail.java - ContactService.java - UserService.java
-
-  ``` 
-
-  ### Tycho:    
-
-  ```
-  Angular (frontend):  
-
-  add-product.component.ts - myproducts.component.ts - myproducts-edit.component.ts -  product.service.ts - add-products.service.ts -  
-  myprodcuts.service.ts 
-
-  Spring (backend):  
-  
-  ProductController.java - ProductService.java
-
-  ``` 
-  ### Roberto:    
-
-  ```
-  Angular (frontend):  
-
-  Messages.component.ts - authguard.ts - auth-response.model.ts - chat-receiver.model.ts - claims.model.ts - 
-  message.model.ts - api.service.ts - auth.service.ts - current-user.service.ts - messages.service.ts - 
-  token.service.ts - route.util.ts - environment.ts
-
-  Spring (backend):  
-  
-  DemoApplication.java - <BeanProvider.java - AuthService.java - ChatService.java - ProductService.java (partially) -
-  SupplierService.java (partially) - UserService.java - JwtCache.java - JwtFilter.java - JwtProvider.java - 
-  AuthenticationHandler.java - Principal.java - PrincipalService.java - QueryMap.java - BaseSpecification.java -
-  ProductSpecification.java - ChatEntity.java - CustomerEntity.java - InquiryCategoryEntity.java - InquiryEntity.java -
-  ProductCategoryEntity.java - ProductEntity.java - RoleEntity.java - SupplierAddressEntity.java - SupplierEntity.java - 
-  UserEntity.java - ChatRepository.java - CustomerRepository.java - ProductCategoryRepository.java - ProductRepository.java -
-  RoleRepository.java - SupplierRepository.java - UserRepository.java - ChatDto.java - ChatMessageDto.java - 
-  ExceptionDto.java - JwtAuthResponse.java - ProductDto.java - RegistrationResponse.java - UserResponse.java -
-  LoginCredentials.java - RoleType.java - FilterExceptionHandler.java - RestExceptionHandler.java - ExpiredTokenException.java -
-  InvalidHeaderException.java - InvalidTokenException.java - ResourceAlreadyExistsException.java - ResourceNotFoundException.java -
-  CorsFilter.java - WebSecurityConfig.java - AuthController.java - ChatController.java - ProductController.java - 
-  SupplierController.java - UserController.java
-
-  ``` 
-  ### Mikal:    
-
-  ```
-  Angular (frontend):  
-
-  product.component.ts - product-detail.component.ts - my-products.service.ts - product.service.ts - location.service.ts
-
-  Spring (backend):  
-  
-  BaseSpecification.java - ProdutSpecification.java - ProductController.java - ProductService.java
-
-  ```
-
-<!-- CONTRIBUTING -->
-## System Documentation
-
-If you want an in depth look at this system/project, take a look at the **System Documentation**.  
-https://drive.google.com/file/d/19_tmyHvEkxE3vB_ND36TK86QQSwqeOMf/view?usp=sharing
 
 <!-- LICENSE -->
 ## License
 Distributed under the MIT License.
-
-<!-- CONTACT -->
-## Maintainers & Contact 
-
-Name | Student Number | Email | Phone Number |  
---- | --- | --- | --- | 
-Omer Citik | 500833046 | omer.citik@hva.nl | 0685298845 |
-Mikal van Eijk | 500828984 | mikal.van.eijk@hva.nl | 0631251505 |
-Ghizlane el Adak | 500828922 | ghizlane.el.adak@hva.nl | 0684919415 |
-Tycho Stam | 500826360 | tycho.stam@hva.nl | 0615687192 |
-Roberto Indemans | 500676036 | roberto.indemans@hva.nl | 0642232349 |
-
-Project Link: https://gitlab.fdmci.hva.nl/se-ewa-2020-2021/vanstreek-2
